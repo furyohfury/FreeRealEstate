@@ -2,6 +2,7 @@
 
 namespace Game
 {
+	[CreateAssetMenu(fileName = "CellList", menuName = "Create config/CellList")]
 	public sealed class CellList : ScriptableObject
 	{
 		public Cell[] Cells => _cells;
