@@ -13,11 +13,14 @@ namespace Game
 			Container.Bind<CellList[]>()
 			         .FromInstance(_cellLists)
 			         .AsCached();
+
+			Container.Bind<ActiveLevelService>()
+			         .AsSingle();
 			
 			Container.Bind<CellChooser>()
 			         .AsSingle();
 
-			Container.Bind<UniqueCellsProvider>()
+			Container.BindInterfacesAndSelfTo<UniqueCellsProvider>()
 			         .AsSingle();
 
 			Container.BindInterfacesAndSelfTo<LevelCellsSwitcher>()

@@ -15,14 +15,16 @@ namespace Game
 		{
 			_desiredCell = cell;
 #if UNITY_EDITOR
-			Debug.Log("Desired cell is now" + cell.ID);
+			Debug.Log("Desired cell is now " + cell.ID);
 #endif
 		}
 
-		public void ChooseCell(Cell cell)
+		public bool ChooseCell(Cell cell)
 		{
 			bool guessed = cell == _desiredCell;
 			OnGuessed.OnNext(guessed);
+
+			return guessed;
 		}
 	}
 }

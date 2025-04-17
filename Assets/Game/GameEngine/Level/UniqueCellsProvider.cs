@@ -1,46 +1,56 @@
 using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Zenject;
 
 namespace Game
 {
-	public sealed class UniqueCellsProvider // TODO kal ksta, zabivaet starie cuz listi perekluchaet
+	public sealed class UniqueCellsProvider : IInitializable // TODO rename to UniqueCellsMemorizer
 	{
 		[ShowInInspector]
-		private Cell[] _cells;
-		private bool[] _chosenCells;
+		private CellList[] _cells;
+		private Dictionary<CellList, bool[]> _chosenCells = new();
 
-		public UniqueCellsProvider(Cell[] cells)
-		{
-			SetCells(cells);
-		}
-
-		public void SetCells(Cell[] cells)
+		public UniqueCellsProvider(CellList[] cells)
 		{
 			_cells = cells;
-			_chosenCells = new bool[_cells.Length];
 		}
 
-		public Cell GetRandomCell()
+		public void Initialize()
 		{
-			if (_chosenCells.All(cell => cell))
-			{
-				ResetChosen();
-			}
-
-			int index = Random.Range(0, _cells.Length - 1);
-			while (_chosenCells[index] == true)
-			{
-				index = Random.Range(0, _cells.Length - 1);
-			}
-
-			return _cells[index];
+			InitChosenCells();
 		}
 
-		private void ResetChosen()
+		public void InitChosenCells()
+		{
+			for (int i = 0; i < cells.Length; i++)
+			{
+				_chosenCells.Add(cells[i], new bool[cells[i].Length]);
+			}
+		}
+
+		public Cell GetRandomCell(CellList cellList)
+		{
+			var chosenCellsList = _chosenCells[cellList];
+			if (chosenCellsList.All(chosen => chosen == true))
+			{
+				ResetChosen(CellList cellList);
+			}
+
+			int index;
+			do 
+			{
+				index = Random.Range(0, chosenCellsList.Length - 1);
+			} 
+			while (chosenCellsList[index] == true);
+
+			return cellList[index];
+		}
+
+		private void ResetChosen(CellList cellList)
 		{
 			Debug.Log("All cells were used. Resetting");
-			for (int i = 0; i < _chosenCells.Length; i++)
+			for (int i = 0; i < _chosenCells[cellList].Length; i++)
 			{
 				_chosenCells[i] = false;
 			}

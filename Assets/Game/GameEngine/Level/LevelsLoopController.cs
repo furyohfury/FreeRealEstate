@@ -6,18 +6,18 @@ namespace Game
 {
 	public sealed class LevelsLoopController : IInitializable, IDisposable
 	{
-		private readonly LevelCellsSwitcher _levelCellsSwitcher;
+		private readonly ActiveLevelService _activeLevelService;
 
 		private readonly CompositeDisposable _disposable = new();
 
-		public LevelsLoopController(LevelCellsSwitcher levelCellsSwitcher)
+		public LevelsLoopController(ActiveLevelService activeLevelService)
 		{
-			_levelCellsSwitcher = levelCellsSwitcher;
+			_activeLevelService = activeLevelService;
 		}
 
 		public void Initialize()
 		{
-			_levelCellsSwitcher.OnLevelEnded
+			_activeLevelService.OnLevelEnded
 			                   .Subscribe(_ => OnLevelEnded())
 			                   .AddTo(_disposable);
 		}
@@ -29,7 +29,7 @@ namespace Game
 
 		private void LoopLevel()
 		{
-			_levelCellsSwitcher.Reset();
+			_activeLevelService.Reset();
 		}
 
 		public void Dispose()
