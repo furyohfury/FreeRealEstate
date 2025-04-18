@@ -10,22 +10,32 @@ namespace Game
 		[ShowInInspector]
 		private CellChooser _cellChooser;
 		[ShowInInspector]
-		private UniqueCellsProvider _cellProvider;
-		[SerializeField]
-		private CellList _cellList;
+		private UniqueCellsMemorizer _cellMemorizer;
+		[ShowInInspector]
+		private ActiveBundleService _activeBundleService;
+
+		[ShowInInspector]
+		private CellBundle ActiveCellBundle => _activeBundleService.ActiveCellBundle;
 
 		[Inject]
-		public void Construct(CellChooser cellChooser, UniqueCellsProvider uniqueCellsProvider)
+		public void Construct(CellChooser cellChooser, UniqueCellsMemorizer uniqueCellsMemorizer, ActiveBundleService activeBundleService)
 		{
 			_cellChooser = cellChooser;
-			_cellProvider = uniqueCellsProvider;
+			_cellMemorizer = uniqueCellsMemorizer;
+			_activeBundleService = activeBundleService;
 		}
 
 		[Button]
 		public void ChooseCell(string cellId)
 		{
-			var cell = _cellList.Cells.Single(cell => cell.ID == cellId);
+			var cell = ActiveCellBundle.Cells.Single(cell => cell.ID == cellId);
 			_cellChooser.ChooseCell(cell);
+		}
+
+		[Button]
+		public void SetBeginningCell()
+		{
+			
 		}
 	}
 }

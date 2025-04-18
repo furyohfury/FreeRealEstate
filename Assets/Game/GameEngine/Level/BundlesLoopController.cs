@@ -4,20 +4,20 @@ using Zenject;
 
 namespace Game
 {
-	public sealed class LevelsLoopController : IInitializable, IDisposable
+	public sealed class BundlesLoopController : IInitializable, IDisposable
 	{
-		private readonly ActiveLevelService _activeLevelService;
+		private readonly ActiveBundleService _activeBundleService;
 
 		private readonly CompositeDisposable _disposable = new();
 
-		public LevelsLoopController(ActiveLevelService activeLevelService)
+		public BundlesLoopController(ActiveBundleService activeBundleService)
 		{
-			_activeLevelService = activeLevelService;
+			_activeBundleService = activeBundleService;
 		}
 
 		public void Initialize()
 		{
-			_activeLevelService.OnLevelEnded
+			_activeBundleService.OnLevelEnded
 			                   .Subscribe(_ => OnLevelEnded())
 			                   .AddTo(_disposable);
 		}
@@ -29,7 +29,7 @@ namespace Game
 
 		private void LoopLevel()
 		{
-			_activeLevelService.Reset();
+			_activeBundleService.Reset();
 		}
 
 		public void Dispose()

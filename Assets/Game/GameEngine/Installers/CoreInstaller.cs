@@ -6,27 +6,30 @@ namespace Game
 	public sealed class CoreInstaller : MonoInstaller
 	{
 		[SerializeField] 
-		private CellList[] _cellLists;
+		private CellBundle[] _cellLists;
 
 		public override void InstallBindings()
 		{
-			Container.Bind<CellList[]>()
+			Container.Bind<CellBundle[]>()
 			         .FromInstance(_cellLists)
 			         .AsCached();
 
-			Container.Bind<ActiveLevelService>()
+			Container.Bind<ActiveBundleService>()
 			         .AsSingle();
 			
 			Container.Bind<CellChooser>()
 			         .AsSingle();
 
-			Container.BindInterfacesAndSelfTo<UniqueCellsProvider>()
+			Container.Bind<DesiredCellController>()
+			         .AsSingle();
+			
+			Container.BindInterfacesAndSelfTo<UniqueCellsMemorizer>()
 			         .AsSingle();
 
-			Container.BindInterfacesAndSelfTo<LevelCellsSwitcher>()
+			Container.BindInterfacesAndSelfTo<BundleSwitcher>()
 			         .AsSingle();
 
-			Container.BindInterfacesAndSelfTo<LevelsLoopController>()
+			Container.BindInterfacesAndSelfTo<BundlesLoopController>()
 			         .AsSingle();
 		}
 	}
