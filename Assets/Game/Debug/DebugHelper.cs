@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenject;
@@ -14,8 +15,13 @@ namespace Game
 		[ShowInInspector]
 		private ActiveBundleService _activeBundleService;
 
-		[ShowInInspector]
-		private CellBundle ActiveCellBundle => _activeBundleService.ActiveCellBundle;
+		[ShowIf("HasActiveCell")]
+		private CellBundle ActiveCellBundle => _activeBundleService.ActiveCellBundle.CurrentValue;
+
+		[SerializeField]
+		private CellViewList _cellViewList;
+		[SerializeField] 
+		private CellView[] _cellViews;
 
 		[Inject]
 		public void Construct(CellChooser cellChooser, UniqueCellsMemorizer uniqueCellsMemorizer, ActiveBundleService activeBundleService)
@@ -33,9 +39,14 @@ namespace Game
 		}
 
 		[Button]
-		public void SetBeginningCell()
+		public void SetCellViewList(int rows, int columns)
 		{
-			
+			_cellViewList.SetCellViews(_cellViews, rows, columns);
 		}
+
+		[Button]
+		public void DestroyCellViews() => _cellViewList.DestroyViews(); 
+
+		private bool HasActiveCell => _activeBundleService != null;
 	}
 }
