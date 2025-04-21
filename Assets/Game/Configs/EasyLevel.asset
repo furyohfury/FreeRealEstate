@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: EasyLevel
   m_EditorClassIdentifier: 
   _cells:
-  - _id: A
-    _icon: {fileID: 0}
-  - _id: B
-    _icon: {fileID: 0}
-  - _id: C
-    _icon: {fileID: 0}
+  - _id: J
+    _icon: {fileID: -581286770295223724, guid: cb68607c8e2671c42b0b51ea2696da46, type: 3}
+  - _id: K
+    _icon: {fileID: 1646720447909147354, guid: b73b428a1ab13b64abc4adbe15b76d6b, type: 3}
+  - _id: N
+    _icon: {fileID: 6059799596907309901, guid: b657c737251ba774db553fe45617b875, type: 3}
+  _rows: 1
+  _columns: 3
