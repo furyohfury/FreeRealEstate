@@ -5,7 +5,9 @@ namespace Game
 	public sealed class ActiveBundleService
 	{
 		public Subject<Unit> OnLevelEnded = new();
-		public CellBundle ActiveCellBundle => _cellLists[_activeIndex];
+		public ReadOnlyReactiveProperty<CellBundle> ActiveCellBundle => _activeCellBundle;
+
+		private readonly ReactiveProperty<CellBundle> _activeCellBundle = new();
 
 		private readonly CellBundle[] _cellLists;
 		private int _activeIndex = 0;
@@ -13,6 +15,7 @@ namespace Game
 		public ActiveBundleService(CellBundle[] cellLists)
 		{
 			_cellLists = cellLists;
+			_activeCellBundle.Value = _cellLists[_activeIndex];
 		}
 
 		public void SetNextLevel()
@@ -21,6 +24,8 @@ namespace Game
 			{
 				OnLevelEnded.OnNext(Unit.Default);
 			}
+
+			_activeCellBundle.Value = _cellLists[_activeIndex];
 		}
 
 		public void Reset()

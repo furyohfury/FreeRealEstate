@@ -15,7 +15,7 @@
 
 		public void UpdateDesiredCell()
 		{
-			var activeLevel = _activeBundleService.ActiveCellBundle;
+			var activeLevel = _activeBundleService.ActiveCellBundle.CurrentValue;
 			var newDesiredCell = _uniqueCellsMemorizer.GetRandomCell(activeLevel);
 			_cellChooser.SetDesiredCell(newDesiredCell);
 		}

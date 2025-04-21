@@ -7,13 +7,14 @@ namespace Game
 	public sealed class CellChooser
 	{
 		public Subject<bool> OnGuessed = new();
+		public ReadOnlyReactiveProperty<Cell> DesiredCell => _desiredCell;
 
 		[ShowInInspector]
-		private Cell _desiredCell;
+		private ReactiveProperty<Cell> _desiredCell = new();
 
 		public void SetDesiredCell(Cell cell)
 		{
-			_desiredCell = cell;
+			_desiredCell.Value = cell;
 #if UNITY_EDITOR
 			Debug.Log("Desired cell is now " + cell.ID);
 #endif
@@ -21,7 +22,7 @@ namespace Game
 
 		public bool ChooseCell(Cell cell)
 		{
-			bool guessed = cell == _desiredCell;
+			bool guessed = cell == _desiredCell.Value;
 			OnGuessed.OnNext(guessed);
 
 			return guessed;
