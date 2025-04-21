@@ -1,31 +1,38 @@
+using DG.Tweening;
 using Game;
 using UnityEngine.UI;
-using DOTween;
 
 namespace UI
 {
-    public sealed class LevelRestarter
-    {
-        private ActiveLevelService _activeLevelService;
-        private Image _loadingScreen;
-        // private CellListView _cellListView; TODO add to ctor
+	public sealed class LevelRestarter
+	{
+		private readonly ActiveBundleService _activeBundleService;
+		private readonly Image _loadingScreen;
+		private readonly CellViewList _cellListView;
+		private BundleSwitcher _bundleSwitcher;
 
-        public LevelRestarter(ActiveLevelService activeLevelService)
-        {
-            _activeLevelService = activeLevelService;
-        }
+		public LevelRestarter(ActiveBundleService activeBundleService, CellViewList cellListView, Image loadingScreen, BundleSwitcher bundleSwitcher)
+		{
+			_activeBundleService = activeBundleService;
+			_cellListView = cellListView;
+			_loadingScreen = loadingScreen;
+			_bundleSwitcher = bundleSwitcher;
+		}
 
-        public void RestartLevel()
-        {
-            _loadingScreen.gameObject.SetActive(true);
-            var screenColor = _loadingScreen.color;
-            screenColor.a = 0;
-            _loadingScreen.color = screenColor;
-            DOTween.Sequence()
-            .Append(_ => _loadingScreen.DOFade(1, 0.5f))
-            .AppendCallback(_ => _activeLevelService.Reset())
-            .Append(_ => _loadingScreen.DOFade(0, 0.5f));
+		public void RestartLevel()
+		{
+			_loadingScreen.gameObject.SetActive(true);
+			var screenColor = _loadingScreen.color;
+			screenColor.a = 0;
+			_loadingScreen.color = screenColor;
+			DOTween.Sequence()
+			       .Append(_loadingScreen.DOFade(1, 1))
+			       .AppendCallback(() => _activeBundleService.Reset())
+			       .AppendCallback(() => _bundleSwitcher.UpdateBundle())
+			       .Append(_loadingScreen.DOFade(0, 1))
+			       .AppendCallback(() => _loadingScreen.gameObject.SetActive(false));
 
-            // _cellListView.EnableViews(); // TODO uncomment
-    }
+			_cellListView.EnableViews();
+		}
+	}
 }

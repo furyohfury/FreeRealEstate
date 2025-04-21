@@ -12,5 +12,7 @@ namespace Game
 		public abstract void DoWrongChoiceEffect();
 
 		public abstract void DoCorrectChoiceEffect();
+		public abstract void Enable();
+		public abstract void Disable();
 	}
 }

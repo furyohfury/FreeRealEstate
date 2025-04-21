@@ -34,14 +34,21 @@ namespace Game
 		private float _easeTimeToNormalState = 1f;
 
 		private Sequence _sequence;
+		private bool _enabled;
 
 		private void Awake()
 		{
+			_enabled = true;
 			if (_bounceOnAwake)
 			{
 				transform.localScale = new Vector3(0, 0, 0);
 				Bounce();
 			}
+		}
+
+		public override void Enable()
+		{
+			_enabled = true;
 		}
 
 		public override void DoWrongChoiceEffect()
@@ -56,6 +63,11 @@ namespace Game
 			var particlesMain = particles.main;
 			particlesMain.playOnAwake = true;
 			particlesMain.stopAction = ParticleSystemStopAction.Destroy;
+		}
+
+		public override void Disable()
+		{
+			_enabled = false;
 		}
 
 		[Button]
@@ -91,6 +103,11 @@ namespace Game
 
 		public void OnPointerClick(PointerEventData eventData)
 		{
+			if (_enabled == false)
+			{
+				return;
+			}
+			
 			OnClicked.OnNext(Unit.Default);
 		}
 

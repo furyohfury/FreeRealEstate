@@ -1,65 +1,69 @@
+using System;
+using DG.Tweening;
+using Game;
+using R3;
 using UnityEngine.UI;
 using Zenject;
-using R3;
-using Game;
 
 namespace UI
 {
-    public sealed class LevelEndObserver : IInitializable, IDisposable
-    {
-        private ActiveLevelService _activeLevelService;
-        private Button _restartButton;
-        private LevelRestarter _levelRestarter;
-        private Image _shadowingImage;
-        // private CellListView _cellListView; TODO add to ctor
+	public sealed class LevelEndObserver : IInitializable, IDisposable
+	{
+		private readonly ActiveBundleService _activeBundleService;
+		private readonly Button _restartButton;
+		private readonly LevelRestarter _levelRestarter;
+		private readonly Image _shadowingImage;
+		private readonly CellViewList _cellListView;
 
-        private CompositeDisposable _disposable = new();
+		private readonly CompositeDisposable _disposable = new();
 
-        public LevelEndObserver(
-            ActiveLevelService activeLevelService, 
-            Button restartButton, 
-            LevelRestarter levelRestarter,
-            Image _shadowingImage)
-            {
-                _activeLevelService = activeLevelService;
-                _restartButton = restartButton;
-                _levelRestarter = levelRestarter;
-                _shadowingImage = shadowingImage;
-            }
+		public LevelEndObserver(
+			ActiveBundleService activeBundleService,
+			Button restartButton,
+			LevelRestarter levelRestarter,
+			Image shadowingImage,
+			CellViewList cellListView)
+		{
+			_activeBundleService = activeBundleService;
+			_restartButton = restartButton;
+			_levelRestarter = levelRestarter;
+			_shadowingImage = shadowingImage;
+			_cellListView = cellListView;
+		}
 
 
-        public void Initialize()
-        {
-            _activeLevelService.OnLevelEnded
-            .Subscribe(OnLevelEnded)
-            .AddTo(_disposable);
-        }
+		public void Initialize()
+		{
+			_activeBundleService.OnLevelEnded
+			                    .Subscribe(_ => OnLevelEnded())
+			                    .AddTo(_disposable);
+		}
 
-        private void OnLevelEnded()
-        {
-            // _cellListView.DisableCells(); // TODO uncomment
+		private void OnLevelEnded()
+		{
+			_cellListView.DisableCells();
 
-            _restartButton.gameObject.SetActive(true);
-            _restartButton.onClick.AddListener(RestartLevel);
+			_restartButton.gameObject.SetActive(true);
+			_restartButton.onClick.AddListener(RestartLevel);
 
-            _shadowingImage.gameObject.SetActive(true);
-            var screenColor = _shadowingImage.color;
-            screenColor.a = 0;
-            _shadowingImage.color = screenColor;
-            _shadowingImage.DOFade(0.5f, 0.3f);
-        }
+			_shadowingImage.gameObject.SetActive(true);
+			var screenColor = _shadowingImage.color;
+			screenColor.a = 0;
+			_shadowingImage.color = screenColor;
+			_shadowingImage.DOFade(0.5f, 0.3f);
+		}
 
-        private void RestartLevel()
-        {
-            _restartButton.onClick.RemoveListener(RestartLevel);
-             _restartButton.gameObject.SetActive(false);
-            _levelRestarter.RestartLevel();
-        }
+		private void RestartLevel()
+		{
+			_restartButton.onClick.RemoveListener(RestartLevel);
+			_restartButton.gameObject.SetActive(false);
+			_shadowingImage.gameObject.SetActive(false);
+			_levelRestarter.RestartLevel();
+		}
 
-        public void Dispose()
-        {
-            _disposable.Clear();
-        }
-
-    }    
+		public void Dispose()
+		{
+			_disposable.Clear();
+		}
+	}
 }

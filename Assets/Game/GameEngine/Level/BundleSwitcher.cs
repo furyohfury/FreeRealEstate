@@ -35,10 +35,10 @@ namespace Game
 				return;
 			}
 
-			SetActiveList();
+			UpdateBundle();
 		}
 
-		private void SetActiveList()
+		public void UpdateBundle()
 		{
 			_activeBundleService.SetNextLevel();
 			SetDesiredCell();

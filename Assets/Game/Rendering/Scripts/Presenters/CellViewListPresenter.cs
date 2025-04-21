@@ -36,9 +36,8 @@ namespace Game
 			                    .AddTo(_disposable);
 		}
 
-		private async void OnBundleChanged(CellBundle bundle)
+		private void OnBundleChanged(CellBundle bundle)
 		{
-			await UniTask.Delay(TimeSpan.FromSeconds(0.7f)); // TODO should be in some config or installer
 			Clear();
 			var views = new CellView[bundle.Cells.Length];
 

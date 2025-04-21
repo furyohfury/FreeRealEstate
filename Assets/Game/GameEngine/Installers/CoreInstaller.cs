@@ -29,8 +29,8 @@ namespace Game
 			Container.BindInterfacesAndSelfTo<BundleSwitcher>()
 			         .AsSingle();
 
-			Container.BindInterfacesAndSelfTo<BundlesLoopController>()
-			         .AsSingle();
+			// Container.BindInterfacesAndSelfTo<BundlesLoopController>()
+			//          .AsSingle();
 		}
 	}
 }

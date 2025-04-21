@@ -48,5 +48,21 @@ namespace Game
 				Destroy(cellView.gameObject);
 			}
 		}
+
+		public override void EnableViews()
+		{
+			foreach (var cellView in _cellViews)
+			{
+				cellView.Enable();
+			}
+		}
+
+		public override void DisableCells()
+		{
+			foreach (var cellView in _cellViews)
+			{
+				cellView.Disable();
+			}
+		}
 	}
 }
