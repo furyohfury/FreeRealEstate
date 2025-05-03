@@ -13,7 +13,7 @@ namespace GameEngine
 		[SerializeField]
 		private Rigidbody _rigidbody;
 
-		public void Rotate(Vector3 direction)
+		public void Rotate(Vector3 delta)
 		{
 			if (CanRotate.Invoke() == false)
 			{
@@ -21,7 +21,25 @@ namespace GameEngine
 			}
 			
 			var rotation = _rigidbody.rotation;
-			_rigidbody.MoveRotation(Quaternion.Lerp(rotation, rotation * Quaternion.Euler(direction), _rotateSpeed));
+			var smoothedDirection = Quaternion.Lerp(rotation, rotation * Quaternion.Euler(delta), _rotateSpeed);
+			_rigidbody.MoveRotation(smoothedDirection);
+		}
+
+		public void RotateTo(Quaternion direction)
+		{
+			if (CanRotate.Invoke() == false)
+			{
+				return;
+			}
+
+			var smoothedRotation = Quaternion.Lerp(_rigidbody.rotation, direction, _rotateSpeed);
+			_rigidbody.MoveRotation(smoothedRotation);
+		}
+
+		public void RotateTo(Vector3 direction)
+		{
+			var quaternion = Quaternion.Euler(direction);
+			RotateTo(quaternion);
 		}
 	}
 }
