@@ -25,12 +25,18 @@ namespace Game
 				OnLevelEnded.OnNext(Unit.Default);
 			}
 
-			_activeCellBundle.Value = _cellLists[_activeIndex];
+			UpdateActiveBundleValue();
 		}
 
 		public void Reset()
 		{
 			_activeIndex = 0;
+			UpdateActiveBundleValue();
+		}
+
+		private void UpdateActiveBundleValue()
+		{
+			_activeCellBundle.Value = _cellLists[_activeIndex];
 		}
 	}
 }

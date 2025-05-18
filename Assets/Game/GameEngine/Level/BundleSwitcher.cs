@@ -35,12 +35,12 @@ namespace Game
 				return;
 			}
 
-			UpdateBundle();
+			_activeBundleService.SetNextLevel();
+			SetDesiredCell();
 		}
 
 		public void UpdateBundle()
 		{
-			_activeBundleService.SetNextLevel();
 			SetDesiredCell();
 		}
 
