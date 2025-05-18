@@ -8,7 +8,8 @@ namespace Game
 	public sealed class PlayerInputReader : IInitializable, IDisposable, InputControls.IPlayerActions
 	{
 		public Vector3 MoveDirection => _moveDirection;
-		public event Action<Vector2> OnLookAction; 
+		public event Action<Vector2> OnLookAction;
+		public event Action OnAttackAction;
 
 		private readonly InputControls _inputControls;
 		private Vector3 _moveDirection;
@@ -38,7 +39,7 @@ namespace Game
 
 		public void OnAttack(InputAction.CallbackContext context)
 		{
-			
+			OnAttackAction?.Invoke();
 		}
 
 		public void OnInteract(InputAction.CallbackContext context)

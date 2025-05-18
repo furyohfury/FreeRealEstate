@@ -5,8 +5,11 @@ using UnityEngine;
 namespace GameEngine
 {
 	[Serializable]
-	public sealed class MoveComponent : IComponent
+	public sealed class MoveRigidbodyComponent : IComponent
 	{
+		public AndCondition CanMove = new();
+		public Vector3 Position => _transform.position;
+		
 		[SerializeField]
 		private Rigidbody _rigidbody;
 		[SerializeField]
@@ -14,9 +17,7 @@ namespace GameEngine
 		[SerializeField]
 		private float _moveSpeed;
 
-		public AndCondition CanMove = new();
-
-		public void Move(Vector3 direction)
+		public void MoveInDirection(Vector3 direction)
 		{
 			if (direction == Vector3.zero || CanMove.Invoke())
 			{
@@ -25,6 +26,16 @@ namespace GameEngine
 			
 			var delta = _transform.forward * direction.z + _transform.right * direction.x;
 			_rigidbody.MovePosition(_transform.position + delta * _moveSpeed);
+		}
+
+		public void MoveTo(Vector3 position)
+		{
+			_rigidbody.MovePosition(position);
+		}
+
+		public void SetKinematic(bool isKinematic)
+		{
+			_rigidbody.isKinematic = isKinematic;
 		}
 	}
 }

@@ -8,6 +8,7 @@ namespace GameEngine
 	public sealed class RotateComponent : IComponent
 	{
 		public AndCondition CanRotate = new();
+		
 		[SerializeField]
 		private float _rotateSpeed;
 		[SerializeField]
