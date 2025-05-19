@@ -186,7 +186,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Atlas_Monsters_0: -6870237813672736605
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
