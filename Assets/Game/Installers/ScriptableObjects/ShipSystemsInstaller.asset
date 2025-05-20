@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c0d1e374f6434e8b75e2255f429c0d, type: 3}
   m_Name: ShipSystemsInstaller
   m_EditorClassIdentifier: 
+  _consumableValuesConfig: {fileID: 11400000, guid: 1cc669579f8718646bbf02b250946b6d, type: 2}

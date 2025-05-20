@@ -1,22 +1,19 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
-using GameEngine;
 using R3;
-using UnityEngine;
 using Zenject;
 
 namespace Game
 {
 	public sealed class ShipSpawnController : IInitializable, IDisposable
 	{
-		private readonly Entity _ship;
+		private readonly Ship _ship;
 		private readonly ShipPoints _shipPoints;
 		private readonly float _delayBetweenSpawns = 0.5f; // TODO to config
 		private readonly CompositeDisposable _disposable = new();
-		private ShipSpawnerComponent _shipSpawnerComponent;
 		private bool _isSpawning;
 
-		public ShipSpawnController(Entity ship, ShipPoints shipPoints)
+		public ShipSpawnController(Ship ship, ShipPoints shipPoints)
 		{
 			_ship = ship;
 			_shipPoints = shipPoints;
@@ -24,8 +21,6 @@ namespace Game
 
 		public void Initialize()
 		{
-			_shipSpawnerComponent = _ship.GetComponent<ShipSpawnerComponent>();
-
 			_shipPoints.Points
 			           .Pairwise()
 			           .Where(pair => pair.Previous < pair.Current
@@ -49,7 +44,7 @@ namespace Game
 
 		private async UniTask SpawnEntity()
 		{
-			_shipSpawnerComponent.CreateEntity();
+			_ship.CreateEntity();
 			await UniTask.Delay(TimeSpan.FromSeconds(_delayBetweenSpawns));
 		}
 

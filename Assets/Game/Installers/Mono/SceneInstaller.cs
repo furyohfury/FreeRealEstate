@@ -8,8 +8,6 @@ namespace Game
 	public sealed class SceneInstaller : MonoInstaller
 	{
 		[SerializeField]
-		private Player _player;
-		[SerializeField]
 		private InputActionReference _moveActionReference;
 		
 		public override void InstallBindings()
@@ -20,9 +18,12 @@ namespace Game
 
 		private void InstallPlayerSceneSystems()
 		{
+			Container.Bind<Player>()
+			         .FromComponentInHierarchy()
+			         .AsSingle();
+
 			Container.Bind<PlayerService>()
-			         .AsSingle()
-			         .WithArguments(_player);
+			         .AsSingle();
 
 			Container.BindInterfacesTo<PlayerController>()
 			         .AsSingle();
@@ -36,8 +37,7 @@ namespace Game
 
 		private void InstallShipSceneSystems()
 		{
-			Container.Bind<Entity>()
-			         .To<Ship>()
+			Container.Bind<Ship>()
 			         .FromComponentInHierarchy()
 			         .AsSingle();
 			
@@ -45,9 +45,6 @@ namespace Game
 			         .AsSingle();
 			
 			Container.BindInterfacesTo<ShipSpawnController>()
-			         .AsSingle();
-
-			Container.BindInterfacesTo<ShipDetectObjectObserver>()
 			         .AsSingle();
 		}
 	}

@@ -9,12 +9,12 @@ using Unity.Properties;
 [NodeDescription(name: "Attack", story: "[Entity] Attack Target", category: "Action", id: "af9429f905df7f3c26853c82c7ad5396")]
 public partial class AttackAction : Action
 {
-    [SerializeReference] public BlackboardVariable<Entity> Entity;
+    [SerializeReference] public BlackboardVariable<GameObject> Entity;
 
     protected override Status OnStart()
     {
-        var attackComponent = Entity.Value.GetComponent<AttackComponent>();
-        attackComponent.Attack();
+        var attackable = Entity.Value.GetComponent<IAttackable>();
+        attackable.Attack();
         return Status.Running;
     }
 }

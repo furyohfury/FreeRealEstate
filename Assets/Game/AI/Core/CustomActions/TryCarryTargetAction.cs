@@ -9,13 +9,13 @@ using Unity.Properties;
 [NodeDescription(name: "TryCarryTarget", story: "[Entity] try carry [Target]", category: "Action", id: "96c183095df3d31809d63b3bb93b61fc")]
 public partial class TryCarryTargetAction : Action
 {
-    [SerializeReference] public BlackboardVariable<Entity> Entity;
-    [SerializeReference] public BlackboardVariable<Entity> Target;
+    [SerializeReference] public BlackboardVariable<GameObject> Entity;
+    [SerializeReference] public BlackboardVariable<GameObject> Target;
 
     protected override Status OnStart()
     {
-        var carryComponent = Entity.Value.GetComponent<CarryComponent>();
-        if (carryComponent.TryCarry(Target.Value))
+        var carry = Entity.Value.GetComponent<ICarry>();
+        if (carry.TryCarry(Target.Value))
         {
             return Status.Success;
         }

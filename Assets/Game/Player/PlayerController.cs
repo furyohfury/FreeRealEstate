@@ -4,14 +4,11 @@ using Zenject;
 
 namespace Game
 {
-	public sealed class PlayerController : IInitializable, IFixedTickable
+	public sealed class PlayerController : IInitializable, ITickable
 	{
 		private readonly PlayerService _playerService;
-		private Entity _player;
-		private MoveRigidbodyComponent _moveRigidbodyComponent;
 		private readonly PlayerInputReader _playerInputReader;
-		private RotateComponent _rotateComponent;
-		private AttackComponent _attackComponent;
+		private Player _player;
 
 		public PlayerController(PlayerService playerService, PlayerInputReader playerInputReader)
 		{
@@ -22,14 +19,10 @@ namespace Game
 		public void Initialize()
 		{
 			_player = _playerService.Player;
-			_moveRigidbodyComponent = _player.GetComponent<MoveRigidbodyComponent>();
-			_rotateComponent = _player.GetComponent<RotateComponent>();
-			_attackComponent = _player.GetComponent<AttackComponent>();
 			_playerInputReader.OnLookAction += OnLook;
-			_playerInputReader.OnAttackAction += OnAttack;
 		}
 
-		public void FixedTick()
+		public void Tick()
 		{
 			Move();
 		}
@@ -37,18 +30,13 @@ namespace Game
 		private void Move()
 		{
 			var moveDirection = _playerInputReader.MoveDirection;
-			_moveRigidbodyComponent.MoveInDirection(moveDirection * Time.deltaTime);
+			_player.Move(moveDirection);
 		}
 
 		private void OnLook(Vector2 direction)
 		{
 			var horizontalRotation = new Vector3(0, direction.x, 0);
-			_rotateComponent.Rotate(horizontalRotation);
-		}
-
-		private void OnAttack()
-		{
-			_attackComponent.Attack();	
+			_player.Rotate(horizontalRotation);
 		}
 	}
 }

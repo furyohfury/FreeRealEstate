@@ -3,14 +3,17 @@ using UnityEngine;
 
 namespace Game.Debug
 {
-	public class EnemyDebug : Entity
+	public class EnemyDebug : MonoBehaviour, IChangeHealth
 	{
 		[SerializeField]
 		private LifeComponent _lifeComponent;
 
-		private void Awake()
+		public int MaxHealth => _lifeComponent.MaxHealth;
+		public int CurrentHealth => _lifeComponent.CurrentHealth;
+
+		public void ChangeHealth(int delta)
 		{
-			AddComponent(_lifeComponent);
+			_lifeComponent.ChangeHealth(delta);
 		}
 	}
 }

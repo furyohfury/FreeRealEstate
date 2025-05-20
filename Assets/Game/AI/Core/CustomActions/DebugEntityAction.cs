@@ -10,7 +10,7 @@ using Action = Unity.Behavior.Action;
 public partial class DebugEntityAction : Action
 {
 	[SerializeReference]
-	public BlackboardVariable<Entity> Entity;
+	public BlackboardVariable<GameObject> Entity;
 
 	protected override Status OnStart()
 	{

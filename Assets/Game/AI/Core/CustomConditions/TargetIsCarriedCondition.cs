@@ -7,7 +7,7 @@ using UnityEngine;
 [Condition(name: "TargetIsCarried", story: "[Target] isCarried", category: "Conditions", id: "bc0973dc56a6ac6a1259ced7ccfcb041")]
 public partial class TargetIsCarriedCondition : Condition
 {
-    [SerializeReference] public BlackboardVariable<Entity> Target;
+    [SerializeReference] public BlackboardVariable<GameObject> Target;
 
     public override bool IsTrue()
     {

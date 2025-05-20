@@ -1,16 +1,22 @@
-﻿using GameEngine;
+﻿using System;
+using GameEngine;
 using UnityEngine;
 
 namespace Game
 {
-	public sealed class CommonPikmin : Entity
+	public sealed class CommonPikmin :  // TODO bind navmesh and animation with isalive too
+		MonoBehaviour,
+		IChangeHealth,
+		ICarry,
+		IAttackable
 	{
+		public int MaxHealth => _lifeComponent.MaxHealth;
+		public int CurrentHealth => _lifeComponent.CurrentHealth;
+		
 		[SerializeField]
 		private LifeComponent _lifeComponent;
 		[SerializeField]
 		private CarryComponent _carryComponent;
-		[SerializeField]
-		private MoveRigidbodyComponent _moveRigidbodyComponent;
 		[SerializeField]
 		private AttackComponent _attackComponent;
 		[SerializeField]
@@ -20,18 +26,43 @@ namespace Game
 
 		private void Awake()
 		{
-			AddComponent(_lifeComponent);
-			AddComponent(_carryComponent);
-			AddComponent(_moveRigidbodyComponent);
-			AddComponent(_attackComponent);
+			_attackComponent.CanAttack.AddCondition(() => _lifeComponent.IsAlive);
 		}
 
-		protected override void Update()
+		private void Start()
 		{
-			base.Update();
+			_attackComponent.Initialize();
+		}
 
+		private void Update()
+		{
+			AnimateMovement();
+		}
+
+		private void AnimateMovement()
+		{
 			var isMoving = _navMeshComponent.Velocity != Vector3.zero;
 			_animatorComponent.Animator.SetBool(AnimatorHash.IsMoving, isMoving);
+		}
+
+		public void ChangeHealth(int delta)
+		{
+			_lifeComponent.ChangeHealth(delta);
+		}
+
+		public bool TryCarry(GameObject entity)
+		{
+			 return _carryComponent.TryCarry(entity);
+		}
+
+		public void Attack()
+		{
+			_attackComponent.Attack();
+		}
+
+		private void OnDestroy()
+		{
+			_attackComponent.Dispose();
 		}
 	}
 }
