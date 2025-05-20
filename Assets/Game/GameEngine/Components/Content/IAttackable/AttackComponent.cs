@@ -40,6 +40,17 @@ namespace GameEngine
 			CanAttack.AddCondition(() => _cooldownPassed);
 		}
 
+		public void Attack()
+		{
+			if (CanAttack.Invoke() == false)
+			{
+				return;
+			}
+
+			AnimateAttack();
+			SetCooldown().Forget();
+		}
+
 		private void OnAttackStarted()
 		{
 			_weaponCollider.enabled = true;
@@ -50,18 +61,7 @@ namespace GameEngine
 			_weaponCollider.enabled = false;
 		}
 
-		public void Attack()
-		{
-			if (CanAttack.Invoke() == false)
-			{
-				return;
-			}
-
-			ExecuteAttack();
-			SetCooldown().Forget();
-		}
-
-		private void ExecuteAttack()
+		private void AnimateAttack()
 		{
 			_animator.SetTrigger(_attackHash);
 		}
