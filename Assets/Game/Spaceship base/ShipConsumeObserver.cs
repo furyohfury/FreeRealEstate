@@ -36,7 +36,10 @@ namespace Game
 			}
 
 			var id = iIdentifier.Id;
-			_shipPoints.Points.Value += _valuesConfig.Values[id];
+			if (_valuesConfig.Values.TryGetValue(id, out int points))
+			{
+				_shipPoints.Points.Value += points;
+			}			
 		}
 
 		public void Dispose()
