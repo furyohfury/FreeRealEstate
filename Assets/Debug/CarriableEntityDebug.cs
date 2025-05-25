@@ -1,14 +1,16 @@
-﻿using GameEngine;
+﻿using System;
+using GameEngine;
 using UnityEngine;
 
-namespace Game.Debug
+namespace Game
 {
 	public sealed class CarriableEntityDebug : MonoBehaviour,
 		IHitPoints,
-		IChangeHealth,
+		ITakeDamage,
 		ICarriable,
 		IIdentifier,
 		IMoveable,
+		IPikminInteractable,
 		IDestroyable
 	{
 		public string Id => _idComponent.ID;
@@ -26,13 +28,18 @@ namespace Game.Debug
 		private MoveTransformComponent _moveTransformComponent;
 		[SerializeField]
 		private LifeComponent _lifeComponent;
-		
-		public void ChangeHealth(int delta)
+
+		private void Update()
+		{
+			_carriableComponent.Update(Time.deltaTime);
+		}
+
+		public void TakeDamage(int delta)
 		{
 			_lifeComponent.ChangeHealth(delta);
 			if (_lifeComponent.IsAlive == false)
 			{
-				
+				Destroy();
 			}
 		}
 
@@ -47,11 +54,6 @@ namespace Game.Debug
 		}
 
 		public void ClearCarriers()
-		{
-			_carriableComponent.ClearCarriers();
-		}
-
-		private void OnDestroy()
 		{
 			_carriableComponent.ClearCarriers();
 		}
@@ -72,6 +74,11 @@ namespace Game.Debug
 		public void Destroy()
 		{
 			_destroyComponent.Destroy();
+		}
+
+		private void OnDestroy()
+		{
+			_carriableComponent.ClearCarriers();
 		}
 	}
 }

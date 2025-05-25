@@ -2,7 +2,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace Game.Debug
+namespace Game
 {
 	public sealed class ShipPointsDebug : MonoBehaviour
 	{
