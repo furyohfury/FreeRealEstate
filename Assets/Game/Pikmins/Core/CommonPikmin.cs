@@ -1,28 +1,40 @@
 ﻿using System;
 using GameEngine;
+using R3;
 using UnityEngine;
 
 namespace Game
 {
 	public sealed class CommonPikmin :  // TODO bind navmesh and animation with isalive too
 		MonoBehaviour,
-		IChangeHealth,
+		ITakeDamage,
 		ICarry,
-		IAttackable
+		IAttackable,
+		IPikminTarget
 	{
-		public int MaxHealth => _lifeComponent.MaxHealth;
 		public int CurrentHealth => _lifeComponent.CurrentHealth;
-		
+
+		public GameObject Target
+		{
+			get => _target;
+		}
+
 		[SerializeField]
 		private LifeComponent _lifeComponent;
+
 		[SerializeField]
 		private CarryComponent _carryComponent;
+
 		[SerializeField]
 		private AttackComponent _attackComponent;
+
 		[SerializeField]
 		private NavMeshComponent _navMeshComponent;
+
 		[SerializeField]
 		private AnimatorComponent _animatorComponent;
+
+		private GameObject _target;
 
 		private void Awake()
 		{
@@ -39,13 +51,24 @@ namespace Game
 			AnimateMovement();
 		}
 
+		public bool TrySetTarget(GameObject target)
+		{
+			if (target.TryGetComponent(out IPikminInteractable _))
+			{
+				_target = target;
+				return true;
+			}
+
+			return false;
+		}
+
 		private void AnimateMovement()
 		{
 			var isMoving = _navMeshComponent.Velocity != Vector3.zero;
 			_animatorComponent.Animator.SetBool(AnimatorHash.IsMoving, isMoving);
 		}
 
-		public void ChangeHealth(int delta)
+		public void TakeDamage(int delta)
 		{
 			_lifeComponent.ChangeHealth(delta);
 		}
@@ -53,6 +76,11 @@ namespace Game
 		public bool TryCarry(GameObject entity)
 		{
 			 return _carryComponent.TryCarry(entity);
+		}
+
+		public void StopCarry()
+		{
+			_carryComponent.StopCarry();
 		}
 
 		public void Attack()
