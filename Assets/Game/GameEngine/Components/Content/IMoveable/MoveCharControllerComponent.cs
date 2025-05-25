@@ -7,6 +7,7 @@ namespace GameEngine
 	[Serializable]
 	public sealed class MoveCharControllerComponent
 	{
+		public bool IsMoving => _characterController.velocity != Vector3.zero;
 		public AndCondition CanMove = new();
 
 		[SerializeField]
