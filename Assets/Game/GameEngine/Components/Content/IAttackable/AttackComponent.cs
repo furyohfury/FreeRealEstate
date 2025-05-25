@@ -75,9 +75,9 @@ namespace GameEngine
 
 		private void OnAttacked(Collider other)
 		{
-			if (other.gameObject.TryGetComponent(out IChangeHealth liveable))
+			if (other.gameObject.TryGetComponent(out ITakeDamage liveable))
 			{
-				liveable.ChangeHealth(-_damage);
+				liveable.TakeDamage(-_damage);
 			}
 		}
 
