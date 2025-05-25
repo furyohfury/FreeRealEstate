@@ -11,6 +11,6 @@ public partial class TargetIsCarriedCondition : Condition
 
     public override bool IsTrue()
     {
-        return Target.Value.GetComponent<CarriableComponent>().IsCarried;
+        return Target.Value.GetComponent<ICarriable>().IsCarried;
     }
 }
