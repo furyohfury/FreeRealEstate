@@ -1,5 +1,4 @@
-﻿using GameEngine;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
@@ -9,7 +8,9 @@ namespace Game
 	{
 		[SerializeField]
 		private InputActionReference _moveActionReference;
-		
+		[SerializeField]
+		private Transform _playerPointer;
+
 		public override void InstallBindings()
 		{
 			InstallPlayerSceneSystems();
@@ -26,7 +27,8 @@ namespace Game
 			         .AsSingle();
 
 			Container.BindInterfacesTo<PlayerController>()
-			         .AsSingle();
+			         .AsSingle()
+			         .WithArguments(_playerPointer);
 
 			Container.Bind<InputControls>()
 			         .AsSingle();
@@ -40,10 +42,10 @@ namespace Game
 			Container.Bind<Ship>()
 			         .FromComponentInHierarchy()
 			         .AsSingle();
-			
+
 			Container.BindInterfacesTo<ShipConsumeObserver>()
 			         .AsSingle();
-			
+
 			Container.BindInterfacesTo<ShipSpawnController>()
 			         .AsSingle();
 		}
