@@ -8,6 +8,7 @@ namespace GameEngine
 	[Serializable]
 	public class CarriableComponent
 	{
+		[ShowInInspector]
 		public bool IsCarried => _currentForce >= _weight;
 		
 		[SerializeField]
@@ -18,6 +19,7 @@ namespace GameEngine
 		private Transform _transform;
 		[ShowInInspector] [ReadOnly]
 		private int _currentForce;
+		[ShowInInspector]
 		private HashSet<Transform> _carriers = new();
 
 		[Button]
@@ -59,7 +61,7 @@ namespace GameEngine
 			Vector3 averagePos = Vector3.zero;
 			foreach (var carrier in _carriers)
 			{
-				averagePos += carrier.transform.position;
+				averagePos += carrier.transform.position; // TODO make with event so facade would move with movecomponent
 			}
 
 			_transform.position = Vector3.Lerp(_transform.position, averagePos / _carriers.Count, deltaTime * _movingSpeed);
