@@ -15,7 +15,6 @@ public partial class AssignTargetToBlackboardAction : Action
     {
         var targetValue = Self.Value.GetComponent<IPikminTarget>().Target;
         Target.Value = targetValue;
-        Debug.Log("Assigned target");
         return Status.Success;
     }
 }

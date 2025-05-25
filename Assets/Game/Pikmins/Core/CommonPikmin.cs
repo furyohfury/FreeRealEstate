@@ -16,10 +16,7 @@ namespace Game
 		public int CurrentHealth => _lifeComponent.CurrentHealth;
 
 		[ShowInInspector]
-		public GameObject Target
-		{
-			get => _target;
-		}
+		public GameObject Target => _target;
 
 		[SerializeField]
 		private LifeComponent _lifeComponent;
