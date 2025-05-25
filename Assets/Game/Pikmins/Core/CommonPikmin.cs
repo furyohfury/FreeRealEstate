@@ -1,6 +1,7 @@
 ﻿using System;
 using GameEngine;
 using R3;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Game
@@ -14,6 +15,7 @@ namespace Game
 	{
 		public int CurrentHealth => _lifeComponent.CurrentHealth;
 
+		[ShowInInspector]
 		public GameObject Target
 		{
 			get => _target;
