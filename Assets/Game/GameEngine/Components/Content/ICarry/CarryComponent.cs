@@ -20,18 +20,22 @@ namespace GameEngine
 		public bool TryCarry(GameObject entity)
 		{
 			bool canCarry = entity.TryGetComponent(out ICarriable carriable)
-			                      && carriable.AddCarrier(_transform, _strength);
+			                && carriable.AddCarrier(_transform, _strength);
 			if (canCarry)
 			{
 				_activeCarriable = carriable;
 			}
-			
+
 			return canCarry;
 		}
 
 		public void StopCarry()
 		{
-			_activeCarriable?.RemoveCarrier(_transform, _strength);
+			if (_activeCarriable != null)
+			{
+				_activeCarriable.RemoveCarrier(_transform, _strength);
+				_activeCarriable = null;
+			}
 		}
 	}
 }
