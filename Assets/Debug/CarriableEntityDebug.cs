@@ -15,11 +15,11 @@ namespace Game.Debug
 
 		public int HitPoints => _lifeComponent.CurrentHealth;
 		public bool IsCarried => _carriableComponent.IsCarried;
-		
+
 		[SerializeField]
 		private CarriableComponent _carriableComponent;
 		[SerializeField]
-		private DestroyComponent _destroyComponent;
+		private DestroyCompositeComponent _destroyComponent;
 		[SerializeField]
 		private IdComponent _idComponent;
 		[SerializeField]
