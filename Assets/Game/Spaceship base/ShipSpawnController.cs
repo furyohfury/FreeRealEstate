@@ -5,7 +5,7 @@ using Zenject;
 
 namespace Game
 {
-	public sealed class ShipSpawnController : IInitializable, IDisposable
+	public sealed class ShipSpawnController : IInitializable, IDisposable // TODO fix. Now inactive
 	{
 		private readonly Ship _ship;
 		private readonly ShipPoints _shipPoints;

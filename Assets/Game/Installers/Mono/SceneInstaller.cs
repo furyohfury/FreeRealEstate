@@ -46,8 +46,8 @@ namespace Game
 			Container.BindInterfacesTo<ShipConsumeObserver>()
 			         .AsSingle();
 
-			Container.BindInterfacesTo<ShipSpawnController>()
-			         .AsSingle();
+			// Container.BindInterfacesTo<ShipSpawnController>()
+			//          .AsSingle();
 		}
 	}
 }
