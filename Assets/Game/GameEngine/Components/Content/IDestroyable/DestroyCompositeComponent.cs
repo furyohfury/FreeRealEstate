@@ -11,22 +11,33 @@ namespace GameEngine
 		public Subject<GameObject> OnSubDestroyed = new();
 		
 		[SerializeField]
-		private GameObject _subObject;
+		private GameObject[] _subObjects;
 		[SerializeField]
 		private GameObject _main;
+		private int _subObjectIndex = 0;
 
 		public void Destroy()
 		{
-			if (_subObject != null)
+			if (_subObjectIndex >= _subObjects.Length)
 			{
-				OnSubDestroyed.OnNext(_subObject);
-				GameObject.Destroy(_subObject);
+				DestroyMain();
 			}
 			else
 			{
-				OnMainDestroyed.OnNext(_main);
-				GameObject.Destroy(_main);
+				DestroySubObject(_subObjectIndex++);
 			}
+		}
+
+		private void DestroySubObject(int index)
+		{
+			OnSubDestroyed.OnNext(_subObjects[index]);
+			GameObject.Destroy(_subObjects[index]);
+		}
+
+		private void DestroyMain()
+		{
+			OnMainDestroyed.OnNext(_main);
+			GameObject.Destroy(_main);
 		}
 	}
 }
