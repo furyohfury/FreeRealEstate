@@ -1,20 +1,19 @@
 ﻿using System;
-using System.Linq;
 using R3;
 using UnityEngine;
 using Zenject;
 
 namespace Game
 {
-	public sealed class PlayerController : IInitializable, ITickable, IDisposable
+	public sealed class PlayerController : IInitializable, IDisposable
 	{
 		private readonly PlayerService _playerService;
 		private readonly PlayerInputReader _playerInputReader;
-		private readonly Transform _playerPointer;
+		private readonly PlayerPointer _playerPointer;
 
 		private readonly CompositeDisposable _disposable = new();
 
-		public PlayerController(PlayerService playerService, PlayerInputReader playerInputReader, Transform playerPointer)
+		public PlayerController(PlayerService playerService, PlayerInputReader playerInputReader, PlayerPointer playerPointer)
 		{
 			_playerService = playerService;
 			_playerInputReader = playerInputReader;
@@ -23,18 +22,18 @@ namespace Game
 
 		public void Initialize()
 		{
-			InitLook();
+			InitMove();
 			InitInteract();
 			InitGather();
 		}
 
-		private void InitLook()
+		private void InitMove()
 		{
-			_playerInputReader.OnLookAction
-			                  .Subscribe(rot =>
+			_playerInputReader.OnMoveAction
+			                  .Subscribe(moveDirection =>
 			                  {
-				                  var horizontalRotation = new Vector3(0, rot.x, 0);
-				                  GetPlayer().Rotate(horizontalRotation);
+				                  var player = GetPlayer();
+				                  player.Move(moveDirection);
 			                  })
 			                  .AddTo(_disposable);
 		}
@@ -44,21 +43,15 @@ namespace Game
 			_playerInputReader.OnInteractAction
 			                  .Subscribe(_ =>
 			                  {
-				                  Collider[] results = new Collider[5];
-				                  var size = Physics.OverlapBoxNonAlloc(_playerPointer.position,
-					                  new Vector3(2, 5, 2),
-					                  results); // TODO magic numbers
-
-				                  if (size == 0)
+				                  var player = GetPlayer();
+				                  var pointerCollisions = _playerPointer.Collisions;
+				                  foreach (var pointerCollision in pointerCollisions)
 				                  {
-					                  return;
-				                  }
-
-				                  var interactable = results.FirstOrDefault(result => result != null
-				                                                                      && result.TryGetComponent(out IPikminInteractable _));
-				                  if (interactable != default)
-				                  {
-					                  GetPlayer().SetTargetToPikmins(interactable.gameObject, false);
+					                  if (pointerCollision.TryGetComponent(out IPikminInteractable _))
+					                  {
+						                  player.SetTargetToPikmins(pointerCollision.gameObject, false);
+						                  return;
+					                  }
 				                  }
 			                  })
 			                  .AddTo(_disposable);
@@ -69,45 +62,21 @@ namespace Game
 			_playerInputReader.OnGatherAction
 			                  .Subscribe(_ =>
 			                  {
-				                  Collider[] pikmins = Physics.OverlapBox(_playerPointer.position,
-					                  new Vector3(2, 5, 2),
-					                  Quaternion.identity,
-					                  1 << 8); // TODO magic numbers of box and mask
-
-				                  if (pikmins.Length <= 0)
-				                  {
-					                  return;
-				                  }
-
+				                  Debug.Log("OnGather");
 				                  var player = GetPlayer();
-				                  for (int i = 0, count = pikmins.Length; i < count; i++)
+				                  var pointerCollisions = _playerPointer.Collisions;
+				                  foreach (var pointerCollision in pointerCollisions)
 				                  {
-					                  player.AddPikmin(pikmins[i].gameObject);
+					                  if (pointerCollision.TryGetComponent(out IPikminTarget _))
+					                  {
+						                  player.AddPikmin(pointerCollision.gameObject);
+					                  }
 				                  }
 
 				                  player.SetTargetToPikmins(player.gameObject, true);
+				                  _playerPointer.IncreaseScale();
 			                  })
 			                  .AddTo(_disposable);
-		}
-
-		public void Tick()
-		{
-			Move();
-		}
-
-		private void Move()
-		{
-			var player = GetPlayer();
-			var moveDirection = _playerInputReader.MoveDirection;
-			moveDirection = player.transform.TransformVector(moveDirection);
-			player.Move(moveDirection);
-		}
-
-		private void OnLook(Vector2 direction)
-		{
-			var player = GetPlayer();
-			var horizontalRotation = new Vector3(0, direction.x, 0);
-			player.Rotate(horizontalRotation);
 		}
 
 		private Player GetPlayer()
