@@ -18,7 +18,7 @@ public partial class StopCarryAction : Action
             iCarry.StopCarry();
         }
         
-        return Status.Running;
+        return Status.Success;
     }
 }
 
