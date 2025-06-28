@@ -99,7 +99,7 @@ MonoBehaviour:
           m_Value0: 15181957979460367877
           m_Value1: 6204845690334456462
         Name: AttackDistance
-        m_Value: 1.2
+        m_Value: 0.3
     - rid: 654417716079231171
       type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -115,7 +115,7 @@ MonoBehaviour:
           m_Value0: 14264040212497899529
           m_Value1: 16587189660611377755
         Name: CarryDistance
-        m_Value: 1
+        m_Value: 0.2
     - rid: 654417802835525865
       type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -131,7 +131,7 @@ MonoBehaviour:
           m_Value0: 9418651931991910297
           m_Value1: 8478942092168523861
         Name: Speed
-        m_Value: 1.5
+        m_Value: 4
 --- !u!1 &3616689203692043367
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,7 +194,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3018321977513005613}
-  - component: {fileID: 3887913579775537267}
   - component: {fileID: 1116314012789219798}
   - component: {fileID: 1068967287905084948}
   - component: {fileID: 5802889461829342190}
@@ -213,42 +212,16 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3835090578986396684}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.2, y: 0.09, z: -0.42}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4957625292170144052}
   - {fileID: 3042410203494552326}
+  - {fileID: 4531663991468183398}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &3887913579775537267
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3835090578986396684}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
 --- !u!195 &1116314012789219798
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -259,10 +232,10 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.73
-  m_Speed: 3.5
-  m_Acceleration: 8
+  m_Speed: 4
+  m_Acceleration: 9999
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 360
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -300,6 +273,9 @@ MonoBehaviour:
     _navMeshAgent: {fileID: 1116314012789219798}
   _animatorComponent:
     _animator: {fileID: 2382820713723687693}
+  _rotateComponent:
+    _rotateSpeed: 0.1
+    _transform: {fileID: 3018321977513005613}
 --- !u!136 &5802889461829342190
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -323,6 +299,52 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0.99, z: -0.00000008940697}
+--- !u!1 &6792904736800245062
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4531663991468183398}
+  - component: {fileID: 263369225417506797}
+  m_Layer: 8
+  m_Name: Gizmos
+  m_TagString: EditorOnly
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4531663991468183398
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6792904736800245062}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.84, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3018321977513005613}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &263369225417506797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6792904736800245062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16c86a712a2f4ed4a5333ac9d95be3c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _radius: 0.42
+  _distance: 1.3
 --- !u!1001 &4848050862292356831
 PrefabInstance:
   m_ObjectHideFlags: 0

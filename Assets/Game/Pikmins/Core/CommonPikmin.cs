@@ -1,17 +1,16 @@
-﻿using System;
-using GameEngine;
-using R3;
+﻿using GameEngine;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Game
 {
-	public sealed class CommonPikmin :  // TODO bind navmesh and animation with isalive too
+	public sealed class CommonPikmin : // TODO bind navmesh and animation with isalive too
 		MonoBehaviour,
 		ITakeDamage,
 		ICarry,
 		IAttackable,
-		IPikminTarget
+		IPikminTarget,
+		IRotateable
 	{
 		public int CurrentHealth => _lifeComponent.CurrentHealth.CurrentValue;
 
@@ -20,18 +19,16 @@ namespace Game
 
 		[SerializeField]
 		private LifeComponent _lifeComponent;
-
 		[SerializeField]
 		private CarryComponent _carryComponent;
-
 		[SerializeField]
 		private AttackComponent _attackComponent;
-
 		[SerializeField]
 		private NavMeshComponent _navMeshComponent;
-
 		[SerializeField]
 		private AnimatorComponent _animatorComponent;
+		[SerializeField]
+		private RotateTransformComponent _rotateComponent;
 
 		private GameObject _target;
 
@@ -72,9 +69,14 @@ namespace Game
 			_lifeComponent.ChangeHealth(delta);
 		}
 
+		public Transform GetAnchorPoint()
+		{
+			return _carryComponent.AnchorPoint;
+		}
+
 		public bool TryCarry(GameObject entity)
 		{
-			 return _carryComponent.TryCarry(entity);
+			return _carryComponent.TryCarry(entity);
 		}
 
 		public void StopCarry()
@@ -90,6 +92,16 @@ namespace Game
 		private void OnDestroy()
 		{
 			_attackComponent.Dispose();
+		}
+
+		public void Rotate(Vector3 delta)
+		{
+			_rotateComponent.Rotate(delta);
+		}
+
+		public void RotateTo(Quaternion direction)
+		{
+			_rotateComponent.RotateTo(direction);
 		}
 	}
 }

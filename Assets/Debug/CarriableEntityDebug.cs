@@ -22,13 +22,15 @@ namespace Game
 		[SerializeField]
 		private CarriableComponent _carriableComponent;
 		[SerializeField]
-		private DestroyCompositeComponent _destroyComponent;
+		private DestroyComponent _destroyComponent;
 		[SerializeField]
 		private IdComponent _idComponent;
 		[SerializeField]
 		private MoveTransformComponent _moveTransformComponent;
 		[SerializeField]
 		private LifeComponent _lifeComponent;
+		[SerializeField]
+		private TakeDamageStateChangeComponent _damageStateChangeComponent;
 
 		[SerializeField] [Header("UI")]
 		private HealthbarUIComponent _healthbarUI;
@@ -61,7 +63,7 @@ namespace Game
 			_lifeComponent.CurrentHealth
 			              .Where(hp => hp <= 0)
 			              .Take(1)
-			              .Subscribe(_ => Destroy())
+			              .Subscribe(_ => _damageStateChangeComponent.ChangeState())
 			              .AddTo(_disposable);
 		}
 
@@ -75,14 +77,14 @@ namespace Game
 			_lifeComponent.ChangeHealth(delta);
 		}
 
-		public bool AddCarrier(Transform transform, int force)
+		public bool AddCarrier(Transform carrier, int force, out Transform anchorPoint)
 		{
-			return _carriableComponent.AddCarrier(transform, force);
+			return _carriableComponent.AddCarrier(carrier, force, out anchorPoint);
 		}
 
-		public void RemoveCarrier(Transform transform, int force)
+		public void RemoveCarrier(Transform carrier, int force)
 		{
-			_carriableComponent.RemoveCarrier(transform, force);
+			_carriableComponent.RemoveCarrier(carrier, force);
 		}
 
 		public void ClearCarriers()
