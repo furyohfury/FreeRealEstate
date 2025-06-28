@@ -1,5 +1,5 @@
-﻿using System;
-using GameEngine;
+﻿using GameEngine;
+using R3;
 using UnityEngine;
 
 namespace Game
@@ -15,8 +15,9 @@ namespace Game
 	{
 		public string Id => _idComponent.ID;
 
-		public int HitPoints => _lifeComponent.CurrentHealth;
+		public int HitPoints => _lifeComponent.CurrentHealth.CurrentValue;
 		public bool IsCarried => _carriableComponent.IsCarried;
+		public Vector3 Position => transform.position;
 
 		[SerializeField]
 		private CarriableComponent _carriableComponent;
@@ -29,6 +30,41 @@ namespace Game
 		[SerializeField]
 		private LifeComponent _lifeComponent;
 
+		[SerializeField] [Header("UI")]
+		private HealthbarUIComponent _healthbarUI;
+		[SerializeField]
+		private CarriableUIComponent _carriableUIComponent;
+
+		private readonly CompositeDisposable _disposable = new();
+
+		private void Start()
+		{
+			_lifeComponent.CurrentHealth
+			              .Subscribe(hp =>
+			              {
+				              _healthbarUI.SetRatio((float)hp / _lifeComponent.MaxHealth);
+				              if (hp <= 0)
+				              {
+					              _healthbarUI.Hide();
+				              }
+			              })
+			              .AddTo(_disposable);
+
+			_carriableComponent.CurrentForce
+			                   .Subscribe(force =>
+				                   _carriableUIComponent.SetAmount(
+					                   force,
+					                   _carriableComponent.Weight)
+			                   )
+			                   .AddTo(_disposable);
+
+			_lifeComponent.CurrentHealth
+			              .Where(hp => hp <= 0)
+			              .Take(1)
+			              .Subscribe(_ => Destroy())
+			              .AddTo(_disposable);
+		}
+
 		private void Update()
 		{
 			_carriableComponent.Update(Time.deltaTime);
@@ -37,10 +73,6 @@ namespace Game
 		public void TakeDamage(int delta)
 		{
 			_lifeComponent.ChangeHealth(delta);
-			if (_lifeComponent.IsAlive == false)
-			{
-				Destroy();
-			}
 		}
 
 		public bool AddCarrier(Transform transform, int force)
@@ -57,9 +89,6 @@ namespace Game
 		{
 			_carriableComponent.ClearCarriers();
 		}
-
-		public Vector3 Position => transform.position;
-
 
 		public void Move(Vector3 direction)
 		{
@@ -79,6 +108,7 @@ namespace Game
 		private void OnDestroy()
 		{
 			_carriableComponent.ClearCarriers();
+			_disposable.Dispose();
 		}
 	}
 }

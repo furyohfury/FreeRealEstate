@@ -1,5 +1,4 @@
-﻿using System;
-using GameEngine;
+﻿using GameEngine;
 using R3;
 using UnityEngine;
 
@@ -13,7 +12,7 @@ namespace Game
 		IAnimator,
 		IPikminInteractable
 	{
-		public int HitPoints => _lifeComponent.CurrentHealth;
+		public int HitPoints => _lifeComponent.CurrentHealth.CurrentValue;
 
 		public Vector3 Position => transform.position;
 		public Animator Animator => _animatorComponent.Animator;
@@ -29,10 +28,19 @@ namespace Game
 		[SerializeField]
 		private PikminControlComponent _pikminControlComponent;
 
+		private readonly CompositeDisposable _disposable = new();
+
 		private void Awake()
 		{
 			_moveCharControllerComponent.CanMove.AddCondition(() => _lifeComponent.IsAlive);
 			_rotateTransformComponent.CanRotate.AddCondition(() => _lifeComponent.IsAlive);
+			_pikminControlComponent.OnGather
+			                       .Subscribe(_ => _animatorComponent.Animator.SetTrigger(AnimatorHash.Gather))
+			                       .AddTo(_disposable);
+
+			_pikminControlComponent.OnInteract
+			                       .Subscribe(_ => _animatorComponent.Animator.SetTrigger(AnimatorHash.Interact))
+			                       .AddTo(_disposable);
 		}
 
 		private void Update()
@@ -79,6 +87,11 @@ namespace Game
 		public void SetTargetToPikmins(GameObject target, bool isPlayer)
 		{
 			_pikminControlComponent.SetTargetToPikmins(target, isPlayer);
+		}
+
+		private void OnDestroy()
+		{
+			_disposable.Dispose();
 		}
 	}
 }

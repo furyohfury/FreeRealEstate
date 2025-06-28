@@ -13,7 +13,7 @@ namespace Game
 		IAttackable,
 		IPikminTarget
 	{
-		public int CurrentHealth => _lifeComponent.CurrentHealth;
+		public int CurrentHealth => _lifeComponent.CurrentHealth.CurrentValue;
 
 		[ShowInInspector]
 		public GameObject Target => _target;
