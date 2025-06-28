@@ -1,4 +1,5 @@
 ﻿using System;
+using R3;
 using UnityEngine;
 
 namespace GameEngine
@@ -7,17 +8,17 @@ namespace GameEngine
 	public sealed class LifeComponent
 	{
 		public int MaxHealth => _maxHealth;
-		public int CurrentHealth => _currentHealth;
-		public bool IsAlive => _currentHealth > 0;
+		public ReadOnlyReactiveProperty<int> CurrentHealth => _currentHealth;
+		public bool IsAlive => _currentHealth.Value > 0;
 
 		[SerializeField]
 		private int _maxHealth;
 		[SerializeField]
-		private int _currentHealth;
+		private SerializableReactiveProperty<int> _currentHealth = new SerializableReactiveProperty<int>(5);
 
 		public void ChangeHealth(int delta)
 		{
-			_currentHealth = Mathf.Clamp(_currentHealth + delta, 0, _maxHealth);
+			_currentHealth.Value = Mathf.Clamp(_currentHealth.Value + delta, 0, _maxHealth);
 		}
 	}
 }
