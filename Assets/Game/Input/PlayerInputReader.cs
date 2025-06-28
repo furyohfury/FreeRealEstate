@@ -9,13 +9,12 @@ namespace Game
 {
 	public sealed class PlayerInputReader : IInitializable, IDisposable
 	{
-		public Vector3 MoveDirection => _moveDirection;
+		public readonly Observable<Vector3> OnMoveAction;
 		public readonly Observable<Vector2> OnLookAction;
 		public readonly Observable<Unit> OnInteractAction;
 		public readonly Observable<Unit> OnGatherAction;
 
 		private readonly InputControls _inputControls;
-		private Vector3 _moveDirection;
 
 		private readonly CompositeDisposable _disposable = new();
 
@@ -28,23 +27,21 @@ namespace Game
 				                         h => _inputControls.Player.Look.performed -= h)
 			                         .Select(ctx => ctx.ReadValue<Vector2>());
 
-			Observable.EveryUpdate()
-			          .Subscribe(_ =>
-			          {
-				          var direction = _inputControls.Player.Move.ReadValue<Vector2>();
-				          _moveDirection = new Vector3(direction.x, 0, direction.y);
-			          })
-			          .AddTo(_disposable);
+			OnMoveAction = Observable.EveryUpdate()
+			                         .Select(_ =>
+			                         {
+				                         var direction = _inputControls.Player.Move.ReadValue<Vector2>();
+				                         return new Vector3(direction.x, 0, direction.y);
+			                         });
 
 			OnInteractAction = Observable.FromEvent<InputAction.CallbackContext>(
 				h => _inputControls.Player.Interact.performed += h,
 				h => _inputControls.Player.Interact.performed -= h)
 			                             .Select(_ => Unit.Default);
 
-			OnGatherAction = Observable.FromEvent<InputAction.CallbackContext>(
-				                             h => _inputControls.Player.Gather.performed += h,
-				                             h => _inputControls.Player.Gather.performed -= h)
-			                             .Select(_ => Unit.Default);
+			OnGatherAction = Observable.EveryUpdate()
+			                           .Where(_ => _inputControls.Player.Gather.IsPressed())
+			                           .AsUnitObservable();
 		}
 
 		public void Initialize()

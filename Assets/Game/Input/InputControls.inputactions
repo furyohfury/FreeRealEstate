@@ -52,12 +52,12 @@
                 },
                 {
                     "name": "Gather",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "30cfe3e5-ff5e-4de2-a07c-627e26eea5c1",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
