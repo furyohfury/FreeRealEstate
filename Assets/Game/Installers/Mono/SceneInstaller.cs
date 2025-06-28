@@ -13,6 +13,9 @@ namespace Game
 
 		public override void InstallBindings()
 		{
+			Container.Bind<Camera>()
+			         .FromComponentInHierarchy()
+			         .AsSingle();
 			InstallPlayerSceneSystems();
 			InstallShipSceneSystems();
 		}
@@ -22,13 +25,22 @@ namespace Game
 			Container.Bind<Player>()
 			         .FromComponentInHierarchy()
 			         .AsSingle();
+			
+			Container.Bind<PlayerPointer>()
+			         .FromComponentInHierarchy()
+			         .AsSingle();
 
 			Container.Bind<PlayerService>()
 			         .AsSingle();
 
 			Container.BindInterfacesTo<PlayerController>()
-			         .AsSingle()
-			         .WithArguments(_playerPointer);
+			         .AsSingle();
+
+			Container.BindInterfacesTo<PlayerRotationController>()
+			         .AsSingle();
+
+			Container.BindInterfacesTo<PlayerAnimatorController>()
+			         .AsSingle();
 
 			Container.Bind<InputControls>()
 			         .AsSingle();
