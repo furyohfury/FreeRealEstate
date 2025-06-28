@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using R3;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -9,8 +10,11 @@ namespace GameEngine
 	public class CarriableComponent
 	{
 		[ShowInInspector]
-		public bool IsCarried => _currentForce >= _weight;
-		
+		public bool IsCarried => _currentForce.Value >= _weight;
+
+		public int Weight => _weight;
+		public ReadOnlyReactiveProperty<int> CurrentForce => _currentForce;
+
 		[SerializeField]
 		private int _weight;
 		[SerializeField]
@@ -18,7 +22,7 @@ namespace GameEngine
 		[SerializeField]
 		private Transform _transform;
 		[ShowInInspector] [ReadOnly]
-		private int _currentForce;
+		private ReactiveProperty<int> _currentForce = new();
 		[ShowInInspector]
 		private HashSet<Transform> _carriers = new();
 
@@ -30,7 +34,7 @@ namespace GameEngine
 				return false;
 			}
 
-			_currentForce += force;
+			_currentForce.Value += force;
 			return true;
 		}
 
@@ -39,16 +43,16 @@ namespace GameEngine
 		{
 			if (_carriers.Remove(transform) == false)
 			{
-				throw new NullReferenceException($"No such carrier as {transform.gameObject.name}");
+				return;
 			}
 
-			_currentForce -= force;
+			_currentForce.Value -= force;
 		}
 
 		public void ClearCarriers()
 		{
 			_carriers.Clear();
-			_currentForce = 0;
+			_currentForce.Value = 0;
 		}
 
 		public void Update(float deltaTime)
