@@ -26,14 +26,15 @@ namespace GameEngine
 			_transform.rotation = smoothedDirection;
 		}
 
-		public void RotateTo(Quaternion rotation)
+		public void RotateTo(Quaternion rot)
 		{
 			if (CanRotate.Invoke() == false)
 			{
 				return;
 			}
 
-			_transform.rotation = rotation;
+			var rotation = _transform.rotation;
+			_transform.rotation = Quaternion.Lerp(rotation, rot, _rotateSpeed);
 		}
 	}
 }
