@@ -44,12 +44,12 @@ namespace Game
 			                  .Subscribe(_ =>
 			                  {
 				                  var player = GetPlayer();
-				                  var pointerCollisions = _playerPointer.Collisions;
+				                  var pointerCollisions = _playerPointer.GetCollisions();
 				                  foreach (var pointerCollision in pointerCollisions)
 				                  {
 					                  if (pointerCollision.TryGetComponent(out IPikminInteractable _))
 					                  {
-						                  player.SetTargetToPikmins(pointerCollision.gameObject, false);
+						                  player.SetTargetToPikmins(pointerCollision.gameObject);
 						                  return;
 					                  }
 				                  }
@@ -64,7 +64,7 @@ namespace Game
 			                  {
 				                  Debug.Log("OnGather");
 				                  var player = GetPlayer();
-				                  var pointerCollisions = _playerPointer.Collisions;
+				                  var pointerCollisions = _playerPointer.GetCollisions();
 				                  foreach (var pointerCollision in pointerCollisions)
 				                  {
 					                  if (pointerCollision.TryGetComponent(out IPikminTarget _))
@@ -73,7 +73,7 @@ namespace Game
 					                  }
 				                  }
 
-				                  player.SetTargetToPikmins(player.gameObject, true);
+				                  player.GatherPikmins();
 				                  _playerPointer.IncreaseScale();
 			                  })
 			                  .AddTo(_disposable);

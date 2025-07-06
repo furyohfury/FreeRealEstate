@@ -21,45 +21,31 @@ namespace GameEngine
 		private float _movingSpeed;
 		[SerializeField]
 		private Transform _transform;
-		[SerializeField]
-		private Transform[] _carryAnchorPoints;
 		[ShowInInspector] [ReadOnly]
 		private ReactiveProperty<int> _currentForce = new();
-		[ShowInInspector] [ReadOnly]
+		[ShowInInspector]
 		private HashSet<Transform> _carriers = new();
 
-		private Transform[] _carriersOnPoints;
-
 		[Button]
-		public bool AddCarrier(Transform carrier, int force, out Transform freeAnchorPoint)
+		public bool AddCarrier(Transform transform, int force)
 		{
-			if (_carriersOnPoints == null)
+			if (IsCarried || _carriers.Add(transform) == false)
 			{
-				_carriersOnPoints = new Transform[_carryAnchorPoints.Length];
-			}
-
-			if (IsCarried || _carriers.Add(carrier) == false)
-			{
-				freeAnchorPoint = null;
 				return false;
 			}
-
-			freeAnchorPoint = GetFreeAnchorPoint(carrier);
 
 			_currentForce.Value += force;
 			return true;
 		}
 
 		[Button]
-		public void RemoveCarrier(Transform carrier, int force)
+		public void RemoveCarrier(Transform transform, int force)
 		{
-			if (_carriers.Remove(carrier) == false)
+			if (_carriers.Remove(transform) == false)
 			{
 				return;
 			}
 
-			var carrierIndex = Array.IndexOf(_carriersOnPoints, carrier);
-			_carriersOnPoints[carrierIndex] = null;
 			_currentForce.Value -= force;
 		}
 
@@ -71,6 +57,11 @@ namespace GameEngine
 
 		public void Update(float deltaTime)
 		{
+			MoveAmongCarriers(deltaTime);
+		}
+
+		private void MoveAmongCarriers(float deltaTime)
+		{
 			if (IsCarried == false)
 			{
 				return;
@@ -79,26 +70,12 @@ namespace GameEngine
 			Vector3 averagePos = Vector3.zero;
 			foreach (var carrier in _carriers)
 			{
-				averagePos += carrier.transform.position;
+				averagePos += carrier.transform.position; // TODO make with event so facade would move with movecomponent
 			}
 
 			averagePos /= _carriers.Count;
 			averagePos.y = _transform.position.y;
 			_transform.position = Vector3.Lerp(_transform.position, averagePos, deltaTime * _movingSpeed);
-		}
-
-		private Transform GetFreeAnchorPoint(Transform carrier)
-		{
-			for (int i = 0, count = _carriersOnPoints.Length; i < count; i++)
-			{
-				if (_carriersOnPoints[i] == null)
-				{
-					_carriersOnPoints[i] = carrier;
-					return _carryAnchorPoints[i];
-				}
-			}
-
-			return null;
 		}
 	}
 }

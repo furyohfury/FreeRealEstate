@@ -27,6 +27,16 @@ namespace Game
 			                .SetEase(Ease.OutCubic);
 		}
 		
+		public void Hide()
+		{
+			_bar.enabled = false;
+		}
+		
+		public void Show()
+		{
+			_bar.enabled = true;
+		}
+		
 		private void OnDestroy()
 		{
 			_tween.Kill();

@@ -8,7 +8,6 @@ namespace GameEngine
 	public sealed class CarryComponent
 	{
 		public int Strength => _strength;
-		public Transform AnchorPoint => _anchorPoint;
 
 		[ShowInInspector]
 		private ICarriable _activeCarriable;
@@ -16,17 +15,14 @@ namespace GameEngine
 		private int _strength;
 		[SerializeField]
 		private Transform _transform;
-		private Transform _anchorPoint;
 
 		[Button]
-		public bool TryCarry(GameObject entity)
+		public bool TryCarry(GameObject target)
 		{
-			Transform anchorPoint = null;
-			bool canCarry = entity.TryGetComponent(out ICarriable carriable)
-			                && carriable.AddCarrier(_transform, _strength, out anchorPoint);
+			bool canCarry = target.TryGetComponent(out ICarriable carriable)
+			                && carriable.AddCarrier(_transform, _strength);
 			if (canCarry)
 			{
-				_anchorPoint = anchorPoint;
 				_activeCarriable = carriable;
 			}
 

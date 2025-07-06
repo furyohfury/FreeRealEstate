@@ -1,6 +1,6 @@
 ﻿using System;
 using UnityEngine;
-using Object = UnityEngine.Object;
+using VFX;
 
 namespace GameEngine
 {
@@ -8,13 +8,13 @@ namespace GameEngine
 	public sealed class DestroyVFXComponent
 	{
 		[SerializeField]
-		private ParticleSystem _vfx;
+		private VFXType _type;
 		[SerializeField]
-		private Transform _spawnPosition;
+		private Transform _point;
 
-		public void SpawnVFX()
+		public void PlayVFX()
 		{
-			Object.Instantiate(_vfx, _spawnPosition);
+			VFXSystem.Instance.PlayAndDestroyVFX(_type, _point.position);
 		}
 	}
 }

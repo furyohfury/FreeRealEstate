@@ -5,7 +5,7 @@ namespace GameEngine
 {
 	public interface IConsume
 	{
-		Subject<GameObject> OnEntityConsumed { get; }
+		Observable<GameObject> OnConsumeEnd { get; }
 		
 		void ConsumeEntity(GameObject entity);
 	}

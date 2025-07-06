@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ea1f584c132426db6e85409b6c074a7, type: 3}
+  m_Name: VFXFactoriesInstaller
+  m_EditorClassIdentifier: 
+  _vfxSystems:
+  - {fileID: 11400000, guid: 5f0edaf86579ca54d93f757273762bb5, type: 2}
+  - {fileID: 11400000, guid: 6917445b7d2b9624d95fa73adfae0438, type: 2}
+  - {fileID: 11400000, guid: 8f41879a242f05d4b85cc535c0266751, type: 2}
+  - {fileID: 11400000, guid: 8600e3d7b5a758c41bfd4ebf065e46ed, type: 2}
+  - {fileID: 11400000, guid: 48e20d704e216bd4ca097d05f5c41b93, type: 2}

@@ -8,7 +8,7 @@ namespace Game
 	{
 		[ShowInInspector] [ReadOnly]
 		private int Points => _shipPoints.Points.Value;
-		
+
 		private ShipPoints _shipPoints;
 
 		[Inject]
@@ -20,7 +20,13 @@ namespace Game
 		[Button]
 		private void Print()
 		{
-			UnityEngine.Debug.Log($"points = {_shipPoints.Points.Value}");
+			Debug.Log($"points = {_shipPoints.Points.Value}");
+		}
+
+		[Button]
+		private void SetPoints(int points)
+		{
+			_shipPoints.Points.Value = points;
 		}
 	}
 }

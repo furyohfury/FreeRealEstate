@@ -10,6 +10,7 @@ namespace GameEngine
 	[Serializable]
 	public sealed class AttackComponent // TODO separate on objects (not components)
 	{
+		public Observable<Unit> OnAttacked => _onAttacked;
 		public AndCondition CanAttack => _canAttack;
 		private AndCondition _canAttack = new();
 
@@ -26,13 +27,14 @@ namespace GameEngine
 
 		private bool _cooldownPassed = true;
 		private int _attackHash = AnimatorHash.Attack;
+		private Subject<Unit> _onAttacked = new();
 		private CompositeDisposable _disposable = new();
 
 		public void Initialize()
 		{
 			_weaponCollider.OnTriggerEnterAsObservable()
-			       .Subscribe(OnAttacked)
-			       .AddTo(_disposable);
+			               .Subscribe(OnCollided)
+			               .AddTo(_disposable);
 
 			_animatorEventReceiver.SubscribeOnEvent(AnimatorEvents.ATTACK_STARTED, OnAttackStarted);
 			_animatorEventReceiver.SubscribeOnEvent(AnimatorEvents.ATTACK_FINISHED, OnAttackFinished);
@@ -47,6 +49,7 @@ namespace GameEngine
 				return;
 			}
 
+			_onAttacked.OnNext(Unit.Default);
 			AnimateAttack();
 			SetCooldown().Forget();
 		}
@@ -73,7 +76,7 @@ namespace GameEngine
 			_cooldownPassed = true;
 		}
 
-		private void OnAttacked(Collider other)
+		private void OnCollided(Collider other)
 		{
 			if (other.gameObject.TryGetComponent(out ITakeDamage liveable))
 			{

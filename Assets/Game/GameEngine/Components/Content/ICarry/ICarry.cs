@@ -4,9 +4,7 @@ namespace GameEngine
 {
 	public interface ICarry
 	{
-		Transform GetAnchorPoint();
-
-		bool TryCarry(GameObject entity);
+		bool TryCarry(GameObject target);
 
 		void StopCarry();
 	}

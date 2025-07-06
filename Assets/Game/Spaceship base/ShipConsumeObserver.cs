@@ -10,7 +10,7 @@ namespace Game
 	{
 		private readonly Ship _ship;
 		private readonly ShipPoints _shipPoints;
-		private ConsumablesValuesConfig _valuesConfig;
+		private readonly ConsumablesValuesConfig _valuesConfig;
 		private readonly CompositeDisposable _disposable = new();
 
 		public ShipConsumeObserver(Ship ship, ShipPoints shipPoints, ConsumablesValuesConfig valuesConfig)
@@ -23,15 +23,16 @@ namespace Game
 		public void Initialize()
 		{
 			var iConsume = _ship.GetComponent<IConsume>();
-			iConsume.OnEntityConsumed
-			                       .Subscribe(OnValueConsumed)
-			                       .AddTo(_disposable);
+			iConsume.OnConsumeEnd
+			        .Subscribe(OnValueConsumed)
+			        .AddTo(_disposable);
 		}
 
 		private void OnValueConsumed(GameObject entity)
 		{
 			if (entity.TryGetComponent(out IIdentifier iIdentifier) == false)
 			{
+				Debug.LogError("Consumed entity has no ID");
 				return;
 			}
 
@@ -39,7 +40,11 @@ namespace Game
 			if (_valuesConfig.Values.TryGetValue(id, out int points))
 			{
 				_shipPoints.Points.Value += points;
-			}			
+			}
+			else
+			{
+				Debug.LogError("Consumed entity has no value in config");
+			}
 		}
 
 		public void Dispose()

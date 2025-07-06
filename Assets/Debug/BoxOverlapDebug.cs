@@ -7,8 +7,8 @@ namespace Game
 		[SerializeField]
 		private Transform _transform;
 		[SerializeField]
-		private Vector3 _size = new Vector3(4, 10, 4);
-		
+		private Vector3 _size = new(4, 10, 4);
+
 		private void OnDrawGizmos()
 		{
 			if (_transform == null) return;

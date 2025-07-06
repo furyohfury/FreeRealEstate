@@ -8,5 +8,6 @@ namespace GameEngine
 		public static readonly int IsMoving = Animator.StringToHash("IsMoving");
 		public static readonly int Gather = Animator.StringToHash("Gather");
 		public static readonly int Interact = Animator.StringToHash("Interact");
+		public static readonly int Death = Animator.StringToHash("Death");
 	}
 }

@@ -11,7 +11,7 @@ namespace Game
 		{
 			UnityEngine.Debug.Log("triggered");
 
-			if (other.TryGetComponent(out CarriableEntityDebug _))
+			if (other.TryGetComponent(out ComplexCarriableEntity _))
 			{
 				UnityEngine.Debug.Log("with CarriableEntityDebug");
 			}

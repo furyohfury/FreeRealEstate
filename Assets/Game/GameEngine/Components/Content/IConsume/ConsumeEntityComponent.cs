@@ -9,7 +9,10 @@ namespace GameEngine
 	[Serializable]
 	public sealed class ConsumeEntityComponent
 	{
-		public Subject<GameObject> OnEntityConsumed = new();
+		public Observable<GameObject> OnConsumeEnd => _onConsumeEnd;
+		public Observable<GameObject> OnConsumeStart => _onConsumeStart;
+		private Subject<GameObject> _onConsumeStart = new();
+		private Subject<GameObject> _onConsumeEnd = new();
 
 		[SerializeField]
 		private Transform _endPoint;
@@ -28,7 +31,8 @@ namespace GameEngine
 			{
 				throw new NullReferenceException("No destroy component on entity" + entity.gameObject.name);
 			}
-
+			
+			_onConsumeStart.OnNext(entity);
 			DOTween.To(
 				       () => moveable.Position,
 				       pos => moveable.MoveTo(pos),
@@ -42,7 +46,7 @@ namespace GameEngine
 		{
 			return () =>
 			{
-				OnEntityConsumed.OnNext(entity);
+				_onConsumeEnd.OnNext(entity);
 				destroyable.Destroy();
 			};
 		}

@@ -14,5 +14,15 @@ namespace Game
 			_carriableUI.SetCount($"{current}/{needed}");
 			_carriableUI.SetBar((float)current / needed);
 		}
+
+		public void Hide()
+		{
+			_carriableUI.Hide();
+		}
+
+		public void Show()
+		{
+			_carriableUI.Show();
+		}
 	}
 }

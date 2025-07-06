@@ -1,9 +1,11 @@
-﻿using GameEngine;
+﻿using System;
+using GameEngine;
 using R3;
 using UnityEngine;
 
 namespace Game
 {
+	[SelectionBase]
 	public sealed class Player : MonoBehaviour,
 		IHitPoints,
 		ITakeDamage,
@@ -28,6 +30,13 @@ namespace Game
 		[SerializeField]
 		private PikminControlComponent _pikminControlComponent;
 
+		[Header("FX")]
+		[SerializeField]
+		private PikminGatherSFXComponent _gatherSfxComponent;
+		[SerializeField]
+		private PikminInteractSFXComponent _interactSfxComponent;
+		private float _whistleDelay = 0f;
+
 		private readonly CompositeDisposable _disposable = new();
 
 		private void Awake()
@@ -36,9 +45,20 @@ namespace Game
 			_rotateTransformComponent.CanRotate.AddCondition(() => _lifeComponent.IsAlive);
 		}
 
+		private void Start()
+		{
+			Observable.EveryUpdate()
+			          .Subscribe(_ => AnimateMovement())
+			          .AddTo(_disposable);
+		}
+
 		private void Update()
 		{
-			AnimateMovement();
+			_whistleDelay = Mathf.Max(0, _whistleDelay - Time.deltaTime);
+			if (_whistleDelay <= 0)
+			{
+				_gatherSfxComponent.StopSFX();
+			}
 		}
 
 		private void AnimateMovement()
@@ -77,9 +97,17 @@ namespace Game
 			_pikminControlComponent.AddPikmin(pikmin);
 		}
 
-		public void SetTargetToPikmins(GameObject target, bool isPlayer)
+		public void SetTargetToPikmins(GameObject target)
 		{
-			_pikminControlComponent.SetTargetToPikmins(target, isPlayer);
+			_pikminControlComponent.SetTargetToPikmins(target, false);
+			_interactSfxComponent.PlaySFX();
+		}
+
+		public void GatherPikmins()
+		{
+			_pikminControlComponent.SetTargetToPikmins(gameObject, true);
+			_gatherSfxComponent.PlaySFX();
+			_whistleDelay = 0.5f;
 		}
 
 		private void OnDestroy()

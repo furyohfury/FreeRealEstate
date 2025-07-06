@@ -16,8 +16,18 @@ namespace Game
 			Container.Bind<Camera>()
 			         .FromComponentInHierarchy()
 			         .AsSingle();
+
+			InstallPikminServices();
 			InstallPlayerSceneSystems();
 			InstallShipSceneSystems();
+		}
+
+		private void InstallPikminServices()
+		{
+			Container.BindInterfacesAndSelfTo<PikminService>()
+			         .AsSingle();
+			Container.BindInterfacesAndSelfTo<PikminDeathObserver>()
+			         .AsSingle();
 		}
 
 		private void InstallPlayerSceneSystems()
@@ -25,7 +35,7 @@ namespace Game
 			Container.Bind<Player>()
 			         .FromComponentInHierarchy()
 			         .AsSingle();
-			
+
 			Container.Bind<PlayerPointer>()
 			         .FromComponentInHierarchy()
 			         .AsSingle();
@@ -58,8 +68,8 @@ namespace Game
 			Container.BindInterfacesTo<ShipConsumeObserver>()
 			         .AsSingle();
 
-			// Container.BindInterfacesTo<ShipSpawnController>()
-			//          .AsSingle();
+			Container.BindInterfacesTo<ShipSpawnController>()
+			         .AsSingle();
 		}
 	}
 }

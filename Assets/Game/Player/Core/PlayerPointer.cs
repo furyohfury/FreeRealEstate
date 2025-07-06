@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using R3;
 using R3.Triggers;
 using Sirenix.OdinInspector;
@@ -8,7 +9,6 @@ namespace Game
 {
 	public sealed class PlayerPointer : MonoBehaviour
 	{
-		public IReadOnlyCollection<GameObject> Collisions => _collisions;
 		[ShowInInspector]
 		private readonly HashSet<GameObject> _collisions = new();
 		[SerializeField] [Required]
@@ -44,6 +44,19 @@ namespace Game
 			}
 
 			_increasing = false;
+		}
+
+		public IReadOnlyCollection<GameObject> GetCollisions()
+		{
+			foreach (var collision in _collisions.ToArray())
+			{
+				if (collision == null)
+				{
+					_collisions.Remove(collision);
+				}
+			}
+
+			return _collisions;
 		}
 
 		public void IncreaseScale()

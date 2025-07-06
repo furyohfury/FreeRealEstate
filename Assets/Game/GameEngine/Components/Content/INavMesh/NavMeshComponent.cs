@@ -12,5 +12,15 @@ namespace GameEngine
 		
 		[SerializeField]
 		private NavMeshAgent _navMeshAgent;
+
+		public void Disable()
+		{
+			_navMeshAgent.enabled = false;
+		}
+		
+		public void Enable()
+		{
+			_navMeshAgent.enabled = true;
+		}
 	}
 }

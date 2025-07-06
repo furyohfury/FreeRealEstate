@@ -17,7 +17,12 @@ namespace GameEngine
 
 		public void Hide()
 		{
-			_healthBar.gameObject.SetActive(false);
+			_healthBar.Hide();
+		}
+
+		public void Show()
+		{
+			_healthBar.Show();
 		}
 	}
 }
