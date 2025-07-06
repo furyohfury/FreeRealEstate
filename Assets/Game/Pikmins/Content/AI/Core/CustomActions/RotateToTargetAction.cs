@@ -22,7 +22,7 @@ public partial class RotateToTargetAction : Action
 		Vector3 lookDirection = Target.Value.position - Self.Value.position;
 		lookDirection.y = 0f;
 		var angle = Vector3.Angle(Self.Value.forward, lookDirection);
-		Debug.Log("Angle = " + angle);
+		// Debug.Log("Angle = " + angle);
 		if (angle <= Angle.Value)
 		{
 			return Status.Success;

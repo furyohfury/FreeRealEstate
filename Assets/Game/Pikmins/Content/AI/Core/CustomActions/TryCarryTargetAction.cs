@@ -14,13 +14,14 @@ public partial class TryCarryTargetAction : Action
 
     protected override Status OnStart()
     {
-        var carry = Entity.Value.GetComponent<ICarry>();
-        if (carry.TryCarry(Target.Value))
+        if (Entity.Value.TryGetComponent(out ICarry iCarry) == false)
         {
-            return Status.Success;
+            return Status.Failure;
         }
         
-        return Status.Failure;
+        return iCarry.TryCarry(Target.Value)
+            ? Status.Success
+            : Status.Failure;
     }
 }
 
