@@ -94,7 +94,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: a38770f69762ec149a67b15e5d2defad, type: 2}
-  m_LightingSettings: {fileID: 4890085278179872738, guid: 28730632a3220fa4ab0c6cbbd7082b9d, type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 3c5b84aae728723489ca8009ab26ed5a, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1666,9 +1666,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: Ghost
   _lifeComponent:
-    _maxHealth: 20
+    _maxHealth: 15
     _currentHealth:
-      value: 20
+      value: 15
   _attackComponent:
     _weaponCollider: {fileID: 202710160}
     _animator: {fileID: 1665878678}
@@ -1914,7 +1914,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 3
-  m_Size: {x: 3.65, y: 5.3, z: 2.52}
+  m_Size: {x: 1.18, y: 5.3, z: 2.52}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &204662231 stripped
 Transform:
@@ -6336,7 +6336,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 34.9
+  field of view: 48.6
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -6362,8 +6362,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.005296172, y: -0.71053696, z: -0.0053482396, w: 0.70361966}
-  m_LocalPosition: {x: -71.5, y: 97.8, z: 3}
+  m_LocalRotation: {x: 0.4179815, y: 0.000000056012368, z: -0.000000025771358, w: 0.90845555}
+  m_LocalPosition: {x: -3.95, y: 21.1, z: -13.62}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13655,11 +13655,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 764352010484010520, guid: e4213dd98a50bbd44808fa7625327026, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.58
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 764352010484010520, guid: e4213dd98a50bbd44808fa7625327026, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 764352010484010520, guid: e4213dd98a50bbd44808fa7625327026, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1887390498532086093, guid: e4213dd98a50bbd44808fa7625327026, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -15484,7 +15488,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1788870959
 MonoBehaviour:
   m_ObjectHideFlags: 0
