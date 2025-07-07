@@ -186,7 +186,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Cthulhu_Texture_0: 7932889572234642296
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

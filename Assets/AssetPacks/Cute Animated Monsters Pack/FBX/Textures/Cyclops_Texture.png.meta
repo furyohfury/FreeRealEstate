@@ -186,7 +186,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Cyclops_Texture_0: 8852530456680308305
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
