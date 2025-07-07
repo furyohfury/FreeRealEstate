@@ -4,6 +4,7 @@ using R3;
 using R3.Triggers;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 namespace Game
 {
@@ -13,6 +14,8 @@ namespace Game
 		private readonly HashSet<GameObject> _collisions = new();
 		[SerializeField] [Required]
 		private Collider _collider;
+		[SerializeField] [Required]
+		private DecalProjector _decalProjector;
 		[SerializeField]
 		private float _sizeIncreaseSpeed = 5f;
 		[SerializeField]
@@ -21,6 +24,7 @@ namespace Game
 		private float _maxScale;
 
 		private Vector3 _initialScale;
+		private Vector3 _decalInitialScale;
 		private bool _increasing;
 		private readonly CompositeDisposable _disposable = new();
 
@@ -34,6 +38,7 @@ namespace Game
 			         .Subscribe(OnExit)
 			         .AddTo(_disposable);
 			_initialScale = transform.localScale;
+			_decalInitialScale = _decalProjector.size;
 		}
 
 		private void LateUpdate()
@@ -68,8 +73,15 @@ namespace Game
 				oldScale.y,
 				Mathf.Min(_maxScale, oldScale.z + _sizeIncreaseSpeed * Time.deltaTime)
 			);
-
 			transform.localScale = newScale;
+			
+			var oldDecalScale = _decalProjector.size;
+			var newDecalScale = new Vector3(
+				Mathf.Min(_maxScale, oldDecalScale.x + _sizeIncreaseSpeed * Time.deltaTime),
+				Mathf.Min(_maxScale, oldDecalScale.y + _sizeIncreaseSpeed * Time.deltaTime),
+				oldDecalScale.z
+			);
+			_decalProjector.size = newDecalScale;
 		}
 
 		private void DecreaseScale()
@@ -82,6 +94,14 @@ namespace Game
 			);
 
 			transform.localScale = newScale;
+			
+			var oldDecalScale = _decalProjector.size;
+			var newDecalScale = new Vector3(
+				Mathf.Max(_decalInitialScale.x, oldDecalScale.x - _sizeIncreaseSpeed * Time.deltaTime),
+				Mathf.Max(_decalInitialScale.y, oldDecalScale.y - _sizeIncreaseSpeed * Time.deltaTime),
+				oldDecalScale.z
+			);
+			_decalProjector.size = newDecalScale;
 		}
 
 		private void OnEnter(Collider other)
