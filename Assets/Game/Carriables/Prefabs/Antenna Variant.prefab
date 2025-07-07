@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _radius: 0.3
+  _color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &4305797531633706774
 GameObject:
   m_ObjectHideFlags: 0

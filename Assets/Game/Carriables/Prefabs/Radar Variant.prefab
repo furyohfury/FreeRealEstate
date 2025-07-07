@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _radius: 0.3
+  _color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &3511424491973693909
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,6 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _radius: 0.3
+  _color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1001 &2086839154272062961
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -98,6 +100,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1541571391938097815, guid: feccc54ddabb4fe489b825d877c07b51, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2744483447356442312, guid: feccc54ddabb4fe489b825d877c07b51, type: 3}
       propertyPath: m_LocalPosition.z
       value: -2.3

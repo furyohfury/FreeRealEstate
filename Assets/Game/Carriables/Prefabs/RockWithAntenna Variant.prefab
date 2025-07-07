@@ -126,6 +126,10 @@ PrefabInstance:
       propertyPath: '_damageStateChangeComponent._stateObjects.Array.data[1]'
       value: 
       objectReference: {fileID: 3356890571438768414}
+    - target: {fileID: 2696446948249171663, guid: 2dcbfb3e36cfad745931081a4ca96596, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3435484045439739533, guid: 2dcbfb3e36cfad745931081a4ca96596, type: 3}
       propertyPath: m_LocalPosition.x
       value: -13.75

@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _radius: 0.3
+  _color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &2476955903592060537
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,6 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _radius: 0.3
+  _color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &4836684256856132332
 GameObject:
   m_ObjectHideFlags: 0
@@ -135,6 +137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _radius: 0.3
+  _color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &5130325589744481895
 GameObject:
   m_ObjectHideFlags: 0
@@ -180,6 +183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _radius: 0.3
+  _color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &5216200270683887361
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,6 +229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _radius: 0.3
+  _color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &5834166075984632874
 GameObject:
   m_ObjectHideFlags: 0
@@ -270,6 +275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _radius: 0.3
+  _color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &5993362289653188225
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,6 +321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _radius: 0.3
+  _color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &7324113271656456489
 GameObject:
   m_ObjectHideFlags: 0
@@ -360,6 +367,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _radius: 0.3
+  _color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &9131493053186795870
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,6 +413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _radius: 0.3
+  _color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1001 &1149815361744022087
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -487,6 +496,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1541571391938097815, guid: feccc54ddabb4fe489b825d877c07b51, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2744483447356442312, guid: feccc54ddabb4fe489b825d877c07b51, type: 3}
       propertyPath: m_LocalPosition.z
       value: -3.48
