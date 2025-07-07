@@ -8,7 +8,7 @@ namespace VFX
 	public sealed class VFXSystem : MonoBehaviour
 	{
 		public static VFXSystem Instance;
-		private readonly Dictionary<VFXType, IVFXFactory> _factories = new();
+		private readonly Dictionary<string, IVFXFactory> _factories = new();
 
 		[Inject]
 		public void Construct(IEnumerable<IVFXFactory> factories)
@@ -36,7 +36,7 @@ namespace VFX
 			}
 		}
 
-		public IVFX PlayVFX(VFXType type, Vector3 pos)
+		public IVFX PlayVFX(string type, Vector3 pos)
 		{
 			if (_factories.TryGetValue(type, out var factory))
 			{
@@ -49,12 +49,12 @@ namespace VFX
 			throw new ArgumentException($"No factory with type {type}");
 		}
 
-		public IVFX PlayAndDestroyVFX(VFXType type, Vector3 pos)
+		public IVFX PlayAndDestroyVFX(string type, Vector3 pos)
 		{
 			if (_factories.TryGetValue(type, out var factory))
 			{
 				var vfx = factory.Spawn();
-				
+
 				vfx.Play();
 				vfx.Move(pos, Quaternion.identity);
 				vfx.OnVFXEnd += Remove;

@@ -1,10 +1,8 @@
-﻿using UnityEngine;
-
-namespace VFX
+﻿namespace VFX
 {
 	public interface IVFXFactory
 	{
-		VFXType GetVFXType();
+		string GetVFXType();
 		IVFX Spawn();
 	}
 }
