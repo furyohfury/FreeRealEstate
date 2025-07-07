@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ed2a477234f495aa82c2bdbbd699b39, type: 3}
   m_Name: ParticleSystemVFXFactory
   m_EditorClassIdentifier: 
-  _type: 1
+  _type:
+    _id: DestroyWall
   _prefab: {fileID: 5831634106769252258, guid: c4f4bdab1099bb54b8935351a40a1610, type: 3}

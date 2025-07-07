@@ -3,7 +3,10 @@ using VFX;
 
 namespace Game.VFX
 {
-	[CreateAssetMenu(fileName = "ParticleSystemVFXFactory", menuName = "Create VFX factory/ParticleSystemVFXFactory")]
+	[CreateAssetMenu(
+		fileName = "ParticleSystemVFXFactory",
+		menuName = "VFX system/VFX factory/ParticleSystemVFXFactory"
+	)]
 	public sealed class ParticleSystemVFXFactory : ScriptableObject, IVFXFactory
 	{
 		[SerializeField]
@@ -11,14 +14,16 @@ namespace Game.VFX
 		[SerializeField]
 		private ParticleSystemVFX _prefab;
 
-		public VFXType GetVFXType()
+		public string GetVFXType()
 		{
-			return _type;
+			return _type.ID;
 		}
 
-		public IVFX Spawn()
+		public IVFX Spawn(Vector3 pos, Quaternion rot, Transform parent)
 		{
-			return Instantiate(_prefab);
+			var vfx = Instantiate(_prefab, parent);
+			vfx.Move(pos, Quaternion.identity);
+			return vfx;
 		}
 	}
 }

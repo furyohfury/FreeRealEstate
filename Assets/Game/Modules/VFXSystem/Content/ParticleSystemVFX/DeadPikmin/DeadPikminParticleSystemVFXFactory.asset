@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ed2a477234f495aa82c2bdbbd699b39, type: 3}
   m_Name: DeadPikminParticleSystemVFXFactory
   m_EditorClassIdentifier: 
-  _type: 4
+  _type:
+    _id: DiedPikmin
   _prefab: {fileID: -6390075065683274191, guid: 711eab5e01cc37a4da0e4ba7d80485ba, type: 3}

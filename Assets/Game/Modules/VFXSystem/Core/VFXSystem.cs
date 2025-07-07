@@ -9,6 +9,7 @@ namespace VFX
 	{
 		public static VFXSystem Instance;
 		private readonly Dictionary<string, IVFXFactory> _factories = new();
+		private Transform _container;
 
 		[Inject]
 		public void Construct(IEnumerable<IVFXFactory> factories)
@@ -34,14 +35,19 @@ namespace VFX
 				Destroy(this);
 				throw new Exception("Instantiated more than one VFXSystem");
 			}
+			
+			
+			var container = new GameObject();
+			container.name = "VFXContainer";
+			DontDestroyOnLoad(container);
+			_container = container.transform;
 		}
 
-		public IVFX PlayVFX(string type, Vector3 pos)
+		public IVFX PlayVFX(string type, Vector3 pos, Quaternion rot)
 		{
 			if (_factories.TryGetValue(type, out var factory))
 			{
-				var vfx = factory.Spawn();
-				vfx.Move(pos, Quaternion.identity);
+				var vfx = factory.Spawn(pos, rot, _container);
 				vfx.Play();
 				return vfx;
 			}
@@ -49,14 +55,13 @@ namespace VFX
 			throw new ArgumentException($"No factory with type {type}");
 		}
 
-		public IVFX PlayAndDestroyVFX(string type, Vector3 pos)
+		public IVFX PlayAndDestroyVFX(string type, Vector3 pos, Quaternion rot)
 		{
 			if (_factories.TryGetValue(type, out var factory))
 			{
-				var vfx = factory.Spawn();
+				var vfx = factory.Spawn(pos, rot, _container);
 
 				vfx.Play();
-				vfx.Move(pos, Quaternion.identity);
 				vfx.OnVFXEnd += Remove;
 				return vfx;
 			}

@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ed2a477234f495aa82c2bdbbd699b39, type: 3}
   m_Name: DamagedWallVFXFactory
   m_EditorClassIdentifier: 
-  _type: 2
+  _type:
+    _id: DamagedWall
   _prefab: {fileID: -6692112761005579635, guid: a7987167caa209a4a89dd08bda46876d, type: 3}

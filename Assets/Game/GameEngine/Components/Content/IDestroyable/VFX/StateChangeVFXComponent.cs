@@ -14,7 +14,7 @@ namespace GameEngine
 
 		public void PlayVFX()
 		{
-			VFXSystem.Instance.PlayAndDestroyVFX(_type, _point.position);
+			VFXSystem.Instance.PlayAndDestroyVFX(_type.ID, _point.position, Quaternion.identity);
 		}
 	}
 }

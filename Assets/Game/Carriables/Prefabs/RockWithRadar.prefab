@@ -398,7 +398,8 @@ MonoBehaviour:
   _destroySfxComponent:
     _audioSource: {fileID: 1981959254631638533}
   _stateChangeVFXComponent:
-    _type: 0
+    _type:
+      _id: DestroyRock
     _point: {fileID: 7668629801223958902}
   _effectPlayHpThresholds:
   - 0

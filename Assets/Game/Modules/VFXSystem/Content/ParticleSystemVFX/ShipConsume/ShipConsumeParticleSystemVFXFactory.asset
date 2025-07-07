@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ed2a477234f495aa82c2bdbbd699b39, type: 3}
   m_Name: ShipConsumeParticleSystemVFXFactory
   m_EditorClassIdentifier: 
-  _type: 3
+  _type:
+    _id: ShipConsume
   _prefab: {fileID: 9215435653967618328, guid: d82c88ab6081b4945a463b6d4382ba00, type: 3}

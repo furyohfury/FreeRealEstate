@@ -380,12 +380,14 @@ MonoBehaviour:
   _healthbarUI:
     _healthBar: {fileID: 7963542620925279197}
   _destroyVFXComponent:
-    _type: 1
+    _type:
+      _id: DestroyWall
     _point: {fileID: 2002837325459834707}
   _destroySfxComponent:
     _audioSource: {fileID: 2226895734311284749}
   _stateChangeVFXComponent:
-    _type: 2
+    _type:
+      _id: DamagedWall
     _point: {fileID: 2002837325459834707}
   _effectPlayHpThresholds:
   - 0.6

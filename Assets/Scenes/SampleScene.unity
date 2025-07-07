@@ -6336,7 +6336,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 48.6
+  field of view: 34.9
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -6362,8 +6362,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.4179815, y: 0.000000056012368, z: -0.000000025771358, w: 0.90845555}
-  m_LocalPosition: {x: -3.95, y: 21.1, z: -13.62}
+  m_LocalRotation: {x: -0.005296172, y: -0.71053696, z: -0.0053482396, w: 0.70361966}
+  m_LocalPosition: {x: -71.5, y: 97.8, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15488,7 +15488,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1788870959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16852,7 +16852,8 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 64
   _consumeEntityEffectComponent:
-    _type: 3
+    _type:
+      _id: ShipConsume
     _point: {fileID: 1182200916}
     _source: {fileID: 135653124}
 --- !u!65 &1981183444

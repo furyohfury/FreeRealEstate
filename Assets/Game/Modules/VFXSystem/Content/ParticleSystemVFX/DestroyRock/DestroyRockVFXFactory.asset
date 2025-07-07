@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ed2a477234f495aa82c2bdbbd699b39, type: 3}
   m_Name: DestroyRockVFXFactory
   m_EditorClassIdentifier: 
-  _type: 0
+  _type:
+    _id: DestroyRock
   _prefab: {fileID: 5935674499352388090, guid: deddbe1b444574a4eb23de041487221e, type: 3}

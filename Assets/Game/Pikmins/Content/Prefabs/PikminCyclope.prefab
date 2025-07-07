@@ -419,7 +419,8 @@ MonoBehaviour:
   _destroySfxComponent:
     _audioSource: {fileID: 9119545225569308269}
   _destroyVFXComponent:
-    _type: 4
+    _type:
+      _id: DiedPikmin
     _point: {fileID: 8253792004358550400}
 --- !u!136 &5802889461829342190
 CapsuleCollider:

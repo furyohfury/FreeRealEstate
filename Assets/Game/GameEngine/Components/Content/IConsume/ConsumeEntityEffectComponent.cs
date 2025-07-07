@@ -18,7 +18,7 @@ namespace GameEngine
 		public void PlayEffect()
 		{
 			_source.Play();
-			_activeVFX = VFXSystem.Instance.PlayVFX(_type, _point.position);
+			_activeVFX = VFXSystem.Instance.PlayVFX(_type.ID, _point.position, Quaternion.identity);
 		}
 
 		public void StopEffect()
