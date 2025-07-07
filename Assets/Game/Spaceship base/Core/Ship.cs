@@ -38,6 +38,10 @@ namespace Game
 			_consumeEntityComponent.OnConsumeStart
 			                       .Subscribe(_ => _consumeEntityEffectComponent.PlayEffect())
 			                       .AddTo(_disposable);
+			
+			_consumeEntityComponent.OnConsumeEnd
+			                       .Subscribe(_ => _consumeEntityEffectComponent.StopEffect())
+			                       .AddTo(_disposable);
 		}
 
 		private void OnObjectDetected(GameObject obj)

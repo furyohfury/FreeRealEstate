@@ -22,33 +22,21 @@ namespace GameEngine
 		[Button]
 		public void ConsumeEntity(GameObject entity)
 		{
-			if (entity.TryGetComponent(out IMoveable moveable) == false)
-			{
-				throw new NullReferenceException("No move component on entity" + entity.gameObject.name);
-			}
-
 			if (entity.TryGetComponent(out IDestroyable destroyable) == false)
 			{
 				throw new NullReferenceException("No destroy component on entity" + entity.gameObject.name);
 			}
-			
-			_onConsumeStart.OnNext(entity);
-			DOTween.To(
-				       () => moveable.Position,
-				       pos => moveable.MoveTo(pos),
-				       _endPoint.position,
-				       _animationDuration)
-			       .SetEase(Ease.InOutBounce)
-			       .OnComplete(OnConsumed(entity, destroyable));
-		}
 
-		private TweenCallback OnConsumed(GameObject entity, IDestroyable destroyable)
-		{
-			return () =>
-			{
-				_onConsumeEnd.OnNext(entity);
-				destroyable.Destroy();
-			};
+			_onConsumeStart.OnNext(entity);
+
+			entity.transform
+			      .DOMove(_endPoint.position, _animationDuration)
+			      .SetEase(Ease.InOutBounce)
+			      .OnComplete(() =>
+			      {
+				      _onConsumeEnd.OnNext(entity);
+				      destroyable.Destroy();
+			      });
 		}
 	}
 }

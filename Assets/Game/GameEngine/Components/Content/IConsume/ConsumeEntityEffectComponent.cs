@@ -13,16 +13,18 @@ namespace GameEngine
 		private Transform _point;
 		[SerializeField]
 		private AudioSource _source;
+		private IVFX _activeVFX;
 
 		public void PlayEffect()
 		{
 			_source.Play();
-			VFXSystem.Instance.PlayAndDestroyVFX(_type, _point.position);
+			_activeVFX = VFXSystem.Instance.PlayVFX(_type, _point.position);
 		}
 
 		public void StopEffect()
 		{
 			_source.Stop();
+			_activeVFX.Remove();
 		}
 	}
 }
