@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Sirenix.OdinInspector;
 using UnityEngine;
+#if ODIN_INSPECTOR
+using Sirenix.OdinInspector;
+#endif
 
 namespace VFX
 {
@@ -9,11 +11,17 @@ namespace VFX
 	public sealed class VFXType
 	{
 		public string ID => _id;
+#if ODIN_INSPECTOR
 		[ValueDropdown(nameof(GetAllVfxTypes))]
+#endif
 		[SerializeField]
 		private string _id;
-		
-		public override string ToString() => _id;
+
+		public override string ToString()
+		{
+			return _id;
+		}
+
 		private static IEnumerable<string> GetAllVfxTypes()
 		{
 			var typesAsset = Resources.Load<VFXTypesDatabase>("VFXTypesDatabase");
@@ -25,6 +33,7 @@ namespace VFX
 			{
 				Debug.Log("No VFX types in database yet");
 			}
+
 			return typesAsset?.Types ?? Array.Empty<string>();
 		}
 	}
