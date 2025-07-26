@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.BeatmapControl;
 using Game.Scoring;
 using R3;
 using VContainer.Unity;
@@ -8,20 +9,20 @@ namespace Game
 	public sealed class MapScoreResetter : IStartable, IDisposable
 	{
 		private readonly MapScore _mapScore;
-		private ActiveMapService _activeMapService;
+		private BeatmapPipeline _beatmapPipeline;
 		private readonly CompositeDisposable _disposable = new();
 
-		public MapScoreResetter(MapScore mapScore, ActiveMapService activeMapService)
+		public MapScoreResetter(MapScore mapScore, BeatmapPipeline beatmapPipeline)
 		{
 			_mapScore = mapScore;
-			_activeMapService = activeMapService;
+			_beatmapPipeline = beatmapPipeline;
 		}
 
 		public void Start()
 		{
-			_activeMapService.ActiveMap
-			                 .Subscribe(_ => _mapScore.Reset())
-			                 .AddTo(_disposable);
+			_beatmapPipeline.Map
+			                .Subscribe(_ => _mapScore.Reset())
+			                .AddTo(_disposable);
 		}
 
 		public void Dispose()

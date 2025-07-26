@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Beatmaps;
+using Game.BeatmapControl;
 using Game.SongMapTime;
 using R3;
 using VContainer.Unity;
@@ -9,18 +10,13 @@ namespace Game
 {
 	public sealed class ActiveElementTimeoutSwitcher : IStartable, ITickable, IDisposable
 	{
-		private readonly ActiveElementSwitcher _switcher;
-		private readonly ActiveElementService _activeElementService;
-		private readonly ActiveMapService _activeMapService;
+		private BeatmapPipeline _beatmapPipeline;
 		private readonly IMapTime _mapTime;
 		private float _clickInterval;
 
-		public ActiveElementTimeoutSwitcher(ActiveElementSwitcher switcher, ActiveElementService activeElementService
-			, ActiveMapService activeMapService, IMapTime mapTime)
+		public ActiveElementTimeoutSwitcher(BeatmapPipeline beatmapPipeline, IMapTime mapTime)
 		{
-			_switcher = switcher;
-			_activeElementService = activeElementService;
-			_activeMapService = activeMapService;
+			_beatmapPipeline = beatmapPipeline;
 			_mapTime = mapTime;
 		}
 
@@ -28,22 +24,22 @@ namespace Game
 
 		public void Start()
 		{
-			_disposable.Disposable = _activeMapService.ActiveMap
-			                                          .Where(map => map != null)
-			                                          .Subscribe(map =>
-			                                          {
-				                                          _clickInterval = map
-				                                                           .GetDifficulty()
-				                                                           .GetDifficultyParams()
-				                                                           .OfType<ClickIntervalParams>()
-				                                                           .Single()
-				                                                           .GetClickInterval();
-			                                          });
+			_disposable.Disposable = _beatmapPipeline.Map
+			                                         .Where(map => map != null)
+			                                         .Subscribe(map =>
+			                                         {
+				                                         _clickInterval = map
+				                                                          .GetDifficulty()
+				                                                          .GetDifficultyParams()
+				                                                          .OfType<ClickIntervalParams>()
+				                                                          .Single()
+				                                                          .GetClickInterval();
+			                                         });
 		}
 
 		public void Tick()
 		{
-			var element = _activeElementService.Element.CurrentValue;
+			var element = _beatmapPipeline.Element.CurrentValue;
 			if (element == null)
 			{
 				return;
@@ -53,7 +49,7 @@ namespace Game
 			var mapTime = _mapTime.GetMapTimeInSeconds();
 			if (IsBeyondClickInterval(mapTime, elementTimeSeconds))
 			{
-				_switcher.SetNextElement();
+				_beatmapPipeline.SwitchToNextElement();
 			}
 		}
 

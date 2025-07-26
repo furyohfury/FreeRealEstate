@@ -1,7 +1,57 @@
-﻿namespace Game.BeatmapPipeline
+﻿using Beatmaps;
+using R3;
+
+namespace Game.BeatmapControl
 {
-	public class BeatmapPipeline
+	public sealed class BeatmapPipeline
 	{
-		
+		public bool IsEnded => _activeIndex >= _activeMapElements?.Length;
+		public ReadOnlyReactiveProperty<MapElement> Element => _element;
+		public ReadOnlyReactiveProperty<IBeatmap> Map => _map;
+
+		private readonly ReactiveProperty<MapElement> _element = new();
+		private readonly ReactiveProperty<IBeatmap> _map = new();
+		private MapElement[] _activeMapElements;
+		private int _activeIndex = 0;
+
+		public bool TryPeek(int numberOfElements, out MapElement element)
+		{
+			if (_activeIndex + numberOfElements > _activeMapElements.Length)
+			{
+				element = null;
+				return false;
+			}
+
+			element = _element.CurrentValue;
+			return true;
+		}
+
+		public void SwitchToNextElement()
+		{
+			_activeIndex++;
+			UpdateElement();
+		}
+
+		public void SetMap(IBeatmap beatmap)
+		{
+			_map.Value = beatmap;
+			_activeMapElements = beatmap.GetMapElements();
+			_activeIndex = 0;
+			UpdateElement();
+		}
+
+		public void RestartMap()
+		{
+			_activeIndex = 0;
+			UpdateElement();
+		}
+
+		private void UpdateElement()
+		{
+			if (_activeIndex < _activeMapElements.Length)
+			{
+				_element.Value = _activeMapElements[_activeIndex];
+			}
+		}
 	}
 }

@@ -33,14 +33,14 @@ namespace Game.Visuals
 			_endPoint = endPoint;
 		}
 
-		public void LaunchMap(ISongMap map)
+		public void LaunchMap(IBeatmap map)
 		{
 			Observable.EveryUpdate()
 			          .Subscribe(_ => OnTick(map))
 			          .AddTo(_disposable);
 		}
 
-		public void OnTick(ISongMap map)
+		public void OnTick(IBeatmap map)
 		{
 			MapElement[] mapElements = map.GetMapElements();
 			if (IsMapEnded(mapElements))

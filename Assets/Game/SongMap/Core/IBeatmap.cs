@@ -1,6 +1,6 @@
 ﻿namespace Beatmaps
 {
-	public interface ISongMap
+	public interface IBeatmap
 	{
 		IDifficulty GetDifficulty();
 		MapElement[] GetMapElements();

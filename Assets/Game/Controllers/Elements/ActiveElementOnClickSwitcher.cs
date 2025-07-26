@@ -2,20 +2,21 @@
 using Game.ElementHandle;
 using R3;
 using Beatmaps;
+using Game.BeatmapControl;
 using VContainer.Unity;
 
 namespace Game
 {
 	public sealed class ActiveElementOnClickSwitcher : IStartable, IDisposable
 	{
-		private ActiveElementSwitcher _switcher;
+		private BeatmapPipeline _beatmapPipeline;
 		private readonly ElementsClickHandler _elementsClickHandler;
 		private readonly SerialDisposable _disposable = new();
 
-		public ActiveElementOnClickSwitcher(ActiveElementSwitcher switcher, ElementsClickHandler elementsClickHandler)
+		public ActiveElementOnClickSwitcher(ElementsClickHandler elementsClickHandler, BeatmapPipeline beatmapPipeline)
 		{
-			_switcher = switcher;
 			_elementsClickHandler = elementsClickHandler;
+			_beatmapPipeline = beatmapPipeline;
 		}
 
 		public void Start()
@@ -33,7 +34,7 @@ namespace Game
 				return;
 			}
 
-			_switcher.SetNextElement();
+			_beatmapPipeline.SwitchToNextElement();
 		}
 
 		public void Dispose()

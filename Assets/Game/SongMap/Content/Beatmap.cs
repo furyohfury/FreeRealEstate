@@ -3,7 +3,7 @@
 namespace Beatmaps
 {
 	[CreateAssetMenu(fileName = "SongMap", menuName = "SongMap/SongMap")]
-	public sealed class SongMap : ScriptableObject, ISongMap
+	public sealed class Beatmap : ScriptableObject, IBeatmap
 	{
 		public IDifficulty GetDifficulty()
 		{

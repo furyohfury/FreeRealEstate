@@ -1,5 +1,6 @@
 ﻿using System;
 using Game;
+using Game.BeatmapControl;
 using Game.Scoring;
 using Game.SongMapTime;
 using Game.Visuals;
@@ -12,9 +13,7 @@ namespace GameDebug
 	public class MapDebug : MonoBehaviour
 	{
 		[SerializeField]
-		private SongMapDebug _map;
-		[Inject]
-		private ActiveMapService _activeMapService;
+		private BeatmapDebug _map;
 		[Inject]
 		private IMapTime _mapTime;
 		[Inject]
@@ -24,9 +23,7 @@ namespace GameDebug
 		[Inject]
 		private MapScore _mapScore;
 		[Inject]
-		private ActiveElementService _activeElementService;
-		[Inject]
-		private ActiveElementIndexService _activeElementIndexService;
+		private BeatmapPipeline _beatmapPipeline;
 
 		[SerializeField] [ReadOnly]
 		private float _time = 0f;
@@ -38,7 +35,7 @@ namespace GameDebug
 		[Button]
 		public void SetMap()
 		{
-			_activeMapService.SetMap(_map);
+			_beatmapPipeline.SetMap(_map);
 		}
 
 		[Button]
@@ -48,25 +45,16 @@ namespace GameDebug
 			_notesVisualSystem.LaunchMap(_map);
 		}
 
-		// [Button]
-		// private void Reset()
-		// {
-		// 	_mapTime.Reset();
-		// }
+		[Button]
+		private void RestartMap()
+		{
+			_beatmapPipeline.RestartMap();
+		}
 
 		private void Update()
 		{
 			UpdateMapTime();
 			UpdateScore();
-			UpdateActiveIndex();
-		}
-
-		private void UpdateActiveIndex()
-		{
-			if (_activeElementIndexService != null)
-			{
-				_activeIndex = _activeElementIndexService.ActiveIndex;
-			}
 		}
 
 		private void UpdateMapTime()

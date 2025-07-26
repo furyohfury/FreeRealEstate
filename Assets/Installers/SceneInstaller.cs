@@ -1,4 +1,5 @@
 ﻿using Game;
+using Game.BeatmapControl;
 using Game.ElementHandle;
 using Game.Input;
 using Game.Scoring;
@@ -16,20 +17,12 @@ namespace Installers
 
 		protected override void Configure(IContainerBuilder builder)
 		{
-			builder.Register<ActiveElementService>(Lifetime.Singleton);
-			builder.Register<ActiveMapService>(Lifetime.Singleton);
-			builder.Register<ActiveElementIndexService>(Lifetime.Singleton)
-			       .AsImplementedInterfaces()
-			       .AsSelf();
+			builder.Register<BeatmapPipeline>(Lifetime.Singleton);
 
-			builder.Register<ActiveElementSwitcher>(Lifetime.Singleton);
 			builder.Register<ActiveElementTimeoutSwitcher>(Lifetime.Singleton)
 			       .AsImplementedInterfaces()
 			       .AsSelf();
 			builder.Register<ActiveElementOnClickSwitcher>(Lifetime.Singleton)
-			       .AsImplementedInterfaces()
-			       .AsSelf();
-			builder.Register<MapChangeObserver>(Lifetime.Singleton)
 			       .AsImplementedInterfaces()
 			       .AsSelf();
 

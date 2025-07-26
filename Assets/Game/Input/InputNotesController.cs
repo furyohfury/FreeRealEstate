@@ -1,5 +1,6 @@
 ﻿using System;
 using Beatmaps;
+using Game.BeatmapControl;
 using Game.ElementHandle;
 using Game.SongMapTime;
 using R3;
@@ -12,8 +13,8 @@ namespace Game
 	{
 		private readonly InputReader _inputReader;
 		private readonly ElementsClickHandler _elementsClickHandler;
-		private readonly ActiveElementService _activeElementService;
 		private readonly IMapTime _mapTime;
+		private BeatmapPipeline _beatmapPipeline;
 
 		private readonly CompositeDisposable _disposable = new();
 		private const float INACTIVE_CLICK_THRESHOLD = 1f;
@@ -21,14 +22,12 @@ namespace Game
 		public InputNotesController(
 			InputReader inputReader,
 			ElementsClickHandler elementsClickHandler,
-			ActiveElementService activeElementService,
-			IMapTime mapTime
-		)
+			IMapTime mapTime, BeatmapPipeline beatmapPipeline)
 		{
 			_inputReader = inputReader;
 			_elementsClickHandler = elementsClickHandler;
-			_activeElementService = activeElementService;
 			_mapTime = mapTime;
+			_beatmapPipeline = beatmapPipeline;
 		}
 
 		public void Start()
@@ -42,7 +41,7 @@ namespace Game
 
 		private void OnNotePressed(Notes note)
 		{
-			var activeMapElement = _activeElementService.Element.CurrentValue;
+			var activeMapElement = _beatmapPipeline.Element.CurrentValue;
 			if (IsOutsideTimeThreshold(activeMapElement))
 			{
 				return;

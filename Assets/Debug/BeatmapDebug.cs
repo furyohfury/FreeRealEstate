@@ -4,7 +4,7 @@ using UnityEngine;
 namespace GameDebug
 {
 	[CreateAssetMenu(fileName = "SongMapDebug", menuName = "Debug/SongMapDebug")]
-	public sealed class SongMapDebug : ScriptableObject, ISongMap
+	public sealed class BeatmapDebug : ScriptableObject, IBeatmap
 	{
 		[SerializeField]
 		private Difficulty _difficulty;
