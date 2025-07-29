@@ -19,12 +19,12 @@ namespace Installers
 		{
 			builder.Register<BeatmapPipeline>(Lifetime.Singleton);
 
-			builder.Register<ActiveElementTimeoutSwitcher>(Lifetime.Singleton)
-			       .AsImplementedInterfaces()
-			       .AsSelf();
-			builder.Register<ActiveElementOnClickSwitcher>(Lifetime.Singleton)
-			       .AsImplementedInterfaces()
-			       .AsSelf();
+			builder.Register<SingleNoteTimeoutSwitcher>(Lifetime.Singleton)
+			       .AsImplementedInterfaces();
+			builder.Register<SpinnerTimeoutSwitcher>(Lifetime.Singleton)
+			       .AsImplementedInterfaces();
+			builder.Register<ElementOnStatusSwitcher>(Lifetime.Singleton)
+			       .AsImplementedInterfaces();
 
 			builder.Register<ElementClickStrategy, SingleNoteClickStrategy>(Lifetime.Scoped);
 			builder.Register<ElementClickStrategy, SpinnerClickStrategy>(Lifetime.Scoped);
@@ -47,7 +47,7 @@ namespace Installers
 			builder.RegisterEntryPoint<MapScoreController>();
 			builder.RegisterEntryPoint<MapScoreResetter>();
 			builder.RegisterInstance<PointsForStatusConfig>(_pointsForStatusConfig);
-
+			
 			Debug.Log("Successfully installed all scene systems");
 		}
 	}
