@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Beatmaps
 {
-	[CreateAssetMenu(fileName = "SongMap", menuName = "SongMap/SongMap")]
+	[CreateAssetMenu(fileName = "Beatmap", menuName = "Beatmap/Beatmap")]
 	public sealed class Beatmap : ScriptableObject, IBeatmap
 	{
 		public IDifficulty GetDifficulty()
 		{
-			return _difficulty;
+			return _difficultyConfig;
 		}
 
 		public MapElement[] GetMapElements()
@@ -17,7 +18,7 @@ namespace Beatmaps
 
 		[SerializeReference]
 		private MapElement[] _mapElements;
-		[SerializeField]
-		private Difficulty _difficulty;
+		[FormerlySerializedAs("_difficulty")] [SerializeField]
+		private DifficultyConfig _difficultyConfig;
 	}
 }

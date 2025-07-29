@@ -40,7 +40,7 @@ namespace Game
 		public void Tick()
 		{
 			var element = _beatmapPipeline.Element.CurrentValue;
-			if (element == null)
+			if (element is not SingleNote)
 			{
 				return;
 			}

@@ -1,19 +1,18 @@
 ﻿using System;
+using Game.BeatmapControl;
 using Game.ElementHandle;
 using R3;
-using Beatmaps;
-using Game.BeatmapControl;
 using VContainer.Unity;
 
 namespace Game
 {
-	public sealed class ActiveElementOnClickSwitcher : IStartable, IDisposable
+	public sealed class ActiveElementOnStatusSwitcher : IStartable, IDisposable
 	{
-		private BeatmapPipeline _beatmapPipeline;
+		private readonly BeatmapPipeline _beatmapPipeline;
 		private readonly ElementsClickHandler _elementsClickHandler;
 		private readonly SerialDisposable _disposable = new();
 
-		public ActiveElementOnClickSwitcher(ElementsClickHandler elementsClickHandler, BeatmapPipeline beatmapPipeline)
+		public ActiveElementOnStatusSwitcher(ElementsClickHandler elementsClickHandler, BeatmapPipeline beatmapPipeline)
 		{
 			_elementsClickHandler = elementsClickHandler;
 			_beatmapPipeline = beatmapPipeline;
