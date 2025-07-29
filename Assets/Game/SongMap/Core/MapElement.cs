@@ -6,13 +6,13 @@ namespace Beatmaps
 	[Serializable]
 	public abstract class MapElement
 	{
-		public float TimeSeconds => _timeSeconds;
+		public float HitTime => _hitTime;
 		[SerializeField]
-		private float _timeSeconds;
+		private float _hitTime;
 
-		protected MapElement(float timeSeconds)
+		protected MapElement(float hitTime)
 		{
-			_timeSeconds = timeSeconds;
+			_hitTime = hitTime;
 		}
 	}
 }

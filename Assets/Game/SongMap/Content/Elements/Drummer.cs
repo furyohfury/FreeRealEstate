@@ -5,7 +5,7 @@ namespace Beatmaps
 	[Serializable]
 	public sealed class Drummer : MapElement
 	{
-		public Drummer(float timeSeconds) : base(timeSeconds)
+		public Drummer(float hitTime) : base(hitTime)
 		{
 		}
 	}

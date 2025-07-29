@@ -10,7 +10,7 @@ namespace Beatmaps
 		[SerializeField]
 		private Notes _note;
 
-		public SingleNote(float timeSeconds, Notes note) : base(timeSeconds)
+		public SingleNote(float hitTime, Notes note) : base(hitTime)
 		{
 			_note = note;
 		}

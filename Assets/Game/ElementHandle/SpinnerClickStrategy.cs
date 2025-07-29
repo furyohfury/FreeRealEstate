@@ -12,6 +12,7 @@ namespace Game.ElementHandle
 		private ClicksPerSecondParams _clicksPerSecondParams;
 		private Spinner _activeSpinner;
 		private int _doneClicks;
+		private Notes _previousInput;
 
 		public SpinnerClickStrategy(IMapTime mapTime) : base(mapTime)
 		{
@@ -29,22 +30,41 @@ namespace Game.ElementHandle
 				throw new ArgumentException("Expected spinner");
 			}
 
-			if (spinner == _activeSpinner)
+			if (IsActiveSpinner(spinner) == false)
 			{
+				Debug.Log("Set new spinner");
+				_activeSpinner = spinner;
+				_previousInput = inputNote;
+				_doneClicks = 1;
+				return ClickStatus.Running;
+			}
+
+			if (IsAlternateNote(inputNote))
+			{
+				_previousInput = inputNote;
 				_doneClicks++;
 				var clicksNeeded = Mathf.FloorToInt(_clicksPerSecondParams.GetClicksPerSecond() * _activeSpinner.Duration);
+				Debug.Log($"Processed {_doneClicks} of {clicksNeeded} clicks of spinner");
 				if (_doneClicks >= clicksNeeded)
 				{
+					Debug.Log("Successfully completed spinner");
 					return ClickStatus.Success;
 				}
-			}
-			else
-			{
-				_activeSpinner = spinner;
-				_doneClicks = 1;
+
+				return ClickStatus.Running;
 			}
 
 			return ClickStatus.None;
+		}
+
+		private bool IsAlternateNote(Notes inputNote)
+		{
+			return _previousInput != inputNote;
+		}
+
+		private bool IsActiveSpinner(Spinner spinner)
+		{
+			return spinner == _activeSpinner;
 		}
 
 		public override void SetDifficultyParameters(IEnumerable<IDifficultyParams> parameters)

@@ -3,6 +3,7 @@
 	public enum ClickStatus
 	{
 		None
+		, Running
 		, Success
 		, Fail
 	}

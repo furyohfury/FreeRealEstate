@@ -8,13 +8,13 @@ using VContainer.Unity;
 
 namespace Game
 {
-	public sealed class ActiveElementTimeoutSwitcher : IStartable, ITickable, IDisposable
+	public sealed class SingleNoteTimeoutSwitcher : IStartable, ITickable, IDisposable
 	{
 		private BeatmapPipeline _beatmapPipeline;
 		private readonly IMapTime _mapTime;
 		private float _clickInterval;
 
-		public ActiveElementTimeoutSwitcher(BeatmapPipeline beatmapPipeline, IMapTime mapTime)
+		public SingleNoteTimeoutSwitcher(BeatmapPipeline beatmapPipeline, IMapTime mapTime)
 		{
 			_beatmapPipeline = beatmapPipeline;
 			_mapTime = mapTime;
@@ -45,7 +45,7 @@ namespace Game
 				return;
 			}
 
-			var elementTimeSeconds = element.TimeSeconds;
+			var elementTimeSeconds = element.HitTime;
 			var mapTime = _mapTime.GetMapTimeInSeconds();
 			if (IsBeyondClickInterval(mapTime, elementTimeSeconds))
 			{

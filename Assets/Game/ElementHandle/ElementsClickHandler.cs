@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using Beatmaps;
+using R3;
 
 namespace Game.ElementHandle
 {
 	public sealed class ElementsClickHandler
 	{
-		public event Action<ClickStatus> OnElementHandled;
+		public Observable<ClickStatus> OnClickHandled => _onClickHandled;
+		private Subject<ClickStatus> _onClickHandled = new Subject<ClickStatus>();
 		private readonly Dictionary<Type, ElementClickStrategy> _handlers = new();
 
 		public ElementsClickHandler(IEnumerable<ElementClickStrategy> handlers)
@@ -30,7 +32,7 @@ namespace Game.ElementHandle
 			var type = element.GetType();
 			var handler = _handlers[type];
 			var clickStatus = handler.HandleClick(element, note);
-			OnElementHandled?.Invoke(clickStatus);
+			_onClickHandled.OnNext(clickStatus);
 		}
 	}
 }

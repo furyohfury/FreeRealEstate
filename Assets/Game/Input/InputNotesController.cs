@@ -4,7 +4,6 @@ using Game.BeatmapControl;
 using Game.ElementHandle;
 using Game.SongMapTime;
 using R3;
-using UnityEngine;
 using VContainer.Unity;
 
 namespace Game
@@ -14,7 +13,7 @@ namespace Game
 		private readonly InputReader _inputReader;
 		private readonly ElementsClickHandler _elementsClickHandler;
 		private readonly IMapTime _mapTime;
-		private BeatmapPipeline _beatmapPipeline;
+		private readonly BeatmapPipeline _beatmapPipeline;
 
 		private readonly CompositeDisposable _disposable = new();
 		private const float INACTIVE_CLICK_THRESHOLD = 1f;
@@ -42,7 +41,7 @@ namespace Game
 		private void OnNotePressed(Notes note)
 		{
 			var activeMapElement = _beatmapPipeline.Element.CurrentValue;
-			if (IsOutsideTimeThreshold(activeMapElement))
+			if (IsTooFar(activeMapElement))
 			{
 				return;
 			}
@@ -50,9 +49,9 @@ namespace Game
 			_elementsClickHandler.HandleElement(activeMapElement, note);
 		}
 
-		private bool IsOutsideTimeThreshold(MapElement activeMapElement)
+		private bool IsTooFar(MapElement activeMapElement)
 		{
-			return Mathf.Abs(activeMapElement.TimeSeconds - _mapTime.GetMapTimeInSeconds()) >= INACTIVE_CLICK_THRESHOLD;
+			return activeMapElement.HitTime - _mapTime.GetMapTimeInSeconds() >= INACTIVE_CLICK_THRESHOLD;
 		}
 
 		public void Dispose()

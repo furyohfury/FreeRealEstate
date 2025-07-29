@@ -4,7 +4,7 @@ using UnityEngine.Serialization;
 namespace Beatmaps
 {
 	[CreateAssetMenu(fileName = "Beatmap", menuName = "Beatmap/Beatmap")]
-	public sealed class Beatmap : ScriptableObject, IBeatmap
+	public sealed class BeatmapConfig : ScriptableObject, IBeatmap
 	{
 		public IDifficulty GetDifficulty()
 		{

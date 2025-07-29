@@ -2,22 +2,20 @@
 
 namespace Beatmaps
 {
-	[CreateAssetMenu(fileName = "Difficulty", menuName = "SongMap/Difficulty")]
-	public sealed class Difficulty : ScriptableObject, IDifficulty
+	[CreateAssetMenu(fileName = "Difficulty", menuName = "Beatmap/Difficulty")]
+	public sealed class DifficultyConfig : ScriptableObject, IDifficulty
 	{
-		[SerializeField] 
-		private string _name;
-		[SerializeReference]
-		private IDifficultyParams[] _difficultyParams;
+		[SerializeField]
+		private Difficulty _difficulty;
 
 		public string GetName()
 		{
-			return _name;
+			return _difficulty.GetName();
 		}
 
 		public IDifficultyParams[] GetDifficultyParams()
 		{
-			return _difficultyParams;
+			return _difficulty.GetDifficultyParams();
 		}
 	}
 }

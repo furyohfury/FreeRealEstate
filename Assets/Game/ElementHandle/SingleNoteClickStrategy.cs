@@ -27,7 +27,7 @@ namespace Game.ElementHandle
 			}
 
 			return singleNote.Note == inputNote
-			       && Math.Abs(element.TimeSeconds - MapTime.GetMapTimeInSeconds()) <= _clickIntervalParams.GetClickInterval()
+			       && Math.Abs(element.HitTime - MapTime.GetMapTimeInSeconds()) <= _clickIntervalParams.GetClickInterval()
 				? ClickStatus.Success
 				: ClickStatus.Fail;
 		}

@@ -53,7 +53,7 @@ namespace Game.Visuals
 			{
 				var element = mapElements[_index];
 
-				if (!ElementTimeIsInScrollRange(element.TimeSeconds))
+				if (!ElementTimeIsInScrollRange(element.HitTime))
 				{
 					break;
 				}

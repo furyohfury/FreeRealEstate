@@ -6,13 +6,13 @@ using VContainer.Unity;
 
 namespace Game
 {
-	public sealed class ActiveElementOnStatusSwitcher : IStartable, IDisposable
+	public sealed class ElementOnStatusSwitcher : IStartable, IDisposable
 	{
 		private readonly BeatmapPipeline _beatmapPipeline;
 		private readonly ElementsClickHandler _elementsClickHandler;
 		private readonly SerialDisposable _disposable = new();
 
-		public ActiveElementOnStatusSwitcher(ElementsClickHandler elementsClickHandler, BeatmapPipeline beatmapPipeline)
+		public ElementOnStatusSwitcher(ElementsClickHandler elementsClickHandler, BeatmapPipeline beatmapPipeline)
 		{
 			_elementsClickHandler = elementsClickHandler;
 			_beatmapPipeline = beatmapPipeline;
@@ -20,10 +20,8 @@ namespace Game
 
 		public void Start()
 		{
-			_disposable.Disposable = Observable.FromEvent<ClickStatus>(
-				                                   h => _elementsClickHandler.OnElementHandled += h,
-				                                   h => _elementsClickHandler.OnElementHandled -= h)
-			                                   .Subscribe(OnElementHandled);
+			_disposable.Disposable = _elementsClickHandler.OnClickHandled
+			                                              .Subscribe(OnElementHandled);
 		}
 
 		private void OnElementHandled(ClickStatus status)

@@ -11,7 +11,7 @@ namespace Game
 		private readonly MapScore _mapScore;
 		private readonly ElementsClickHandler _elementsClickHandler;
 		private readonly PointsForStatusConfig _config;
-		private readonly CompositeDisposable _disposable = new();
+		private readonly SerialDisposable _disposable = new();
 
 		public MapScoreController(MapScore mapScore, ElementsClickHandler elementsClickHandler, PointsForStatusConfig config)
 		{
@@ -22,11 +22,13 @@ namespace Game
 
 		public void Start()
 		{
-			Observable.FromEvent<ClickStatus>(
-				          h => _elementsClickHandler.OnElementHandled += h,
-				          h => _elementsClickHandler.OnElementHandled -= h)
-			          .Subscribe(status => _mapScore.AddPoints(_config.Points[status]))
-			          .AddTo(_disposable);
+			_disposable.Disposable = _elementsClickHandler.OnClickHandled
+			                                              .Subscribe(OnPointsAdded);
+		}
+
+		private void OnPointsAdded(ClickStatus status)
+		{
+			_mapScore.AddPoints(_config.Points[status]);
 		}
 
 		public void Dispose()

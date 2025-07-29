@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Beatmaps
 {
+	[Serializable]
 	public sealed class ClickIntervalParams : IDifficultyParams
 	{
 		[SerializeField]

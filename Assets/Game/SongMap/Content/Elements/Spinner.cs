@@ -10,7 +10,7 @@ namespace Beatmaps
 		[SerializeField]
 		private float _duration;
 
-		public Spinner(float timeSeconds, float duration) : base(timeSeconds)
+		public Spinner(float hitTime, float duration) : base(hitTime)
 		{
 			_duration = duration;
 		}
