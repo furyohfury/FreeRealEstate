@@ -1,5 +1,4 @@
-﻿using System;
-using Game;
+﻿using Beatmaps;
 using Game.BeatmapControl;
 using Game.Scoring;
 using Game.SongMapTime;
@@ -14,6 +13,8 @@ namespace GameDebug
 	{
 		[SerializeField]
 		private BeatmapDebug _map;
+		[SerializeField]
+		private BeatmapSpinnerDebug _spinnerDebugMap;
 		[Inject]
 		private IMapTime _mapTime;
 		[Inject]
@@ -29,25 +30,29 @@ namespace GameDebug
 		private float _time = 0f;
 		[SerializeField] [ReadOnly]
 		private int _score = 0;
-		[SerializeField] [ReadOnly]
-		private int _activeIndex = 0;
-
+		[SerializeReference]
+		private MapElement _activeMapElement;
+		
 		[Button]
-		public void SetMap()
+		public void LaunchSingleNoteMap()
 		{
 			_beatmapPipeline.SetMap(_map);
-		}
-
-		[Button]
-		public void LaunchMap()
-		{
 			_beatmapLauncher.LaunchActiveMap();
 			_notesVisualSystem.LaunchMap(_map);
 		}
 
 		[Button]
+		public void LaunchSpinnerMap()
+		{
+			_beatmapPipeline.SetMap(_spinnerDebugMap);
+			_beatmapLauncher.LaunchActiveMap();
+			_notesVisualSystem.LaunchMap(_spinnerDebugMap);
+		}
+
+		[Button]
 		private void RestartMap()
 		{
+			_mapTime.Reset();
 			_beatmapPipeline.RestartMap();
 		}
 
@@ -55,6 +60,15 @@ namespace GameDebug
 		{
 			UpdateMapTime();
 			UpdateScore();
+			UpdateActiveElement();
+		}
+
+		private void UpdateActiveElement()
+		{
+			if (_beatmapPipeline.Element.CurrentValue != null)
+			{
+				_activeMapElement = _beatmapPipeline.Element.CurrentValue;
+			}
 		}
 
 		private void UpdateMapTime()
