@@ -9,7 +9,7 @@ namespace Game.ElementHandle
 {
 	public sealed class SpinnerClickStrategy : ElementClickStrategy
 	{
-		private ClicksPerSecondParams _clicksPerSecondParams;
+		private SpinnerClicksPerSecondParams _spinnerClicksPerSecondParams;
 		private Spinner _activeSpinner;
 		private int _doneClicks;
 		private Notes _previousInput;
@@ -43,7 +43,7 @@ namespace Game.ElementHandle
 			{
 				_previousInput = inputNote;
 				_doneClicks++;
-				var clicksNeeded = Mathf.FloorToInt(_clicksPerSecondParams.GetClicksPerSecond() * _activeSpinner.Duration);
+				var clicksNeeded = Mathf.FloorToInt(_spinnerClicksPerSecondParams.GetClicksPerSecond() * _activeSpinner.Duration);
 				Debug.Log($"Processed {_doneClicks} of {clicksNeeded} clicks of spinner");
 				if (_doneClicks >= clicksNeeded)
 				{
@@ -69,7 +69,7 @@ namespace Game.ElementHandle
 
 		public override void SetDifficultyParameters(IEnumerable<IDifficultyParams> parameters)
 		{
-			_clicksPerSecondParams = parameters?.OfType<ClicksPerSecondParams>().Single();
+			_spinnerClicksPerSecondParams = parameters?.OfType<SpinnerClicksPerSecondParams>().Single();
 		}
 	}
 }

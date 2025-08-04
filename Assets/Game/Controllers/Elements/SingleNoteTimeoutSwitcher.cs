@@ -31,7 +31,7 @@ namespace Game
 				                                         _clickInterval = map
 				                                                          .GetDifficulty()
 				                                                          .GetDifficultyParams()
-				                                                          .OfType<ClickIntervalParams>()
+				                                                          .OfType<SingleNoteClickIntervalParams>()
 				                                                          .Single()
 				                                                          .GetClickInterval();
 			                                         });
