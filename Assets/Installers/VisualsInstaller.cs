@@ -1,4 +1,5 @@
 ﻿using Game.BeatmapControl;
+using Game.Services;
 using Game.SongMapTime;
 using Game.Visuals;
 using Sirenix.OdinInspector;
@@ -13,35 +14,47 @@ namespace Installers
 		[SerializeField] [Required]
 		private SingleNotePrefabConfig _singleNotePrefabConfig;
 		[SerializeField] [Required]
-		private Transform _container;
+		private SpinnerPrefabConfig _spinnerPrefabConfig;
+		[SerializeField] [Required]
+		private DrumrollPrefabConfig _drumrollPrefabConfig;
+		[SerializeField] [Required]
+		private Transform _notesContainer;
 		[SerializeField] [Required]
 		private Transform _startPoint;
 		[SerializeField] [Required]
 		private Transform _endPoint;
 		[SerializeField] [Required]
-		private SpinnerView _spinnerPrefab;
-		[SerializeField]
 		private Transform _activeSpinnerContainer;
-		[SerializeField]
+		[SerializeField] [Required]
 		private ActiveSpinnerView _activeSpinnerViewPrefab;
 
 		protected override void Configure(IContainerBuilder builder)
 		{
+			builder.RegisterInstance<NotesLineBoundsService>(new NotesLineBoundsService(_startPoint, _endPoint, _notesContainer));
+			builder.Register<NotesLineMover>(Lifetime.Singleton)
+			       .AsImplementedInterfaces()
+			       .AsSelf();
+
 			builder.RegisterInstance<SingleNotePrefabConfig>(_singleNotePrefabConfig);
-			builder.RegisterInstance<SpinnerView>(_spinnerPrefab);
-			builder.Register<IElementFactory, SingleNoteViewFactory>(Lifetime.Scoped);
-			builder.Register<IElementFactory, SpinnerViewFactory>(Lifetime.Scoped);
+			builder.RegisterInstance<SpinnerPrefabConfig>(_spinnerPrefabConfig);
+			builder.RegisterInstance<DrumrollPrefabConfig>(_drumrollPrefabConfig);
+			builder.Register<SingleNoteViewFactory>(Lifetime.Singleton).AsImplementedInterfaces();
+			builder.Register<SpinnerViewFactory>(Lifetime.Singleton).AsImplementedInterfaces();
+			builder.Register<DrumRollViewFactory>(Lifetime.Singleton).AsImplementedInterfaces();
 			builder.Register<ElementViewFactory>(Lifetime.Singleton);
+
 			builder.Register<NotesVisualSystem>((resolver) =>
 			{
 				var viewFactory = resolver.Resolve<ElementViewFactory>();
 				var mapTime = resolver.Resolve<IMapTime>();
+				var notesLineBoundsService = resolver.Resolve<NotesLineBoundsService>();
+				var notesLineMover = resolver.Resolve<NotesLineMover>();
 				return new NotesVisualSystem(
 					viewFactory,
 					mapTime,
-					_container,
-					_startPoint,
-					_endPoint);
+					notesLineBoundsService,
+					notesLineMover
+				);
 			}, Lifetime.Singleton);
 
 			builder.RegisterInstance<ActiveSpinnerView>(_activeSpinnerViewPrefab);
