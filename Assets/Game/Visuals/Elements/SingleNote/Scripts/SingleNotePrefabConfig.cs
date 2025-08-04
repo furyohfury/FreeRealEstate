@@ -5,11 +5,11 @@ using UnityEngine;
 
 namespace Game.Visuals
 {
-	[CreateAssetMenu(fileName = "SingleNotePrefabConfig", menuName = "Visuals/SingleNotePrefabConfig")]
+	[CreateAssetMenu(fileName = "SingleNotePrefabConfig", menuName = "Visuals/PrefabConfig/SingleNotePrefabConfig")]
 	public sealed class SingleNotePrefabConfig : SerializedScriptableObject
 	{
-		public IReadOnlyDictionary<Notes, SingleNoteView> Views => _views;
+		public IReadOnlyDictionary<Notes, string> ViewIds => _viewIds;
 		[SerializeField]
-		private Dictionary<Notes, SingleNoteView> _views;
+		private Dictionary<Notes, string> _viewIds;
 	}
 }

@@ -1,8 +1,7 @@
 ﻿using Beatmaps;
-using DG.Tweening;
+using Game.Services;
 using Game.SongMapTime;
 using R3;
-using UnityEngine;
 
 namespace Game.Visuals
 {
@@ -10,27 +9,23 @@ namespace Game.Visuals
 	{
 		private readonly ElementViewFactory _elementViewFactory;
 		private readonly IMapTime _mapTime;
-		private readonly Transform _container;
-		private readonly Transform _startPoint;
-		private readonly Transform _endPoint;
+		private readonly NotesLineBoundsService _boundsService;
+		private readonly NotesLineMover _notesLineMover;
 
 		private int _index = 0;
-		private const float SCROLL_TIME = 3f;
 		private readonly CompositeDisposable _disposable = new();
 
 		public NotesVisualSystem(
 			ElementViewFactory elementViewFactory,
 			IMapTime mapTime,
-			Transform container,
-			Transform startPoint,
-			Transform endPoint
+			NotesLineBoundsService boundsService,
+			NotesLineMover notesLineMover
 		)
 		{
 			_elementViewFactory = elementViewFactory;
 			_mapTime = mapTime;
-			_container = container;
-			_startPoint = startPoint;
-			_endPoint = endPoint;
+			_boundsService = boundsService;
+			_notesLineMover = notesLineMover;
 		}
 
 		public void LaunchMap(IBeatmap map)
@@ -71,24 +66,19 @@ namespace Game.Visuals
 
 		private bool ElementTimeIsInScrollRange(float elementTime)
 		{
-			return elementTime - SCROLL_TIME <= _mapTime.GetMapTimeInSeconds();
+			return elementTime - NotesVisualData.SCROLL_TIME <= _mapTime.GetMapTimeInSeconds();
 		}
 
 		private ElementView SpawnView(MapElement element)
 		{
-			var view = _elementViewFactory.Spawn(element, _container);
+			var view = _elementViewFactory.Spawn(element, _boundsService.NotesContainer);
 			return view;
 		}
 
 		private void SetMovement(ElementView view)
 		{
-			view.Move(_startPoint.position);
-			DOTween.To(
-				view.GetPosition,
-				view.Move,
-				_endPoint.position,
-				SCROLL_TIME)
-			       .SetEase(Ease.Linear);
+			view.Move(_boundsService.StartPoint);
+			_notesLineMover.AddElement(view);
 		}
 	}
 }

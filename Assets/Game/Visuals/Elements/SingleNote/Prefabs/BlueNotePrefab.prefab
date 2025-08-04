@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6267726785576759443}
   - component: {fileID: 1289502899698701147}
   m_Layer: 0
-  m_Name: BlueNote
+  m_Name: BlueNotePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

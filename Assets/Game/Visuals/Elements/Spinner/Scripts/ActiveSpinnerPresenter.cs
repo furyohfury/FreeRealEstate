@@ -36,7 +36,7 @@ namespace Game.Visuals
 			var clicksPerSecondParams = map
 			                            .GetDifficulty()
 			                            .GetDifficultyParams()
-			                            .OfType<ClicksPerSecondParams>()
+			                            .OfType<SpinnerClicksPerSecondParams>()
 			                            .Single();
 			_clicksNeeded = Mathf.FloorToInt(clicksPerSecondParams.GetClicksPerSecond() * _spinner.Duration);
 			_spinnerClicks = _clicksNeeded;

@@ -1,17 +1,27 @@
 ﻿using System;
 using Beatmaps;
+using ObjectProvide;
 using UnityEngine;
+using VContainer.Unity;
 using Object = UnityEngine.Object;
 
 namespace Game.Visuals
 {
-	public sealed class SpinnerViewFactory : IElementFactory
+	public sealed class SpinnerViewFactory : IElementFactory, IStartable
 	{
-		private readonly SpinnerView _prefab;
+		private readonly IObjectProvider _objectProvider;
+		private readonly SpinnerPrefabConfig _config;
+		private SpinnerView _prefab;
 
-		public SpinnerViewFactory(SpinnerView prefab)
+		public SpinnerViewFactory(IObjectProvider objectProvider, SpinnerPrefabConfig config)
 		{
-			_prefab = prefab;
+			_objectProvider = objectProvider;
+			_config = config;
+		}
+
+		public async void Start()
+		{
+			_prefab = await _objectProvider.Get<SpinnerView>(_config.SpinnerViewId);
 		}
 
 		public Type GetElementType()
