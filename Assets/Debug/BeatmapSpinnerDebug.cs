@@ -14,12 +14,18 @@ namespace GameDebug
 			                                          new SingleNote(20
 				                                          , Notes.Red),
 		                                          };
-		[SerializeField]
-		private DifficultyConfig _difficultyConfig;
+		public int GetBpm()
+		{
+			return 60;
+		}
 
 		public IDifficulty GetDifficulty()
 		{
-			return _difficultyConfig;
+			return new Difficulty("Normal", new IDifficultyParams[]
+			                                {
+				                                new SingleNoteClickIntervalParams(0.03f), new SpinnerClicksPerSecondParams(2)
+				                                , new DrumrollClickIntervalParams(0.04f)
+			                                });
 		}
 
 		public MapElement[] GetMapElements()

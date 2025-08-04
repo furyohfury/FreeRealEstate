@@ -1,8 +1,12 @@
-﻿using Beatmaps;
+﻿using System;
+using Beatmaps;
+using Cysharp.Threading.Tasks;
+using Game;
 using Game.BeatmapControl;
 using Game.Scoring;
 using Game.SongMapTime;
 using Game.Visuals;
+using R3;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using VContainer;
@@ -15,6 +19,8 @@ namespace GameDebug
 		private BeatmapDebug _map;
 		[SerializeField]
 		private BeatmapSpinnerDebug _spinnerDebugMap;
+		[SerializeField]
+		private BeatmapDrumrollDebug _beatmapDrumrollDebug;
 		[Inject]
 		private IMapTime _mapTime;
 		[Inject]
@@ -25,6 +31,8 @@ namespace GameDebug
 		private MapScore _mapScore;
 		[Inject]
 		private BeatmapPipeline _beatmapPipeline;
+		[Inject]
+		private InputReader _inputReader;
 
 		[SerializeField] [ReadOnly]
 		private float _time = 0f;
@@ -32,7 +40,7 @@ namespace GameDebug
 		private int _score = 0;
 		[SerializeReference]
 		private MapElement _activeMapElement;
-		
+
 		[Button]
 		public void LaunchSingleNoteMap()
 		{
@@ -50,9 +58,30 @@ namespace GameDebug
 		}
 
 		[Button]
+		public void LaunchDrumrollMap()
+		{
+			_beatmapPipeline.SetMap(_beatmapDrumrollDebug);
+			_beatmapLauncher.LaunchActiveMap();
+			_notesVisualSystem.LaunchMap(_beatmapDrumrollDebug);
+		}
+
+		private readonly SerialDisposable _serialDisposable = new();
+
+		[Button]
+		public async void LaunchDrumrollAutoMap()
+		{
+			_beatmapPipeline.SetMap(_beatmapDrumrollDebug);
+			_beatmapLauncher.LaunchActiveMap();
+			_notesVisualSystem.LaunchMap(_beatmapDrumrollDebug);
+			await UniTask.Delay(5000);
+			_inputReader.OnTestNote(Notes.Blue);
+			_serialDisposable.Disposable = Observable.Interval(TimeSpan.FromSeconds(0.25))
+			                                         .Subscribe(_ => _inputReader.OnTestNote(Notes.Blue));
+		}
+
+		[Button]
 		private void RestartMap()
 		{
-			_mapTime.Reset();
 			_beatmapPipeline.RestartMap();
 		}
 

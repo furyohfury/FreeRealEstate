@@ -23,7 +23,7 @@ MonoBehaviour:
     - rid: 2812328138404790347
       type: {class: ClickIntervalParams, ns: Beatmaps, asm: SongMap}
       data:
-        _intervalSeconds: 0.3
+        _intervalSeconds: 0.06
     - rid: 2812328138404790350
       type: {class: ClicksPerSecondParams, ns: Beatmaps, asm: SongMap}
       data:

@@ -15,9 +15,18 @@ namespace GameDebug
 			                                          , new SingleNote(7, Notes.Red), new SingleNote(8, Notes.Blue), new SingleNote(11, Notes.Red)
 		                                          };
 
+		public int GetBpm()
+		{
+			return 60;
+		}
+
 		public IDifficulty GetDifficulty()
 		{
-			return _difficultyConfig;
+			return new Difficulty("Normal", new IDifficultyParams[]
+			                                {
+				                                new SingleNoteClickIntervalParams(0.03f), new SpinnerClicksPerSecondParams(2)
+				                                , new DrumrollClickIntervalParams(0.04f)
+			                                });
 		}
 
 		public MapElement[] GetMapElements()
