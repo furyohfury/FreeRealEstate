@@ -4,10 +4,15 @@ using UnityEngine;
 namespace Beatmaps
 {
 	[Serializable]
-	public sealed class ClickIntervalParams : IDifficultyParams
+	public sealed class SingleNoteClickIntervalParams : IDifficultyParams
 	{
 		[SerializeField]
 		private float _intervalSeconds;
+
+		public SingleNoteClickIntervalParams(float intervalSeconds)
+		{
+			_intervalSeconds = intervalSeconds;
+		}
 
 		public float GetClickInterval()
 		{

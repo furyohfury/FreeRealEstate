@@ -6,6 +6,11 @@ namespace Beatmaps
 	[CreateAssetMenu(fileName = "Beatmap", menuName = "Beatmap/Beatmap")]
 	public sealed class BeatmapConfig : ScriptableObject, IBeatmap
 	{
+		public int GetBpm()
+		{
+			return _bpm;
+		}
+
 		public IDifficulty GetDifficulty()
 		{
 			return _difficultyConfig;
@@ -16,6 +21,8 @@ namespace Beatmaps
 			return _mapElements;
 		}
 
+		[SerializeField]
+		private int _bpm = 120;
 		[SerializeReference]
 		private MapElement[] _mapElements;
 		[FormerlySerializedAs("_difficulty")] [SerializeField]
