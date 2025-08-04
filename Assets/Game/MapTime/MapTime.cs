@@ -1,22 +1,54 @@
-﻿namespace Game.SongMapTime
+﻿using UnityEngine;
+
+namespace Game.SongMapTime
 {
 	public sealed class MapTime : IMapTime
 	{
-		private float _mapTimeSeconds;
+		private float _startTimeRealtime;
+		private float _pausedAtTime;
+		private float _accumulatedPausedTime;
+		private bool _isPlaying;
 
-		public float GetMapTimeInSeconds()
+		public void Launch()
 		{
-			return _mapTimeSeconds;
+			_isPlaying = true;
+			_startTimeRealtime = Time.realtimeSinceStartup;
+			_accumulatedPausedTime = 0f;
+			_pausedAtTime = 0f;
 		}
 
-		public void AddTime(float seconds)
+		public void Pause()
 		{
-			_mapTimeSeconds += seconds;
+			if (!_isPlaying) return;
+
+			_pausedAtTime = GetMapTimeInSeconds();
+			_isPlaying = false;
+		}
+
+		public void Resume()
+		{
+			if (_isPlaying) return;
+
+			_accumulatedPausedTime += Time.realtimeSinceStartup - (_startTimeRealtime + _pausedAtTime);
+			_isPlaying = true;
 		}
 
 		public void Reset()
 		{
-			_mapTimeSeconds = 0f;
+			_startTimeRealtime = Time.realtimeSinceStartup;
+			_accumulatedPausedTime = 0f;
+			_pausedAtTime = 0f;
+			_isPlaying = false;
+		}
+
+		public float GetMapTimeInSeconds()
+		{
+			if (_isPlaying)
+			{
+				return Time.realtimeSinceStartup - _startTimeRealtime - _accumulatedPausedTime;
+			}
+
+			return _pausedAtTime;
 		}
 	}
 }

@@ -1,30 +1,17 @@
-﻿using System;
-using R3;
-using UnityEngine;
-
-namespace Game.SongMapTime
+﻿namespace Game.SongMapTime
 {
-	public sealed class BeatmapLauncher : IDisposable
+	public sealed class BeatmapLauncher
 	{
-		private readonly IMapTime _mapTime;
-		private readonly CompositeDisposable _disposable = new();
+		private readonly MapTime _mapTime;
 
-		public BeatmapLauncher(IMapTime mapTime)
+		public BeatmapLauncher(MapTime mapTime)
 		{
 			_mapTime = mapTime;
 		}
 
 		public void LaunchActiveMap()
 		{
-			_disposable.Clear();
-			Observable.EveryUpdate()
-			          .Subscribe(_ => _mapTime.AddTime(Time.deltaTime))
-			          .AddTo(_disposable);
-		}
-
-		public void Dispose()
-		{
-			_disposable.Dispose();
+			_mapTime.Launch();
 		}
 	}
 }

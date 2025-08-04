@@ -39,6 +39,11 @@ namespace Game
 			}
 		}
 
+		public void OnTestNote(Notes note)
+		{
+			OnNotePressed?.Invoke(note);
+		}
+
 		public void Dispose()
 		{
 			_inputActions.Player.Disable();
