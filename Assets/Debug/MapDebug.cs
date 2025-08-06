@@ -1,8 +1,8 @@
-﻿using System;
-using Beatmaps;
-using Cysharp.Threading.Tasks;
+﻿using Beatmaps;
 using Game;
+using Game.BeatmapBundles;
 using Game.BeatmapControl;
+using Game.BeatmapLaunch;
 using Game.Scoring;
 using Game.SongMapTime;
 using Game.Visuals;
@@ -15,6 +15,8 @@ namespace GameDebug
 {
 	public class MapDebug : MonoBehaviour
 	{
+		[SerializeField]
+		private BeatmapBundle _beatmapBundle;
 		[SerializeField]
 		private BeatmapDebug _map;
 		[SerializeField]
@@ -44,40 +46,22 @@ namespace GameDebug
 		[Button]
 		public void LaunchSingleNoteMap()
 		{
-			_beatmapPipeline.SetMap(_map);
-			_beatmapLauncher.LaunchActiveMap();
-			_notesVisualSystem.LaunchMap(_map);
-		}
-
-		[Button]
-		public void LaunchSpinnerMap()
-		{
-			_beatmapPipeline.SetMap(_spinnerDebugMap);
-			_beatmapLauncher.LaunchActiveMap();
-			_notesVisualSystem.LaunchMap(_spinnerDebugMap);
-		}
-
-		[Button]
-		public void LaunchDrumrollMap()
-		{
-			_beatmapPipeline.SetMap(_beatmapDrumrollDebug);
-			_beatmapLauncher.LaunchActiveMap();
-			_notesVisualSystem.LaunchMap(_beatmapDrumrollDebug);
+			_beatmapLauncher.Launch(_beatmapBundle, 0);
 		}
 
 		private readonly SerialDisposable _serialDisposable = new();
 
-		[Button]
-		public async void LaunchDrumrollAutoMap()
-		{
-			_beatmapPipeline.SetMap(_beatmapDrumrollDebug);
-			_beatmapLauncher.LaunchActiveMap();
-			_notesVisualSystem.LaunchMap(_beatmapDrumrollDebug);
-			await UniTask.Delay(5000);
-			_inputReader.OnTestNote(Notes.Blue);
-			_serialDisposable.Disposable = Observable.Interval(TimeSpan.FromSeconds(0.25))
-			                                         .Subscribe(_ => _inputReader.OnTestNote(Notes.Blue));
-		}
+		// [Button]
+		// public async void LaunchDrumrollAutoMap()
+		// {
+		// 	_beatmapPipeline.SetMap(_beatmapDrumrollDebug);
+		// 	_beatmapTimeLauncher.Launch();
+		// 	_notesVisualSystem.LaunchMap(_beatmapDrumrollDebug);
+		// 	await UniTask.Delay(5000);
+		// 	_inputReader.OnTestNote(Notes.Blue);
+		// 	_serialDisposable.Disposable = Observable.Interval(TimeSpan.FromSeconds(0.25))
+		// 	                                         .Subscribe(_ => _inputReader.OnTestNote(Notes.Blue));
+		// }
 
 		[Button]
 		private void RestartMap()
