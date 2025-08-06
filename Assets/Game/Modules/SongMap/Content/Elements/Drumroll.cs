@@ -14,5 +14,9 @@ namespace Beatmaps
 		{
 			_duration = duration;
 		}
+
+		public Drumroll()
+		{
+		}
 	}
 }

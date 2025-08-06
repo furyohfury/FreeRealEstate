@@ -14,6 +14,10 @@ namespace Beatmaps
 			_clicksPerSecond = clicksPerSecond;
 		}
 
+		public SpinnerClicksPerSecondParams()
+		{
+		}
+
 		public float GetClicksPerSecond()
 		{
 			return _clicksPerSecond;

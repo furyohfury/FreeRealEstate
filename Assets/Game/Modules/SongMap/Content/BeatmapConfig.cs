@@ -1,31 +1,20 @@
-﻿using UnityEngine;
-using UnityEngine.Serialization;
+﻿using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace Beatmaps
 {
-	[CreateAssetMenu(fileName = "Beatmap", menuName = "Beatmap/Beatmap")]
-	public sealed class BeatmapConfig : ScriptableObject, IBeatmap
+	[CreateAssetMenu(fileName = "BeatmapConfig", menuName = "Beatmap/BeatmapConfig")]
+	public sealed class BeatmapConfig : ScriptableObject
 	{
-		public int GetBpm()
-		{
-			return _bpm;
-		}
-
-		public IDifficulty GetDifficulty()
-		{
-			return _difficultyConfig;
-		}
-
-		public MapElement[] GetMapElements()
-		{
-			return _mapElements;
-		}
+		public Beatmap Beatmap => _beatmap;
 
 		[SerializeField]
-		private int _bpm = 120;
-		[SerializeReference]
-		private MapElement[] _mapElements;
-		[FormerlySerializedAs("_difficulty")] [SerializeField]
-		private DifficultyConfig _difficultyConfig;
+		private Beatmap _beatmap;
+
+		[Button]
+		private void SetDifficulty(DifficultyConfig difficultyConfig)
+		{
+			_beatmap.Difficulty = difficultyConfig.Difficulty;
+		}
 	}
 }

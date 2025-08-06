@@ -14,5 +14,9 @@ namespace Beatmaps
 		{
 			_note = note;
 		}
+
+		public SingleNote()
+		{
+		}
 	}
 }

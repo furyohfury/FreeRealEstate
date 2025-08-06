@@ -12,7 +12,16 @@ namespace Beatmaps
 
 		public Spinner(float hitTime, float duration) : base(hitTime)
 		{
+			if (duration <= 0)
+			{
+				throw new ArgumentOutOfRangeException(nameof(duration), "Spinner duration must be positive.");
+			}
+
 			_duration = duration;
+		}
+
+		public Spinner()
+		{
 		}
 	}
 }

@@ -14,6 +14,10 @@ namespace Beatmaps
 			_intervalSeconds = intervalSeconds;
 		}
 
+		public SingleNoteClickIntervalParams()
+		{
+		}
+
 		public float GetClickInterval()
 		{
 			return _intervalSeconds;
