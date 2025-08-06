@@ -40,6 +40,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f5590eab7e07f7f4ab02ab00eef139cb
+    m_Address: rel - night city
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f660ce6231501d844b7ba3a3d1c22125
     m_Address: RedNotePrefab
     m_ReadOnly: 0
