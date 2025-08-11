@@ -7,9 +7,9 @@ namespace PriorityTaskPipeline
 	[CreateAssetMenu(fileName = "DebugNodeConfig", menuName = "PriorityTaskPipeline/DebugNodeConfig")]
 	public sealed class DebugNodeConfig : PriorityPipelineNodeConfig
 	{
-		public override UniTask[] GetTasks()
+		public override UniTask GetTasks()
 		{
-			return Array.Empty<UniTask>();
+			return UniTask.Delay(1);
 		}
 	}
 }

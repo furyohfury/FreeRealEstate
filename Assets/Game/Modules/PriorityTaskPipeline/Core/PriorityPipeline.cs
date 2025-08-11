@@ -3,11 +3,9 @@ using Cysharp.Threading.Tasks;
 
 namespace PriorityTaskPipeline
 {
-	public class PriorityPipeline
+	public class PriorityPipeline : IPriorityPipeline
 	{
 		public int Count => _priorityQueue.Count;
-
-		public UniTask[] Tasks => _priorityQueue.Elements;
 
 		private readonly PriorityQueueInt<UniTask> _priorityQueue = new();
 

@@ -7,6 +7,6 @@ namespace PriorityTaskPipeline
 	{
 		public int Priority;
 
-		public abstract UniTask[] GetTasks();
+		public abstract UniTask GetTasks();
 	}
 }
