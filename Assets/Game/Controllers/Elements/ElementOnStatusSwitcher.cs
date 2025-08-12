@@ -6,7 +6,7 @@ using VContainer.Unity;
 
 namespace Game
 {
-	public sealed class ElementOnStatusSwitcher : IStartable, IDisposable
+	public sealed class ElementOnStatusSwitcher : IStartable, IDisposable // TODO opt separate
 	{
 		private readonly BeatmapPipeline _beatmapPipeline;
 		private readonly ElementsClickHandler _elementsClickHandler;
@@ -21,16 +21,15 @@ namespace Game
 		public void Start()
 		{
 			_disposable.Disposable = _elementsClickHandler.OnClickHandled
+			                                              .Where(result =>
+				                                              result is HitClickResult
+					                                              or SpinnerCompleteClickResult
+					                                              or DrumrollCompleteClickResult)
 			                                              .Subscribe(OnElementHandled);
 		}
 
-		private void OnElementHandled(ClickStatus status)
+		private void OnElementHandled(ClickResult result)
 		{
-			if (status is not (ClickStatus.Success or ClickStatus.Fail))
-			{
-				return;
-			}
-
 			_beatmapPipeline.SwitchToNextElement();
 		}
 

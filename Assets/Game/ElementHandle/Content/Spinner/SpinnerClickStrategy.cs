@@ -23,7 +23,7 @@ namespace Game.ElementHandle
 			return typeof(Spinner);
 		}
 
-		public override ClickStatus HandleClick(MapElement element, Notes inputNote)
+		public override ClickResult HandleClick(MapElement element, Notes inputNote)
 		{
 			if (element is not Spinner spinner)
 			{
@@ -36,7 +36,7 @@ namespace Game.ElementHandle
 				_activeSpinner = spinner;
 				_previousInput = inputNote;
 				_doneClicks = 1;
-				return ClickStatus.Running;
+				return new SpinnerRunningClickResult();
 			}
 
 			if (IsAlternateNote(inputNote))
@@ -48,13 +48,13 @@ namespace Game.ElementHandle
 				if (_doneClicks >= clicksNeeded)
 				{
 					Debug.Log("Successfully completed spinner");
-					return ClickStatus.Success;
+					return new SpinnerCompleteClickResult();
 				}
 
-				return ClickStatus.Running;
+				return new SpinnerRunningClickResult();
 			}
 
-			return ClickStatus.None;
+			return new NoneClickResult();
 		}
 
 		private bool IsAlternateNote(Notes inputNote)

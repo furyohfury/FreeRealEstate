@@ -7,8 +7,8 @@ namespace Game.ElementHandle
 {
 	public sealed class ElementsClickHandler
 	{
-		public Observable<ClickStatus> OnClickHandled => _onClickHandled;
-		private Subject<ClickStatus> _onClickHandled = new Subject<ClickStatus>();
+		public Observable<ClickResult> OnClickHandled => _onClickHandled;
+		private Subject<ClickResult> _onClickHandled = new Subject<ClickResult>();
 		private readonly Dictionary<Type, ElementClickStrategy> _handlers = new();
 
 		public ElementsClickHandler(IEnumerable<ElementClickStrategy> handlers)

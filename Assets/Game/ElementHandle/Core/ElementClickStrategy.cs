@@ -15,7 +15,7 @@ namespace Game.ElementHandle
 		}
 
 		public abstract Type GetElementType();
-		public abstract ClickStatus HandleClick(MapElement element, Notes inputNote);
+		public abstract ClickResult HandleClick(MapElement element, Notes inputNote);
 		public abstract void SetDifficultyParameters(IEnumerable<IDifficultyParams> parameters);
 	}
 }

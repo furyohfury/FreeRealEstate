@@ -42,7 +42,7 @@ namespace Game.Visuals
 			_spinnerClicks = _clicksNeeded;
 			_activeSpinnerView.SetText(_spinnerClicks.ToString());
 			_elementsClickHandler.OnClickHandled
-			                     .Where(status => status is ClickStatus.Running)
+			                     .Where(status => status is SpinnerRunningClickResult)
 			                     .Subscribe(_ =>
 			                     {
 				                     _spinnerClicks--;
@@ -51,7 +51,7 @@ namespace Game.Visuals
 			                     .AddTo(_disposable);
 
 			_elementsClickHandler.OnClickHandled
-			                     .Where(status => status is ClickStatus.Success or ClickStatus.Fail)
+			                     .Where(status => status is SpinnerCompleteClickResult or MissClickResult)
 			                     .Subscribe(_ =>
 			                     {
 				                     _activeSpinnerView.Destroy();
@@ -73,6 +73,7 @@ namespace Game.Visuals
 			{
 				_activeSpinnerView.Destroy();
 			}
+
 			_disposable.Dispose();
 		}
 	}

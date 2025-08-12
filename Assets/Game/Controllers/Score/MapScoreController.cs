@@ -26,9 +26,9 @@ namespace Game
 			                                              .Subscribe(OnPointsAdded);
 		}
 
-		private void OnPointsAdded(ClickStatus status)
+		private void OnPointsAdded(ClickResult result)
 		{
-			_mapScore.AddPoints(_config.Points[status]);
+			_mapScore.AddPoints(_config.Points[result]);
 		}
 
 		public void Dispose()

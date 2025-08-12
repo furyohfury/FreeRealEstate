@@ -8,9 +8,9 @@ namespace Game.Scoring
 	[CreateAssetMenu(fileName = "PointsForStatusConfig", menuName = "Points/PointsForStatusConfig")]
 	public sealed class PointsForStatusConfig : SerializedScriptableObject
 	{
-		public IReadOnlyDictionary<ClickStatus, int> Points => _points;
+		public IReadOnlyDictionary<ClickResult, int> Points => _points;
 
 		[SerializeField]
-		private Dictionary<ClickStatus, int> _points;
+		private Dictionary<ClickResult, int> _points;
 	}
 }

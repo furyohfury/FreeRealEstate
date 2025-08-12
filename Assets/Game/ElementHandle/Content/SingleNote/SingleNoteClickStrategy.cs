@@ -19,17 +19,18 @@ namespace Game.ElementHandle
 			return typeof(SingleNote);
 		}
 
-		public override ClickStatus HandleClick(MapElement element, Notes inputNote)
+		public override ClickResult HandleClick(MapElement element, Notes inputNote)
 		{
 			if (element is not SingleNote singleNote)
 			{
 				throw new ArgumentException("Expected single note");
 			}
 
+			var offset = Math.Abs(element.HitTime - MapTime.GetMapTimeInSeconds());
 			return singleNote.Note == inputNote
-			       && Math.Abs(element.HitTime - MapTime.GetMapTimeInSeconds()) <= _singleNoteClickIntervalParams.GetClickInterval()
-				? ClickStatus.Success
-				: ClickStatus.Fail;
+			       && offset <= _singleNoteClickIntervalParams.GetClickInterval()
+				? new HitClickResult(offset)
+				: new MissClickResult();
 		}
 
 		public override void SetDifficultyParameters(IEnumerable<IDifficultyParams> parameters)

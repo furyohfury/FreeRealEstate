@@ -30,7 +30,7 @@ namespace Game.ElementHandle
 			return typeof(Drumroll);
 		}
 
-		public override ClickStatus HandleClick(MapElement element, Notes inputNote)
+		public override ClickResult HandleClick(MapElement element, Notes inputNote)
 		{
 			if (element is not Drumroll drumroll)
 			{
@@ -59,7 +59,7 @@ namespace Game.ElementHandle
 
 			if (_drumrollNoteTimings.Count <= 0)
 			{
-				return ClickStatus.None;
+				return new NoneClickResult();
 			}
 
 			if (ClickWasInsideInterval(mapTime, noteTiming))
@@ -67,11 +67,11 @@ namespace Game.ElementHandle
 				Debug.Log("Hit drumroll note");
 				_drumrollNoteTimings.Dequeue();
 				return _drumrollNoteTimings.Count <= 0
-					? ClickStatus.Success
-					: ClickStatus.Running;
+					? new DrumrollCompleteClickResult()
+					: new DrumrollHitClickResult();
 			}
 
-			return ClickStatus.None;
+			return new NoneClickResult();
 		}
 
 		private bool IsNewDrumroll(Drumroll drumroll)
