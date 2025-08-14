@@ -14,7 +14,7 @@ namespace Beatmaps
 		{
 			if (hitTime < 0)
 			{
-				throw new ArgumentOutOfRangeException(nameof(hitTime), "Spinner duration must be positive.");
+				throw new ArgumentOutOfRangeException(nameof(hitTime), "Hit time must be positive.");
 			}
 
 			_hitTime = hitTime;
