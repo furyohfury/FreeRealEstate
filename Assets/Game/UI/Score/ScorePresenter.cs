@@ -9,7 +9,7 @@ namespace Game.UI
 	{
 		private readonly MapScore _mapScore;
 		private readonly TextView _scoreTextView;
-		private readonly SerialDisposable _disposable = new();
+		private IDisposable _disposable;
 
 		public ScorePresenter(MapScore mapScore, TextView scoreTextView)
 		{
@@ -19,8 +19,8 @@ namespace Game.UI
 
 		public void Start()
 		{
-			_disposable.Disposable = _mapScore.Score
-			                                  .Subscribe(OnScoreChanged);
+			_disposable = _mapScore.Score
+			                       .Subscribe(OnScoreChanged);
 		}
 
 		private void OnScoreChanged(int score)

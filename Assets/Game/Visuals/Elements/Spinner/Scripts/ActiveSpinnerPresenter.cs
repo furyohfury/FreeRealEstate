@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Beatmaps;
 using Game.BeatmapControl;
 using Game.ElementHandle;
@@ -10,7 +9,7 @@ namespace Game.Visuals
 {
 	public class ActiveSpinnerPresenter : IDisposable
 	{
-		private readonly ElementsClickHandler _elementsClickHandler;
+		private readonly IHandleResultObservable _handleResultObservable;
 		private readonly BeatmapPipeline _beatmapPipeline;
 		private ActiveSpinnerView _activeSpinnerView;
 		private Spinner _spinner;
@@ -19,13 +18,10 @@ namespace Game.Visuals
 		private int _spinnerClicks;
 		private readonly CompositeDisposable _disposable = new();
 
-		public ActiveSpinnerPresenter(
-			ElementsClickHandler elementsClickHandler,
-			BeatmapPipeline beatmapPipeline
-		)
+		public ActiveSpinnerPresenter(BeatmapPipeline beatmapPipeline, IHandleResultObservable handleResultObservable)
 		{
-			_elementsClickHandler = elementsClickHandler;
 			_beatmapPipeline = beatmapPipeline;
+			_handleResultObservable = handleResultObservable;
 		}
 
 		public void Init(Spinner spinner, ActiveSpinnerView activeSpinnerView)
@@ -33,31 +29,29 @@ namespace Game.Visuals
 			_spinner = spinner;
 			_activeSpinnerView = activeSpinnerView;
 			var map = _beatmapPipeline.Map.CurrentValue;
-			var clicksPerSecondParams = map
-			                            .GetDifficulty()
-			                            .GetDifficultyParams()
-			                            .OfType<SpinnerClicksPerSecondParams>()
-			                            .Single();
-			_clicksNeeded = Mathf.FloorToInt(clicksPerSecondParams.GetClicksPerSecond() * _spinner.Duration);
+			var clicksPerSecond = map
+			                      .GetDifficulty()
+			                      .GetSpinnerClicksPerSecond();
+			_clicksNeeded = Mathf.FloorToInt(clicksPerSecond * _spinner.Duration);
 			_spinnerClicks = _clicksNeeded;
 			_activeSpinnerView.SetText(_spinnerClicks.ToString());
-			_elementsClickHandler.OnClickHandled
-			                     .Where(status => status is SpinnerRunningClickResult)
-			                     .Subscribe(_ =>
-			                     {
-				                     _spinnerClicks--;
-				                     UpdateView();
-			                     })
-			                     .AddTo(_disposable);
+			_handleResultObservable.OnElementHandled
+			                       .Where(status => status is SpinnerRunningHandleResult)
+			                       .Subscribe(_ =>
+			                       {
+				                       _spinnerClicks--;
+				                       UpdateView();
+			                       })
+			                       .AddTo(_disposable);
 
-			_elementsClickHandler.OnClickHandled
-			                     .Where(status => status is SpinnerCompleteClickResult or MissClickResult)
-			                     .Subscribe(_ =>
-			                     {
-				                     _activeSpinnerView.Destroy();
-				                     _disposable.Clear();
-			                     })
-			                     .AddTo(_disposable);
+			_handleResultObservable.OnElementHandled
+			                       .Where(status => status is SpinnerCompleteHandleResult or MissHandleResult)
+			                       .Subscribe(_ =>
+			                       {
+				                       _activeSpinnerView.Destroy();
+				                       _disposable.Clear();
+			                       })
+			                       .AddTo(_disposable);
 		}
 
 		private void UpdateView()

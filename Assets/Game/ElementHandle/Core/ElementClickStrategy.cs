@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Beatmaps;
-using Game.SongMapTime;
+using Game.BeatmapTime;
 
 namespace Game.ElementHandle
 {
-	public abstract class ElementClickStrategy
+	public abstract class ElementClickStrategy : IElementHandler
 	{
 		protected IMapTime MapTime;
 
@@ -15,7 +15,7 @@ namespace Game.ElementHandle
 		}
 
 		public abstract Type GetElementType();
-		public abstract ClickResult HandleClick(MapElement element, Notes inputNote);
+		public abstract HandleResult HandleClick(MapElement element, Notes inputNote);
 		public abstract void SetDifficultyParameters(IEnumerable<IDifficultyParams> parameters);
 	}
 }

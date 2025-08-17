@@ -9,12 +9,12 @@ namespace Game
 	public sealed class DifficultySwitcher : IStartable, IDisposable
 	{
 		private readonly BeatmapPipeline _beatmapPipeline;
-		private readonly ElementsClickHandler _elementsClickHandler;
+		private readonly ClickHandleEmitter _clickHandleEmitter;
 		private readonly CompositeDisposable _disposable = new();
 
-		public DifficultySwitcher(ElementsClickHandler elementsClickHandler, BeatmapPipeline beatmapPipeline)
+		public DifficultySwitcher(ClickHandleEmitter clickHandleEmitter, BeatmapPipeline beatmapPipeline)
 		{
-			_elementsClickHandler = elementsClickHandler;
+			_clickHandleEmitter = clickHandleEmitter;
 			_beatmapPipeline = beatmapPipeline;
 		}
 
@@ -22,7 +22,7 @@ namespace Game
 		{
 			_beatmapPipeline.Map
 			                .Where(map => map != null)
-			                .Subscribe(map => _elementsClickHandler.SetDifficulty(map.GetDifficulty()))
+			                .Subscribe(map => _clickHandleEmitter.SetDifficulty(map.GetDifficulty()))
 			                .AddTo(_disposable);
 		}
 

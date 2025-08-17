@@ -1,14 +1,16 @@
 ﻿using System;
 using Beatmaps;
 using Game.Input;
+using R3;
 using UnityEngine.InputSystem;
 using VContainer.Unity;
 
 namespace Game
 {
-	public sealed class InputReader : InputActions.IPlayerActions, IStartable, IDisposable
+	public sealed class InputReader : IInitializable, IDisposable
 	{
-		public event Action<Notes> OnNotePressed;
+		public Observable<Notes> OnNotePressed => _onNotePressed;
+		private readonly Subject<Notes> _onNotePressed = new();
 
 		private readonly InputActions _inputActions;
 
@@ -17,31 +19,25 @@ namespace Game
 			_inputActions = inputActions;
 		}
 
-		public void Start()
+		public void Initialize()
 		{
-			_inputActions.Player.SetCallbacks(this);
 			_inputActions.Player.Enable();
+			InitNotesStream();
 		}
 
-		void InputActions.IPlayerActions.OnRed(InputAction.CallbackContext context)
+		private void InitNotesStream()
 		{
-			if (context.phase == InputActionPhase.Performed)
-			{
-				OnNotePressed?.Invoke(Notes.Red);
-			}
-		}
-
-		void InputActions.IPlayerActions.OnBlue(InputAction.CallbackContext context)
-		{
-			if (context.phase == InputActionPhase.Performed)
-			{
-				OnNotePressed?.Invoke(Notes.Blue);
-			}
-		}
-
-		public void OnTestNote(Notes note)
-		{
-			OnNotePressed?.Invoke(note);
+			Observable.Merge(
+				          Observable.FromEvent<InputAction.CallbackContext>(
+					          h => _inputActions.Player.Red.performed += h,
+					          h => _inputActions.Player.Red.performed -= h
+				          ).Select(_ => Notes.Red),
+				          Observable.FromEvent<InputAction.CallbackContext>(
+					          h => _inputActions.Player.Blue.performed += h,
+					          h => _inputActions.Player.Blue.performed -= h
+				          ).Select(_ => Notes.Blue)
+			          )
+			          .Subscribe(_onNotePressed.AsObserver());
 		}
 
 		public void Dispose()

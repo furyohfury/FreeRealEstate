@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ff4541ae1d0424ea662461ebbacab1a, type: 3}
+  m_Name: BeatmapConfigDebugDrumroll
+  m_EditorClassIdentifier: 
+  _beatmap:
+    _bpm: 120
+    _mapElements:
+    - rid: 710760745461612626
+    - rid: 710760745461612627
+    - rid: 710760999259734262
+    - rid: 710760745461612628
+    _difficulty:
+      _name: Normal
+      _difficultyParameters:
+      - rid: 710760745461612620
+      - rid: 710760745461612621
+      - rid: 710760745461612622
+  references:
+    version: 2
+    RefIds:
+    - rid: 710760745461612620
+      type: {class: SingleNoteClickIntervalParams, ns: Beatmaps, asm: SongMap}
+      data:
+        _intervalSeconds: 0.03
+    - rid: 710760745461612621
+      type: {class: SpinnerClicksPerSecondParams, ns: Beatmaps, asm: SongMap}
+      data:
+        _clicksPerSecond: 5
+    - rid: 710760745461612622
+      type: {class: DrumrollClickIntervalParams, ns: Beatmaps, asm: SongMap}
+      data:
+        _intervalSeconds: 0.04
+    - rid: 710760745461612626
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 4
+        _note: 0
+    - rid: 710760745461612627
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 5
+        _note: 1
+    - rid: 710760745461612628
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 10
+        _note: 0
+    - rid: 710760999259734262
+      type: {class: Drumroll, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 6
+        _duration: 3

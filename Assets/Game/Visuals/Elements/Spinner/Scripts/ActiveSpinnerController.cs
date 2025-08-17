@@ -1,21 +1,21 @@
 ﻿using System;
 using Beatmaps;
 using Game.BeatmapControl;
-using Game.SongMapTime;
+using Game.BeatmapTime;
 using R3;
 using UnityEngine;
 using VContainer.Unity;
 
 namespace Game.Visuals
 {
-	public sealed class ActiveSpinnerController : IStartable, IDisposable
+	public sealed class ActiveSpinnerController : IInitializable, IDisposable
 	{
 		private readonly IMapTime _mapTime;
 		private readonly BeatmapPipeline _beatmapPipeline;
 		private readonly ActiveSpinnerFactory _activeSpinnerFactory;
 		private readonly Transform _container;
 		private readonly ActiveSpinnerPresenterFactory _activeSpinnerPresenterFactory;
-		private readonly SerialDisposable _disposable = new();
+		private IDisposable _disposable;
 		private readonly SerialDisposable _activePresenterDisposable = new();
 
 		public ActiveSpinnerController(
@@ -33,18 +33,19 @@ namespace Game.Visuals
 			_activeSpinnerPresenterFactory = activeSpinnerPresenterFactory;
 		}
 
-		public void Start()
+		public void Initialize()
 		{
-			_disposable.Disposable = _beatmapPipeline.Element
-			                                         .Where(element => element is Spinner)
-			                                         .Cast<MapElement, Spinner>()
-			                                         .SelectMany(spinner =>
-				                                         Observable.Timer(
-					                                                   TimeSpan.FromSeconds(spinner.HitTime - _mapTime.GetMapTimeInSeconds())
-				                                                   )
-				                                                   .Select(_ => spinner)
-			                                         )
-			                                         .Subscribe(CreateActiveSpinnerView);
+			_disposable = _beatmapPipeline.Element
+			                              // .Where(element => element is Spinner)
+			                              // .Cast<MapElement, Spinner>()
+			                              .OfType<MapElement, Spinner>()
+			                              .SelectMany(spinner =>
+				                              Observable.Timer(
+					                                        TimeSpan.FromSeconds(spinner.HitTime - _mapTime.GetMapTimeInSeconds())
+				                                        )
+				                                        .Select(_ => spinner)
+			                              )
+			                              .Subscribe(CreateActiveSpinnerView);
 		}
 
 		private void CreateActiveSpinnerView(Spinner spinner)

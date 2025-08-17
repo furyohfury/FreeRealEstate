@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Beatmaps;
-using Game.SongMapTime;
+using Game.BeatmapTime;
 using UnityEngine;
 
 namespace Game.ElementHandle
@@ -23,7 +23,7 @@ namespace Game.ElementHandle
 			return typeof(Spinner);
 		}
 
-		public override ClickResult HandleClick(MapElement element, Notes inputNote)
+		public override HandleResult HandleClick(MapElement element, Notes inputNote)
 		{
 			if (element is not Spinner spinner)
 			{
@@ -36,7 +36,7 @@ namespace Game.ElementHandle
 				_activeSpinner = spinner;
 				_previousInput = inputNote;
 				_doneClicks = 1;
-				return new SpinnerRunningClickResult();
+				return new SpinnerRunningHandleResult(element);
 			}
 
 			if (IsAlternateNote(inputNote))
@@ -48,13 +48,13 @@ namespace Game.ElementHandle
 				if (_doneClicks >= clicksNeeded)
 				{
 					Debug.Log("Successfully completed spinner");
-					return new SpinnerCompleteClickResult();
+					return new SpinnerCompleteHandleResult(element);
 				}
 
-				return new SpinnerRunningClickResult();
+				return new SpinnerRunningHandleResult(element);
 			}
 
-			return new NoneClickResult();
+			return new NoneHandleResult(element);
 		}
 
 		private bool IsAlternateNote(Notes inputNote)

@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Game.ElementHandle;
+using UnityEngine;
 
-namespace Game.ElementHandle
+namespace Game.Services
 {
 	public sealed class DrumrollTickrateService
 	{

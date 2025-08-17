@@ -9,26 +9,26 @@ namespace Game
 	public sealed class ElementOnStatusSwitcher : IStartable, IDisposable // TODO opt separate
 	{
 		private readonly BeatmapPipeline _beatmapPipeline;
-		private readonly ElementsClickHandler _elementsClickHandler;
-		private readonly SerialDisposable _disposable = new();
+		private readonly IHandleResultObservable _handleResultObservable;
+		private IDisposable _disposable;
 
-		public ElementOnStatusSwitcher(ElementsClickHandler elementsClickHandler, BeatmapPipeline beatmapPipeline)
+		public ElementOnStatusSwitcher(BeatmapPipeline beatmapPipeline, IHandleResultObservable handleResultObservable)
 		{
-			_elementsClickHandler = elementsClickHandler;
 			_beatmapPipeline = beatmapPipeline;
+			_handleResultObservable = handleResultObservable;
 		}
 
 		public void Start()
 		{
-			_disposable.Disposable = _elementsClickHandler.OnClickHandled
-			                                              .Where(result =>
-				                                              result is HitClickResult
-					                                              or SpinnerCompleteClickResult
-					                                              or DrumrollCompleteClickResult)
-			                                              .Subscribe(OnElementHandled);
+			_disposable = _handleResultObservable.OnElementHandled
+			                                     .Where(result =>
+				                                     result is NoteHitHandleResult
+					                                     or SpinnerCompleteHandleResult
+					                                     or DrumrollCompleteHandleResult)
+			                                     .Subscribe(OnElementHandled);
 		}
 
-		private void OnElementHandled(ClickResult result)
+		private void OnElementHandled(HandleResult result)
 		{
 			_beatmapPipeline.SwitchToNextElement();
 		}

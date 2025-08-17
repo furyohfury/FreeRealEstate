@@ -13,18 +13,18 @@ namespace Game.Visuals
 	public sealed class DrumRollViewFactory : IElementFactory, IStartable
 	{
 		private readonly DrumrollPrefabConfig _drumrollPrefabConfig;
-		private readonly NotesLineBoundsService _notesLineBoundsService;
+		private readonly ScreenBeatmapBoundsService _screenBeatmapBoundsService;
 		private readonly DrumrollTickrateService _drumrollTickrateService;
 		private readonly BeatmapPipeline _beatmapPipeline;
 		private readonly IObjectProvider _objectProvider;
 		private DrumrollView _prefab;
 
 		public DrumRollViewFactory(
-			NotesLineBoundsService notesLineBoundsService,
+			ScreenBeatmapBoundsService screenBeatmapBoundsService,
 			DrumrollTickrateService drumrollTickrateService,
 			BeatmapPipeline beatmapPipeline, DrumrollPrefabConfig drumrollPrefabConfig, IObjectProvider objectProvider)
 		{
-			_notesLineBoundsService = notesLineBoundsService;
+			_screenBeatmapBoundsService = screenBeatmapBoundsService;
 			_drumrollTickrateService = drumrollTickrateService;
 			_beatmapPipeline = beatmapPipeline;
 			_drumrollPrefabConfig = drumrollPrefabConfig;
@@ -51,8 +51,8 @@ namespace Game.Visuals
 			var map = _beatmapPipeline.Map.CurrentValue;
 			var bpm = map.GetBpm();
 			var drumrollNotesCount = _drumrollTickrateService.GetNotesCountByDuration(bpm, drumroll.Duration);
-			var scrollDistance = _notesLineBoundsService.GetNoteLineDistance();
-			var length = drumroll.Duration / NotesVisualData.SCROLL_TIME * scrollDistance;
+			var scrollDistance = _screenBeatmapBoundsService.GetNoteLineDistance();
+			var length = drumroll.Duration / NotesVisualStaticData.SCROLL_TIME * scrollDistance;
 
 			var view = Object.Instantiate(_prefab, parent);
 			view.SetLength(length);

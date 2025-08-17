@@ -6,18 +6,18 @@ namespace Game.Visuals
 {
 	public sealed class ActiveSpinnerPresenterFactory
 	{
-		private readonly ElementsClickHandler _elementsClickHandler;
 		private readonly BeatmapPipeline _beatmapPipeline;
+		private readonly IHandleResultObservable _handleResultObservable;
 
-		public ActiveSpinnerPresenterFactory(ElementsClickHandler elementsClickHandler, BeatmapPipeline beatmapPipeline)
+		public ActiveSpinnerPresenterFactory(BeatmapPipeline beatmapPipeline, IHandleResultObservable handleResultObservable)
 		{
-			_elementsClickHandler = elementsClickHandler;
 			_beatmapPipeline = beatmapPipeline;
+			_handleResultObservable = handleResultObservable;
 		}
 
 		public ActiveSpinnerPresenter Create(Spinner spinner, ActiveSpinnerView activeSpinnerView)
 		{
-			var presenter = new ActiveSpinnerPresenter(_elementsClickHandler, _beatmapPipeline);
+			var presenter = new ActiveSpinnerPresenter(_beatmapPipeline, _handleResultObservable);
 			presenter.Init(spinner, activeSpinnerView);
 			return presenter;
 		}

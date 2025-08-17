@@ -1,52 +1,51 @@
 ﻿using System;
 using Beatmaps;
 using Game.BeatmapControl;
+using Game.BeatmapTime;
 using Game.ElementHandle;
-using Game.SongMapTime;
 using R3;
 using VContainer.Unity;
 
 namespace Game
 {
-	public sealed class InputNotesController : IStartable, IDisposable
+	public sealed class InputNotesController : IInitializable, IDisposable
 	{
 		private readonly InputReader _inputReader;
-		private readonly ElementsClickHandler _elementsClickHandler;
+		private readonly ClickHandleEmitter _clickHandleEmitter;
 		private readonly IMapTime _mapTime;
 		private readonly BeatmapPipeline _beatmapPipeline;
 
-		private readonly CompositeDisposable _disposable = new();
+		private IDisposable _disposable;
 		private const float INACTIVE_CLICK_THRESHOLD = 1f;
 
 		public InputNotesController(
 			InputReader inputReader,
-			ElementsClickHandler elementsClickHandler,
-			IMapTime mapTime, BeatmapPipeline beatmapPipeline)
+			ClickHandleEmitter clickHandleEmitter,
+			IMapTime mapTime,
+			BeatmapPipeline beatmapPipeline
+		)
 		{
 			_inputReader = inputReader;
-			_elementsClickHandler = elementsClickHandler;
+			_clickHandleEmitter = clickHandleEmitter;
 			_mapTime = mapTime;
 			_beatmapPipeline = beatmapPipeline;
 		}
 
-		public void Start()
+		public void Initialize()
 		{
-			Observable.FromEvent<Notes>(
-				          h => _inputReader.OnNotePressed += h,
-				          h => _inputReader.OnNotePressed -= h)
-			          .Subscribe(OnNotePressed)
-			          .AddTo(_disposable);
-		}
+			_disposable = _inputReader.OnNotePressed
+			                          .WithLatestFrom(_beatmapPipeline.Element, (note, element) => (note, element))
+			                          .Subscribe(tuple =>
+			                          {
+				                          var (note, element) = tuple;
 
-		private void OnNotePressed(Notes note)
-		{
-			var activeMapElement = _beatmapPipeline.Element.CurrentValue;
-			if (IsTooFar(activeMapElement))
-			{
-				return;
-			}
+				                          if (IsTooFar(element))
+				                          {
+					                          return;
+				                          }
 
-			_elementsClickHandler.HandleElement(activeMapElement, note);
+				                          _clickHandleEmitter.HandleElement(element, note);
+			                          });
 		}
 
 		private bool IsTooFar(MapElement activeMapElement)

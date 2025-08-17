@@ -8,10 +8,15 @@ namespace Game.Visuals
 		{
 			return transform.position;
 		}
-		
+
 		public void Move(Vector3 pos)
 		{
 			transform.position = pos;
+		}
+
+		public virtual void DestroyView()
+		{
+			Destroy(gameObject);
 		}
 	}
 }

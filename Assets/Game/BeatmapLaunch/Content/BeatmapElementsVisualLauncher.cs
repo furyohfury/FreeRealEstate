@@ -5,16 +5,16 @@ namespace Game.BeatmapLaunch
 {
 	public sealed class BeatmapElementsVisualLauncher : IBeatmapLaunchable
 	{
-		private readonly NotesVisualSystem _notesVisualSystem;
+		private readonly ElementsVisualsSpawner _elementsVisualsSpawner;
 
-		public BeatmapElementsVisualLauncher(NotesVisualSystem notesVisualSystem)
+		public BeatmapElementsVisualLauncher(ElementsVisualsSpawner elementsVisualsSpawner)
 		{
-			_notesVisualSystem = notesVisualSystem;
+			_elementsVisualsSpawner = elementsVisualsSpawner;
 		}
 
 		public async UniTask Launch(BeatmapLaunchContext context)
 		{
-			_notesVisualSystem.LaunchMap(context.SelectedVariant.BeatmapConfig.Beatmap);
+			_elementsVisualsSpawner.LaunchMap(context.SelectedVariant.BeatmapConfig.Beatmap);
 		}
 	}
 }

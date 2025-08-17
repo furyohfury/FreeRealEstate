@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
-using Sirenix.OdinInspector.Editor;
 using UnityEngine;
+#if UNITY_EDITOR
+using Sirenix.OdinInspector.Editor;
+#endif
 
 namespace PriorityTaskPipeline
 {
@@ -16,7 +18,9 @@ namespace PriorityTaskPipeline
 	{
 		[SerializeField]
 		[HorizontalGroup("Nodes")]
+#if UNITY_EDITOR
 		[OnCollectionChanged(nameof(NodesChanged))]
+#endif
 		[ListDrawerSettings(DraggableItems = false)]
 		private PriorityPipelineNodeConfig[] _nodes;
 
@@ -58,6 +62,7 @@ namespace PriorityTaskPipeline
 			}
 		}
 
+#if UNITY_EDITOR
 		private void NodesChanged(CollectionChangeInfo info)
 		{
 			SortNodes();
@@ -98,5 +103,6 @@ namespace PriorityTaskPipeline
 				return -1;
 			});
 		}
+#endif
 	}
 }

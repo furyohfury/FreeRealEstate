@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Beatmaps;
 using Game.BeatmapControl;
-using Game.SongMapTime;
+using Game.Services;
+using Game.BeatmapTime;
 using UnityEngine;
 
 namespace Game.ElementHandle
@@ -30,7 +31,7 @@ namespace Game.ElementHandle
 			return typeof(Drumroll);
 		}
 
-		public override ClickResult HandleClick(MapElement element, Notes inputNote)
+		public override HandleResult HandleClick(MapElement element, Notes inputNote)
 		{
 			if (element is not Drumroll drumroll)
 			{
@@ -59,7 +60,7 @@ namespace Game.ElementHandle
 
 			if (_drumrollNoteTimings.Count <= 0)
 			{
-				return new NoneClickResult();
+				return new NoneHandleResult(element);
 			}
 
 			if (ClickWasInsideInterval(mapTime, noteTiming))
@@ -67,11 +68,11 @@ namespace Game.ElementHandle
 				Debug.Log("Hit drumroll note");
 				_drumrollNoteTimings.Dequeue();
 				return _drumrollNoteTimings.Count <= 0
-					? new DrumrollCompleteClickResult()
-					: new DrumrollHitClickResult();
+					? new DrumrollCompleteHandleResult(element)
+					: new DrumrollHitHandleResult(element);
 			}
 
-			return new NoneClickResult();
+			return new NoneHandleResult(element);
 		}
 
 		private bool IsNewDrumroll(Drumroll drumroll)

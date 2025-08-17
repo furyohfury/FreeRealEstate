@@ -50,6 +50,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fca5c83a75cb4854fb46bce3b3fb80a2
+    m_Address: Assets/Game/Visuals/ElementHandle/DrumrollNotePrefab.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9ecf24d7cd6818040984a5d692f3685f, type: 2}
   m_SchemaSet:

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Beatmaps;
-using Game.SongMapTime;
+using Game.BeatmapTime;
 
 namespace Game.ElementHandle
 {
@@ -19,7 +19,7 @@ namespace Game.ElementHandle
 			return typeof(SingleNote);
 		}
 
-		public override ClickResult HandleClick(MapElement element, Notes inputNote)
+		public override HandleResult HandleClick(MapElement element, Notes inputNote)
 		{
 			if (element is not SingleNote singleNote)
 			{
@@ -29,8 +29,8 @@ namespace Game.ElementHandle
 			var offset = Math.Abs(element.HitTime - MapTime.GetMapTimeInSeconds());
 			return singleNote.Note == inputNote
 			       && offset <= _singleNoteClickIntervalParams.GetClickInterval()
-				? new HitClickResult(offset)
-				: new MissClickResult();
+				? new NoteHitHandleResult(element, offset)
+				: new MissHandleResult(element);
 		}
 
 		public override void SetDifficultyParameters(IEnumerable<IDifficultyParams> parameters)

@@ -6,7 +6,7 @@ namespace Game.BeatmapControl
 	public sealed class BeatmapPipeline
 	{
 		public bool IsEnded => _activeIndex >= _activeMapElements?.Length;
-		public ReadOnlyReactiveProperty<MapElement> Element => _element;
+		public Observable<MapElement> Element => _element;
 		public ReadOnlyReactiveProperty<IBeatmap> Map => _map;
 
 		private readonly ReactiveProperty<MapElement> _element = new();
@@ -51,6 +51,10 @@ namespace Game.BeatmapControl
 			if (_activeIndex < _activeMapElements.Length)
 			{
 				_element.Value = _activeMapElements[_activeIndex];
+			}
+			else
+			{
+				_element.OnCompleted();
 			}
 		}
 	}

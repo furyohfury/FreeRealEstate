@@ -1,15 +1,18 @@
-﻿using Beatmaps;
+﻿using System.Diagnostics;
+using Beatmaps;
 using Game;
 using Game.BeatmapBundles;
 using Game.BeatmapControl;
 using Game.BeatmapLaunch;
+using Game.BeatmapTime;
+using Game.ElementHandle;
 using Game.Scoring;
-using Game.SongMapTime;
 using Game.Visuals;
 using R3;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using VContainer;
+using Debug = UnityEngine.Debug;
 
 namespace GameDebug
 {
@@ -28,13 +31,15 @@ namespace GameDebug
 		[Inject]
 		private BeatmapLauncher _beatmapLauncher;
 		[Inject]
-		private NotesVisualSystem _notesVisualSystem;
+		private ElementsVisualsSpawner _elementsVisualsSpawner;
 		[Inject]
 		private MapScore _mapScore;
 		[Inject]
 		private BeatmapPipeline _beatmapPipeline;
 		[Inject]
 		private InputReader _inputReader;
+		[Inject]
+		private IHandleResultObservable _handleResultObservable;
 
 		[SerializeField] [ReadOnly]
 		private float _time = 0f;
@@ -43,13 +48,27 @@ namespace GameDebug
 		[SerializeReference]
 		private MapElement _activeMapElement;
 
+		private readonly CompositeDisposable _disposable = new();
+
+		private void Start()
+		{
+			_handleResultObservable.OnElementHandled
+			                       .Subscribe(result => Debug.Log($"Handled result: {result.Element} with result {result.GetType().Name}"))
+			                       .AddTo(_disposable);
+		}
+
 		[Button]
 		public void LaunchSingleNoteMap()
 		{
 			_beatmapLauncher.Launch(_beatmapBundle, 0);
 		}
 
-		private readonly SerialDisposable _serialDisposable = new();
+		[Button]
+		public void LaunchDrumrollMap()
+		{
+			_beatmapLauncher.Launch(_beatmapBundle, 1);
+		}
+
 
 		// [Button]
 		// public async void LaunchDrumrollAutoMap()
@@ -69,20 +88,40 @@ namespace GameDebug
 			_beatmapPipeline.RestartMap();
 		}
 
+		[Button]
+		private void DebugUpdateObservables()
+		{
+			var sw = new Stopwatch();
+			sw.Start();
+			Observable.EveryUpdate(UnityFrameProvider.Update)
+			          .Take(1)
+			          .Subscribe(_ => Debug.Log($"Update = {sw.ElapsedTicks.ToString()}"))
+			          .AddTo(_disposable);
+			Observable.EveryUpdate(UnityFrameProvider.PreUpdate)
+			          .Take(1)
+			          .Subscribe(_ => Debug.Log($"PreUpdate = {sw.ElapsedTicks.ToString()}"))
+			          .AddTo(_disposable);
+
+			Observable.EveryUpdate(UnityFrameProvider.EarlyUpdate)
+			          .Take(1)
+			          .Subscribe(_ => Debug.Log($"EarlyUpdate = {sw.ElapsedTicks.ToString()}"))
+			          .AddTo(_disposable);
+		}
+
 		private void Update()
 		{
 			UpdateMapTime();
 			UpdateScore();
-			UpdateActiveElement();
+			// UpdateActiveElement();
 		}
 
-		private void UpdateActiveElement()
-		{
-			if (_beatmapPipeline.Element.CurrentValue != null)
-			{
-				_activeMapElement = _beatmapPipeline.Element.CurrentValue;
-			}
-		}
+		// private void UpdateActiveElement()
+		// {
+		// 	if (_beatmapPipeline.Element.CurrentValue != null)
+		// 	{
+		// 		_activeMapElement = _beatmapPipeline.Element.CurrentValue;
+		// 	}
+		// }
 
 		private void UpdateMapTime()
 		{
@@ -98,6 +137,11 @@ namespace GameDebug
 			{
 				_score = _mapScore.Score.CurrentValue;
 			}
+		}
+
+		private void OnDestroy()
+		{
+			_disposable.Dispose();
 		}
 	}
 }

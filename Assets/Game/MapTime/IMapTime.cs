@@ -1,4 +1,4 @@
-﻿namespace Game.SongMapTime
+﻿namespace Game.BeatmapTime
 {
 	public interface IMapTime
 	{
