@@ -11,11 +11,17 @@ namespace Game.Visuals
 	{
 		private readonly Transform _activeSpinnerContainer;
 		private readonly ElementViewsRegistry _elementViewsRegistry;
+		private readonly IActiveSpinnerController _activeSpinnerController;
 
-		public SpinnerVisualClickHandler(Transform activeSpinnerContainer, ElementViewsRegistry elementViewsRegistry)
+		public SpinnerVisualClickHandler(
+			Transform activeSpinnerContainer,
+			ElementViewsRegistry elementViewsRegistry,
+			IActiveSpinnerController activeSpinnerController
+		)
 		{
 			_activeSpinnerContainer = activeSpinnerContainer;
 			_elementViewsRegistry = elementViewsRegistry;
+			_activeSpinnerController = activeSpinnerController;
 		}
 
 		public void Handle(HandleResult result)
@@ -23,28 +29,31 @@ namespace Game.Visuals
 			if (result is SpinnerStartedHandleResult)
 			{
 				var element = result.Element;
-				LaunchViewEnlargeAnimation(element);
+				ElementView view = _elementViewsRegistry.ActiveElements[element];
+				_elementViewsRegistry.SetInactive(element);
+				if (view is not SpinnerView spinnerView
+				    || element is not Spinner spinner)
+				{
+					throw new ArgumentException();
+				}
+
+				LaunchViewEnlargeAnimation(spinner, spinnerView).Forget();
+				_activeSpinnerController.CreateActiveSpinnerView(spinner);
 			}
 		}
 
-		private async void LaunchViewEnlargeAnimation(MapElement element)
+		private async UniTask LaunchViewEnlargeAnimation(MapElement element, SpinnerView spinnerView)
 		{
-			ElementView view = _elementViewsRegistry.ActiveElements[element];
-			_elementViewsRegistry.SetInactive(element);
-			if (view is not SpinnerView spinnerView)
-			{
-				throw new ArgumentException();
-			}
-
 			await DOTween.Sequence(spinnerView.MoveToAnimation(_activeSpinnerContainer.position))
 			             .Join(spinnerView.FadeToAnimation(0))
 			             .Join(spinnerView.EnlargeAnimation())
 			             .ToUniTask();
-			OnNoteAnimationFinished(view);
+			OnNoteAnimationFinished(element, spinnerView);
 		}
 
-		private void OnNoteAnimationFinished(ElementView view)
+		private void OnNoteAnimationFinished(MapElement element, ElementView view)
 		{
+			_elementViewsRegistry.RemoveElement(element);
 			view.DestroyView();
 		}
 

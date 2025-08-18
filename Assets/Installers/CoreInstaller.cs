@@ -204,7 +204,8 @@ namespace Installers
 
 			builder.Register<SpinnerVisualClickHandler>(resolver => new SpinnerVisualClickHandler(
 					       _activeSpinnerContainer,
-					       resolver.Resolve<ElementViewsRegistry>()),
+					       resolver.Resolve<ElementViewsRegistry>(),
+					       resolver.Resolve<ActiveSpinnerController>()),
 				       Lifetime.Singleton)
 			       .As<IVisualClickHandler>();
 
@@ -225,10 +226,7 @@ namespace Installers
 				       var beatmapPipeline = resolver.Resolve<BeatmapPipeline>();
 				       var activeSpinnerFactory = resolver.Resolve<PrefabFactory<ActiveSpinnerView>>();
 				       var activeSpinnerPresenterFactory = resolver.Resolve<ActiveSpinnerPresenterFactory>();
-				       return new ActiveSpinnerController(
-					       mapTime,
-					       beatmapPipeline,
-					       activeSpinnerFactory,
+				       return new ActiveSpinnerController(activeSpinnerFactory,
 					       activeSpinnerPresenterFactory,
 					       _activeSpinnerContainer);
 			       }, Lifetime.Singleton)

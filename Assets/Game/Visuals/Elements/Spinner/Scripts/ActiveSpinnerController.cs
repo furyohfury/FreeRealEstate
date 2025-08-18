@@ -1,17 +1,12 @@
 ﻿using System;
 using Beatmaps;
-using Game.BeatmapControl;
-using Game.BeatmapTime;
 using R3;
 using UnityEngine;
-using VContainer.Unity;
 
 namespace Game.Visuals
 {
-	public sealed class ActiveSpinnerController : IInitializable, IDisposable
+	public sealed class ActiveSpinnerController : IDisposable, IActiveSpinnerController
 	{
-		private readonly IMapTime _mapTime;
-		private readonly BeatmapPipeline _beatmapPipeline;
 		private readonly PrefabFactory<ActiveSpinnerView> _activeSpinnerFactory;
 		private readonly Transform _container;
 		private readonly ActiveSpinnerPresenterFactory _activeSpinnerPresenterFactory;
@@ -19,34 +14,17 @@ namespace Game.Visuals
 		private readonly SerialDisposable _activePresenterDisposable = new();
 
 		public ActiveSpinnerController(
-			IMapTime mapTime,
-			BeatmapPipeline beatmapPipeline,
 			PrefabFactory<ActiveSpinnerView> activeSpinnerFactory,
 			ActiveSpinnerPresenterFactory activeSpinnerPresenterFactory,
 			Transform container
 		)
 		{
-			_mapTime = mapTime;
 			_activeSpinnerFactory = activeSpinnerFactory;
-			_beatmapPipeline = beatmapPipeline;
 			_container = container;
 			_activeSpinnerPresenterFactory = activeSpinnerPresenterFactory;
 		}
 
-		public void Initialize()
-		{
-			_disposable = _beatmapPipeline.Element
-			                              .OfType<MapElement, Spinner>()
-			                              .SelectMany(spinner =>
-				                              Observable.Timer(
-					                                        TimeSpan.FromSeconds(spinner.HitTime - _mapTime.GetMapTimeInSeconds())
-				                                        )
-				                                        .Select(_ => spinner)
-			                              )
-			                              .Subscribe(CreateActiveSpinnerView);
-		}
-
-		private void CreateActiveSpinnerView(Spinner spinner)
+		public void CreateActiveSpinnerView(Spinner spinner)
 		{
 			Debug.Log("Spawn spinner");
 			var activeSpinnerView = _activeSpinnerFactory.Spawn(_container);
