@@ -4,6 +4,6 @@ namespace Game.Visuals
 {
 	public interface IVisualClickHandler : IElementHandler
 	{
-		void Handle(ElementView view, HandleResult result);
+		void Handle(HandleResult result);
 	}
 }

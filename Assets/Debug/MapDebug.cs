@@ -69,6 +69,12 @@ namespace GameDebug
 			_beatmapLauncher.Launch(_beatmapBundle, 1);
 		}
 
+		[Button]
+		public void LaunchSpinnerMap()
+		{
+			_beatmapLauncher.Launch(_beatmapBundle, 2);
+		}
+
 
 		// [Button]
 		// public async void LaunchDrumrollAutoMap()

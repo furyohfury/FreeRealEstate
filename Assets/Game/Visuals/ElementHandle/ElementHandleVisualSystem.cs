@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Game.ElementHandle;
 using R3;
-using UnityEngine;
 using VContainer.Unity;
 
 namespace Game.Visuals
@@ -37,16 +36,8 @@ namespace Game.Visuals
 		private void OnHandleResultReceived(HandleResult result)
 		{
 			var element = result.Element;
-			if (_elementViewsRegistry.TryGetView(element, out ElementView view) == false)
-			{
-				Debug.LogError($"Couldn't find view for element in registry. {element.GetType().Name} : {element.HitTime}");
-				return;
-			}
-
-			_visualClickHandlers[element.GetType()].Handle(view, result);
-			// kogda ubirat iz registra to?
+			_visualClickHandlers[element.GetType()].Handle(result);
 		}
-
 
 		public void Dispose()
 		{

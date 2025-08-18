@@ -507,7 +507,7 @@ GameObject:
   - component: {fileID: 367936745}
   - component: {fileID: 367936744}
   m_Layer: 0
-  m_Name: EndPoint
+  m_Name: HitPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1155,6 +1155,7 @@ MonoBehaviour:
   _activeSpinnerContainer: {fileID: 739051169}
   _activeSpinnerViewPrefab: {fileID: 465634250}
   _drumrollNoteViewIdConfig: {fileID: 11400000, guid: 5497b93cd9f8f014f87d995a8411c375, type: 2}
+  _activeSpinnerIdConfig: {fileID: 11400000, guid: 5ec45c76f5d3cc148a387a5a35d90637, type: 2}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -2294,7 +2295,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2334370832575840311, guid: f660ce6231501d844b7ba3a3d1c22125, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2353511040431162120, guid: f660ce6231501d844b7ba3a3d1c22125, type: 3}
       propertyPath: m_Color.a

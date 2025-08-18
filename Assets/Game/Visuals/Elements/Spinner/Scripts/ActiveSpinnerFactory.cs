@@ -1,19 +1,12 @@
-﻿using UnityEngine;
+﻿using ObjectProvide;
 
 namespace Game.Visuals
 {
-	public sealed class ActiveSpinnerFactory
+	public sealed class ActiveSpinnerFactory : PrefabFactory<ActiveSpinnerView>
 	{
-		private readonly ActiveSpinnerView _prefab;
-
-		public ActiveSpinnerFactory(ActiveSpinnerView prefab)
+		public ActiveSpinnerFactory(IObjectProvider objectProvider, PrefabIdConfig<ActiveSpinnerView> prefabIdConfig) : base(objectProvider
+			, prefabIdConfig)
 		{
-			_prefab = prefab;
-		}
-
-		public ActiveSpinnerView Spawn(Transform container)
-		{
-			return Object.Instantiate(_prefab, container);
 		}
 	}
 }

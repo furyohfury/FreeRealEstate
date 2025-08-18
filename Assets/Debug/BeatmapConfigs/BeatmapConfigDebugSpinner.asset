@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ff4541ae1d0424ea662461ebbacab1a, type: 3}
-  m_Name: BeatmapConfigDebugDrumroll
+  m_Name: BeatmapConfigDebugSpinner
   m_EditorClassIdentifier: 
   _beatmap:
     _bpm: 120
     _mapElements:
     - rid: 710760745461612626
     - rid: 710760745461612627
-    - rid: 710760999259734262
+    - rid: 710760999259734263
     - rid: 710760745461612628
     _difficulty:
       _name: Normal
@@ -35,7 +35,7 @@ MonoBehaviour:
     - rid: 710760745461612621
       type: {class: SpinnerClicksPerSecondParams, ns: Beatmaps, asm: SongMap}
       data:
-        _clicksPerSecond: 5
+        _clicksPerSecond: 3
     - rid: 710760745461612622
       type: {class: DrumrollClickIntervalParams, ns: Beatmaps, asm: SongMap}
       data:
@@ -55,8 +55,8 @@ MonoBehaviour:
       data:
         _hitTime: 10
         _note: 0
-    - rid: 710760999259734262
-      type: {class: Drumroll, ns: Beatmaps, asm: SongMap}
+    - rid: 710760999259734263
+      type: {class: Spinner, ns: Beatmaps, asm: SongMap}
       data:
         _hitTime: 6
         _duration: 3

@@ -43,7 +43,7 @@ namespace Game.Visuals
 
 		private void MoveViewsToLeft()
 		{
-			ICollection<ElementView> elementViews = _registry.ElementViews;
+			ICollection<ElementView> elementViews = _registry.ActiveElementViews;
 
 			foreach (var view in elementViews)
 			{

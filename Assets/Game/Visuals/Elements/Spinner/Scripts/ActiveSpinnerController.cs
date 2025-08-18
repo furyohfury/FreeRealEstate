@@ -12,7 +12,7 @@ namespace Game.Visuals
 	{
 		private readonly IMapTime _mapTime;
 		private readonly BeatmapPipeline _beatmapPipeline;
-		private readonly ActiveSpinnerFactory _activeSpinnerFactory;
+		private readonly PrefabFactory<ActiveSpinnerView> _activeSpinnerFactory;
 		private readonly Transform _container;
 		private readonly ActiveSpinnerPresenterFactory _activeSpinnerPresenterFactory;
 		private IDisposable _disposable;
@@ -21,7 +21,7 @@ namespace Game.Visuals
 		public ActiveSpinnerController(
 			IMapTime mapTime,
 			BeatmapPipeline beatmapPipeline,
-			ActiveSpinnerFactory activeSpinnerFactory,
+			PrefabFactory<ActiveSpinnerView> activeSpinnerFactory,
 			ActiveSpinnerPresenterFactory activeSpinnerPresenterFactory,
 			Transform container
 		)
@@ -36,8 +36,6 @@ namespace Game.Visuals
 		public void Initialize()
 		{
 			_disposable = _beatmapPipeline.Element
-			                              // .Where(element => element is Spinner)
-			                              // .Cast<MapElement, Spinner>()
 			                              .OfType<MapElement, Spinner>()
 			                              .SelectMany(spinner =>
 				                              Observable.Timer(

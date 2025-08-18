@@ -9,39 +9,50 @@ namespace Game.Visuals
 	public sealed class DrumrollVisualClickHandler : IVisualClickHandler
 	{
 		private readonly Transform _endPoint;
+		private readonly Transform _hitPoint;
 		private readonly Transform _container;
 		private readonly PrefabFactory<DrumrollNoteView> _prefabFactory;
 
-		public DrumrollVisualClickHandler(Transform endPoint, Transform container, PrefabFactory<DrumrollNoteView> prefabFactory)
+		public DrumrollVisualClickHandler(
+			PrefabFactory<DrumrollNoteView> prefabFactory,
+			Transform endPoint,
+			Transform container,
+			Transform hitPoint
+		)
 		{
 			_endPoint = endPoint;
 			_prefabFactory = prefabFactory;
+			_hitPoint = hitPoint;
 			_container = container;
 		}
 
-		public void Handle(ElementView view, HandleResult result)
+		public void Handle(HandleResult result)
 		{
-			if (result is not DrumrollHitHandleResult)
+			if (result is DrumrollHitHandleResult)
 			{
-				return;
+				var noteView = _prefabFactory.Spawn(_container);
+				noteView.Move(_hitPoint.position);
+
+				DOTween.Sequence()
+				       .Append(DOTween.To(
+					       () => noteView.GetPosition(),
+					       pos => noteView.Move(pos),
+					       _endPoint.position,
+					       0.5f
+				       ))
+				       .Join(DOTween.To(
+					       () => noteView.Alpha,
+					       alpha => noteView.Alpha = alpha,
+					       0,
+					       0.5f
+				       ))
+				       .AppendCallback(() => OnNoteAnimationFinished(noteView));
 			}
+		}
 
-			var noteView = _prefabFactory.Spawn(_container);
-
-			DOTween.Sequence()
-			       .Append(DOTween.To(
-				       () => noteView.GetPosition(),
-				       pos => noteView.Move(pos),
-				       _endPoint.position,
-				       0.5f
-			       ))
-			       .Join(DOTween.To(
-				       () => noteView.Alpha,
-				       alpha => noteView.Alpha = alpha,
-				       0,
-				       0.5f
-			       ))
-			       .AppendCallback(view.DestroyView);
+		private void OnNoteAnimationFinished(DrumrollNoteView noteView)
+		{
+			noteView.DestroyView();
 		}
 
 		public Type GetElementType()

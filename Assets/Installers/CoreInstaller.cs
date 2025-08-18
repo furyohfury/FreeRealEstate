@@ -43,6 +43,8 @@ namespace Installers
 		private ActiveSpinnerView _activeSpinnerViewPrefab;
 		[SerializeField]
 		private DrumrollNoteViewIdConfig _drumrollNoteViewIdConfig;
+		[SerializeField]
+		private ActiveSpinnerIdConfig _activeSpinnerIdConfig;
 
 		protected override void Configure(IContainerBuilder builder)
 		{
@@ -113,6 +115,8 @@ namespace Installers
 			       .AsImplementedInterfaces();
 			builder.Register<HandleResultObservable>(Lifetime.Singleton)
 			       .AsImplementedInterfaces();
+			builder.Register<SpinnerStartObservable>(Lifetime.Singleton)
+			       .AsImplementedInterfaces();
 
 			builder.RegisterEntryPoint<ElementOnTimeoutSwitcher>();
 		}
@@ -174,32 +178,52 @@ namespace Installers
 			builder.RegisterEntryPoint<ViewsRegistryAddController>();
 
 			// Result visual handlers
-			builder.RegisterInstance(new SingleNoteVisualClickHandler(_clickedNotesEndPoint))
+			builder.Register<SingleNoteVisualClickHandler>(resolver =>
+			       {
+				       var registry = resolver.Resolve<ElementViewsRegistry>();
+				       return new SingleNoteVisualClickHandler(_clickedNotesEndPoint, registry);
+			       }, Lifetime.Singleton)
 			       .As<IVisualClickHandler>();
+
 			builder.RegisterInstance<DrumrollNoteViewIdConfig>(_drumrollNoteViewIdConfig)
 			       .As<PrefabIdConfig<DrumrollNoteView>>();
-			builder.Register<PrefabFactory<DrumrollNoteView>>(Lifetime.Singleton);
+
+			builder.Register<PrefabFactory<DrumrollNoteView>>(Lifetime.Singleton)
+			       .AsImplementedInterfaces()
+			       .AsSelf();
+
 			builder.Register<DrumrollVisualClickHandler>(
 				       resolver => new DrumrollVisualClickHandler(
-					       _endPoint,
+					       resolver.Resolve<PrefabFactory<DrumrollNoteView>>(),
+					       _clickedNotesEndPoint,
 					       _notesContainer,
-					       resolver.Resolve<PrefabFactory<DrumrollNoteView>>()
+					       _endPoint
 				       ),
 				       Lifetime.Singleton)
 			       .As<IVisualClickHandler>();
+
+			builder.Register<SpinnerVisualClickHandler>(resolver => new SpinnerVisualClickHandler(
+					       _activeSpinnerContainer,
+					       resolver.Resolve<ElementViewsRegistry>()),
+				       Lifetime.Singleton)
+			       .As<IVisualClickHandler>();
+
 			builder.Register<ElementHandleVisualSystem>(Lifetime.Singleton)
 			       .AsImplementedInterfaces()
 			       .AsSelf();
 
 			// Active spinner systems
 			builder.RegisterInstance<ActiveSpinnerView>(_activeSpinnerViewPrefab);
-			builder.Register<ActiveSpinnerFactory>(Lifetime.Singleton);
+			builder.RegisterInstance<ActiveSpinnerIdConfig>(_activeSpinnerIdConfig).As<PrefabIdConfig<ActiveSpinnerView>>();
+			builder.Register<PrefabFactory<ActiveSpinnerView>>(Lifetime.Singleton)
+			       .AsImplementedInterfaces()
+			       .AsSelf();
 			builder.Register<ActiveSpinnerPresenterFactory>(Lifetime.Singleton);
 			builder.Register<ActiveSpinnerController>(resolver =>
 			       {
 				       var mapTime = resolver.Resolve<IMapTime>();
 				       var beatmapPipeline = resolver.Resolve<BeatmapPipeline>();
-				       var activeSpinnerFactory = resolver.Resolve<ActiveSpinnerFactory>();
+				       var activeSpinnerFactory = resolver.Resolve<PrefabFactory<ActiveSpinnerView>>();
 				       var activeSpinnerPresenterFactory = resolver.Resolve<ActiveSpinnerPresenterFactory>();
 				       return new ActiveSpinnerController(
 					       mapTime,

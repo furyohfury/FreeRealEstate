@@ -22,3 +22,6 @@ MonoBehaviour:
   - BeatmapConfig: {fileID: 11400000, guid: 06186d0ab6022aa4d9825c9af26e097b, type: 2}
     SongStartTimeInSeconds: 0
     SongEndTimeInSeconds: 20
+  - BeatmapConfig: {fileID: 11400000, guid: 59eba37819830034eafcf4851260fd32, type: 2}
+    SongStartTimeInSeconds: 0
+    SongEndTimeInSeconds: 20

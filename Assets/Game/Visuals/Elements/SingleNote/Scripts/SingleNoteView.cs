@@ -1,20 +1,23 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 
 namespace Game.Visuals
 {
 	public sealed class SingleNoteView : ElementView
 	{
-		public float Alpha
-		{
-			get => _spriteRenderer.color.a;
-			set
-			{
-				var color = _spriteRenderer.color;
-				color.a = value;
-				_spriteRenderer.color = color;
-			}
-		}
 		[SerializeField]
 		private SpriteRenderer _spriteRenderer;
+		[SerializeField]
+		private float _animationDuration = 0.5f;
+
+		public Tween MoveToAnimation(Vector3 point)
+		{
+			return transform.DOMove(point, _animationDuration);
+		}
+
+		public Tween FadeToAnimation(float alpha)
+		{
+			return _spriteRenderer.DOFade(alpha, _animationDuration);
+		}
 	}
 }
