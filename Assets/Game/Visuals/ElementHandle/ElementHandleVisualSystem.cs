@@ -10,19 +10,16 @@ namespace Game.Visuals
 	public sealed class ElementHandleVisualSystem : IInitializable, IDisposable
 	{
 		private readonly Dictionary<Type, IVisualClickHandler> _visualClickHandlers;
-		private readonly ElementViewsRegistry _elementViewsRegistry;
 		private readonly IHandleResultObservable _handleResultObservable;
 
 		private IDisposable _disposable;
 
 		public ElementHandleVisualSystem(
 			IEnumerable<IVisualClickHandler> visualClickHandlers,
-			ElementViewsRegistry elementViewsRegistry,
 			IHandleResultObservable handleResultObservable
 		)
 		{
 			_visualClickHandlers = visualClickHandlers.ToDictionary(handler => handler.GetElementType(), handler => handler);
-			_elementViewsRegistry = elementViewsRegistry;
 			_handleResultObservable = handleResultObservable;
 		}
 

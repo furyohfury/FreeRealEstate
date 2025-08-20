@@ -1,0 +1,16 @@
+{
+    "name": "Module.BeatmapPipeline",
+    "rootNamespace": "",
+    "references": [
+        "GUID:34853347fa3750d4db49f588bc0c9868"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

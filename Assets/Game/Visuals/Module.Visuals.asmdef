@@ -1,0 +1,27 @@
+{
+    "name": "Module.Visuals",
+    "rootNamespace": "",
+    "references": [
+        "Module.BeatmapPipeline",
+        "Module.ElementHandle",
+        "Module.MapTime",
+        "SongMap",
+        "Module.PriorityTaskPipeline",
+        "VContainer",
+        "UniTask",
+        "DOTween.Modules",
+        "UniTask.DOTween",
+        "PrefabProviding",
+        "Services",
+        "Unity.TextMeshPro"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

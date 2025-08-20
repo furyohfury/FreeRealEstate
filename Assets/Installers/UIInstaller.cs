@@ -13,12 +13,8 @@ namespace Installers
 
 		protected override void Configure(IContainerBuilder builder)
 		{
-			builder.Register<ScorePresenter>(resolver =>
-			       {
-				       var mapScore = resolver.Resolve<MapScore>();
-				       return new ScorePresenter(mapScore, _scoreTextView);
-			       }, Lifetime.Singleton)
-			       .AsImplementedInterfaces();
+			builder.RegisterEntryPoint<ScorePresenter>(resolver =>
+				new ScorePresenter(_scoreTextView, resolver.Resolve<ScoreSystem>()), Lifetime.Singleton);
 		}
 	}
 }

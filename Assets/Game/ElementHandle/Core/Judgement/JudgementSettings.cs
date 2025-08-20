@@ -22,7 +22,8 @@ namespace Game.ElementHandle
 			{
 				if (fraction <= _settings[i].ClickWindowFraction)
 				{
-					return new JudgementResult(_settings[i].Type);
+					var judgementResult = new JudgementResult(_settings[i].Type);
+					return judgementResult;
 				}
 			}
 

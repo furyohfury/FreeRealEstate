@@ -7,10 +7,10 @@ namespace Game.BeatmapTime
 {
 	public sealed class MapTimeController : IInitializable, IDisposable
 	{
-		private readonly MapTime _mapTime;
+		private readonly IMapTime _mapTime;
 		private IDisposable _disposable;
 
-		public MapTimeController(MapTime mapTime)
+		public MapTimeController(IMapTime mapTime)
 		{
 			_mapTime = mapTime;
 		}

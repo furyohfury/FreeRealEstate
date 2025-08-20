@@ -5,12 +5,11 @@ using UnityEngine;
 
 namespace Game.Visuals
 {
-	public sealed class ActiveSpinnerController : IDisposable, IActiveSpinnerController
+	public sealed class ActiveSpinnerController : IActiveSpinnerController, IDisposable
 	{
 		private readonly PrefabFactory<ActiveSpinnerView> _activeSpinnerFactory;
 		private readonly Transform _container;
 		private readonly ActiveSpinnerPresenterFactory _activeSpinnerPresenterFactory;
-		private IDisposable _disposable;
 		private readonly SerialDisposable _activePresenterDisposable = new();
 
 		public ActiveSpinnerController(
@@ -37,7 +36,6 @@ namespace Game.Visuals
 
 		public void Dispose()
 		{
-			_disposable.Dispose();
 			_activePresenterDisposable.Dispose();
 		}
 	}

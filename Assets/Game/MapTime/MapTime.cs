@@ -27,7 +27,6 @@
 			_isPlaying = false;
 		}
 
-		// Вызывается извне каждый кадр (см. MapTimeDriver)
 		public void Tick(float deltaTime)
 		{
 			if (_isPlaying)

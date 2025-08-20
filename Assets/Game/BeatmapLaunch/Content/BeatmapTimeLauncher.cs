@@ -5,9 +5,9 @@ namespace Game.BeatmapTime
 {
 	public sealed class BeatmapTimeLauncher : IBeatmapLaunchable
 	{
-		private readonly MapTime _mapTime;
+		private readonly IMapTime _mapTime;
 
-		public BeatmapTimeLauncher(MapTime mapTime)
+		public BeatmapTimeLauncher(IMapTime mapTime)
 		{
 			_mapTime = mapTime;
 		}

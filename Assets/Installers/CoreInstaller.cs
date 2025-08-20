@@ -2,6 +2,7 @@
 using Game.BeatmapControl;
 using Game.BeatmapLaunch;
 using Game.BeatmapTime;
+using Game.Controllers;
 using Game.ElementHandle;
 using Game.Input;
 using Game.Scoring;
@@ -17,8 +18,6 @@ namespace Installers
 	public class CoreInstaller : LifetimeScope
 	{
 		[Header("Core")]
-		[SerializeField]
-		private PointsForStatusConfig _pointsForStatusConfig;
 		[SerializeField]
 		private DrumrollTickRateConfig _drumrollTickrateConfig;
 
@@ -45,13 +44,15 @@ namespace Installers
 		private DrumrollNoteViewIdConfig _drumrollNoteViewIdConfig;
 		[SerializeField]
 		private ActiveSpinnerIdConfig _activeSpinnerIdConfig;
+		[SerializeField]
+		private JudgementSettings _judgementSettings;
+		[SerializeField]
+		private ScoreResultConfig _scoreResultConfig;
 
 		protected override void Configure(IContainerBuilder builder)
 		{
 			// Map time
-			builder.Register<MapTime>(Lifetime.Singleton)
-			       .AsImplementedInterfaces()
-			       .AsSelf();
+			builder.Register<MapTime>(Lifetime.Singleton).As<IMapTime>();
 			builder.RegisterEntryPoint<MapTimeController>();
 
 			builder.Register<BeatmapPipeline>(Lifetime.Singleton);
@@ -107,11 +108,11 @@ namespace Installers
 			builder.Register<ElementClickStrategy, SingleNoteClickStrategy>(Lifetime.Scoped);
 			builder.Register<ElementClickStrategy, SpinnerClickStrategy>(Lifetime.Scoped);
 			builder.Register<ElementClickStrategy, DrumrollClickStrategy>(Lifetime.Scoped);
-			builder.Register<ClickHandleEmitter>(Lifetime.Singleton)
+			builder.Register<ClickHandleResultStrategy>(Lifetime.Singleton)
 			       .AsImplementedInterfaces()
 			       .AsSelf();
 
-			builder.Register<TimeoutHandleEmitter>(Lifetime.Singleton)
+			builder.Register<TimeoutHandleResultStrategy>(Lifetime.Singleton)
 			       .AsImplementedInterfaces();
 			builder.Register<HandleResultObservable>(Lifetime.Singleton)
 			       .AsImplementedInterfaces();
@@ -202,6 +203,25 @@ namespace Installers
 				       Lifetime.Singleton)
 			       .As<IVisualClickHandler>();
 
+
+			// Active spinner systems
+			builder.RegisterInstance<ActiveSpinnerView>(_activeSpinnerViewPrefab);
+			builder.RegisterInstance<ActiveSpinnerIdConfig>(_activeSpinnerIdConfig).As<PrefabIdConfig<ActiveSpinnerView>>();
+			builder.Register<PrefabFactory<ActiveSpinnerView>>(Lifetime.Singleton)
+			       .AsImplementedInterfaces()
+			       .AsSelf();
+			builder.Register<ActiveSpinnerPresenterFactory>(Lifetime.Singleton);
+			builder.Register<ActiveSpinnerController>(resolver =>
+			       {
+				       var activeSpinnerFactory = resolver.Resolve<PrefabFactory<ActiveSpinnerView>>();
+				       var activeSpinnerPresenterFactory = resolver.Resolve<ActiveSpinnerPresenterFactory>();
+				       return new ActiveSpinnerController(activeSpinnerFactory,
+					       activeSpinnerPresenterFactory,
+					       _activeSpinnerContainer);
+			       }, Lifetime.Singleton)
+			       .AsImplementedInterfaces()
+			       .AsSelf();
+
 			builder.Register<SpinnerVisualClickHandler>(resolver => new SpinnerVisualClickHandler(
 					       _activeSpinnerContainer,
 					       resolver.Resolve<ElementViewsRegistry>(),
@@ -213,44 +233,18 @@ namespace Installers
 			       .AsImplementedInterfaces()
 			       .AsSelf();
 
-			// Active spinner systems
-			builder.RegisterInstance<ActiveSpinnerView>(_activeSpinnerViewPrefab);
-			builder.RegisterInstance<ActiveSpinnerIdConfig>(_activeSpinnerIdConfig).As<PrefabIdConfig<ActiveSpinnerView>>();
-			builder.Register<PrefabFactory<ActiveSpinnerView>>(Lifetime.Singleton)
-			       .AsImplementedInterfaces()
-			       .AsSelf();
-			builder.Register<ActiveSpinnerPresenterFactory>(Lifetime.Singleton);
-			builder.Register<ActiveSpinnerController>(resolver =>
-			       {
-				       var mapTime = resolver.Resolve<IMapTime>();
-				       var beatmapPipeline = resolver.Resolve<BeatmapPipeline>();
-				       var activeSpinnerFactory = resolver.Resolve<PrefabFactory<ActiveSpinnerView>>();
-				       var activeSpinnerPresenterFactory = resolver.Resolve<ActiveSpinnerPresenterFactory>();
-				       return new ActiveSpinnerController(activeSpinnerFactory,
-					       activeSpinnerPresenterFactory,
-					       _activeSpinnerContainer);
-			       }, Lifetime.Singleton)
-			       .AsImplementedInterfaces();
-
 			Debug.Log("Successfully installed all visual systems");
+
+			// Score system
+			builder.RegisterInstance<JudgementSettings>(_judgementSettings);
+			builder.RegisterInstance<ScoreResultConfig>(_scoreResultConfig);
+			builder.Register<MapScore>(Lifetime.Singleton).As<IMapScore>();
+			builder.Register<Combo>(Lifetime.Singleton).As<ICombo>();
+			builder.RegisterInstance<LinearScoreCalculator>(
+				       new LinearScoreCalculator(_judgementSettings, _scoreResultConfig.ScoreResults))
+			       .As<IScoreCalculator>();
+			builder.Register<ScoreSystem>(Lifetime.Singleton);
+			builder.RegisterEntryPoint<ScoreSystemController>();
 		}
-
-		// private void Start()
-		// {
-		// 	SpawnInjectedGameObjects();
-		// }
-
-		// private void SpawnInjectedGameObjects()
-		// {
-		// 	var systemsContainer = new GameObject("SpawnedSystems");
-		// 	var systemsContainerTransform = systemsContainer.transform;
-		// 	systemsContainerTransform.SetParent(transform);
-		// }
-		//
-		// private void SpawnGameObject<T>(T prefab, Transform container) where T : MonoBehaviour
-		// {
-		// 	var spawnedObject = Container.Instantiate(prefab, container);
-		// 	spawnedObject.name = typeof(T).Name;
-		// }
 	}
 }
