@@ -9,9 +9,9 @@ namespace Game.ElementHandle
 	{
 		public Observable<HandleResult> OnElementHandled => _onElementHandled;
 		private Observable<HandleResult> _onElementHandled;
-		private readonly IEnumerable<IElementHandleEmitter> _emitters;
+		private readonly IEnumerable<IHandleResultStrategy> _emitters;
 
-		public HandleResultObservable(IEnumerable<IElementHandleEmitter> emitters)
+		public HandleResultObservable(IEnumerable<IHandleResultStrategy> emitters)
 		{
 			_emitters = emitters;
 		}
