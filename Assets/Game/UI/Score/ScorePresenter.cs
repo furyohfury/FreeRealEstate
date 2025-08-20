@@ -5,22 +5,22 @@ using VContainer.Unity;
 
 namespace Game.UI
 {
-	public sealed class ScorePresenter : IStartable, IDisposable
+	public sealed class ScorePresenter : IInitializable, IDisposable
 	{
-		private readonly MapScore _mapScore;
 		private readonly TextView _scoreTextView;
+		private readonly ScoreSystem _scoreSystem;
 		private IDisposable _disposable;
 
-		public ScorePresenter(MapScore mapScore, TextView scoreTextView)
+		public ScorePresenter(TextView scoreTextView, ScoreSystem scoreSystem)
 		{
-			_mapScore = mapScore;
 			_scoreTextView = scoreTextView;
+			_scoreSystem = scoreSystem;
 		}
 
-		public void Start()
+		public void Initialize()
 		{
-			_disposable = _mapScore.Score
-			                       .Subscribe(OnScoreChanged);
+			_disposable = _scoreSystem.Score
+			                          .Subscribe(OnScoreChanged);
 		}
 
 		private void OnScoreChanged(int score)
