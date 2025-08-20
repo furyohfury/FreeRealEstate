@@ -4,10 +4,10 @@ using Game.ElementHandle;
 namespace Game.Scoring
 {
 	[Serializable]
-	public readonly struct ScoreResult
+	public struct ScoreResult
 	{
-		public readonly int Points;
-		public readonly JudgementType Judgement;
+		public int Points;
+		public JudgementType Judgement;
 
 		public ScoreResult(int points, JudgementType judgement)
 		{
