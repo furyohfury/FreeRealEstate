@@ -11,7 +11,7 @@ namespace Game
 	public sealed class InputNotesController : IInitializable, IDisposable
 	{
 		private readonly InputReader _inputReader;
-		private readonly ClickHandleEmitter _clickHandleEmitter;
+		private readonly ClickHandleResultStrategy _clickHandleResultStrategy;
 		private readonly IMapTime _mapTime;
 		private readonly BeatmapPipeline _beatmapPipeline;
 
@@ -20,13 +20,13 @@ namespace Game
 
 		public InputNotesController(
 			InputReader inputReader,
-			ClickHandleEmitter clickHandleEmitter,
+			ClickHandleResultStrategy clickHandleResultStrategy,
 			IMapTime mapTime,
 			BeatmapPipeline beatmapPipeline
 		)
 		{
 			_inputReader = inputReader;
-			_clickHandleEmitter = clickHandleEmitter;
+			_clickHandleResultStrategy = clickHandleResultStrategy;
 			_mapTime = mapTime;
 			_beatmapPipeline = beatmapPipeline;
 		}
@@ -44,7 +44,7 @@ namespace Game
 					                          return;
 				                          }
 
-				                          _clickHandleEmitter.HandleElement(element, note);
+				                          _clickHandleResultStrategy.HandleElement(element, note);
 			                          });
 		}
 

@@ -8,11 +8,11 @@ namespace Game
 {
 	public sealed class MapScoreResetter : IStartable, IDisposable
 	{
-		private readonly MapScore _mapScore;
+		private readonly IMapScore _mapScore;
 		private BeatmapPipeline _beatmapPipeline;
 		private readonly CompositeDisposable _disposable = new();
 
-		public MapScoreResetter(MapScore mapScore, BeatmapPipeline beatmapPipeline)
+		public MapScoreResetter(IMapScore mapScore, BeatmapPipeline beatmapPipeline)
 		{
 			_mapScore = mapScore;
 			_beatmapPipeline = beatmapPipeline;

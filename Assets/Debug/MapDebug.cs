@@ -33,7 +33,7 @@ namespace GameDebug
 		[Inject]
 		private ElementsVisualsSpawner _elementsVisualsSpawner;
 		[Inject]
-		private MapScore _mapScore;
+		private IMapScore _mapScore;
 		[Inject]
 		private BeatmapPipeline _beatmapPipeline;
 		[Inject]
