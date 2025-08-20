@@ -2,7 +2,7 @@
 
 namespace Game.Scoring
 {
-	public sealed class MapScore
+	public sealed class MapScore : IMapScore
 	{
 		public ReadOnlyReactiveProperty<int> Score => _score;
 		private readonly ReactiveProperty<int> _score = new();
