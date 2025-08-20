@@ -5,12 +5,12 @@ using R3;
 
 namespace Game.ElementHandle
 {
-	public sealed class ClickHandleEmitter : IElementHandleEmitter
+	public sealed class ClickHandleResultStrategy : IHandleResultStrategy
 	{
 		private readonly Subject<HandleResult> _onClickHandled = new();
 		private readonly Dictionary<Type, ElementClickStrategy> _handlers = new();
 
-		public ClickHandleEmitter(IEnumerable<ElementClickStrategy> handlers)
+		public ClickHandleResultStrategy(IEnumerable<ElementClickStrategy> handlers)
 		{
 			foreach (var clickHandler in handlers)
 			{

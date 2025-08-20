@@ -5,12 +5,12 @@ using VContainer.Unity;
 
 namespace Game
 {
-	public sealed class TimeoutHandleEmitter : IElementHandleEmitter, IInitializable
+	public sealed class TimeoutHandleResultStrategy : IHandleResultStrategy, IInitializable
 	{
 		private readonly IElementTimeoutObservable _elementTimeoutObservable;
 		private readonly Subject<HandleResult> _subject = new();
 
-		public TimeoutHandleEmitter(IElementTimeoutObservable elementTimeoutObservable)
+		public TimeoutHandleResultStrategy(IElementTimeoutObservable elementTimeoutObservable)
 		{
 			_elementTimeoutObservable = elementTimeoutObservable;
 		}

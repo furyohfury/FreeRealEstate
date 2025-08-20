@@ -11,5 +11,10 @@ namespace Game.ElementHandle
 		{
 			_mapElement = mapElement;
 		}
+
+		public virtual JudgementResult JudgeResult(JudgementSettings settings)
+		{
+			return new JudgementResult(JudgementType.Miss);
+		}
 	}
 }

@@ -2,7 +2,7 @@
 
 namespace Game.ElementHandle
 {
-	public interface IElementHandleEmitter
+	public interface IHandleResultStrategy
 	{
 		Observable<HandleResult> GetStream();
 	}

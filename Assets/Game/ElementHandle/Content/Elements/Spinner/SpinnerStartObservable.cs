@@ -7,7 +7,7 @@ using VContainer.Unity;
 
 namespace Game.ElementHandle
 {
-	public sealed class SpinnerStartObservable : IElementHandleEmitter, IInitializable
+	public sealed class SpinnerStartObservable : IHandleResultStrategy, IInitializable
 	{
 		private readonly BeatmapPipeline _beatmapPipeline;
 		private readonly IMapTime _mapTime;

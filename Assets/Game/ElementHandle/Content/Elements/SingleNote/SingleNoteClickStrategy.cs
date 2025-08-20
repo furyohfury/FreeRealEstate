@@ -8,7 +8,7 @@ namespace Game.ElementHandle
 {
 	public sealed class SingleNoteClickStrategy : ElementClickStrategy
 	{
-		private SingleNoteClickIntervalParams _singleNoteClickIntervalParams;
+		private float _clickWindow;
 
 		public SingleNoteClickStrategy(IMapTime mapTime) : base(mapTime)
 		{
@@ -28,14 +28,14 @@ namespace Game.ElementHandle
 
 			var offset = Math.Abs(element.HitTime - MapTime.GetMapTimeInSeconds());
 			return singleNote.Note == inputNote
-			       && offset <= _singleNoteClickIntervalParams.GetClickInterval()
-				? new NoteHitHandleResult(element, offset)
+			       && offset <= _clickWindow
+				? new NoteHitHandleResult(element, offset, _clickWindow)
 				: new MissHandleResult(element);
 		}
 
 		public override void SetDifficultyParameters(IEnumerable<IDifficultyParams> parameters)
 		{
-			_singleNoteClickIntervalParams = parameters?.OfType<SingleNoteClickIntervalParams>().Single();
+			_clickWindow = parameters.OfType<SingleNoteClickIntervalParams>().Single().GetClickInterval();
 		}
 	}
 }
