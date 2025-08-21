@@ -174,15 +174,21 @@ namespace Installers
 			       .AsImplementedInterfaces()
 			       .AsSelf();
 
+			builder.RegisterEntryPoint<HorizontalMoverController>();
+
 			// View registry
 			builder.Register<ElementViewsRegistry>(Lifetime.Singleton);
 			builder.RegisterEntryPoint<ViewsRegistryAddController>();
+
+			// Destroyer
+			builder.Register<ElementViewDestroyer>(Lifetime.Singleton).As<IElementViewDestroyer>();
 
 			// Result visual handlers
 			builder.Register<SingleNoteVisualClickHandler>(resolver =>
 			       {
 				       var registry = resolver.Resolve<ElementViewsRegistry>();
-				       return new SingleNoteVisualClickHandler(_clickedNotesEndPoint, registry);
+				       var destroyer = resolver.Resolve<IElementViewDestroyer>();
+				       return new SingleNoteVisualClickHandler(_clickedNotesEndPoint, registry, destroyer);
 			       }, Lifetime.Singleton)
 			       .As<IVisualClickHandler>();
 
@@ -225,7 +231,8 @@ namespace Installers
 			builder.Register<SpinnerVisualClickHandler>(resolver => new SpinnerVisualClickHandler(
 					       _activeSpinnerContainer,
 					       resolver.Resolve<ElementViewsRegistry>(),
-					       resolver.Resolve<ActiveSpinnerController>()),
+					       resolver.Resolve<ActiveSpinnerController>(),
+					       resolver.Resolve<IElementViewDestroyer>()),
 				       Lifetime.Singleton)
 			       .As<IVisualClickHandler>();
 

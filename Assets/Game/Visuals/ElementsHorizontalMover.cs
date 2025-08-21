@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using Beatmaps;
 using Game.Services;
-using ObservableCollections;
 using R3;
 using UnityEngine;
 using VContainer.Unity;
@@ -10,28 +10,33 @@ namespace Game.Visuals
 	public sealed class ElementsHorizontalMover : IInitializable
 	{
 		private readonly ScreenBeatmapBoundsService _boundsService;
-		private readonly ElementViewsRegistry _registry;
 
 		private float _speed;
+		private readonly Dictionary<MapElement, ElementView> _elementViews = new();
 		private readonly CompositeDisposable _disposable = new();
 
-		public ElementsHorizontalMover(ScreenBeatmapBoundsService boundsService, ElementViewsRegistry registry)
+		public ElementsHorizontalMover(ScreenBeatmapBoundsService boundsService)
 		{
 			_boundsService = boundsService;
-			_registry = registry;
 		}
 
 		public void Initialize()
 		{
 			_speed = CalculateSpeed();
-			_registry.ActiveElements.ObserveAdd()
-			         .Select(@event => @event.Value.Value)
-			         .Subscribe(view => view.Move(_boundsService.StartPoint))
-			         .AddTo(_disposable);
-
 			Observable.EveryUpdate()
 			          .Subscribe(_ => MoveViewsToLeft())
 			          .AddTo(_disposable);
+		}
+
+		public void Add(MapElement element, ElementView view)
+		{
+			_elementViews.Add(element, view);
+			MoveToStartPoint(view);
+		}
+
+		public void Remove(MapElement element)
+		{
+			_elementViews.Remove(element);
 		}
 
 		private float CalculateSpeed()
@@ -41,11 +46,14 @@ namespace Game.Visuals
 			return speed;
 		}
 
+		private void MoveToStartPoint(ElementView view)
+		{
+			view.Move(_boundsService.StartPoint);
+		}
+
 		private void MoveViewsToLeft()
 		{
-			ICollection<ElementView> elementViews = _registry.ActiveElementViews;
-
-			foreach (var view in elementViews)
+			foreach (var view in _elementViews.Values)
 			{
 				view.Move(view.GetPosition() - new Vector3(_speed * Time.deltaTime, 0, 0));
 			}
