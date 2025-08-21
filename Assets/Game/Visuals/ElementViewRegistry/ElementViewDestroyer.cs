@@ -1,15 +1,19 @@
 ﻿using Beatmaps;
-using UnityEngine;
 
 namespace Game.Visuals
 {
 	public sealed class ElementViewDestroyer : IElementViewDestroyer
 	{
-		private ElementViewsRegistry _elementViewsRegistry;
+		private readonly ElementViewsRegistry _elementViewsRegistry;
+
+		public ElementViewDestroyer(ElementViewsRegistry elementViewsRegistry)
+		{
+			_elementViewsRegistry = elementViewsRegistry;
+		}
 
 		public void DestroyView(MapElement element)
 		{
-			var view = _elementViewsRegistry[element];
+			var view = _elementViewsRegistry.Registry[element];
 			_elementViewsRegistry.RemoveElement(element);
 			Destroy(view);
 		}
@@ -22,7 +26,7 @@ namespace Game.Visuals
 
 		private static void Destroy(ElementView view)
 		{
-			Object.Destroy(view);
+			view.DestroyView();
 		}
 	}
 }

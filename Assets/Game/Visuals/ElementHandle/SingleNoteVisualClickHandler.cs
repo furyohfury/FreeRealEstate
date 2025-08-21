@@ -43,7 +43,7 @@ namespace Game.Visuals
 				await DOTween.Sequence(singleNoteView.MoveToAnimation(_endPoint.position))
 				             .Join(singleNoteView.FadeToAnimation(0))
 				             .ToUniTask();
-				OnAnimationEnd(element, view);
+				OnAnimationEnd(element);
 			}
 			else
 			{
@@ -51,9 +51,8 @@ namespace Game.Visuals
 			}
 		}
 
-		private void OnAnimationEnd(MapElement element, ElementView view)
+		private void OnAnimationEnd(MapElement element)
 		{
-			_elementViewsRegistry.RemoveElement(element);
 			DestroyView(element);
 		}
 
