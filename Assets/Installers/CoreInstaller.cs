@@ -244,7 +244,8 @@ namespace Installers
 				       new LinearScoreCalculator(_judgementSettings, _scoreResultConfig.ScoreResults))
 			       .As<IScoreCalculator>();
 			builder.Register<ScoreSystem>(Lifetime.Singleton);
-			builder.RegisterEntryPoint<ScoreSystemController>();
+			builder.RegisterEntryPoint<ScoreController>();
+			builder.RegisterEntryPoint<ComboController>();
 		}
 	}
 }
