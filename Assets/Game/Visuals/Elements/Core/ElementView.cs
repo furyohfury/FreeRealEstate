@@ -13,10 +13,5 @@ namespace Game.Visuals
 		{
 			transform.position = pos;
 		}
-
-		public virtual void DestroyView()
-		{
-			Destroy(gameObject);
-		}
 	}
 }
