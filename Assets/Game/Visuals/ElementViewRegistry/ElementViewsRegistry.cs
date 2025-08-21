@@ -11,8 +11,6 @@ namespace Game.Visuals
 
 		private readonly ObservableDictionary<MapElement, ElementView> _registry = new();
 
-		public ElementView this[MapElement element] => _registry[element];
-
 		public void AddPair(ElementViewPair pair)
 		{
 			_registry.Add(pair.MapElement, pair.ElementView);
