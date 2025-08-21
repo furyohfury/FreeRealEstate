@@ -11,11 +11,17 @@ namespace Game.Visuals
 	{
 		private readonly Transform _endPoint;
 		private readonly ElementViewsRegistry _elementViewsRegistry;
+		private readonly IElementViewDestroyer _destroyer;
 
-		public SingleNoteVisualClickHandler(Transform endPoint, ElementViewsRegistry elementViewsRegistry)
+		public SingleNoteVisualClickHandler(
+			Transform endPoint,
+			ElementViewsRegistry elementViewsRegistry,
+			IElementViewDestroyer destroyer
+		)
 		{
 			_endPoint = endPoint;
 			_elementViewsRegistry = elementViewsRegistry;
+			_destroyer = destroyer;
 		}
 
 		public async void Handle(HandleResult result)
@@ -32,30 +38,28 @@ namespace Game.Visuals
 				throw new ArgumentException();
 			}
 
-
-			_elementViewsRegistry.SetInactive(element);
 			if (result is NoteHitHandleResult)
 			{
 				await DOTween.Sequence(singleNoteView.MoveToAnimation(_endPoint.position))
-				       .Join(singleNoteView.FadeToAnimation(0))
-				       .ToUniTask();
+				             .Join(singleNoteView.FadeToAnimation(0))
+				             .ToUniTask();
 				OnAnimationEnd(element, view);
 			}
 			else
 			{
-				DestroyView(view);
+				DestroyView(element);
 			}
 		}
 
 		private void OnAnimationEnd(MapElement element, ElementView view)
 		{
 			_elementViewsRegistry.RemoveElement(element);
-			DestroyView(view);
+			DestroyView(element);
 		}
 
-		private void DestroyView(ElementView view)
+		private void DestroyView(MapElement element)
 		{
-			view.DestroyView();
+			_destroyer.DestroyView(element);
 		}
 
 		public Type GetElementType()

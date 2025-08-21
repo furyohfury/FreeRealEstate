@@ -12,16 +12,19 @@ namespace Game.Visuals
 		private readonly Transform _activeSpinnerContainer;
 		private readonly ElementViewsRegistry _elementViewsRegistry;
 		private readonly IActiveSpinnerController _activeSpinnerController;
+		private IElementViewDestroyer _destroyer;
 
 		public SpinnerVisualClickHandler(
 			Transform activeSpinnerContainer,
 			ElementViewsRegistry elementViewsRegistry,
-			IActiveSpinnerController activeSpinnerController
-		)
+			IActiveSpinnerController activeSpinnerController, 
+			IElementViewDestroyer destroyer
+			)
 		{
 			_activeSpinnerContainer = activeSpinnerContainer;
 			_elementViewsRegistry = elementViewsRegistry;
 			_activeSpinnerController = activeSpinnerController;
+			_destroyer = destroyer;
 		}
 
 		public void Handle(HandleResult result)
@@ -29,8 +32,7 @@ namespace Game.Visuals
 			if (result is SpinnerStartedHandleResult)
 			{
 				var element = result.Element;
-				ElementView view = _elementViewsRegistry.ActiveElements[element];
-				_elementViewsRegistry.SetInactive(element);
+				ElementView view = _elementViewsRegistry.Registry[element];
 				if (view is not SpinnerView spinnerView
 				    || element is not Spinner spinner)
 				{
@@ -48,13 +50,18 @@ namespace Game.Visuals
 			             .Join(spinnerView.FadeToAnimation(0))
 			             .Join(spinnerView.EnlargeAnimation())
 			             .ToUniTask();
-			OnNoteAnimationFinished(element, spinnerView);
+			OnNoteAnimationFinished(element);
 		}
 
-		private void OnNoteAnimationFinished(MapElement element, ElementView view)
+		private void OnNoteAnimationFinished(MapElement element)
 		{
 			_elementViewsRegistry.RemoveElement(element);
-			view.DestroyView();
+			DestroyView(element);
+		}
+
+		private void DestroyView(MapElement element)
+		{
+			_destroyer.DestroyView(element);
 		}
 
 		public Type GetElementType()
