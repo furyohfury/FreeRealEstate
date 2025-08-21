@@ -7,5 +7,10 @@ namespace Game.ElementHandle
 		public MissHandleResult(MapElement mapElement) : base(mapElement)
 		{
 		}
+
+		public override JudgementResult JudgeResult(JudgementSettings settings)
+		{
+			return new JudgementResult(JudgementType.Miss);
+		}
 	}
 }

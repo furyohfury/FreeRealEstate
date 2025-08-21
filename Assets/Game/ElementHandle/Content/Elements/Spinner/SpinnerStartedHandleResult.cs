@@ -7,5 +7,10 @@ namespace Game.ElementHandle
 		public SpinnerStartedHandleResult(MapElement mapElement) : base(mapElement)
 		{
 		}
+
+		public override JudgementResult JudgeResult(JudgementSettings settings)
+		{
+			return settings.GetDefaultScore();
+		}
 	}
 }

@@ -14,7 +14,7 @@ namespace Game.ElementHandle
 
 		public virtual JudgementResult JudgeResult(JudgementSettings settings)
 		{
-			return new JudgementResult(JudgementType.Miss);
+			return settings.GetDefaultScore();
 		}
 	}
 }

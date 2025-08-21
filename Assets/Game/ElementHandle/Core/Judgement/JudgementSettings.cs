@@ -29,5 +29,10 @@ namespace Game.ElementHandle
 
 			throw new ArgumentException();
 		}
+
+		public JudgementResult GetDefaultScore()
+		{
+			return new JudgementResult(_settings[0].Type);
+		}
 	}
 }
