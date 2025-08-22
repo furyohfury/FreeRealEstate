@@ -1,7 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
-using Game.BeatmapLaunch;
+using Game.BeatmapTime;
 
-namespace Game.BeatmapTime
+namespace Game.BeatmapLaunch
 {
 	public sealed class BeatmapTimeLauncher : IBeatmapLaunchable
 	{
