@@ -1,4 +1,5 @@
 ﻿using Beatmaps;
+using UnityEngine;
 
 namespace Game.Visuals
 {
@@ -13,9 +14,15 @@ namespace Game.Visuals
 
 		public void DestroyView(MapElement element)
 		{
-			var view = _elementViewsRegistry.Registry[element];
-			_elementViewsRegistry.RemoveElement(element);
-			Destroy(view);
+			if (_elementViewsRegistry.Registry.TryGetValue(element, out var view))
+			{
+				_elementViewsRegistry.RemoveElement(element);
+				Destroy(view);
+			}
+			else
+			{
+				Debug.LogWarning($"Couldnt find view for {element} with hittime = {element.HitTime}");
+			}
 		}
 
 		public void DestroyView(ElementView view)
