@@ -52,10 +52,6 @@ namespace Game.BeatmapControl
 			{
 				_element.Value = _activeMapElements[_activeIndex];
 			}
-			else
-			{
-				_element.OnCompleted();
-			}
 		}
 	}
 }
