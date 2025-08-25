@@ -74,9 +74,16 @@ namespace Installers
 			RegisterInputSystems(builder);
 			RegisterScoreSystems(builder);
 			RegisterLaunchers(builder);
+			RegisterCurrentBundleService(builder);
 			Debug.Log("Successfully installed all core systems");
 
 			RegisterVisualSystems(builder);
+		}
+
+		private static void RegisterCurrentBundleService(IContainerBuilder builder)
+		{
+			builder.Register<CurrentBundleService>(Lifetime.Singleton);
+			builder.RegisterEntryPoint<BundleServiceController>();
 		}
 
 		private void RegisterCoreServices(IContainerBuilder builder)
