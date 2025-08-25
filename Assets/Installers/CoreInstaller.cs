@@ -1,6 +1,7 @@
 ﻿using Game;
 using Game.BeatmapControl;
 using Game.BeatmapLaunch;
+using Game.BeatmapRestart;
 using Game.BeatmapTime;
 using Game.Controllers;
 using Game.ElementHandle;
@@ -75,9 +76,24 @@ namespace Installers
 			RegisterScoreSystems(builder);
 			RegisterLaunchers(builder);
 			RegisterCurrentBundleService(builder);
+			RegisterRestartSystem(builder);
 			Debug.Log("Successfully installed all core systems");
 
 			RegisterVisualSystems(builder);
+		}
+
+		private static void RegisterRestartSystem(IContainerBuilder builder)
+		{
+			builder.Register<BeatmapAudioRestartable>(Lifetime.Singleton).As<IBeatmapRestartable>();
+			builder.Register<BeatmapPipelineRestartable>(Lifetime.Singleton).As<IBeatmapRestartable>();
+			builder.Register<BeatmapScoreRestartable>(Lifetime.Singleton).As<IBeatmapRestartable>();
+			builder.Register<BeatmapTimeRestartable>(Lifetime.Singleton).As<IBeatmapRestartable>();
+			builder.Register<BeatmapVisualMoverRestartable>(Lifetime.Singleton).As<IBeatmapRestartable>();
+			builder.Register<BeatmapVisualRegistryRestartable>(Lifetime.Singleton).As<IBeatmapRestartable>();
+			builder.Register<BeatmapVisualSpawnerRestartable>(Lifetime.Singleton).As<IBeatmapRestartable>();
+			builder.Register<BeatmapActiveSpinnerRestartable>(Lifetime.Singleton).As<IBeatmapRestartable>();
+			builder.Register<BeatmapSpinnerClickRestartable>(Lifetime.Singleton).As<IBeatmapRestartable>();
+			builder.Register<BeatmapRestarter>(Lifetime.Singleton);
 		}
 
 		private static void RegisterCurrentBundleService(IContainerBuilder builder)
