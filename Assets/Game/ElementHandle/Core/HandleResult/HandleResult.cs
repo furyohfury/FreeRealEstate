@@ -16,5 +16,17 @@ namespace Game.ElementHandle
 		{
 			return settings.GetDefaultScore();
 		}
+
+		public virtual ResultCompletionType GetCompletionType()
+		{
+			return ResultCompletionType.Final;
+		}
+
+		public enum ResultCompletionType
+		{
+			None
+			, Final
+			, Continuous
+		}
 	}
 }

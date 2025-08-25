@@ -7,5 +7,10 @@ namespace Game.ElementHandle
 		public NoneHandleResult(MapElement mapElement) : base(mapElement)
 		{
 		}
+
+		public override ResultCompletionType GetCompletionType()
+		{
+			return ResultCompletionType.None;
+		}
 	}
 }

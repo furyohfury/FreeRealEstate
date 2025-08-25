@@ -7,5 +7,10 @@ namespace Game.ElementHandle
 		public SpinnerRunningHandleResult(MapElement mapElement) : base(mapElement)
 		{
 		}
+		
+		public override ResultCompletionType GetCompletionType()
+		{
+			return ResultCompletionType.Continuous;
+		}
 	}
 }

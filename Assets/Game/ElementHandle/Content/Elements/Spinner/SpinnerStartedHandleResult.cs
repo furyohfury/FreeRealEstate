@@ -12,5 +12,10 @@ namespace Game.ElementHandle
 		{
 			return settings.GetDefaultScore();
 		}
+
+		public override ResultCompletionType GetCompletionType()
+		{
+			return ResultCompletionType.Continuous;
+		}
 	}
 }
