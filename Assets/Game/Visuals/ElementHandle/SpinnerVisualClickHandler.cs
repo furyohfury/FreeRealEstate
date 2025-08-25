@@ -55,7 +55,6 @@ namespace Game.Visuals
 
 		private void OnNoteAnimationFinished(MapElement element)
 		{
-			_elementViewsRegistry.RemoveElement(element);
 			DestroyView(element);
 		}
 
