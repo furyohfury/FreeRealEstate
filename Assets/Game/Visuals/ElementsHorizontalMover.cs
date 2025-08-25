@@ -30,8 +30,14 @@ namespace Game.Visuals
 
 		public void Add(MapElement element, ElementView view)
 		{
-			_elementViews.Add(element, view);
-			MoveToStartPoint(view);
+			if (_elementViews.TryAdd(element, view))
+			{
+				MoveToStartPoint(view);
+			}
+			else
+			{
+				Debug.LogWarning($"Mover already has element {element}");
+			}
 		}
 
 		public void Remove(MapElement element)

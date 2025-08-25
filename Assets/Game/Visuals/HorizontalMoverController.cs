@@ -32,6 +32,12 @@ namespace Game.Visuals
 			               .AddTo(_disposable);
 
 			_handleResultObservable.OnElementHandled
+			                       .Where(result => result.GetCompletionType() == HandleResult.ResultCompletionType.Final)
+			                       .Subscribe(result => { _elementsHorizontalMover.Remove(result.Element); })
+			                       .AddTo(_disposable);
+
+			_handleResultObservable.OnElementHandled
+			                       .Where(result => result is SpinnerStartedHandleResult) // TODO crutch. Mb separate with observables
 			                       .Subscribe(result => { _elementsHorizontalMover.Remove(result.Element); })
 			                       .AddTo(_disposable);
 		}
