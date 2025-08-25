@@ -23,5 +23,10 @@ namespace Beatmaps
 		protected MapElement()
 		{
 		}
+
+		public override string ToString()
+		{
+			return $"{GetType()}, HitTime-{HitTime}";
+		}
 	}
 }
