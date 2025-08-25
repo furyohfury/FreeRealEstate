@@ -26,6 +26,13 @@ namespace Game.Visuals
 
 		public void Init(Spinner spinner, ActiveSpinnerView activeSpinnerView)
 		{
+			InitInitialState(spinner, activeSpinnerView);
+			SubscribeToInput();
+			SetDisposalTimer(spinner);
+		}
+
+		private void InitInitialState(Spinner spinner, ActiveSpinnerView activeSpinnerView)
+		{
 			_spinner = spinner;
 			_activeSpinnerView = activeSpinnerView;
 			var map = _beatmapPipeline.Map.CurrentValue;
@@ -35,6 +42,10 @@ namespace Game.Visuals
 			_clicksNeeded = Mathf.FloorToInt(clicksPerSecond * _spinner.Duration);
 			_spinnerClicks = _clicksNeeded;
 			_activeSpinnerView.SetText(_spinnerClicks.ToString());
+		}
+
+		private void SubscribeToInput()
+		{
 			_handleResultObservable.OnElementHandled
 			                       .Where(status => status is SpinnerRunningHandleResult)
 			                       .Subscribe(_ =>
@@ -49,7 +60,7 @@ namespace Game.Visuals
 			                       .Subscribe(_ =>
 			                       {
 				                       _activeSpinnerView.Destroy();
-				                       _disposable.Clear();
+				                       _disposable.Dispose();
 			                       })
 			                       .AddTo(_disposable);
 		}
@@ -61,13 +72,19 @@ namespace Game.Visuals
 			_activeSpinnerView.SetInnerRingScaleRatio((float)_spinnerClicks / _clicksNeeded);
 		}
 
+		private void SetDisposalTimer(Spinner spinner)
+		{
+			Observable.Timer(TimeSpan.FromSeconds(spinner.Duration))
+			          .Subscribe(_ =>
+			          {
+				          _activeSpinnerView.Destroy();
+				          _disposable.Dispose();
+			          })
+			          .AddTo(_disposable);
+		}
+
 		public void Dispose()
 		{
-			if (_activeSpinnerView != null)
-			{
-				_activeSpinnerView.Destroy();
-			}
-
 			_disposable.Dispose();
 		}
 	}

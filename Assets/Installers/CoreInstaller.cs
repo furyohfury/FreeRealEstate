@@ -217,11 +217,11 @@ namespace Installers
 			       .AsImplementedInterfaces()
 			       .AsSelf();
 			builder.Register<ActiveSpinnerPresenterFactory>(Lifetime.Singleton);
-			builder.Register<ActiveSpinnerController>(resolver =>
+			builder.Register<ActiveSpinnerFactory>(resolver =>
 			       {
 				       var activeSpinnerFactory = resolver.Resolve<PrefabFactory<ActiveSpinnerView>>();
 				       var activeSpinnerPresenterFactory = resolver.Resolve<ActiveSpinnerPresenterFactory>();
-				       return new ActiveSpinnerController(activeSpinnerFactory,
+				       return new ActiveSpinnerFactory(activeSpinnerFactory,
 					       activeSpinnerPresenterFactory,
 					       _activeSpinnerContainer);
 			       }, Lifetime.Singleton)
@@ -231,7 +231,7 @@ namespace Installers
 			builder.Register<SpinnerVisualClickHandler>(resolver => new SpinnerVisualClickHandler(
 					       _activeSpinnerContainer,
 					       resolver.Resolve<ElementViewsRegistry>(),
-					       resolver.Resolve<ActiveSpinnerController>(),
+					       resolver.Resolve<ActiveSpinnerFactory>(),
 					       resolver.Resolve<IElementViewDestroyer>()),
 				       Lifetime.Singleton)
 			       .As<IVisualClickHandler>();

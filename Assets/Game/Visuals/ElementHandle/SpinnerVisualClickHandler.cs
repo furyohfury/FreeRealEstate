@@ -11,19 +11,19 @@ namespace Game.Visuals
 	{
 		private readonly Transform _activeSpinnerContainer;
 		private readonly ElementViewsRegistry _elementViewsRegistry;
-		private readonly IActiveSpinnerController _activeSpinnerController;
-		private IElementViewDestroyer _destroyer;
+		private readonly IActiveSpinnerFactory _activeSpinnerFactory;
+		private readonly IElementViewDestroyer _destroyer;
 
 		public SpinnerVisualClickHandler(
 			Transform activeSpinnerContainer,
 			ElementViewsRegistry elementViewsRegistry,
-			IActiveSpinnerController activeSpinnerController, 
+			IActiveSpinnerFactory activeSpinnerFactory,
 			IElementViewDestroyer destroyer
-			)
+		)
 		{
 			_activeSpinnerContainer = activeSpinnerContainer;
 			_elementViewsRegistry = elementViewsRegistry;
-			_activeSpinnerController = activeSpinnerController;
+			_activeSpinnerFactory = activeSpinnerFactory;
 			_destroyer = destroyer;
 		}
 
@@ -40,7 +40,7 @@ namespace Game.Visuals
 				}
 
 				LaunchViewEnlargeAnimation(spinner, spinnerView).Forget();
-				_activeSpinnerController.CreateActiveSpinnerView(spinner);
+				_activeSpinnerFactory.CreateActiveSpinner(spinner);
 			}
 		}
 
