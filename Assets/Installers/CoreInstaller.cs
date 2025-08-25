@@ -105,9 +105,9 @@ namespace Installers
 			builder.Register<ElementTimeoutObservable>(Lifetime.Singleton)
 			       .AsImplementedInterfaces();
 
-			builder.Register<ElementClickStrategy, SingleNoteClickStrategy>(Lifetime.Scoped);
-			builder.Register<ElementClickStrategy, SpinnerClickStrategy>(Lifetime.Scoped);
-			builder.Register<ElementClickStrategy, DrumrollClickStrategy>(Lifetime.Scoped);
+			builder.Register<SingleNoteClickStrategy>(Lifetime.Scoped).As<ElementClickStrategy>();
+			builder.Register<SpinnerClickStrategy>(Lifetime.Scoped).As<ElementClickStrategy>().AsSelf();
+			builder.Register<DrumrollClickStrategy>(Lifetime.Scoped).As<ElementClickStrategy>();
 			builder.Register<ClickHandleResultStrategy>(Lifetime.Singleton)
 			       .AsImplementedInterfaces()
 			       .AsSelf();
@@ -204,7 +204,8 @@ namespace Installers
 					       resolver.Resolve<PrefabFactory<DrumrollNoteView>>(),
 					       _clickedNotesEndPoint,
 					       _notesContainer,
-					       _endPoint
+					       _endPoint,
+					       resolver.Resolve<IElementViewDestroyer>()
 				       ),
 				       Lifetime.Singleton)
 			       .As<IVisualClickHandler>();

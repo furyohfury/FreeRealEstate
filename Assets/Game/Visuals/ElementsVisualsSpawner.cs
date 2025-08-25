@@ -1,7 +1,7 @@
 ﻿using System;
 using Beatmaps;
-using Game.Services;
 using Game.BeatmapTime;
+using Game.Services;
 using R3;
 
 namespace Game.Visuals
@@ -38,7 +38,12 @@ namespace Game.Visuals
 			          .AddTo(_disposable);
 		}
 
-		private void OnTick() // TODO fix. Spawn with position to adjust time error caused by deltatime
+		public void Reset()
+		{
+			_index = 0;
+		}
+
+		private void OnTick() // TODO fix. Spawn with position to adjust time error caused by deltatime. Actually its in the mover
 		{
 			SpawnNewElements();
 		}

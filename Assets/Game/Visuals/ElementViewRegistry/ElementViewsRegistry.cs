@@ -44,5 +44,10 @@ namespace Game.Visuals
 		{
 			return _registry.TryGetValue(element, out view);
 		}
+
+		public void Clear()
+		{
+			_registry.Clear();
+		}
 	}
 }

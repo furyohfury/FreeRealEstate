@@ -23,6 +23,12 @@ namespace Game.ElementHandle
 			return typeof(Spinner);
 		}
 
+		public void Reset()
+		{
+			_activeSpinner = null;
+			_doneClicks = 0;
+		}
+
 		public override HandleResult HandleClick(MapElement element, Notes inputNote)
 		{
 			if (element is not Spinner spinner)
@@ -30,7 +36,7 @@ namespace Game.ElementHandle
 				throw new ArgumentException("Expected spinner");
 			}
 
-			if (IsActiveSpinner(spinner) == false)
+			if (IsCurrentSpinner(spinner) == false)
 			{
 				Debug.Log("Set new spinner");
 				_activeSpinner = spinner;
@@ -44,7 +50,7 @@ namespace Game.ElementHandle
 				_previousInput = inputNote;
 				_doneClicks++;
 				var clicksNeeded = Mathf.FloorToInt(_spinnerClicksPerSecondParams.GetClicksPerSecond() * _activeSpinner.Duration);
-				Debug.Log($"Processed {_doneClicks} of {clicksNeeded} clicks of spinner");
+				Debug.Log($"Processed {_doneClicks.ToString()} of {clicksNeeded.ToString()} clicks of spinner");
 				if (_doneClicks >= clicksNeeded)
 				{
 					Debug.Log("Successfully completed spinner");
@@ -62,7 +68,7 @@ namespace Game.ElementHandle
 			return _previousInput != inputNote;
 		}
 
-		private bool IsActiveSpinner(Spinner spinner)
+		private bool IsCurrentSpinner(Spinner spinner)
 		{
 			return spinner == _activeSpinner;
 		}
