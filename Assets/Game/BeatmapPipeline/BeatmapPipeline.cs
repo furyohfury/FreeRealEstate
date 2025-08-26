@@ -14,18 +14,6 @@ namespace Game.BeatmapControl
 		private MapElement[] _activeMapElements;
 		private int _activeIndex = 0;
 
-		public bool TryPeek(int numberOfElements, out MapElement element)
-		{
-			if (_activeIndex + numberOfElements > _activeMapElements.Length)
-			{
-				element = null;
-				return false;
-			}
-
-			element = _element.CurrentValue;
-			return true;
-		}
-
 		public void SwitchToNextElement()
 		{
 			_activeIndex++;
