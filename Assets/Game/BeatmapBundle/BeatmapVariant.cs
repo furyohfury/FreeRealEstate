@@ -6,6 +6,7 @@ namespace Game.BeatmapBundles
 	[Serializable]
 	public sealed class BeatmapVariant
 	{
+		public string Id;
 		public BeatmapConfig BeatmapConfig;
 		public float SongStartTimeInSeconds;
 		public float SongEndTimeInSeconds;
