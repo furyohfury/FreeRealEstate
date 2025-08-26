@@ -77,6 +77,7 @@ namespace Installers
 			RegisterLaunchers(builder);
 			RegisterCurrentBundleService(builder);
 			RegisterRestartSystem(builder);
+			builder.Register<BeatmapEndObservable>(Lifetime.Singleton).As<IBeatmapEndObservable>();
 			Debug.Log("Successfully installed all core systems");
 
 			RegisterVisualSystems(builder);
