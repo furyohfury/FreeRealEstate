@@ -1,0 +1,27 @@
+{
+    "name": "Module.FirebaseSystem.Tests",
+    "rootNamespace": "",
+    "references": [
+        "GUID:a936875047510a74786ca1c4e047ddc6",
+        "GUID:0acc523941302664db1f4e527237feb3",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll",
+        "Firebase.App.dll",
+        "Firebase.Firestore.dll",
+        "Firebase.Auth.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

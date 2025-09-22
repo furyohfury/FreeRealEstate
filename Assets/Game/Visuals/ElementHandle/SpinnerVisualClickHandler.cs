@@ -50,6 +50,7 @@ namespace Game.Visuals
 			             .Join(spinnerView.FadeToAnimation(0))
 			             .Join(spinnerView.EnlargeAnimation())
 			             .ToUniTask();
+			
 			OnNoteAnimationFinished(element);
 		}
 

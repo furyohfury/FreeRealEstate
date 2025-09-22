@@ -16,7 +16,7 @@ namespace Game
 		private readonly BeatmapPipeline _beatmapPipeline;
 
 		private IDisposable _disposable;
-		private const float INACTIVE_CLICK_THRESHOLD = 1f;
+		private const float INACTIVE_CLICK_THRESHOLD = 0.5f;
 
 		public InputNotesController(
 			InputReader inputReader,

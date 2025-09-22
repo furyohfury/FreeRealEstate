@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "844857907946",
+    "firebase_url": "https://dadadada-be9d8-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "dadadada-be9d8",
+    "storage_bucket": "dadadada-be9d8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:844857907946:android:cc3b87ef85e754b0165593",
+        "android_client_info": {
+          "package_name": "com.FuryOhFury.DADADADA"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgc-Ywq9eG1MTolp6Loh-k4lFeH31fqTU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,5 +1,6 @@
 ﻿using Game;
 using Game.BeatmapControl;
+using Game.BeatmapFinish;
 using Game.BeatmapLaunch;
 using Game.BeatmapRestart;
 using Game.BeatmapTime;
@@ -8,6 +9,8 @@ using Game.ElementHandle;
 using Game.Input;
 using Game.Scoring;
 using Game.Services;
+using Game.UI;
+using Game.UI.Leaderboards;
 using Game.Visuals;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -24,12 +27,6 @@ namespace Installers
 
 		[Header("Visuals")]
 		[SerializeField] [Required]
-		private SingleNotePrefabConfig _singleNotePrefabConfig;
-		[SerializeField] [Required]
-		private SpinnerPrefabConfig _spinnerPrefabConfig;
-		[SerializeField] [Required]
-		private DrumrollPrefabConfig _drumrollPrefabConfig;
-		[SerializeField] [Required]
 		private Transform _notesContainer;
 		[SerializeField] [Required]
 		private Transform _startPoint;
@@ -39,33 +36,29 @@ namespace Installers
 		private Transform _clickedNotesEndPoint;
 		[SerializeField] [Required]
 		private Transform _activeSpinnerContainer;
+		[SerializeField]
+		private Transform _popupContainer;
 		[SerializeField] [Required]
 		private ActiveSpinnerView _activeSpinnerViewPrefab;
-		[SerializeField]
-		private DrumrollNoteViewIdConfig _drumrollNoteViewIdConfig;
-		[SerializeField]
-		private ActiveSpinnerIdConfig _activeSpinnerIdConfig;
 		[SerializeField]
 		private JudgementSettings _judgementSettings;
 		[SerializeField]
 		private ScoreResultConfig _scoreResultConfig;
+		[SerializeField]
+		private TextView _scoreTextView;
+		[SerializeField]
+		private TextView _comboTextView;
 
 		protected override void Configure(IContainerBuilder builder)
 		{
-			// Map time
+			RegisterCoreServices(builder);
 			builder.Register<MapTime>(Lifetime.Singleton).As<IMapTime>();
 			builder.RegisterEntryPoint<MapTimeController>();
 
 			builder.Register<BeatmapPipeline>(Lifetime.Singleton);
 
-			RegisterCoreServices(builder);
 
-			builder.Register<IElementTimeoutCalculator, SingleNoteTimeoutCalculator>(Lifetime.Singleton);
-			builder.Register<IElementTimeoutCalculator, SpinnerTimeoutCalculator>(Lifetime.Singleton);
-			builder.Register<IElementTimeoutCalculator, DrumrollTimeoutCalculator>(Lifetime.Singleton);
-			builder.Register<ElementTimeoutHelper>(Lifetime.Singleton);
 			builder.RegisterEntryPoint<ElementOnStatusSwitcher>();
-
 
 			builder.Register<DifficultySwitcher>(Lifetime.Singleton)
 			       .AsImplementedInterfaces()
@@ -73,17 +66,53 @@ namespace Installers
 
 			RegisterElementHandlers(builder);
 			RegisterInputSystems(builder);
-			RegisterScoreSystems(builder);
-			RegisterLaunchers(builder);
-			RegisterCurrentBundleService(builder);
-			RegisterRestartSystem(builder);
-			builder.Register<BeatmapEndObservable>(Lifetime.Singleton).As<IBeatmapEndObservable>();
-			Debug.Log("Successfully installed all core systems");
-
 			RegisterVisualSystems(builder);
+			RegisterUISystems(builder);
+			RegisterBeatmapLauncher(builder);
+			RegisterBeatmapRestarter(builder);
+			RegisterBeatmapFinisher(builder);
+			RegisterCurrentBundleService(builder);
+
+			Debug.Log("Successfully installed all scene systems");
 		}
 
-		private static void RegisterRestartSystem(IContainerBuilder builder)
+		private static void RegisterBeatmapFinisher(IContainerBuilder builder)
+		{
+			builder.Register<AudioBeatmapFinishable>(Lifetime.Singleton)
+			       .As<IBeatmapFinishable>();
+			builder.Register<MapTimeBeatmapFinishable>(Lifetime.Singleton)
+			       .As<IBeatmapFinishable>();
+			builder.Register<LeaderboardBeatmapFinishable>(Lifetime.Singleton)
+			       .As<IBeatmapFinishable>();
+			builder.Register<BeatmapFinisher>(Lifetime.Singleton);
+			builder.Register<BeatmapEndObservable>(Lifetime.Singleton)
+			       .AsImplementedInterfaces();
+			builder.Register<BeatmapFinishObserver>(Lifetime.Singleton)
+			       .AsImplementedInterfaces();
+		}
+
+		private void RegisterUISystems(IContainerBuilder builder)
+		{
+			builder.RegisterEntryPoint<ScorePresenter>(resolver =>
+				new ScorePresenter(_scoreTextView, resolver.Resolve<ScoreSystem>()), Lifetime.Singleton);
+
+			builder.RegisterEntryPoint<ComboPresenter>(resolver =>
+				new ComboPresenter(_comboTextView, resolver.Resolve<ScoreSystem>()), Lifetime.Singleton);
+
+			builder.Register<LeaderboardFactory>(Lifetime.Singleton);
+
+			builder.Register<WindowSystem>(resolver =>
+					       new WindowSystem(resolver.Resolve<IPrefabFactory>(), _popupContainer)
+				       , Lifetime.Singleton)
+			       .As<IWindowSystem>();
+
+			builder.Register<LeaderboardPresenter>(Lifetime.Transient);
+			builder.Register<LeaderboardPresenterFactory>(Lifetime.Singleton);
+
+			Debug.Log("Successfully installed UI scene systems");
+		}
+
+		private static void RegisterBeatmapRestarter(IContainerBuilder builder)
 		{
 			builder.Register<BeatmapAudioRestartable>(Lifetime.Singleton).As<IBeatmapRestartable>();
 			builder.Register<BeatmapPipelineRestartable>(Lifetime.Singleton).As<IBeatmapRestartable>();
@@ -109,11 +138,6 @@ namespace Installers
 			builder.Register<DrumrollTickrateService>(Lifetime.Singleton);
 		}
 
-		private void RegisterScoreSystems(IContainerBuilder builder)
-		{
-			builder.Register<MapScore>(Lifetime.Singleton);
-		}
-
 		private static void RegisterInputSystems(IContainerBuilder builder)
 		{
 			builder.Register<InputReader>(Lifetime.Singleton)
@@ -129,9 +153,9 @@ namespace Installers
 			builder.Register<ElementTimeoutObservable>(Lifetime.Singleton)
 			       .AsImplementedInterfaces();
 
-			builder.Register<SingleNoteClickStrategy>(Lifetime.Scoped).As<ElementClickStrategy>();
-			builder.Register<SpinnerClickStrategy>(Lifetime.Scoped).As<ElementClickStrategy>().AsSelf();
-			builder.Register<DrumrollClickStrategy>(Lifetime.Scoped).As<ElementClickStrategy>();
+			builder.Register<SingleNoteClickStrategy>(Lifetime.Singleton).As<ElementClickStrategy>();
+			builder.Register<SpinnerClickStrategy>(Lifetime.Singleton).As<ElementClickStrategy>().AsSelf();
+			builder.Register<DrumrollClickStrategy>(Lifetime.Singleton).As<ElementClickStrategy>();
 			builder.Register<ClickHandleResultStrategy>(Lifetime.Singleton)
 			       .AsImplementedInterfaces()
 			       .AsSelf();
@@ -146,18 +170,20 @@ namespace Installers
 			builder.RegisterEntryPoint<ElementOnTimeoutSwitcher>();
 		}
 
-		private static void RegisterLaunchers(IContainerBuilder builder)
+		private static void RegisterBeatmapLauncher(IContainerBuilder builder)
 		{
 			builder.Register<BeatmapTimeLauncher>(Lifetime.Singleton)
-			       .AsImplementedInterfaces();
+			       .As<IBeatmapLaunchable>();
+			builder.Register<WindowsBeatmapLaunchable>(Lifetime.Singleton)
+			       .As<IBeatmapLaunchable>();
 			builder.Register<BeatmapAudioLauncher>(Lifetime.Singleton)
-			       .AsImplementedInterfaces();
+			       .As<IBeatmapLaunchable>();
 			builder.Register<BeatmapBackgroundLauncher>(Lifetime.Singleton)
-			       .AsImplementedInterfaces();
+			       .As<IBeatmapLaunchable>();
 			builder.Register<BeatmapElementsVisualLauncher>(Lifetime.Singleton)
-			       .AsImplementedInterfaces();
+			       .As<IBeatmapLaunchable>();
 			builder.Register<BeatmapPipelineLauncher>(Lifetime.Singleton)
-			       .AsImplementedInterfaces();
+			       .As<IBeatmapLaunchable>();
 			builder.Register<BeatmapLauncher>(Lifetime.Singleton);
 		}
 
@@ -168,9 +194,6 @@ namespace Installers
 			builder.RegisterInstance<ElementViewContainerService>(new ElementViewContainerService(_notesContainer));
 
 			// Element view factory
-			builder.RegisterInstance<SingleNotePrefabConfig>(_singleNotePrefabConfig);
-			builder.RegisterInstance<SpinnerPrefabConfig>(_spinnerPrefabConfig);
-			builder.RegisterInstance<DrumrollPrefabConfig>(_drumrollPrefabConfig);
 			builder.Register<SingleNoteViewFactory>(Lifetime.Singleton)
 			       .AsImplementedInterfaces();
 			builder.Register<SpinnerViewFactory>(Lifetime.Singleton)
@@ -188,7 +211,7 @@ namespace Installers
 					       viewFactory,
 					       mapTime,
 					       elementViewContainerService
-				       );
+					       );
 			       }, Lifetime.Singleton)
 			       .AsImplementedInterfaces()
 			       .AsSelf();
@@ -216,35 +239,23 @@ namespace Installers
 			       }, Lifetime.Singleton)
 			       .As<IVisualClickHandler>();
 
-			builder.RegisterInstance<DrumrollNoteViewIdConfig>(_drumrollNoteViewIdConfig)
-			       .As<PrefabIdConfig<DrumrollNoteView>>();
-
-			builder.Register<PrefabFactory<DrumrollNoteView>>(Lifetime.Singleton)
-			       .AsImplementedInterfaces()
-			       .AsSelf();
-
 			builder.Register<DrumrollVisualClickHandler>(
 				       resolver => new DrumrollVisualClickHandler(
-					       resolver.Resolve<PrefabFactory<DrumrollNoteView>>(),
+					       resolver.Resolve<IPrefabFactory>(),
 					       _clickedNotesEndPoint,
 					       _notesContainer,
 					       _endPoint,
 					       resolver.Resolve<IElementViewDestroyer>()
-				       ),
+					       ),
 				       Lifetime.Singleton)
 			       .As<IVisualClickHandler>();
 
 
 			// Active spinner systems
-			builder.RegisterInstance<ActiveSpinnerView>(_activeSpinnerViewPrefab);
-			builder.RegisterInstance<ActiveSpinnerIdConfig>(_activeSpinnerIdConfig).As<PrefabIdConfig<ActiveSpinnerView>>();
-			builder.Register<PrefabFactory<ActiveSpinnerView>>(Lifetime.Singleton)
-			       .AsImplementedInterfaces()
-			       .AsSelf();
 			builder.Register<ActiveSpinnerPresenterFactory>(Lifetime.Singleton);
 			builder.Register<ActiveSpinnerFactory>(resolver =>
 			       {
-				       var activeSpinnerFactory = resolver.Resolve<PrefabFactory<ActiveSpinnerView>>();
+				       var activeSpinnerFactory = resolver.Resolve<IPrefabFactory>();
 				       var activeSpinnerPresenterFactory = resolver.Resolve<ActiveSpinnerPresenterFactory>();
 				       return new ActiveSpinnerFactory(activeSpinnerFactory,
 					       activeSpinnerPresenterFactory,
@@ -265,8 +276,6 @@ namespace Installers
 			       .AsImplementedInterfaces()
 			       .AsSelf();
 
-			Debug.Log("Successfully installed all visual systems");
-
 			// Score system
 			builder.RegisterInstance<JudgementSettings>(_judgementSettings);
 			builder.RegisterInstance<ScoreResultConfig>(_scoreResultConfig);
@@ -278,6 +287,8 @@ namespace Installers
 			builder.Register<ScoreSystem>(Lifetime.Singleton);
 			builder.RegisterEntryPoint<ScoreController>();
 			builder.RegisterEntryPoint<ComboController>();
+
+			Debug.Log("Successfully installed scene visual systems");
 		}
 	}
 }

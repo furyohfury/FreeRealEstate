@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using Beatmaps;
+using Cysharp.Threading.Tasks;
 using ObjectProvide;
 using UnityEngine;
 using VContainer.Unity;
@@ -8,26 +10,23 @@ using Object = UnityEngine.Object;
 
 namespace Game.Visuals
 {
-	public sealed class SingleNoteViewFactory : IElementFactory, IStartable
+	public sealed class SingleNoteViewFactory : IElementFactory, IAsyncStartable
 	{
-		private readonly SingleNotePrefabConfig _config;
 		private readonly IObjectProvider _objectProvider;
 		private readonly Dictionary<Notes, SingleNoteView> _prefabs = new();
+		
+		private const string BLUE_NOTE_ID = "BlueNotePrefab";
+		private const string RED_NOTE_ID = "RedNotePrefab";
 
-		public SingleNoteViewFactory(SingleNotePrefabConfig config, IObjectProvider objectProvider)
+		public SingleNoteViewFactory(IObjectProvider objectProvider)
 		{
-			_config = config;
 			_objectProvider = objectProvider;
 		}
 
-		public async void Start()
+		public async UniTask StartAsync(CancellationToken cancellation = new())
 		{
-			foreach (var note in _config.ViewIds.Keys)
-			{
-				string viewId = _config.ViewIds[note];
-				SingleNoteView prefab = await _objectProvider.Get<SingleNoteView>(viewId);
-				_prefabs.Add(note, prefab);
-			}
+			_prefabs[Notes.Blue] = await _objectProvider.Get<SingleNoteView>(BLUE_NOTE_ID);
+			_prefabs[Notes.Red] = await _objectProvider.Get<SingleNoteView>(RED_NOTE_ID);
 		}
 
 		public Type GetElementType()

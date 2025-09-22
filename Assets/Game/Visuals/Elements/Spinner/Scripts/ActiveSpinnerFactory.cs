@@ -5,27 +5,27 @@ namespace Game.Visuals
 {
 	public sealed class ActiveSpinnerFactory : IActiveSpinnerFactory
 	{
-		private readonly PrefabFactory<ActiveSpinnerView> _activeSpinnerFactory;
+		private readonly IPrefabFactory _prefabFactory;
 		private readonly Transform _container;
 		private readonly ActiveSpinnerPresenterFactory _activeSpinnerPresenterFactory;
 		private ActiveSpinnerView _activeSpinnerView;
 		private ActiveSpinnerPresenter _activeSpinnerPresenter;
 
 		public ActiveSpinnerFactory(
-			PrefabFactory<ActiveSpinnerView> activeSpinnerFactory,
+			IPrefabFactory prefabFactory,
 			ActiveSpinnerPresenterFactory activeSpinnerPresenterFactory,
 			Transform container
-		)
+			)
 		{
-			_activeSpinnerFactory = activeSpinnerFactory;
+			_prefabFactory = prefabFactory;
 			_container = container;
 			_activeSpinnerPresenterFactory = activeSpinnerPresenterFactory;
 		}
 
-		public void CreateActiveSpinner(Spinner spinner)
+		public async void CreateActiveSpinner(Spinner spinner)
 		{
 			Debug.Log("Spawn spinner");
-			_activeSpinnerView = _activeSpinnerFactory.Spawn(_container);
+			_activeSpinnerView = await _prefabFactory.Spawn<ActiveSpinnerView>(PrefabsStaticNames.ACTIVE_SPINNER, _container);
 			_activeSpinnerPresenter = _activeSpinnerPresenterFactory.Create(spinner, _activeSpinnerView);
 		}
 

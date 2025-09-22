@@ -30,7 +30,7 @@ MonoBehaviour:
     - rid: 710760745461612620
       type: {class: SingleNoteClickIntervalParams, ns: Beatmaps, asm: SongMap}
       data:
-        _intervalSeconds: 0.03
+        _intervalSeconds: 0.1
     - rid: 710760745461612621
       type: {class: SpinnerClicksPerSecondParams, ns: Beatmaps, asm: SongMap}
       data:

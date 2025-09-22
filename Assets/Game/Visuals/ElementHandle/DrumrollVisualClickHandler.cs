@@ -11,16 +11,16 @@ namespace Game.Visuals
 		private readonly Transform _endPoint;
 		private readonly Transform _hitPoint;
 		private readonly Transform _container;
-		private readonly PrefabFactory<DrumrollNoteView> _prefabFactory;
+		private readonly IPrefabFactory _prefabFactory;
 		private readonly IElementViewDestroyer _viewDestroyer;
 
 		public DrumrollVisualClickHandler(
-			PrefabFactory<DrumrollNoteView> prefabFactory,
+			IPrefabFactory prefabFactory,
 			Transform endPoint,
 			Transform container,
 			Transform hitPoint,
 			IElementViewDestroyer viewDestroyer
-		)
+			)
 		{
 			_endPoint = endPoint;
 			_prefabFactory = prefabFactory;
@@ -29,11 +29,11 @@ namespace Game.Visuals
 			_container = container;
 		}
 
-		public void Handle(HandleResult result)
+		public async void Handle(HandleResult result)
 		{
 			if (result is DrumrollHitHandleResult)
 			{
-				var noteView = _prefabFactory.Spawn(_container);
+				var noteView = await _prefabFactory.Spawn<DrumrollNoteView>(PrefabsStaticNames.DRUMROLL_NOTE, _container);
 				noteView.Move(_hitPoint.position);
 
 				DOTween.Sequence()
@@ -42,13 +42,13 @@ namespace Game.Visuals
 					       pos => noteView.Move(pos),
 					       _endPoint.position,
 					       0.5f
-				       ))
+					       ))
 				       .Join(DOTween.To(
 					       () => noteView.Alpha,
 					       alpha => noteView.Alpha = alpha,
 					       0,
 					       0.5f
-				       ))
+					       ))
 				       .AppendCallback(() => OnNoteAnimationFinished(noteView));
 			}
 			else if (result is MissHandleResult or DrumrollCompleteHandleResult)

@@ -16,12 +16,15 @@ MonoBehaviour:
   _songId: rel-night-city
   _backgroundId: 
   _beatmapsVariants:
-  - BeatmapConfig: {fileID: 11400000, guid: 0d30c573ee9c6464594cabae5abe33ab, type: 2}
+  - Id: single-note
+    BeatmapConfig: {fileID: 11400000, guid: 0d30c573ee9c6464594cabae5abe33ab, type: 2}
     SongStartTimeInSeconds: 0
     SongEndTimeInSeconds: 10
-  - BeatmapConfig: {fileID: 11400000, guid: 06186d0ab6022aa4d9825c9af26e097b, type: 2}
+  - Id: drumroll
+    BeatmapConfig: {fileID: 11400000, guid: 06186d0ab6022aa4d9825c9af26e097b, type: 2}
     SongStartTimeInSeconds: 0
     SongEndTimeInSeconds: 20
-  - BeatmapConfig: {fileID: 11400000, guid: 59eba37819830034eafcf4851260fd32, type: 2}
+  - Id: spinner
+    BeatmapConfig: {fileID: 11400000, guid: 59eba37819830034eafcf4851260fd32, type: 2}
     SongStartTimeInSeconds: 0
     SongEndTimeInSeconds: 20

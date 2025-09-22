@@ -1,9 +1,12 @@
 ﻿using System.Diagnostics;
 using Beatmaps;
+using Cysharp.Threading.Tasks;
+using FirebaseSystem;
 using Game;
 using Game.BeatmapBundles;
 using Game.BeatmapControl;
 using Game.BeatmapLaunch;
+using Game.BeatmapRestart;
 using Game.BeatmapTime;
 using Game.ElementHandle;
 using Game.Scoring;
@@ -40,6 +43,10 @@ namespace GameDebug
 		private InputReader _inputReader;
 		[Inject]
 		private IHandleResultObservable _handleResultObservable;
+		[Inject]
+		private BeatmapRestarter _beatmapRestarter;
+		[Inject]
+		private FirebaseManager _firebaseManager;
 
 		[SerializeField] [ReadOnly]
 		private float _time = 0f;
@@ -50,11 +57,47 @@ namespace GameDebug
 
 		private readonly CompositeDisposable _disposable = new();
 
-		private void Start()
+		private async void Start()
 		{
 			_handleResultObservable.OnElementHandled
 			                       .Subscribe(result => Debug.Log($"Handled result: {result.Element} with result {result.GetType().Name}"))
 			                       .AddTo(_disposable);
+		}
+
+		[Button]
+		public async UniTask LoginFirst()
+		{
+			var register = await _firebaseManager.Register("test@gmail.com", "123456", "TestUser");
+			if (register is AuthFailure failure)
+			{
+				var login = await _firebaseManager.SignIn("test@gmail.com", "123456");
+			}
+		}
+
+		[Button]
+		public async UniTask LoginSecond()
+		{
+			var register = await _firebaseManager.Register("test2@gmail.com", "123456asd", "TestUser2");
+			if (register is AuthFailure failure)
+			{
+				var login = await _firebaseManager.SignIn("test2@gmail.com", "123456asd");
+			}
+		}
+		
+		[Button]
+		public async UniTask LoginThird()
+		{
+			var register = await _firebaseManager.Register("test3@gmail.com", "123444asd", "TestUser3");
+			if (register is AuthFailure failure)
+			{
+				var login = await _firebaseManager.SignIn("test3@gmail.com", "123444asd");
+			}
+		}
+
+		[Button]
+		public void RestartMap()
+		{
+			_beatmapRestarter.Restart();
 		}
 
 		[Button]
@@ -87,12 +130,6 @@ namespace GameDebug
 		// 	_serialDisposable.Disposable = Observable.Interval(TimeSpan.FromSeconds(0.25))
 		// 	                                         .Subscribe(_ => _inputReader.OnTestNote(Notes.Blue));
 		// }
-
-		[Button]
-		private void RestartMap()
-		{
-			_beatmapPipeline.RestartMap();
-		}
 
 		[Button]
 		private void DebugUpdateObservables()

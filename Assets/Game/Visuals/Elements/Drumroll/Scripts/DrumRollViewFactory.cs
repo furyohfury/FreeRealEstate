@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Threading;
 using Beatmaps;
+using Cysharp.Threading.Tasks;
 using Game.BeatmapControl;
-using Game.ElementHandle;
 using Game.Services;
 using ObjectProvide;
 using UnityEngine;
@@ -10,30 +11,32 @@ using Object = UnityEngine.Object;
 
 namespace Game.Visuals
 {
-	public sealed class DrumRollViewFactory : IElementFactory, IStartable
+	public sealed class DrumRollViewFactory : IElementFactory, IAsyncStartable
 	{
-		private readonly DrumrollPrefabConfig _drumrollPrefabConfig;
 		private readonly ScreenBeatmapBoundsService _screenBeatmapBoundsService;
 		private readonly DrumrollTickrateService _drumrollTickrateService;
 		private readonly BeatmapPipeline _beatmapPipeline;
 		private readonly IObjectProvider _objectProvider;
 		private DrumrollView _prefab;
 
+		private const string ID = "DrumrollPrefab";
+
 		public DrumRollViewFactory(
 			ScreenBeatmapBoundsService screenBeatmapBoundsService,
 			DrumrollTickrateService drumrollTickrateService,
-			BeatmapPipeline beatmapPipeline, DrumrollPrefabConfig drumrollPrefabConfig, IObjectProvider objectProvider)
+			BeatmapPipeline beatmapPipeline,
+			IObjectProvider objectProvider
+			)
 		{
 			_screenBeatmapBoundsService = screenBeatmapBoundsService;
 			_drumrollTickrateService = drumrollTickrateService;
 			_beatmapPipeline = beatmapPipeline;
-			_drumrollPrefabConfig = drumrollPrefabConfig;
 			_objectProvider = objectProvider;
 		}
 
-		public async void Start()
+		public async UniTask StartAsync(CancellationToken cancellation = new())
 		{
-			_prefab = await _objectProvider.Get<DrumrollView>(_drumrollPrefabConfig.DrumrollPrefabId);
+			_prefab = await _objectProvider.Get<DrumrollView>(ID);
 		}
 
 		public Type GetElementType()

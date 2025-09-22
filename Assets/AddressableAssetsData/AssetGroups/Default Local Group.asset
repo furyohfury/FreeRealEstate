@@ -15,6 +15,21 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: 30b0d703f75c19047927c9c96601138d
   m_SerializeEntries:
+  - m_GUID: 0c6b0bee1c6290046992a8797e0c8a8c
+    m_Address: MessagePopup
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0f658afed0bcc5748bd244cc33fb4e8a
+    m_Address: LeaderboardWindow
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4c19d69258593a04b82d2f60bcff0d04
+    m_Address: LeaderboardRecord
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5719c26c804d06d4b8fdb3e46a22e6f6
     m_Address: AuthOptionWindow
     m_ReadOnly: 0
@@ -30,13 +45,13 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 85a0ed1524415b843a304f7f3ac64dfd
-    m_Address: SpinnerPrefab
+  - m_GUID: 83f883eb3f403ae4492b9a96197381ca
+    m_Address: DimLoadingScreen
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 8c9cfa26abfee488c85f1582747f6a02
-    m_Address: SampleScene
+  - m_GUID: 85a0ed1524415b843a304f7f3ac64dfd
+    m_Address: SpinnerPrefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

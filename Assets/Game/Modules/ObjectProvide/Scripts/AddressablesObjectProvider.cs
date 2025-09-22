@@ -11,15 +11,17 @@ namespace ObjectProvide
 	public sealed class AddressablesObjectProvider : IObjectProvider, IDisposable
 	{
 		private readonly Dictionary<string, AsyncOperationHandle> _cachedObjects = new();
+		private readonly Dictionary<string, int> _counter = new();
 		private readonly Dictionary<string, AsyncOperationHandle> _activeLoads = new();
 
 		public async UniTask<T> Get<T>(string id) where T : Object
 		{
 			if (typeof(MonoBehaviour).IsAssignableFrom(typeof(T)))
 			{
+				// Being loaded
 				if (_activeLoads.TryGetValue(id, out AsyncOperationHandle handle))
 				{
-					Debug.Log($"Dublicate task to load {id} detected, awaiting for it's finish...");
+					Debug.Log($"Duplicate task to load {id} detected, awaiting for it's finish...");
 					await handle.Task;
 					if (handle.Status != AsyncOperationStatus.Succeeded)
 					{
@@ -32,9 +34,15 @@ namespace ObjectProvide
 						throw new ArgumentException($"Loaded object doesnt have component {typeof(T)}");
 					}
 
+					if (_counter.TryAdd(id, 1) == false)
+					{
+						_counter[id]++;
+					}
+
 					return comp;
 				}
 
+				// Is cached
 				if (_cachedObjects.TryGetValue(id, out AsyncOperationHandle loadedGameObject))
 				{
 					GameObject result = (GameObject)loadedGameObject.Result;
@@ -43,6 +51,7 @@ namespace ObjectProvide
 						throw new ArgumentException($"Cached object doesnt have component {typeof(T)}");
 					}
 
+					_counter[id]++;
 					return comp;
 				}
 
@@ -53,14 +62,24 @@ namespace ObjectProvide
 					throw new ArgumentException($"Loaded object doesnt have component {typeof(T)}");
 				}
 
+				if (_counter.TryAdd(id, 1) == false)
+				{
+					_counter[id]++;
+				}
+
 				return component;
 			}
 
 			if (_activeLoads.TryGetValue(id, out var activeTask))
 			{
-				Debug.Log($"Dublicate task to load {id} detected, awaiting for it's finish...");
+				Debug.Log($"Duplicate task to load {id} detected, awaiting for it's finish...");
 				var handle = activeTask;
 				await handle.Task;
+				if (_counter.TryAdd(id, 1) == false)
+				{
+					_counter[id]++;
+				}
+
 				return (T)handle.Result;
 			}
 
@@ -70,7 +89,26 @@ namespace ObjectProvide
 			}
 
 			var loadedObject = await LoadObjectAsync<T>(id);
+			if (_counter.TryAdd(id, 1) == false)
+			{
+				_counter[id]++;
+			}
+
 			return loadedObject;
+		}
+
+		public void Release(string id)
+		{
+			if (_cachedObjects.TryGetValue(id, out var handle))
+			{
+				_counter[id]--;
+				if (_counter[id] <= 0)
+				{
+					Addressables.Release(handle);
+					_cachedObjects.Remove(id);
+					_counter.Remove(id);
+				}
+			}
 		}
 
 		private async UniTask<T> LoadObjectAsync<T>(string id) where T : Object
@@ -100,6 +138,8 @@ namespace ObjectProvide
 			{
 				Addressables.Release(loadedObject);
 			}
+
+			_cachedObjects.Clear();
 		}
 	}
 }

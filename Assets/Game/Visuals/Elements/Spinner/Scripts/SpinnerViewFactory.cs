@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Threading;
 using Beatmaps;
+using Cysharp.Threading.Tasks;
 using ObjectProvide;
 using UnityEngine;
 using VContainer.Unity;
@@ -7,21 +9,21 @@ using Object = UnityEngine.Object;
 
 namespace Game.Visuals
 {
-	public sealed class SpinnerViewFactory : IElementFactory, IStartable
+	public sealed class SpinnerViewFactory : IElementFactory, IAsyncStartable
 	{
 		private readonly IObjectProvider _objectProvider;
-		private readonly SpinnerPrefabConfig _config;
 		private SpinnerView _prefab;
 
-		public SpinnerViewFactory(IObjectProvider objectProvider, SpinnerPrefabConfig config)
+		private const string ID = "SpinnerPrefab";
+		
+		public SpinnerViewFactory(IObjectProvider objectProvider)
 		{
 			_objectProvider = objectProvider;
-			_config = config;
 		}
 
-		public async void Start()
+		public async UniTask StartAsync(CancellationToken cancellation = new())
 		{
-			_prefab = await _objectProvider.Get<SpinnerView>(_config.SpinnerViewId);
+			_prefab = await _objectProvider.Get<SpinnerView>(ID);
 		}
 
 		public Type GetElementType()
