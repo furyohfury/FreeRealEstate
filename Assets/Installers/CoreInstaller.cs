@@ -142,15 +142,23 @@ namespace Installers
 
 		private void RegisterInputSystems(IContainerBuilder builder)
 		{
-			builder.Register<KeysInputNotesObservable>(Lifetime.Singleton)
-			       .AsImplementedInterfaces();
-			builder.RegisterInstance<ScreenInputNotesObservable>(_screenInputNotesObservable)
-			       .As<IInputNotesObservable>();
-			builder.Register<InputReader>(Lifetime.Singleton)
-			       .AsImplementedInterfaces();
 			builder.Register<InputActions>(Lifetime.Singleton);
 
+			builder.Register<KeysInputNotesObservable>(Lifetime.Singleton)
+			       .AsImplementedInterfaces();
+
+			builder.RegisterInstance<ScreenInputNotesObservable>(_screenInputNotesObservable)
+			       .As<IInputNotesObservable>();
+
+			builder.Register<InputRestartable>(Lifetime.Scoped)
+			       .AsImplementedInterfaces();
+
+			builder.Register<InputReader>(Lifetime.Singleton)
+			       .AsImplementedInterfaces();
+
 			builder.RegisterEntryPoint<InputNotesController>();
+
+			builder.RegisterEntryPoint<InputRestartObserver>();
 		}
 
 		private void RegisterElementHandlers(IContainerBuilder builder)

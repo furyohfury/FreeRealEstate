@@ -8,7 +8,7 @@ namespace GameDebug
 	{
 		private void Update()
 		{
-			if (Keyboard.current.rKey.wasPressedThisFrame)
+			if (Keyboard.current.kKey.wasPressedThisFrame)
 			{
 				SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 			}
