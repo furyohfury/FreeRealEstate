@@ -40,8 +40,6 @@ namespace GameDebug
 		[Inject]
 		private BeatmapPipeline _beatmapPipeline;
 		[Inject]
-		private InputReader _inputReader;
-		[Inject]
 		private IHandleResultObservable _handleResultObservable;
 		[Inject]
 		private BeatmapRestarter _beatmapRestarter;

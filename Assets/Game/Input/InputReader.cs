@@ -1,48 +1,28 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Beatmaps;
-using Game.Input;
 using R3;
-using UnityEngine.InputSystem;
 using VContainer.Unity;
 
 namespace Game
 {
-	public sealed class InputReader : IInitializable, IDisposable
+	public sealed class InputReader : IInputReader, IPostInitializable
 	{
 		public Observable<Notes> OnNotePressed => _onNotePressed;
-		private readonly Subject<Notes> _onNotePressed = new();
+		private Observable<Notes> _onNotePressed;
 
-		private readonly InputActions _inputActions;
+		private readonly IEnumerable<IInputNotesObservable> _notesObservables;
 
-		public InputReader(InputActions inputActions)
+		public InputReader(IEnumerable<IInputNotesObservable> notesObservables)
 		{
-			_inputActions = inputActions;
+			_notesObservables = notesObservables;
 		}
 
-		public void Initialize()
+		public void PostInitialize()
 		{
-			_inputActions.Player.Enable();
-			InitNotesStream();
-		}
-
-		private void InitNotesStream()
-		{
-			Observable.Merge(
-				          Observable.FromEvent<InputAction.CallbackContext>(
-					          h => _inputActions.Player.Red.performed += h,
-					          h => _inputActions.Player.Red.performed -= h
-				          ).Select(_ => Notes.Red),
-				          Observable.FromEvent<InputAction.CallbackContext>(
-					          h => _inputActions.Player.Blue.performed += h,
-					          h => _inputActions.Player.Blue.performed -= h
-				          ).Select(_ => Notes.Blue)
-			          )
-			          .Subscribe(_onNotePressed.AsObserver());
-		}
-
-		public void Dispose()
-		{
-			_inputActions.Player.Disable();
+			_onNotePressed = _notesObservables
+			                 .Select(observable => observable.OnNotePressed)
+			                 .Merge();
 		}
 	}
 }

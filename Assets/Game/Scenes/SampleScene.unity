@@ -681,6 +681,7 @@ GameObject:
   - component: {fileID: 416812615}
   - component: {fileID: 416812617}
   - component: {fileID: 416812616}
+  - component: {fileID: 416812619}
   m_Layer: 5
   m_Name: Red
   m_TagString: Untagged
@@ -745,6 +746,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 416812614}
   m_CullTransparentMesh: 1
+--- !u!114 &416812619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 416812614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 416812616}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &465634249 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6403719171767995328, guid: a2f747a73e5c1504bb28b314d56e89a4, type: 3}
@@ -1241,6 +1286,7 @@ MonoBehaviour:
   _scoreResultConfig: {fileID: 11400000, guid: d03dfab4b2bf3954e8e546d296ea88fc, type: 2}
   _scoreTextView: {fileID: 541171039}
   _comboTextView: {fileID: 1238785393}
+  _screenInputNotesObservable: {fileID: 1752071324}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1518,6 +1564,7 @@ GameObject:
   - component: {fileID: 836890863}
   - component: {fileID: 836890865}
   - component: {fileID: 836890864}
+  - component: {fileID: 836890867}
   m_Layer: 5
   m_Name: Blue
   m_TagString: Untagged
@@ -1582,6 +1629,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 836890862}
   m_CullTransparentMesh: 1
+--- !u!114 &836890867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 836890862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 836890864}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &917528837
 GameObject:
   m_ObjectHideFlags: 0
@@ -2236,6 +2327,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1752071322}
   - component: {fileID: 1752071323}
+  - component: {fileID: 1752071324}
   m_Layer: 5
   m_Name: InputButtons
   m_TagString: Untagged
@@ -2290,6 +2382,20 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1752071324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1752071321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0500004300c24de797d9d29b82682588, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _blueButton: {fileID: 836890867}
+  _redButton: {fileID: 416812619}
 --- !u!1 &1890609716
 GameObject:
   m_ObjectHideFlags: 0

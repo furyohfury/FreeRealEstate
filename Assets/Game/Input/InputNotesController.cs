@@ -8,9 +8,9 @@ using VContainer.Unity;
 
 namespace Game
 {
-	public sealed class InputNotesController : IInitializable, IDisposable
+	public sealed class InputNotesController : IStartable, IDisposable
 	{
-		private readonly InputReader _inputReader;
+		private readonly IInputReader _inputReader;
 		private readonly ClickHandleResultStrategy _clickHandleResultStrategy;
 		private readonly IMapTime _mapTime;
 		private readonly BeatmapPipeline _beatmapPipeline;
@@ -19,11 +19,11 @@ namespace Game
 		private const float INACTIVE_CLICK_THRESHOLD = 0.5f;
 
 		public InputNotesController(
-			InputReader inputReader,
+			IInputReader inputReader,
 			ClickHandleResultStrategy clickHandleResultStrategy,
 			IMapTime mapTime,
 			BeatmapPipeline beatmapPipeline
-		)
+			)
 		{
 			_inputReader = inputReader;
 			_clickHandleResultStrategy = clickHandleResultStrategy;
@@ -31,7 +31,7 @@ namespace Game
 			_beatmapPipeline = beatmapPipeline;
 		}
 
-		public void Initialize()
+		public void Start()
 		{
 			_disposable = _inputReader.OnNotePressed
 			                          .WithLatestFrom(_beatmapPipeline.Element, (note, element) => (note, element))

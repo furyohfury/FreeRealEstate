@@ -48,6 +48,8 @@ namespace Installers
 		private TextView _scoreTextView;
 		[SerializeField]
 		private TextView _comboTextView;
+		[SerializeField]
+		private ScreenInputNotesObservable _screenInputNotesObservable;
 
 		protected override void Configure(IContainerBuilder builder)
 		{
@@ -138,11 +140,14 @@ namespace Installers
 			builder.Register<DrumrollTickrateService>(Lifetime.Singleton);
 		}
 
-		private static void RegisterInputSystems(IContainerBuilder builder)
+		private void RegisterInputSystems(IContainerBuilder builder)
 		{
+			builder.Register<KeysInputNotesObservable>(Lifetime.Singleton)
+			       .AsImplementedInterfaces();
+			builder.RegisterInstance<ScreenInputNotesObservable>(_screenInputNotesObservable)
+			       .As<IInputNotesObservable>();
 			builder.Register<InputReader>(Lifetime.Singleton)
-			       .AsImplementedInterfaces()
-			       .AsSelf();
+			       .AsImplementedInterfaces();
 			builder.Register<InputActions>(Lifetime.Singleton);
 
 			builder.RegisterEntryPoint<InputNotesController>();
