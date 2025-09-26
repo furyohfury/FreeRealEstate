@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: rel-night-city
   _songId: rel-night-city
-  _backgroundId: 
+  _background: {fileID: 21300000, guid: 8d8ce9ccecdaa0c4dab01b80be29b5c5, type: 3}
   _beatmapsVariants:
   - Id: single-note
     BeatmapConfig: {fileID: 11400000, guid: 0d30c573ee9c6464594cabae5abe33ab, type: 2}
