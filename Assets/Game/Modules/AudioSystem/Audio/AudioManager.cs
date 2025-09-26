@@ -23,7 +23,6 @@ namespace Audio
 		public AudioManager(
 			IAudioClipProvider clipProvider,
 			AudioMixer audioMixer,
-			AudioLibrary audioLibrary,
 			AudioLayerSetting audioLayerSetting
 		)
 		{
@@ -80,6 +79,23 @@ namespace Audio
 			layer.Play(sound, volumeScale);
 		}
 
+		public void PlaySound(AudioClip sound, Vector3 position, float volumeScale = 1.0f)
+		{
+			AudioLayer layer = _audioLayerPool.Get(position);
+			layer.Play(sound, volumeScale);
+		}
+		
+		public async UniTask PlaySoundOneShot(string clipId, AudioOutput output, float volumeScale = 1.0f, float pitch = 1.0f)
+		{
+			AudioClip clipToPlay = await _clipProvider.GetClipAsync(clipId);
+			if (!_audioLayers.TryGetValue(output, out AudioLayer layer))
+			{
+				return;
+			}
+
+			PlaySoundOneShot(clipToPlay, output, volumeScale, pitch);
+		}
+
 		public void PlaySoundOneShot(AudioClip sound, AudioOutput output, float volumeScale = 1.0f, float pitch = 1.0f)
 		{
 			if (!_audioLayers.TryGetValue(output, out AudioLayer layer))
@@ -88,12 +104,6 @@ namespace Audio
 			}
 
 			layer.PlayOneShot(sound, volumeScale, pitch);
-		}
-
-		public void PlaySound(AudioClip sound, Vector3 position, float volumeScale = 1.0f)
-		{
-			AudioLayer layer = _audioLayerPool.Get(position);
-			layer.Play(sound, volumeScale);
 		}
 
 		public void PlaySoundOneShot(AudioClip sound, Vector3 position, float volumeScale = 1.0f, float pitch = 1.0f)

@@ -45,6 +45,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 818ceeca65489e14ab6864f21ac80fd5
+    m_Address: buttonClick1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 83f883eb3f403ae4492b9a96197381ca
     m_Address: DimLoadingScreen
     m_ReadOnly: 0

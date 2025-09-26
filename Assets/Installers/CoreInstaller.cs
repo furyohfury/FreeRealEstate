@@ -7,10 +7,12 @@ using Game.BeatmapTime;
 using Game.Controllers;
 using Game.ElementHandle;
 using Game.Input;
+using Game.SceneSwitch;
 using Game.Scoring;
 using Game.Services;
 using Game.UI;
 using Game.UI.Leaderboards;
+using Game.UI.Navigation;
 using Game.Visuals;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -22,7 +24,7 @@ namespace Installers
 	public class CoreInstaller : LifetimeScope
 	{
 		[Header("Core")]
-		[SerializeField]
+		[SerializeField] [Required]
 		private DrumrollTickRateConfig _drumrollTickrateConfig;
 
 		[Header("Visuals")]
@@ -32,24 +34,28 @@ namespace Installers
 		private Transform _startPoint;
 		[SerializeField] [Required]
 		private Transform _endPoint;
-		[SerializeField]
+		[SerializeField] [Required]
 		private Transform _clickedNotesEndPoint;
 		[SerializeField] [Required]
 		private Transform _activeSpinnerContainer;
-		[SerializeField]
+		[SerializeField] [Required]
 		private Transform _popupContainer;
 		[SerializeField] [Required]
 		private ActiveSpinnerView _activeSpinnerViewPrefab;
-		[SerializeField]
+		[SerializeField] [Required]
 		private JudgementSettings _judgementSettings;
-		[SerializeField]
+		[SerializeField] [Required]
 		private ScoreResultConfig _scoreResultConfig;
-		[SerializeField]
+		[SerializeField] [Required]
 		private TextView _scoreTextView;
-		[SerializeField]
+		[SerializeField] [Required]
 		private TextView _comboTextView;
-		[SerializeField]
+		[SerializeField] [Required]
 		private ScreenInputNotesObservable _screenInputNotesObservable;
+		[SerializeField] [Required]
+		private ButtonView _backButton;
+		[SerializeField] [Required]
+		private ButtonView _restartButton;
 
 		protected override void Configure(IContainerBuilder builder)
 		{
@@ -110,6 +116,20 @@ namespace Installers
 
 			builder.Register<LeaderboardPresenter>(Lifetime.Transient);
 			builder.Register<LeaderboardPresenterFactory>(Lifetime.Singleton);
+
+			builder.RegisterEntryPoint<BackButtonPresenter>(resolver =>
+					new BackButtonPresenter(
+						_backButton,
+						new MainMenuSceneSwitchable()
+						)
+				, Lifetime.Scoped);
+
+			builder.RegisterEntryPoint<RestartButtonPresenter>(resolver =>
+					new RestartButtonPresenter(
+						_restartButton,
+						resolver.Resolve<BeatmapRestarter>()
+						)
+				, Lifetime.Scoped);
 
 			Debug.Log("Successfully installed UI scene systems");
 		}

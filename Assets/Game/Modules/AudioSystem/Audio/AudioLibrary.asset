@@ -15,3 +15,5 @@ MonoBehaviour:
   _clips:
   - Name: rel-night-city
     ClipId: rel - night city
+  - Name: buttonClick1
+    ClipId: buttonClick1
