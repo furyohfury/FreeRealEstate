@@ -11,14 +11,14 @@ namespace Game.BeatmapBundles
 	{
 		public string Name => _name;
 		public string SongId => _songId;
-		public string BackgroundId => _backgroundId;
+		public Sprite Background => _background;
 		public BeatmapVariant[] BeatmapsVariants => _beatmapsVariants;
 
-		public BeatmapBundle(string name, string songId, string backgroundId, BeatmapVariant[] beatmapsVariants)
+		public BeatmapBundle(string name, string songId, Sprite background, BeatmapVariant[] beatmapsVariants)
 		{
 			_name = name;
 			_songId = songId;
-			_backgroundId = backgroundId;
+			_background = background;
 			_beatmapsVariants = beatmapsVariants;
 		}
 
@@ -27,7 +27,7 @@ namespace Game.BeatmapBundles
 		[SerializeField]
 		private string _songId;
 		[SerializeField]
-		private string _backgroundId;
+		private Sprite _background;
 		[SerializeField]
 		private BeatmapVariant[] _beatmapsVariants;
 

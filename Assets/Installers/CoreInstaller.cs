@@ -56,9 +56,14 @@ namespace Installers
 		private ButtonView _backButton;
 		[SerializeField] [Required]
 		private ButtonView _restartButton;
+		[SerializeField] [Required]
+		private ConstantSizePicture _background;
+		[SerializeField] 
+		private Camera _camera;
 
 		protected override void Configure(IContainerBuilder builder)
 		{
+			builder.RegisterInstance<Camera>(_camera);
 			RegisterCoreServices(builder);
 			builder.Register<MapTime>(Lifetime.Singleton).As<IMapTime>();
 			builder.RegisterEntryPoint<MapTimeController>();
@@ -320,6 +325,10 @@ namespace Installers
 			builder.Register<ScoreSystem>(Lifetime.Singleton);
 			builder.RegisterEntryPoint<ScoreController>();
 			builder.RegisterEntryPoint<ComboController>();
+
+			// Background
+			builder.RegisterInstance<BackgroundChanger>(new BackgroundChanger(_background))
+			       .As<IBackgroundChanger>();
 
 			Debug.Log("Successfully installed scene visual systems");
 		}
