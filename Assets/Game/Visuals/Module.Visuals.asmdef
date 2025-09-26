@@ -14,7 +14,8 @@
         "SongMap",
         "Module.PriorityTaskPipeline",
         "PrefabProviding",
-        "Services"
+        "AudioSystem",
+        "Input"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
