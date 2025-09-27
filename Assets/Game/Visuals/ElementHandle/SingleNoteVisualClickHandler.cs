@@ -1,4 +1,5 @@
 ﻿using System;
+using Audio;
 using Beatmaps;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
@@ -9,19 +10,31 @@ namespace Game.Visuals
 {
 	public sealed class SingleNoteVisualClickHandler : IVisualClickHandler
 	{
+		private const string HIT_CLIP_ID = "singleNoteHitSound";
+		private const string MISS_CLIP_ID = "missSound";
 		private readonly Transform _endPoint;
 		private readonly ElementViewsRegistry _elementViewsRegistry;
+
 		private readonly IElementViewDestroyer _destroyer;
+
+		private AudioManager _audioManager;
 
 		public SingleNoteVisualClickHandler(
 			Transform endPoint,
 			ElementViewsRegistry elementViewsRegistry,
-			IElementViewDestroyer destroyer
-		)
+			IElementViewDestroyer destroyer, 
+			AudioManager audioManager
+			)
 		{
 			_endPoint = endPoint;
 			_elementViewsRegistry = elementViewsRegistry;
 			_destroyer = destroyer;
+			_audioManager = audioManager;
+		}
+
+		public Type GetElementType()
+		{
+			return typeof(SingleNote);
 		}
 
 		public async void Handle(HandleResult result)
@@ -38,6 +51,7 @@ namespace Game.Visuals
 				throw new ArgumentException();
 			}
 
+			PlayHitSound();
 			if (result is NoteHitHandleResult)
 			{
 				await DOTween.Sequence(singleNoteView.MoveToAnimation(_endPoint.position))
@@ -45,10 +59,21 @@ namespace Game.Visuals
 				             .ToUniTask();
 				OnAnimationEnd(element);
 			}
-			else
+			else if (result is MissHandleResult)
 			{
+				PlayMissSound();
 				DestroyView(element);
 			}
+		}
+
+		private void PlayHitSound()
+		{
+			_audioManager.PlaySoundOneShot(HIT_CLIP_ID, AudioOutput.UI).Forget();
+		}
+		
+		private void PlayMissSound()
+		{
+			_audioManager.PlaySoundOneShot(MISS_CLIP_ID, AudioOutput.UI).Forget();
 		}
 
 		private void OnAnimationEnd(MapElement element)
@@ -59,11 +84,6 @@ namespace Game.Visuals
 		private void DestroyView(MapElement element)
 		{
 			_destroyer.DestroyView(element);
-		}
-
-		public Type GetElementType()
-		{
-			return typeof(SingleNote);
 		}
 	}
 }

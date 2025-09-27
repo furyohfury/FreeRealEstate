@@ -17,3 +17,13 @@ MonoBehaviour:
     ClipId: rel - night city
   - Name: buttonClick1
     ClipId: buttonClick1
+  - Name: missSound
+    ClipId: missSound
+  - Name: singleNoteHitSound
+    ClipId: taiko-normal-hitclap
+  - Name: drumrollHitSound
+    ClipId: taiko-normal-hitclap
+  - Name: inputNote
+    ClipId: soft-hitclap
+  - Name: missSound
+    ClipId: combobreak

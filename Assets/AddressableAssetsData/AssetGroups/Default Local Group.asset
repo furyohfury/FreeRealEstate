@@ -15,6 +15,11 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: 30b0d703f75c19047927c9c96601138d
   m_SerializeEntries:
+  - m_GUID: 026462deba6d90745867a63d537925e2
+    m_Address: combobreak
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0c6b0bee1c6290046992a8797e0c8a8c
     m_Address: MessagePopup
     m_ReadOnly: 0
@@ -60,6 +65,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 929a3909043a889478f0e89faac92533
+    m_Address: taiko-normal-hitclap
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a2f747a73e5c1504bb28b314d56e89a4
     m_Address: ActiveSpinnerPrefab
     m_ReadOnly: 0
@@ -67,6 +77,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a8fbfe7a53aea9d40b35e59e5dec6026
     m_Address: AuthScene
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c527b5f5dbfb8b944aca40c215023419
+    m_Address: soft-hitclap
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

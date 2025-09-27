@@ -1,4 +1,5 @@
-﻿using Game;
+﻿using Audio;
+using Game;
 using Game.BeatmapControl;
 using Game.BeatmapFinish;
 using Game.BeatmapLaunch;
@@ -58,7 +59,7 @@ namespace Installers
 		private ButtonView _restartButton;
 		[SerializeField] [Required]
 		private ConstantSizePicture _background;
-		[SerializeField] 
+		[SerializeField]
 		private Camera _camera;
 
 		protected override void Configure(IContainerBuilder builder)
@@ -227,6 +228,10 @@ namespace Installers
 
 		private void RegisterVisualSystems(IContainerBuilder builder)
 		{
+			// Audio on input
+			builder.Register<InputAudio>(Lifetime.Scoped)
+			       .AsImplementedInterfaces();
+
 			// Scene bounds and container
 			builder.RegisterInstance<ScreenBeatmapBoundsService>(new ScreenBeatmapBoundsService(_startPoint, _endPoint));
 			builder.RegisterInstance<ElementViewContainerService>(new ElementViewContainerService(_notesContainer));
@@ -273,7 +278,8 @@ namespace Installers
 			       {
 				       var registry = resolver.Resolve<ElementViewsRegistry>();
 				       var destroyer = resolver.Resolve<IElementViewDestroyer>();
-				       return new SingleNoteVisualClickHandler(_clickedNotesEndPoint, registry, destroyer);
+				       var audioManager = resolver.Resolve<AudioManager>();
+				       return new SingleNoteVisualClickHandler(_clickedNotesEndPoint, registry, destroyer, audioManager);
 			       }, Lifetime.Singleton)
 			       .As<IVisualClickHandler>();
 
@@ -283,7 +289,8 @@ namespace Installers
 					       _clickedNotesEndPoint,
 					       _notesContainer,
 					       _endPoint,
-					       resolver.Resolve<IElementViewDestroyer>()
+					       resolver.Resolve<IElementViewDestroyer>(),
+					       resolver.Resolve<AudioManager>()
 					       ),
 				       Lifetime.Singleton)
 			       .As<IVisualClickHandler>();
@@ -306,8 +313,10 @@ namespace Installers
 					       _activeSpinnerContainer,
 					       resolver.Resolve<ElementViewsRegistry>(),
 					       resolver.Resolve<ActiveSpinnerFactory>(),
-					       resolver.Resolve<IElementViewDestroyer>()),
-				       Lifetime.Singleton)
+					       resolver.Resolve<IElementViewDestroyer>(),
+					       resolver.Resolve<AudioManager>()
+					       )
+				       , Lifetime.Singleton)
 			       .As<IVisualClickHandler>();
 
 			builder.Register<ElementHandleVisualSystem>(Lifetime.Singleton)

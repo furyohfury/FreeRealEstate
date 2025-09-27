@@ -17,7 +17,7 @@ namespace Game.Visuals
 		public ElementHandleVisualSystem(
 			IEnumerable<IVisualClickHandler> visualClickHandlers,
 			IHandleResultObservable handleResultObservable
-		)
+			)
 		{
 			_visualClickHandlers = visualClickHandlers.ToDictionary(handler => handler.GetElementType(), handler => handler);
 			_handleResultObservable = handleResultObservable;
@@ -33,6 +33,7 @@ namespace Game.Visuals
 		private void OnHandleResultReceived(HandleResult result)
 		{
 			var element = result.Element;
+
 			_visualClickHandlers[element.GetType()].Handle(result);
 		}
 

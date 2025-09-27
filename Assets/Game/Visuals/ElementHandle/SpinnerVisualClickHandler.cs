@@ -1,4 +1,5 @@
 ﻿using System;
+using Audio;
 using Beatmaps;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
@@ -9,22 +10,26 @@ namespace Game.Visuals
 {
 	public sealed class SpinnerVisualClickHandler : IVisualClickHandler
 	{
+		private const string MISS_CLIP_ID = "missSound";
 		private readonly Transform _activeSpinnerContainer;
 		private readonly ElementViewsRegistry _elementViewsRegistry;
 		private readonly IActiveSpinnerFactory _activeSpinnerFactory;
 		private readonly IElementViewDestroyer _destroyer;
+		private readonly AudioManager _audioManager;
 
 		public SpinnerVisualClickHandler(
 			Transform activeSpinnerContainer,
 			ElementViewsRegistry elementViewsRegistry,
 			IActiveSpinnerFactory activeSpinnerFactory,
-			IElementViewDestroyer destroyer
-		)
+			IElementViewDestroyer destroyer,
+			AudioManager audioManager
+			)
 		{
 			_activeSpinnerContainer = activeSpinnerContainer;
 			_elementViewsRegistry = elementViewsRegistry;
 			_activeSpinnerFactory = activeSpinnerFactory;
 			_destroyer = destroyer;
+			_audioManager = audioManager;
 		}
 
 		public void Handle(HandleResult result)
@@ -33,14 +38,20 @@ namespace Game.Visuals
 			{
 				var element = result.Element;
 				ElementView view = _elementViewsRegistry.Registry[element];
-				if (view is not SpinnerView spinnerView
-				    || element is not Spinner spinner)
+				if (view is not SpinnerView spinnerView ||
+				    element is not Spinner spinner)
 				{
 					throw new ArgumentException();
 				}
 
 				LaunchViewEnlargeAnimation(spinner, spinnerView).Forget();
 				_activeSpinnerFactory.CreateActiveSpinner(spinner);
+			}
+			else
+			{
+				if (result is MissHandleResult)
+				{
+				}
 			}
 		}
 
@@ -50,8 +61,13 @@ namespace Game.Visuals
 			             .Join(spinnerView.FadeToAnimation(0))
 			             .Join(spinnerView.EnlargeAnimation())
 			             .ToUniTask();
-			
+
 			OnNoteAnimationFinished(element);
+		}
+
+		private void PlayMissSound()
+		{
+			_audioManager.PlaySoundOneShot(MISS_CLIP_ID, AudioOutput.UI).Forget();
 		}
 
 		private void OnNoteAnimationFinished(MapElement element)
