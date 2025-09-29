@@ -10,7 +10,7 @@ namespace Utils
     {
         public static Dictionary<string, float> StringToStringFloatDictionary(
             string str,
-            char separator = ',',
+            char separator = ';',
             char valueSeparator = ':')
         {
             List<string> cards = StringToStringList(str, separator);
@@ -21,7 +21,7 @@ namespace Utils
                 string[] s = card.Split(valueSeparator);
                 if (s.Length == 2)
                 {
-                    if (float.TryParse(s[1], NumberStyles.Any, CultureInfo.InvariantCulture.NumberFormat, out float value))
+                    if (float.TryParse(s[1].Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture.NumberFormat, out float value))
                     {
                         if (!requiredCards.ContainsKey(s[0]))
                         {
@@ -48,7 +48,7 @@ namespace Utils
 
         public static string ConvertDictionaryStringFloatToString(
             Dictionary<string, float> records,
-            char separator = ',',
+            char separator = ';',
             char valueSeparator = ':')
         {
             var stringBuilder = new StringBuilder();
@@ -65,7 +65,7 @@ namespace Utils
 
         public static List<string> StringToStringList(
             string str,
-            char separator = ',',
+            char separator = ';',
             StringSplitOptions splitOptions = StringSplitOptions.None)
         {
             str = str.Replace("\n", String.Empty).Replace("\r", String.Empty);

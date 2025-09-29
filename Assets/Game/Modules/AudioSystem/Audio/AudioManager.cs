@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Audio;
 using Utils;
+using Object = UnityEngine.Object;
 
 namespace Audio
 {
@@ -24,7 +25,7 @@ namespace Audio
 			IAudioClipProvider clipProvider,
 			AudioMixer audioMixer,
 			AudioLayerSetting audioLayerSetting
-		)
+			)
 		{
 			_clipProvider = clipProvider;
 			_audioMixer = audioMixer;
@@ -33,9 +34,20 @@ namespace Audio
 			_audioLayerFactory = new AudioLayerFactory(layerSetting);
 			AudioMixerGroup audioMixerGroup = GetOutput(EnumUtils<AudioOutput>.ToString(AudioOutput.Master));
 			_audioLayerPool = new AudioLayerPool(audioMixerGroup, layerSetting);
-			_rootAudioLayer = Camera.main!.transform;
-			SetVolume();
+			var rootAudioGameObject = new GameObject("AudioLayers");
+			_rootAudioLayer = rootAudioGameObject.transform;
+			Object.DontDestroyOnLoad(rootAudioGameObject);
+			rootAudioGameObject.AddComponent<CallbackOnStart>().SetCallback(SetSavedVolume); // Mixer doesn't get updated if called in ctr
 			InitializeLayers();
+		}
+
+		public void SetVolume01(AudioOutput output, float value)
+		{
+			var convertedVolume = Mathf.Lerp(
+				AudioManagerStaticData.CHANNEL_VOLUME_MINIMUM,
+				AudioManagerStaticData.CHANNEL_VOLUME_MAXIMUM,
+				value);
+			SetVolume(output, convertedVolume);
 		}
 
 		public void SetVolume(AudioOutput output, float value)
@@ -49,7 +61,7 @@ namespace Audio
 				, _ => throw new ArgumentOutOfRangeException(nameof(output), output, null)
 			};
 			_audioLocalSaver.Save(channelName, value);
-			SetVolume();
+			SetSavedVolume();
 		}
 
 		public async UniTask PlaySound(string clipName, AudioOutput output, float volumeScale = 1.0f, float startTime = 0f)
@@ -69,7 +81,7 @@ namespace Audio
 			layer.SetTime(startTime);
 		}
 
-		public void PlaySound(AudioClip sound, AudioOutput output, float volumeScale = 1.0f)
+		public void PlaySound(AudioClip sound, AudioOutput output, float volumeScale = 1.0f, float startTime = 0f)
 		{
 			if (!_audioLayers.TryGetValue(output, out AudioLayer layer))
 			{
@@ -77,14 +89,16 @@ namespace Audio
 			}
 
 			layer.Play(sound, volumeScale);
+			layer.SetTime(startTime);
 		}
 
-		public void PlaySound(AudioClip sound, Vector3 position, float volumeScale = 1.0f)
+		public void PlaySound(AudioClip sound, Vector3 position, float volumeScale = 1.0f, float startTime = 0f)
 		{
 			AudioLayer layer = _audioLayerPool.Get(position);
 			layer.Play(sound, volumeScale);
+			layer.SetTime(startTime);
 		}
-		
+
 		public async UniTask PlaySoundOneShot(string clipId, AudioOutput output, float volumeScale = 1.0f, float pitch = 1.0f)
 		{
 			AudioClip clipToPlay = await _clipProvider.GetClipAsync(clipId);
@@ -133,7 +147,20 @@ namespace Audio
 			layer.Stop();
 		}
 
-		private void SetVolume()
+		public float GetVolume01(AudioOutput output)
+		{
+			string channelName = output switch
+			{
+				AudioOutput.Master => AudioManagerStaticData.VOLUME_MAIN_CHANNEL_NAME
+				, AudioOutput.UI => AudioManagerStaticData.VOLUME_UI_CHANNEL_NAME
+				, AudioOutput.Music => AudioManagerStaticData.VOLUME_MUSIC_CHANNEL_NAME
+				, _ => throw new ArgumentOutOfRangeException(nameof(output), output, null)
+			};
+			var volume = _audioLocalSaver.GetVolume(channelName);
+			return Mathf.InverseLerp(AudioManagerStaticData.CHANNEL_VOLUME_MINIMUM, AudioManagerStaticData.CHANNEL_VOLUME_MAXIMUM, volume);
+		}
+
+		public void SetSavedVolume()
 		{
 			_mainChannel = _audioLocalSaver.GetVolume(AudioManagerStaticData.VOLUME_MAIN_CHANNEL_NAME);
 			_uiChannel = _audioLocalSaver.GetVolume(AudioManagerStaticData.VOLUME_UI_CHANNEL_NAME);
@@ -145,7 +172,8 @@ namespace Audio
 		{
 			_audioMixer.SetFloat(AudioManagerStaticData.VOLUME_MAIN_CHANNEL_NAME, ToChannelVolume(_mainChannel));
 			_audioMixer.SetFloat(AudioManagerStaticData.VOLUME_UI_CHANNEL_NAME, ToChannelVolume(_uiChannel));
-			_audioMixer.SetFloat(AudioManagerStaticData.VOLUME_MUSIC_CHANNEL_NAME, ToChannelVolume(_musicChannel));
+			var channelVolume = ToChannelVolume(_musicChannel);
+			var result = _audioMixer.SetFloat(AudioManagerStaticData.VOLUME_MUSIC_CHANNEL_NAME, channelVolume);
 		}
 
 		private void InitializeLayers()
