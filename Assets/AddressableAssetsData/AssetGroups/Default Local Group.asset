@@ -45,11 +45,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 186bb4bc8c04566488154beb5ea1613c
-    m_Address: 2293341 Hanako Nana - Born To Run
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4c19d69258593a04b82d2f60bcff0d04
     m_Address: LeaderboardRecord
     m_ReadOnly: 0
@@ -101,6 +96,11 @@ MonoBehaviour:
   - m_GUID: 72494c17913795540b1f3a7f8e2ed769
     m_Address: Assets/AssetPacks/UI/CorePro/Flat Pack/Fonts/lato/Lato-ThinItalic
       SDF.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 728897331e25de443aeebae7d5c2fea5
+    m_Address: Assets/Game/Scenes/BootstrapScene.unity
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
