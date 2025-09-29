@@ -7,7 +7,7 @@
 
 		public void Launch()
 		{
-			_mapTimeSeconds = 0f;
+			_mapTimeSeconds = -3f;
 			_isPlaying = true;
 		}
 
@@ -23,7 +23,7 @@
 
 		public void Reset()
 		{
-			_mapTimeSeconds = 0f;
+			_mapTimeSeconds = -3f;
 			_isPlaying = false;
 		}
 
