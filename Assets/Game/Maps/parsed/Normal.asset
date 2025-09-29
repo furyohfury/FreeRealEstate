@@ -1,0 +1,1700 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ff4541ae1d0424ea662461ebbacab1a, type: 3}
+  m_Name: Normal
+  m_EditorClassIdentifier: 
+  _beatmap:
+    _bpm: 160
+    _mapElements:
+    - rid: 4810478367170101465
+    - rid: 4810478367170101466
+    - rid: 4810478367170101467
+    - rid: 4810478367170101468
+    - rid: 4810478367170101469
+    - rid: 4810478367170101470
+    - rid: 4810478367170101471
+    - rid: 4810478367170101472
+    - rid: 4810478367170101473
+    - rid: 4810478367170101474
+    - rid: 4810478367170101475
+    - rid: 4810478367170101476
+    - rid: 4810478367170101477
+    - rid: 4810478367170101478
+    - rid: 4810478367170101479
+    - rid: 4810478367170101480
+    - rid: 4810478367170101481
+    - rid: 4810478367170101482
+    - rid: 4810478367170101483
+    - rid: 4810478367170101484
+    - rid: 4810478367170101485
+    - rid: 4810478367170101486
+    - rid: 4810478367170101487
+    - rid: 4810478367170101488
+    - rid: 4810478367170101489
+    - rid: 4810478367170101490
+    - rid: 4810478367170101491
+    - rid: 4810478367170101492
+    - rid: 4810478367170101493
+    - rid: 4810478367170101494
+    - rid: 4810478367170101495
+    - rid: 4810478367170101496
+    - rid: 4810478367170101497
+    - rid: 4810478367170101498
+    - rid: 4810478367170101499
+    - rid: 4810478367170101500
+    - rid: 4810478367170101501
+    - rid: 4810478367170101502
+    - rid: 4810478367170101503
+    - rid: 4810478367170101504
+    - rid: 4810478367170101505
+    - rid: 4810478367170101506
+    - rid: 4810478367170101507
+    - rid: 4810478367170101508
+    - rid: 4810478367170101509
+    - rid: 4810478367170101510
+    - rid: 4810478367170101511
+    - rid: 4810478367170101512
+    - rid: 4810478367170101513
+    - rid: 4810478367170101514
+    - rid: 4810478367170101515
+    - rid: 4810478367170101516
+    - rid: 4810478367170101517
+    - rid: 4810478367170101518
+    - rid: 4810478367170101519
+    - rid: 4810478367170101520
+    - rid: 4810478367170101521
+    - rid: 4810478367170101522
+    - rid: 4810478367170101523
+    - rid: 4810478367170101524
+    - rid: 4810478367170101525
+    - rid: 4810478367170101526
+    - rid: 4810478367170101527
+    - rid: 4810478367170101528
+    - rid: 4810478367170101529
+    - rid: 4810478367170101530
+    - rid: 4810478367170101531
+    - rid: 4810478367170101532
+    - rid: 4810478367170101533
+    - rid: 4810478367170101534
+    - rid: 4810478367170101535
+    - rid: 4810478367170101536
+    - rid: 4810478367170101537
+    - rid: 4810478367170101538
+    - rid: 4810478367170101539
+    - rid: 4810478367170101540
+    - rid: 4810478367170101541
+    - rid: 4810478367170101542
+    - rid: 4810478367170101543
+    - rid: 4810478367170101544
+    - rid: 4810478367170101545
+    - rid: 4810478367170101546
+    - rid: 4810478367170101547
+    - rid: 4810478367170101548
+    - rid: 4810478367170101549
+    - rid: 4810478367170101550
+    - rid: 4810478367170101551
+    - rid: 4810478367170101552
+    - rid: 4810478367170101553
+    - rid: 4810478367170101554
+    - rid: 4810478367170101555
+    - rid: 4810478367170101556
+    - rid: 4810478367170101557
+    - rid: 4810478367170101558
+    - rid: 4810478367170101559
+    - rid: 4810478367170101560
+    - rid: 4810478367170101561
+    - rid: 4810478367170101562
+    - rid: 4810478367170101563
+    - rid: 4810478367170101564
+    - rid: 4810478367170101565
+    - rid: 4810478367170101566
+    - rid: 4810478367170101567
+    - rid: 4810478367170101568
+    - rid: 4810478367170101569
+    - rid: 4810478367170101570
+    - rid: 4810478367170101571
+    - rid: 4810478367170101572
+    - rid: 4810478367170101573
+    - rid: 4810478367170101574
+    - rid: 4810478367170101575
+    - rid: 4810478367170101576
+    - rid: 4810478367170101577
+    - rid: 4810478367170101578
+    - rid: 4810478367170101579
+    - rid: 4810478367170101580
+    - rid: 4810478367170101581
+    - rid: 4810478367170101582
+    - rid: 4810478367170101583
+    - rid: 4810478367170101584
+    - rid: 4810478367170101585
+    - rid: 4810478367170101586
+    - rid: 4810478367170101587
+    - rid: 4810478367170101588
+    - rid: 4810478367170101589
+    - rid: 4810478367170101590
+    - rid: 4810478367170101591
+    - rid: 4810478367170101592
+    - rid: 4810478367170101593
+    - rid: 4810478367170101594
+    - rid: 4810478367170101595
+    - rid: 4810478367170101596
+    - rid: 4810478367170101597
+    - rid: 4810478367170101598
+    - rid: 4810478367170101599
+    - rid: 4810478367170101600
+    - rid: 4810478367170101601
+    - rid: 4810478367170101602
+    - rid: 4810478367170101603
+    - rid: 4810478367170101604
+    - rid: 4810478367170101605
+    - rid: 4810478367170101606
+    - rid: 4810478367170101607
+    - rid: 4810478367170101608
+    - rid: 4810478367170101609
+    - rid: 4810478367170101610
+    - rid: 4810478367170101611
+    - rid: 4810478367170101612
+    - rid: 4810478367170101613
+    - rid: 4810478367170101614
+    - rid: 4810478367170101615
+    - rid: 4810478367170101616
+    - rid: 4810478367170101617
+    - rid: 4810478367170101618
+    - rid: 4810478367170101619
+    - rid: 4810478367170101620
+    - rid: 4810478367170101621
+    - rid: 4810478367170101622
+    - rid: 4810478367170101623
+    - rid: 4810478367170101624
+    - rid: 4810478367170101625
+    - rid: 4810478367170101626
+    - rid: 4810478367170101627
+    - rid: 4810478367170101628
+    - rid: 4810478367170101629
+    - rid: 4810478367170101630
+    - rid: 4810478367170101631
+    - rid: 4810478367170101632
+    - rid: 4810478367170101633
+    - rid: 4810478367170101634
+    - rid: 4810478367170101635
+    - rid: 4810478367170101636
+    - rid: 4810478367170101637
+    - rid: 4810478367170101638
+    - rid: 4810478367170101639
+    - rid: 4810478367170101640
+    - rid: 4810478367170101641
+    - rid: 4810478367170101642
+    - rid: 4810478367170101643
+    - rid: 4810478367170101644
+    - rid: 4810478367170101645
+    - rid: 4810478367170101646
+    - rid: 4810478367170101647
+    - rid: 4810478367170101648
+    - rid: 4810478367170101649
+    - rid: 4810478367170101650
+    - rid: 4810478367170101651
+    - rid: 4810478367170101652
+    - rid: 4810478367170101653
+    - rid: 4810478367170101654
+    - rid: 4810478367170101655
+    - rid: 4810478367170101656
+    - rid: 4810478367170101657
+    - rid: 4810478367170101658
+    - rid: 4810478367170101659
+    - rid: 4810478367170101660
+    - rid: 4810478367170101661
+    - rid: 4810478367170101662
+    - rid: 4810478367170101663
+    - rid: 4810478367170101664
+    - rid: 4810478367170101665
+    - rid: 4810478367170101666
+    - rid: 4810478367170101667
+    - rid: 4810478367170101668
+    - rid: 4810478367170101669
+    - rid: 4810478367170101670
+    - rid: 4810478367170101671
+    - rid: 4810478367170101672
+    - rid: 4810478367170101673
+    - rid: 4810478367170101674
+    - rid: 4810478367170101675
+    - rid: 4810478367170101676
+    - rid: 4810478367170101677
+    - rid: 4810478367170101678
+    - rid: 4810478367170101679
+    - rid: 4810478367170101680
+    - rid: 4810478367170101681
+    - rid: 4810478367170101682
+    - rid: 4810478367170101683
+    - rid: 4810478367170101684
+    - rid: 4810478367170101685
+    - rid: 4810478367170101686
+    - rid: 4810478367170101687
+    - rid: 4810478367170101688
+    - rid: 4810478367170101689
+    - rid: 4810478367170101690
+    - rid: 4810478367170101691
+    - rid: 4810478367170101692
+    - rid: 4810478367170101693
+    - rid: 4810478367170101694
+    - rid: 4810478367170101695
+    - rid: 4810478367170101696
+    - rid: 4810478367170101697
+    - rid: 4810478367170101698
+    - rid: 4810478367170101699
+    - rid: 4810478367170101700
+    - rid: 4810478367170101701
+    - rid: 4810478367170101702
+    - rid: 4810478367170101703
+    - rid: 4810478367170101704
+    - rid: 4810478367170101705
+    - rid: 4810478367170101706
+    - rid: 4810478367170101707
+    - rid: 4810478367170101708
+    - rid: 4810478367170101709
+    - rid: 4810478367170101710
+    - rid: 4810478367170101711
+    - rid: 4810478367170101712
+    - rid: 4810478367170101713
+    - rid: 4810478367170101714
+    - rid: 4810478367170101715
+    - rid: 4810478367170101716
+    - rid: 4810478367170101717
+    - rid: 4810478367170101718
+    - rid: 4810478367170101719
+    - rid: 4810478367170101720
+    - rid: 4810478367170101721
+    - rid: 4810478367170101722
+    - rid: 4810478367170101723
+    - rid: 4810478367170101724
+    - rid: 4810478367170101725
+    - rid: 4810478367170101726
+    - rid: 4810478367170101727
+    - rid: 4810478367170101728
+    - rid: 4810478367170101729
+    - rid: 4810478367170101730
+    - rid: 4810478367170101731
+    - rid: 4810478367170101732
+    - rid: 4810478367170101733
+    - rid: 4810478367170101734
+    - rid: 4810478367170101735
+    - rid: 4810478367170101736
+    - rid: 4810478367170101737
+    - rid: 4810478367170101738
+    - rid: 4810478367170101739
+    - rid: 4810478367170101740
+    - rid: 4810478367170101741
+    _difficulty:
+      _name: Normal
+      _difficultyParameters:
+      - rid: 4810478367170101742
+      - rid: 4810478367170101743
+      - rid: 4810478367170101744
+  references:
+    version: 2
+    RefIds:
+    - rid: 4810478367170101465
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 0.375
+        _note: 0
+    - rid: 4810478367170101466
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 3.375
+        _note: 0
+    - rid: 4810478367170101467
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 6.375
+        _note: 1
+    - rid: 4810478367170101468
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 7.125
+        _note: 1
+    - rid: 4810478367170101469
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 7.875
+        _note: 1
+    - rid: 4810478367170101470
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 8.625
+        _note: 0
+    - rid: 4810478367170101471
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 9
+        _note: 1
+    - rid: 4810478367170101472
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 9.375
+        _note: 0
+    - rid: 4810478367170101473
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 10.125
+        _note: 0
+    - rid: 4810478367170101474
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 10.875
+        _note: 0
+    - rid: 4810478367170101475
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 11.625
+        _note: 1
+    - rid: 4810478367170101476
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 12
+        _note: 1
+    - rid: 4810478367170101477
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 12.375
+        _note: 0
+    - rid: 4810478367170101478
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 13.125
+        _note: 0
+    - rid: 4810478367170101479
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 13.875
+        _note: 1
+    - rid: 4810478367170101480
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 14.25
+        _note: 1
+    - rid: 4810478367170101481
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 14.625
+        _note: 0
+    - rid: 4810478367170101482
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 15
+        _note: 0
+    - rid: 4810478367170101483
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 15.375
+        _note: 1
+    - rid: 4810478367170101484
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 16.125
+        _note: 0
+    - rid: 4810478367170101485
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 16.875
+        _note: 1
+    - rid: 4810478367170101486
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 17.25
+        _note: 0
+    - rid: 4810478367170101487
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 17.625
+        _note: 1
+    - rid: 4810478367170101488
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 18
+        _note: 0
+    - rid: 4810478367170101489
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 18.375
+        _note: 1
+    - rid: 4810478367170101490
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 19.125
+        _note: 0
+    - rid: 4810478367170101491
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 19.875
+        _note: 0
+    - rid: 4810478367170101492
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 20.25
+        _note: 1
+    - rid: 4810478367170101493
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 20.625
+        _note: 0
+    - rid: 4810478367170101494
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 21
+        _note: 1
+    - rid: 4810478367170101495
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 21.75
+        _note: 1
+    - rid: 4810478367170101496
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 22.125
+        _note: 0
+    - rid: 4810478367170101497
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 22.5
+        _note: 1
+    - rid: 4810478367170101498
+      type: {class: Spinner, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 22.875
+        _duration: 0.75
+    - rid: 4810478367170101499
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 24.375
+        _note: 1
+    - rid: 4810478367170101500
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 24.75
+        _note: 0
+    - rid: 4810478367170101501
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 25.125
+        _note: 1
+    - rid: 4810478367170101502
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 25.5
+        _note: 1
+    - rid: 4810478367170101503
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 25.687
+        _note: 0
+    - rid: 4810478367170101504
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 26.062
+        _note: 0
+    - rid: 4810478367170101505
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 26.25
+        _note: 1
+    - rid: 4810478367170101506
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 26.625
+        _note: 0
+    - rid: 4810478367170101507
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 27
+        _note: 0
+    - rid: 4810478367170101508
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 27.375
+        _note: 1
+    - rid: 4810478367170101509
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 27.75
+        _note: 0
+    - rid: 4810478367170101510
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 28.125
+        _note: 1
+    - rid: 4810478367170101511
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 28.5
+        _note: 0
+    - rid: 4810478367170101512
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 28.687
+        _note: 1
+    - rid: 4810478367170101513
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 29.062
+        _note: 1
+    - rid: 4810478367170101514
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 29.25
+        _note: 0
+    - rid: 4810478367170101515
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 29.625
+        _note: 0
+    - rid: 4810478367170101516
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 30.375
+        _note: 1
+    - rid: 4810478367170101517
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 30.75
+        _note: 0
+    - rid: 4810478367170101518
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 31.125
+        _note: 1
+    - rid: 4810478367170101519
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 31.5
+        _note: 1
+    - rid: 4810478367170101520
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 31.687
+        _note: 0
+    - rid: 4810478367170101521
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 32.062
+        _note: 0
+    - rid: 4810478367170101522
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 32.25
+        _note: 1
+    - rid: 4810478367170101523
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 32.625
+        _note: 0
+    - rid: 4810478367170101524
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 33
+        _note: 0
+    - rid: 4810478367170101525
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 33.375
+        _note: 1
+    - rid: 4810478367170101526
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 33.75
+        _note: 0
+    - rid: 4810478367170101527
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 34.125
+        _note: 1
+    - rid: 4810478367170101528
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 34.5
+        _note: 1
+    - rid: 4810478367170101529
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 34.687
+        _note: 0
+    - rid: 4810478367170101530
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 35.25
+        _note: 1
+    - rid: 4810478367170101531
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 35.625
+        _note: 0
+    - rid: 4810478367170101532
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 36
+        _note: 0
+    - rid: 4810478367170101533
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 36.375
+        _note: 1
+    - rid: 4810478367170101534
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 37.125
+        _note: 1
+    - rid: 4810478367170101535
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 37.5
+        _note: 1
+    - rid: 4810478367170101536
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 37.875
+        _note: 0
+    - rid: 4810478367170101537
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 38.437
+        _note: 0
+    - rid: 4810478367170101538
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 38.812
+        _note: 0
+    - rid: 4810478367170101539
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 39.187
+        _note: 1
+    - rid: 4810478367170101540
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 39.75
+        _note: 1
+    - rid: 4810478367170101541
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 40.125
+        _note: 1
+    - rid: 4810478367170101542
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 40.5
+        _note: 0
+    - rid: 4810478367170101543
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 40.687
+        _note: 1
+    - rid: 4810478367170101544
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 41.625
+        _note: 0
+    - rid: 4810478367170101545
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 42.375
+        _note: 1
+    - rid: 4810478367170101546
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 43.125
+        _note: 0
+    - rid: 4810478367170101547
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 43.5
+        _note: 0
+    - rid: 4810478367170101548
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 43.875
+        _note: 1
+    - rid: 4810478367170101549
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 44.25
+        _note: 1
+    - rid: 4810478367170101550
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 44.437
+        _note: 0
+    - rid: 4810478367170101551
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 44.812
+        _note: 0
+    - rid: 4810478367170101552
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 45.187
+        _note: 1
+    - rid: 4810478367170101553
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 45.75
+        _note: 0
+    - rid: 4810478367170101554
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 46.125
+        _note: 1
+    - rid: 4810478367170101555
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 46.5
+        _note: 0
+    - rid: 4810478367170101556
+      type: {class: Drumroll, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 46.687
+        _duration: 0.35
+    - rid: 4810478367170101557
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 48.375
+        _note: 1
+    - rid: 4810478367170101558
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 48.75
+        _note: 0
+    - rid: 4810478367170101559
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 49.125
+        _note: 1
+    - rid: 4810478367170101560
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 49.5
+        _note: 0
+    - rid: 4810478367170101561
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 49.687
+        _note: 1
+    - rid: 4810478367170101562
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 50.062
+        _note: 1
+    - rid: 4810478367170101563
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 50.25
+        _note: 0
+    - rid: 4810478367170101564
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 50.625
+        _note: 1
+    - rid: 4810478367170101565
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 51
+        _note: 0
+    - rid: 4810478367170101566
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 51.187
+        _note: 1
+    - rid: 4810478367170101567
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 51.562
+        _note: 1
+    - rid: 4810478367170101568
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 51.75
+        _note: 0
+    - rid: 4810478367170101569
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 52.125
+        _note: 1
+    - rid: 4810478367170101570
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 52.312
+        _note: 0
+    - rid: 4810478367170101571
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 52.687
+        _note: 0
+    - rid: 4810478367170101572
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 52.875
+        _note: 1
+    - rid: 4810478367170101573
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 53.25
+        _note: 0
+    - rid: 4810478367170101574
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 53.437
+        _note: 0
+    - rid: 4810478367170101575
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 54.375
+        _note: 1
+    - rid: 4810478367170101576
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 54.75
+        _note: 0
+    - rid: 4810478367170101577
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 55.125
+        _note: 1
+    - rid: 4810478367170101578
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 55.5
+        _note: 1
+    - rid: 4810478367170101579
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 55.687
+        _note: 0
+    - rid: 4810478367170101580
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 56.062
+        _note: 0
+    - rid: 4810478367170101581
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 56.25
+        _note: 1
+    - rid: 4810478367170101582
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 56.625
+        _note: 0
+    - rid: 4810478367170101583
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 57
+        _note: 1
+    - rid: 4810478367170101584
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 57.375
+        _note: 1
+    - rid: 4810478367170101585
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 57.75
+        _note: 0
+    - rid: 4810478367170101586
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 58.125
+        _note: 0
+    - rid: 4810478367170101587
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 58.5
+        _note: 1
+    - rid: 4810478367170101588
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 58.687
+        _note: 0
+    - rid: 4810478367170101589
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 59.062
+        _note: 0
+    - rid: 4810478367170101590
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 59.25
+        _note: 1
+    - rid: 4810478367170101591
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 59.625
+        _note: 0
+    - rid: 4810478367170101592
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 60.375
+        _note: 1
+    - rid: 4810478367170101593
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 61.125
+        _note: 1
+    - rid: 4810478367170101594
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 61.875
+        _note: 0
+    - rid: 4810478367170101595
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 62.625
+        _note: 0
+    - rid: 4810478367170101596
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 63
+        _note: 1
+    - rid: 4810478367170101597
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 63.375
+        _note: 1
+    - rid: 4810478367170101598
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 64.125
+        _note: 1
+    - rid: 4810478367170101599
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 64.875
+        _note: 0
+    - rid: 4810478367170101600
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 65.625
+        _note: 1
+    - rid: 4810478367170101601
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 66
+        _note: 1
+    - rid: 4810478367170101602
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 66.375
+        _note: 0
+    - rid: 4810478367170101603
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 67.125
+        _note: 1
+    - rid: 4810478367170101604
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 67.875
+        _note: 1
+    - rid: 4810478367170101605
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 68.625
+        _note: 0
+    - rid: 4810478367170101606
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 69
+        _note: 1
+    - rid: 4810478367170101607
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 69.375
+        _note: 1
+    - rid: 4810478367170101608
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 70.125
+        _note: 1
+    - rid: 4810478367170101609
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 70.875
+        _note: 0
+    - rid: 4810478367170101610
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 71.625
+        _note: 0
+    - rid: 4810478367170101611
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 72
+        _note: 0
+    - rid: 4810478367170101612
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 72.375
+        _note: 1
+    - rid: 4810478367170101613
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 73.125
+        _note: 1
+    - rid: 4810478367170101614
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 73.5
+        _note: 0
+    - rid: 4810478367170101615
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 73.875
+        _note: 1
+    - rid: 4810478367170101616
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 74.625
+        _note: 0
+    - rid: 4810478367170101617
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 75
+        _note: 1
+    - rid: 4810478367170101618
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 75.375
+        _note: 0
+    - rid: 4810478367170101619
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 75.75
+        _note: 1
+    - rid: 4810478367170101620
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 76.125
+        _note: 0
+    - rid: 4810478367170101621
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 76.875
+        _note: 1
+    - rid: 4810478367170101622
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 77.25
+        _note: 1
+    - rid: 4810478367170101623
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 77.625
+        _note: 0
+    - rid: 4810478367170101624
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 78.375
+        _note: 1
+    - rid: 4810478367170101625
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 79.125
+        _note: 0
+    - rid: 4810478367170101626
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 79.5
+        _note: 1
+    - rid: 4810478367170101627
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 79.875
+        _note: 0
+    - rid: 4810478367170101628
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 80.625
+        _note: 1
+    - rid: 4810478367170101629
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 81
+        _note: 0
+    - rid: 4810478367170101630
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 81.375
+        _note: 1
+    - rid: 4810478367170101631
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 81.75
+        _note: 0
+    - rid: 4810478367170101632
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 82.125
+        _note: 1
+    - rid: 4810478367170101633
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 82.875
+        _note: 0
+    - rid: 4810478367170101634
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 83.625
+        _note: 1
+    - rid: 4810478367170101635
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 84
+        _note: 0
+    - rid: 4810478367170101636
+      type: {class: Spinner, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 84.375
+        _duration: 1.125
+    - rid: 4810478367170101637
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 85.875
+        _note: 1
+    - rid: 4810478367170101638
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 86.25
+        _note: 1
+    - rid: 4810478367170101639
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 86.625
+        _note: 0
+    - rid: 4810478367170101640
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 87
+        _note: 1
+    - rid: 4810478367170101641
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 87.187
+        _note: 0
+    - rid: 4810478367170101642
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 87.562
+        _note: 1
+    - rid: 4810478367170101643
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 87.75
+        _note: 1
+    - rid: 4810478367170101644
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 88.125
+        _note: 0
+    - rid: 4810478367170101645
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 88.5
+        _note: 0
+    - rid: 4810478367170101646
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 88.687
+        _note: 0
+    - rid: 4810478367170101647
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 88.875
+        _note: 1
+    - rid: 4810478367170101648
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 89.25
+        _note: 0
+    - rid: 4810478367170101649
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 89.625
+        _note: 1
+    - rid: 4810478367170101650
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 90
+        _note: 1
+    - rid: 4810478367170101651
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 90.187
+        _note: 0
+    - rid: 4810478367170101652
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 90.562
+        _note: 1
+    - rid: 4810478367170101653
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 90.75
+        _note: 1
+    - rid: 4810478367170101654
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 91.125
+        _note: 0
+    - rid: 4810478367170101655
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 91.5
+        _note: 1
+    - rid: 4810478367170101656
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 91.687
+        _note: 1
+    - rid: 4810478367170101657
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 91.875
+        _note: 1
+    - rid: 4810478367170101658
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 92.25
+        _note: 0
+    - rid: 4810478367170101659
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 92.625
+        _note: 0
+    - rid: 4810478367170101660
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 93
+        _note: 1
+    - rid: 4810478367170101661
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 93.187
+        _note: 0
+    - rid: 4810478367170101662
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 93.562
+        _note: 1
+    - rid: 4810478367170101663
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 93.75
+        _note: 1
+    - rid: 4810478367170101664
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 94.125
+        _note: 0
+    - rid: 4810478367170101665
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 94.5
+        _note: 1
+    - rid: 4810478367170101666
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 94.687
+        _note: 1
+    - rid: 4810478367170101667
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 94.875
+        _note: 1
+    - rid: 4810478367170101668
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 95.812
+        _note: 0
+    - rid: 4810478367170101669
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 96.187
+        _note: 1
+    - rid: 4810478367170101670
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 96.562
+        _note: 0
+    - rid: 4810478367170101671
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 96.937
+        _note: 1
+    - rid: 4810478367170101672
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 97.312
+        _note: 1
+    - rid: 4810478367170101673
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 97.5
+        _note: 0
+    - rid: 4810478367170101674
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 97.875
+        _note: 1
+    - rid: 4810478367170101675
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 98.25
+        _note: 0
+    - rid: 4810478367170101676
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 98.625
+        _note: 0
+    - rid: 4810478367170101677
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 99
+        _note: 1
+    - rid: 4810478367170101678
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 99.187
+        _note: 0
+    - rid: 4810478367170101679
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 99.562
+        _note: 0
+    - rid: 4810478367170101680
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 99.75
+        _note: 1
+    - rid: 4810478367170101681
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 100.125
+        _note: 0
+    - rid: 4810478367170101682
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 100.5
+        _note: 0
+    - rid: 4810478367170101683
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 100.687
+        _note: 0
+    - rid: 4810478367170101684
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 100.875
+        _note: 1
+    - rid: 4810478367170101685
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 101.25
+        _note: 1
+    - rid: 4810478367170101686
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 101.625
+        _note: 0
+    - rid: 4810478367170101687
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 102
+        _note: 1
+    - rid: 4810478367170101688
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 102.187
+        _note: 0
+    - rid: 4810478367170101689
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 102.562
+        _note: 0
+    - rid: 4810478367170101690
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 102.75
+        _note: 1
+    - rid: 4810478367170101691
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 103.125
+        _note: 0
+    - rid: 4810478367170101692
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 103.5
+        _note: 1
+    - rid: 4810478367170101693
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 103.687
+        _note: 0
+    - rid: 4810478367170101694
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 103.875
+        _note: 1
+    - rid: 4810478367170101695
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 104.25
+        _note: 0
+    - rid: 4810478367170101696
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 104.625
+        _note: 1
+    - rid: 4810478367170101697
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 105
+        _note: 1
+    - rid: 4810478367170101698
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 105.187
+        _note: 0
+    - rid: 4810478367170101699
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 106.875
+        _note: 1
+    - rid: 4810478367170101700
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 107.25
+        _note: 0
+    - rid: 4810478367170101701
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 107.625
+        _note: 1
+    - rid: 4810478367170101702
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 108
+        _note: 1
+    - rid: 4810478367170101703
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 108.187
+        _note: 0
+    - rid: 4810478367170101704
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 108.562
+        _note: 0
+    - rid: 4810478367170101705
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 108.75
+        _note: 1
+    - rid: 4810478367170101706
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 109.125
+        _note: 0
+    - rid: 4810478367170101707
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 109.5
+        _note: 0
+    - rid: 4810478367170101708
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 109.875
+        _note: 1
+    - rid: 4810478367170101709
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 110.25
+        _note: 0
+    - rid: 4810478367170101710
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 110.625
+        _note: 1
+    - rid: 4810478367170101711
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 111
+        _note: 1
+    - rid: 4810478367170101712
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 111.187
+        _note: 0
+    - rid: 4810478367170101713
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 111.562
+        _note: 0
+    - rid: 4810478367170101714
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 111.75
+        _note: 1
+    - rid: 4810478367170101715
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 112.125
+        _note: 1
+    - rid: 4810478367170101716
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 112.5
+        _note: 0
+    - rid: 4810478367170101717
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 112.687
+        _note: 0
+    - rid: 4810478367170101718
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 112.875
+        _note: 1
+    - rid: 4810478367170101719
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 113.25
+        _note: 0
+    - rid: 4810478367170101720
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 113.625
+        _note: 1
+    - rid: 4810478367170101721
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 114
+        _note: 1
+    - rid: 4810478367170101722
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 114.187
+        _note: 0
+    - rid: 4810478367170101723
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 114.562
+        _note: 1
+    - rid: 4810478367170101724
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 114.75
+        _note: 1
+    - rid: 4810478367170101725
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 115.125
+        _note: 0
+    - rid: 4810478367170101726
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 115.5
+        _note: 0
+    - rid: 4810478367170101727
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 115.875
+        _note: 1
+    - rid: 4810478367170101728
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 116.25
+        _note: 0
+    - rid: 4810478367170101729
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 116.625
+        _note: 1
+    - rid: 4810478367170101730
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 117
+        _note: 1
+    - rid: 4810478367170101731
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 117.187
+        _note: 0
+    - rid: 4810478367170101732
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 117.75
+        _note: 1
+    - rid: 4810478367170101733
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 118.125
+        _note: 1
+    - rid: 4810478367170101734
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 118.5
+        _note: 1
+    - rid: 4810478367170101735
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 118.687
+        _note: 0
+    - rid: 4810478367170101736
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 119.25
+        _note: 1
+    - rid: 4810478367170101737
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 119.625
+        _note: 0
+    - rid: 4810478367170101738
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 120
+        _note: 0
+    - rid: 4810478367170101739
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 120.187
+        _note: 1
+    - rid: 4810478367170101740
+      type: {class: SingleNote, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 120.937
+        _note: 0
+    - rid: 4810478367170101741
+      type: {class: Spinner, ns: Beatmaps, asm: SongMap}
+      data:
+        _hitTime: 121.125
+        _duration: 4.125
+    - rid: 4810478367170101742
+      type: {class: SingleNoteClickIntervalParams, ns: Beatmaps, asm: SongMap}
+      data:
+        _intervalSeconds: 0.03
+    - rid: 4810478367170101743
+      type: {class: DrumrollClickIntervalParams, ns: Beatmaps, asm: SongMap}
+      data:
+        _intervalSeconds: 0.05
+    - rid: 4810478367170101744
+      type: {class: SpinnerClicksPerSecondParams, ns: Beatmaps, asm: SongMap}
+      data:
+        _clicksPerSecond: 5
