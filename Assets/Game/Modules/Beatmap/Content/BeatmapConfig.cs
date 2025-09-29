@@ -11,6 +11,11 @@ namespace Beatmaps
 		[SerializeField]
 		private Beatmap _beatmap;
 
+		public void SetBeatmap(Beatmap beatmap)
+		{
+			_beatmap = beatmap;
+		}
+
 		[Button]
 		private void SetDifficulty(DifficultyConfig difficultyConfig)
 		{
