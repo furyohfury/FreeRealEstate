@@ -6,6 +6,7 @@ using Game.BeatmapLaunch;
 using Game.BeatmapRestart;
 using Game.BeatmapTime;
 using Game.Controllers;
+using Game.Controllers.Audio;
 using Game.ElementHandle;
 using Game.Input;
 using Game.SceneSwitch;
@@ -85,7 +86,8 @@ namespace Installers
 			RegisterBeatmapLauncher(builder);
 			RegisterBeatmapRestarter(builder);
 			RegisterBeatmapFinisher(builder);
-			RegisterCurrentBundleService(builder);
+			RegisterCurrentBundleController(builder);
+			RegisterSceneServices(builder);
 
 			Debug.Log("Successfully installed all scene systems");
 		}
@@ -154,9 +156,8 @@ namespace Installers
 			builder.Register<BeatmapRestarter>(Lifetime.Singleton);
 		}
 
-		private static void RegisterCurrentBundleService(IContainerBuilder builder)
+		private static void RegisterCurrentBundleController(IContainerBuilder builder)
 		{
-			builder.Register<CurrentBundleService>(Lifetime.Singleton);
 			builder.RegisterEntryPoint<BundleServiceController>();
 		}
 
@@ -340,6 +341,13 @@ namespace Installers
 			       .As<IBackgroundChanger>();
 
 			Debug.Log("Successfully installed scene visual systems");
+		}
+
+		private void RegisterSceneServices(IContainerBuilder builder)
+		{
+			builder.Register<SceneStartMapLauncher>(Lifetime.Scoped)
+			       .AsImplementedInterfaces();
+			builder.RegisterEntryPoint<AudioOnSceneSwitchController>(Lifetime.Scoped);
 		}
 	}
 }

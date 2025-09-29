@@ -2,6 +2,7 @@
 using FirebaseSystem;
 using Game;
 using Game.Audio;
+using Game.BeatmapLaunch;
 using Game.Leaderboard;
 using Game.Meta.Authentication;
 using Game.Visuals;
@@ -29,6 +30,7 @@ namespace Installers
 			RegisterFirebaseSystems(builder);
 			RegisterLeaderboardSystems(builder);
 			RegisterElementTimeoutHelper(builder);
+			builder.Register<CurrentBundleService>(Lifetime.Singleton);
 		}
 
 		private static void InstallObjectProvider(IContainerBuilder builder)
