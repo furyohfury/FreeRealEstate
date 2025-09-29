@@ -186,7 +186,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      taiko-flower-group_0: -5623909195875976569
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

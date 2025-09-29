@@ -56,6 +56,9 @@ PluginImporter:
     WebGL:
       enabled: 1
       settings: {}
+    Win64:
+      enabled: 1
+      settings: {}
     WindowsStoreApps:
       enabled: 1
       settings:

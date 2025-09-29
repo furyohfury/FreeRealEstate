@@ -186,7 +186,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      "taiko-glow - \u0414CR\u0414Cs\u0414A[_0": -7796118142142235171
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -261,7 +261,11 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      spinner-approachcircle_0: -9222394147491877743
+      spinner-approachcircle_1: -8590277650339290950
+      spinner-approachcircle_2: 6819369851697104282
+      spinner-approachcircle_3: 2144729415472268720
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

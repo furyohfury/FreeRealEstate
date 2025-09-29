@@ -186,7 +186,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      sliderfollowcircle_0: -4696997679911999809
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

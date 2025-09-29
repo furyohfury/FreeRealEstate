@@ -186,7 +186,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      mode-fruits-med_0: -4111872383670896948
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

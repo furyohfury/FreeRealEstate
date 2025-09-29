@@ -186,7 +186,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      taiko-drum-outer_0: 2540898091763133587
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

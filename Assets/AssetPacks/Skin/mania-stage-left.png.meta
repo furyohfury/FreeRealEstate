@@ -186,7 +186,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      mania-stage-left_0: -8638760003849089506
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

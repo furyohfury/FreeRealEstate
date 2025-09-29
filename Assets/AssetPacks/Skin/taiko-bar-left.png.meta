@@ -186,7 +186,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      taiko-bar-left_0: 2177953341751648445
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

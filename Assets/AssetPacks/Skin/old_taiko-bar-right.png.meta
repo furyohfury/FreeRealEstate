@@ -186,7 +186,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      old_taiko-bar-right_0: -210786487500343860
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

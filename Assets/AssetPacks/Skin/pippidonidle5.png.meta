@@ -186,7 +186,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      pippidonidle5_0: -181279555037379282
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

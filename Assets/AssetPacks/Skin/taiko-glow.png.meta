@@ -186,7 +186,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      taiko-glow_0: -3649275543455699969
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -186,7 +186,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      selection-mod-hardrock_0: 2590481041065310411
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -186,7 +186,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      mania-key2D_0: 1717242916579865256
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

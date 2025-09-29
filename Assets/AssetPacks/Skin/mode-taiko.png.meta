@@ -186,7 +186,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      mode-taiko_0: 7007140924269584178
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

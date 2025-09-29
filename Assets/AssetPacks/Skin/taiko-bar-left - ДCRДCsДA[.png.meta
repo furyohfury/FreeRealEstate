@@ -236,7 +236,10 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      "taiko-bar-left - \u0414CR\u0414Cs\u0414A[_0": -7854126461245852956
+      "taiko-bar-left - \u0414CR\u0414Cs\u0414A[_1": -4302829607435423198
+      "taiko-bar-left - \u0414CR\u0414Cs\u0414A[_2": -3248211715244157022
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
