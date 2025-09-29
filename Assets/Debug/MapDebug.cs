@@ -129,6 +129,14 @@ namespace GameDebug
 		// 	                                         .Subscribe(_ => _inputReader.OnTestNote(Notes.Blue));
 		// }
 
+		[SerializeField]
+		private BeatmapBundle _beatmapBundleParsed;
+		[Button]
+		public void LaunchParsedMap()
+		{
+			_beatmapLauncher.Launch(_beatmapBundleParsed, 0);
+		}
+
 		[Button]
 		private void DebugUpdateObservables()
 		{

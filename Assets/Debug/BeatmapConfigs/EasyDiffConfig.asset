@@ -10,26 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 56f07564a5a447efbfd212f15788a71b, type: 3}
-  m_Name: NormalDiffDebug
+  m_Name: EasyDiffConfig
   m_EditorClassIdentifier: 
   _difficulty:
-    _name: Normal
+    _name: Easy
     _difficultyParameters:
-    - rid: 710760745461612617
-    - rid: 710760745461612618
-    - rid: 710760745461612619
+    - rid: 4810478367170101291
+    - rid: 4810478367170101292
+    - rid: 4810478367170101293
   references:
     version: 2
     RefIds:
-    - rid: 710760745461612617
+    - rid: 4810478367170101291
       type: {class: SingleNoteClickIntervalParams, ns: Beatmaps, asm: SongMap}
       data:
-        _intervalSeconds: 0.03
-    - rid: 710760745461612618
+        _intervalSeconds: 0.1
+    - rid: 4810478367170101292
       type: {class: SpinnerClicksPerSecondParams, ns: Beatmaps, asm: SongMap}
       data:
-        _clicksPerSecond: 5
-    - rid: 710760745461612619
+        _clicksPerSecond: 3
+    - rid: 4810478367170101293
       type: {class: DrumrollClickIntervalParams, ns: Beatmaps, asm: SongMap}
       data:
-        _intervalSeconds: 0.04
+        _intervalSeconds: 0.1
