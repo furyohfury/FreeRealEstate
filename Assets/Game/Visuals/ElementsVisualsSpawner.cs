@@ -1,5 +1,6 @@
 ﻿using System;
 using Beatmaps;
+using Game.BeatmapControl;
 using Game.BeatmapTime;
 using Game.Services;
 using R3;
@@ -80,7 +81,7 @@ namespace Game.Visuals
 
 		private bool ElementTimeIsInScrollRange(float elementTime)
 		{
-			return elementTime - NotesVisualStaticData.SCROLL_TIME <= _mapTime.GetMapTimeInSeconds();
+			return elementTime - NotesStaticData.SCROLL_TIME <= _mapTime.GetMapTimeInSeconds();
 		}
 
 		private ElementView SpawnView(MapElement element)

@@ -55,7 +55,7 @@ namespace Game.Visuals
 			var bpm = map.GetBpm();
 			var drumrollNotesCount = _drumrollTickrateService.GetNotesCountByDuration(bpm, drumroll.Duration);
 			var scrollDistance = _screenBeatmapBoundsService.GetNoteLineDistance();
-			var length = drumroll.Duration / NotesVisualStaticData.SCROLL_TIME * scrollDistance;
+			var length = drumroll.Duration / NotesStaticData.SCROLL_TIME * scrollDistance;
 
 			var view = Object.Instantiate(_prefab, parent);
 			view.SetLength(length);

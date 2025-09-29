@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Beatmaps;
+using Game.BeatmapControl;
 using Game.Services;
 using R3;
 using UnityEngine;
@@ -7,7 +9,7 @@ using VContainer.Unity;
 
 namespace Game.Visuals
 {
-	public sealed class ElementsHorizontalMover : IInitializable
+	public sealed class ElementsHorizontalMover : IInitializable, IDisposable
 	{
 		private readonly ScreenBeatmapBoundsService _boundsService;
 
@@ -48,7 +50,7 @@ namespace Game.Visuals
 		private float CalculateSpeed()
 		{
 			var distance = Vector2.Distance(_boundsService.HitPoint, _boundsService.StartPoint);
-			var speed = distance / NotesVisualStaticData.SCROLL_TIME;
+			var speed = distance / NotesStaticData.SCROLL_TIME;
 			return speed;
 		}
 
@@ -63,6 +65,11 @@ namespace Game.Visuals
 			{
 				view.Move(view.GetPosition() - new Vector3(_speed * Time.deltaTime, 0, 0));
 			}
+		}
+
+		public void Dispose()
+		{
+			_disposable.Dispose();
 		}
 	}
 }
