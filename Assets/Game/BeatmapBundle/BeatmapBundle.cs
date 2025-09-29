@@ -11,6 +11,7 @@ namespace Game.BeatmapBundles
 	{
 		public string Name => _name;
 		public string SongId => _songId;
+		public AudioClip SongClip => _songClip;
 		public Sprite Background => _background;
 		public BeatmapVariant[] BeatmapsVariants => _beatmapsVariants;
 
@@ -26,6 +27,8 @@ namespace Game.BeatmapBundles
 		private string _name;
 		[SerializeField]
 		private string _songId;
+		[SerializeField]
+		private AudioClip _songClip;
 		[SerializeField]
 		private Sprite _background;
 		[SerializeField]
