@@ -20,6 +20,16 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 03f780b01b9b2e640984a49e5a44edd1
+    m_Address: Assets/AssetPacks/UI/CorePro/Flat Pack/Fonts/lato/Lato-Black SDF.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 048608fcbc454444c8dae1da78579749
+    m_Address: Assets/AssetPacks/UI/CorePro/Flat Pack/Fonts/lato/Lato-Semibold SDF.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0c6b0bee1c6290046992a8797e0c8a8c
     m_Address: MessagePopup
     m_ReadOnly: 0
@@ -30,8 +40,28 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1322b9d899d3fe547ae06640c8ed73cf
+    m_Address: Assets/AssetPacks/UI/CorePro/Flat Pack/Fonts/lato/Lato-Hairline SDF.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 186bb4bc8c04566488154beb5ea1613c
+    m_Address: 2293341 Hanako Nana - Born To Run
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4c19d69258593a04b82d2f60bcff0d04
     m_Address: LeaderboardRecord
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4cbdf439fba57604e9054be4294f9a9a
+    m_Address: Assets/AssetPacks/UI/CorePro/Flat Pack/Fonts/lato/Lato-Heavy SDF.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4e26f9a17e3f6d947ae648e4d8585919
+    m_Address: Assets/AssetPacks/UI/CorePro/Flat Pack/Fonts/lato/Lato-Light SDF.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -40,8 +70,37 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5bdea4d44643db04d81805291e1c15ff
+    m_Address: Assets/AssetPacks/UI/CorePro/Flat Pack/Fonts/lato/Lato-Medium SDF.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 61f156801be0aad49bf077027b5b2a66
+    m_Address: Assets/AssetPacks/UI/CorePro/Flat Pack/Fonts/lato/Lato-HeavyItalic
+      SDF.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 692fbc68a1d1635488de64757e0c3492
+    m_Address: Assets/AssetPacks/UI/CorePro/Flat Pack/Fonts/lato/Lato-BoldItalic
+      SDF.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6cd78b39f278c064981b2fa6953afb43
     m_Address: DrumrollPrefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 715aac65b240bd748b38cd629028fbe6
+    m_Address: Assets/AssetPacks/UI/CorePro/Flat Pack/Fonts/lato/Lato-SemiboldItalic
+      SDF.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 72494c17913795540b1f3a7f8e2ed769
+    m_Address: Assets/AssetPacks/UI/CorePro/Flat Pack/Fonts/lato/Lato-ThinItalic
+      SDF.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -65,8 +124,18 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8c9cfa26abfee488c85f1582747f6a02
+    m_Address: SampleScene
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 929a3909043a889478f0e89faac92533
     m_Address: taiko-normal-hitclap
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a2c185c821ccff74eae3c5a351c79e5f
+    m_Address: Assets/AssetPacks/UI/CorePro/Flat Pack/Fonts/lato/Lato-Regular SDF.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -75,13 +144,46 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a544124f1c2a3fe42bc346c97bf60e6f
+    m_Address: Assets/Game/Visuals/Elements/SingleNote/Prefabs/Circle   25t    Stroke
+      30.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a8fbfe7a53aea9d40b35e59e5dec6026
     m_Address: AuthScene
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b1126ab8ffe3cdc4d8ea30dcd8eaed62
+    m_Address: Assets/AssetPacks/UI/CorePro/Flat Pack/Shapes/Circle 512x512/Circle  
+      25t    Stroke 30.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b5743214621f4c249b61bb895e5dd9cd
+    m_Address: Assets/AssetPacks/UI/CorePro/Flat Pack/Fonts/lato/Lato-Bold SDF.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c0aa364b63165fc4e9ba383c3471802a
+    m_Address: Assets/AssetPacks/UI/CorePro/Flat Pack/Fonts/lato/Lato-Thin SDF.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c527b5f5dbfb8b944aca40c215023419
     m_Address: soft-hitclap
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cab98dad88c55b244b7bc3fc153de571
+    m_Address: Assets/AssetPacks/UI/CorePro/Flat Pack/Fonts/lato/Lato-Italic SDF.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cb62a3f04deba5e4cb4877a3ae2a834b
+    m_Address: Assets/AssetPacks/UI/CorePro/Flat Pack/Fonts/lato/Lato-HairlineItalic
+      SDF.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -100,8 +202,26 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e76c62a5a514fb24686e94ae51d66b6b
+    m_Address: Assets/AssetPacks/UI/CorePro/Flat Pack/Fonts/lato/Lato-BlackItalic
+      SDF.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ecfaf5281878ed242ba31e5f057d3670
+    m_Address: Assets/AssetPacks/UI/CorePro/Flat Pack/Fonts/lato/Lato-LightItalic
+      SDF.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f060d3f929788b544932859b6ad0c379
     m_Address: MainMenuScene
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f20a6bb0b484f3549b9cbe253524fadc
+    m_Address: Assets/AssetPacks/UI/CorePro/Flat Pack/Fonts/lato/Lato-MediumItalic
+      SDF.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
