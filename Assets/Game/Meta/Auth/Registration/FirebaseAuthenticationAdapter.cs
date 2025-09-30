@@ -1,4 +1,6 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using Firebase.Auth;
 using FirebaseSystem;
 
@@ -14,38 +16,56 @@ namespace Game.Meta.Authentication
 			_firebaseManager = firebaseManager;
 		}
 
-		public async UniTask<IAuthResult> Register(string email, string password, string nickname)
+		public async UniTask<IAuthResult> Register(string email, string password, string nickname, CancellationToken token = default)
 		{
-			var result = await _firebaseManager.Register(email, password, nickname);
-			if (result is AuthSuccess success)
+			try
 			{
-				_firebaseUser = success.User;
-				return new SuccessAuthResult();
-			}
+				var result = await _firebaseManager.Register(email, password, nickname)
+				                                   .AttachExternalCancellation(token);
+				if (result is AuthSuccess success)
+				{
+					_firebaseUser = success.User;
+					return new SuccessAuthResult();
+				}
 
-			if (result is AuthFailure failure)
+				if (result is AuthFailure failure)
+				{
+					return new ErrorAuthResult(failure.Message);
+				}
+
+				return new NullAuthResult();
+			}
+			catch (OperationCanceledException e)
 			{
-				return new ErrorAuthResult(failure.Message);
+				await UniTask.SwitchToMainThread();
+				return new ErrorAuthResult(e.Message);
 			}
-
-			return new NullAuthResult();
 		}
 
-		public async UniTask<IAuthResult> Login(string email, string password)
+		public async UniTask<IAuthResult> Login(string email, string password, CancellationToken token = default)
 		{
-			var result = await _firebaseManager.SignIn(email, password);
-			if (result is AuthSuccess success)
+			try
 			{
-				_firebaseUser = success.User;
-				return new SuccessAuthResult();
-			}
+				var result = await _firebaseManager.SignIn(email, password)
+				                                   .AttachExternalCancellation(token);;
+				if (result is AuthSuccess success)
+				{
+					_firebaseUser = success.User;
+					return new SuccessAuthResult();
+				}
 
-			if (result is AuthFailure failure)
+				if (result is AuthFailure failure)
+				{
+					return new ErrorAuthResult(failure.Message);
+				}
+
+				return new NullAuthResult();
+			}
+			catch (OperationCanceledException e)
 			{
-				return new ErrorAuthResult(failure.Message);
+				await UniTask.SwitchToMainThread();
+				return new ErrorAuthResult(e.Message);
 			}
-
-			return new NullAuthResult();
 		}
 
 		public UserData GetUserData()

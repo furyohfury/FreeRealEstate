@@ -1,4 +1,5 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System.Threading;
+using Cysharp.Threading.Tasks;
 using Game.Meta.Authentication;
 using Game.SceneSwitch;
 using R3;
@@ -41,7 +42,7 @@ namespace Game.UI
 
 			_loginWindow.OnSignInButtonPressed
 			            .WithLatestFrom(fieldsStream, (_, fields) => fields)
-			            .Subscribe(OnRegister)
+			            .Subscribe(OnLogin)
 			            .AddTo(_disposable);
 
 			_loginWindow.OnBackButtonPressed
@@ -53,17 +54,20 @@ namespace Game.UI
 			            .AddTo(_disposable);
 		}
 
-		private async void OnRegister(string[] fields)
+		private async void OnLogin(string[] fields)
 		{
-			await Register(fields[0], fields[1]);
+			await Login(fields[0], fields[1]);
 		}
 
-		private async UniTask Register(string email, string password)
+		private async UniTask Login(string email, string password)
 		{
-			Debug.Log("Signed in!");
-			IAuthResult result = await _loginable.Login(email, password);
+			var cts = new CancellationTokenSource(5000);
+			_loginWindow.SetLoginButtonInteractable(false);
+			IAuthResult result = await _loginable.Login(email, password, cts.Token);
+			_loginWindow.SetLoginButtonInteractable(true);
 			if (result is SuccessAuthResult)
 			{
+				Debug.Log("Signed in!");
 				DestroyLoginWindow();
 				_sceneSwitchable.SwitchScene();
 			}

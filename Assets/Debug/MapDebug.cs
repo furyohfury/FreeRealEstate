@@ -23,6 +23,7 @@ namespace GameDebug
 	{
 		[SerializeField]
 		private BeatmapBundle _beatmapBundle;
+		
 		[SerializeField]
 		private BeatmapDebug _map;
 		[SerializeField]

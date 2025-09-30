@@ -1,9 +1,10 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System.Threading;
+using Cysharp.Threading.Tasks;
 
 namespace Game.Meta.Authentication
 {
 	public interface ILoginable
 	{
-		UniTask<IAuthResult> Login(string email, string password);
+		UniTask<IAuthResult> Login(string email, string password, CancellationToken token);
 	}
 }

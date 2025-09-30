@@ -1,4 +1,5 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System.Threading;
+using Cysharp.Threading.Tasks;
 using Game.Meta.Authentication;
 using Game.SceneSwitch;
 using R3;
@@ -11,7 +12,7 @@ namespace Game.UI
 		private readonly IRegisterWindow _registerWindow;
 		private readonly IRegisterable _registerable;
 		private readonly IAuthNavigationMediator _authNavigationMediator;
-		private ISceneSwitchable _sceneSwitchable;
+		private readonly ISceneSwitchable _sceneSwitchable;
 		private readonly CompositeDisposable _disposable = new();
 
 		public RegistrationWindowPresenter(
@@ -61,10 +62,13 @@ namespace Game.UI
 
 		private async UniTask Register(string email, string password, string nickname)
 		{
-			Debug.Log("Register!");
-			IAuthResult result = await _registerable.Register(email, password, nickname);
+			var cts = new CancellationTokenSource(5000);
+			_registerWindow.SetRegisterButtonInteractable(false);
+			IAuthResult result = await _registerable.Register(email, password, nickname, cts.Token);
+			_registerWindow.SetRegisterButtonInteractable(true);
 			if (result is SuccessAuthResult)
 			{
+				Debug.Log("Register!");
 				DestroyRegisterWindow();
 				_sceneSwitchable.SwitchScene();
 			}
