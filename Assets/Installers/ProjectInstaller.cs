@@ -1,6 +1,7 @@
 ﻿using Audio;
 using FirebaseSystem;
 using Game;
+using Game.App;
 using Game.Audio;
 using Game.BeatmapLaunch;
 using Game.Leaderboard;
@@ -31,6 +32,8 @@ namespace Installers
 			RegisterLeaderboardSystems(builder);
 			RegisterElementTimeoutHelper(builder);
 			builder.Register<CurrentBundleService>(Lifetime.Singleton);
+			builder.Register<FramerateController>(Lifetime.Singleton);
+			
 		}
 
 		private static void InstallObjectProvider(IContainerBuilder builder)
