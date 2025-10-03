@@ -17,8 +17,8 @@ MonoBehaviour:
   _songClip: {fileID: 8300000, guid: 186bb4bc8c04566488154beb5ea1613c, type: 3}
   _background: {fileID: 21300000, guid: 4b300ad12e1fc1547b3ae9cc6354ab37, type: 3}
   _beatmapsVariants:
-  - Id: Easy
-    BeatmapConfig: {fileID: 11400000, guid: 75a3452ef53da0e4a9f0ab01fc62d0a0, type: 2}
+  - Id: EasyNew
+    BeatmapConfig: {fileID: 11400000, guid: 734c5b2e8836cc64488d3ad2504ba314, type: 2}
     SongStartTimeInSeconds: 0
     SongEndTimeInSeconds: 600000
   - Id: Normal

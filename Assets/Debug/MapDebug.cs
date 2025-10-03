@@ -133,9 +133,9 @@ namespace GameDebug
 		[SerializeField]
 		private BeatmapBundle _beatmapBundleParsed;
 		[Button]
-		public void LaunchParsedMap()
+		public void LaunchParsedMap(int variant)
 		{
-			_beatmapLauncher.Launch(_beatmapBundleParsed, 0);
+			_beatmapLauncher.Launch(_beatmapBundleParsed, variant);
 		}
 
 		[Button]
