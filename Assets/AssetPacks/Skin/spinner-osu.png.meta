@@ -186,7 +186,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      spinner-osu_0: 6117749884480664593
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

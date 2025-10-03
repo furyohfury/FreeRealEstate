@@ -186,7 +186,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      taikohitcircleoverlay-0_0: 1709567517880821717
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

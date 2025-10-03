@@ -3,6 +3,3 @@ E:/Programs/Unity/Projects/FreeRealEstate/.utmp/RelWithDebInfo/126h686y/arm64-v8
 E:/Programs/Unity/Projects/FreeRealEstate/.utmp/RelWithDebInfo/126h686y/arm64-v8a/GameActivity/CMakeFiles/game.dir
 E:/Programs/Unity/Projects/FreeRealEstate/.utmp/RelWithDebInfo/126h686y/arm64-v8a/GameActivity/CMakeFiles/edit_cache.dir
 E:/Programs/Unity/Projects/FreeRealEstate/.utmp/RelWithDebInfo/126h686y/arm64-v8a/GameActivity/CMakeFiles/rebuild_cache.dir
-E:/Programs/Unity/Projects/FreeRealEstate/.utmp/RelWithDebInfo/126h686y/arm64-v8a/FramePacing/CMakeFiles/swappywrapper.dir
-E:/Programs/Unity/Projects/FreeRealEstate/.utmp/RelWithDebInfo/126h686y/arm64-v8a/FramePacing/CMakeFiles/edit_cache.dir
-E:/Programs/Unity/Projects/FreeRealEstate/.utmp/RelWithDebInfo/126h686y/arm64-v8a/FramePacing/CMakeFiles/rebuild_cache.dir

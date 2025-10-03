@@ -236,7 +236,10 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      mode-mania_0: 3146116543195254345
+      mode-mania_1: -7022655358528484695
+      mode-mania_2: 5069304986599423864
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

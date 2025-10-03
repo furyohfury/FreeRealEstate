@@ -15,4 +15,3 @@ E:\Programs\Unity\Projects\FreeRealEstate\Library\Bee\Android\Prj\IL2CPP\Gradle\
 E:\Programs\Unity\Projects\FreeRealEstate\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\UnityToGAConfigurationCallbacks.h
 E:\Programs\Unity\Projects\FreeRealEstate\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\UnityToGAKeyEventCallbacks.h
 E:\Programs\Unity\Projects\FreeRealEstate\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\UnityToGAMotionEventCallbacks.h
-E:\Programs\Unity\Projects\FreeRealEstate\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\FramePacing\UnitySwappyWrapper.h

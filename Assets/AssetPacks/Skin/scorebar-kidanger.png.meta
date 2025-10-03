@@ -186,7 +186,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      scorebar-kidanger_0: -3045336597390408493
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

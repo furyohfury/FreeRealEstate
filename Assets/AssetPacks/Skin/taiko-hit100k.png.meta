@@ -261,7 +261,11 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      taiko-hit100k_0: 5824035405967726651
+      taiko-hit100k_1: -5992692657517382172
+      taiko-hit100k_2: 4671892356056160657
+      taiko-hit100k_3: 6630012857543717167
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

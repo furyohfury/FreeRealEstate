@@ -186,7 +186,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      taiko-slider-fail_0: 4671213686281464866
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

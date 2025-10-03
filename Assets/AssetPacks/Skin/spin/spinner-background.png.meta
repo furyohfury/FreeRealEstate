@@ -186,7 +186,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      spinner-background_0: 735885549148110424
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

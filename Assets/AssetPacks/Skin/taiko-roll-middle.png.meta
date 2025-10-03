@@ -186,7 +186,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      taiko-roll-middle_0: 4735820283357827601
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

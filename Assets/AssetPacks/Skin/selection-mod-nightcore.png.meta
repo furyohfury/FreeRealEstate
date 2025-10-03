@@ -211,7 +211,9 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      selection-mod-nightcore_0: 8228978312426606724
+      selection-mod-nightcore_1: 140580587047192533
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
