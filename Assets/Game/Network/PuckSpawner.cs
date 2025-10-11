@@ -42,7 +42,10 @@ namespace Game.Network
 
 		private void OnDestroy()
 		{
-			NetworkManager.Singleton.OnServerStarted -= OnServerStart;
+			if (NetworkManager.Singleton != null)
+			{
+				NetworkManager.Singleton.OnServerStarted -= OnServerStart;
+			}
 		}
 	}
 }
