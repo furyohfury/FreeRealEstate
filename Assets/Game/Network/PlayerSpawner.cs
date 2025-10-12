@@ -1,10 +1,14 @@
-﻿using Unity.Netcode;
+﻿using R3;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace Game.Network
 {
 	public class PlayerSpawner : MonoBehaviour
 	{
+		public Observable<NetworkObject> OnHostSpawned => _onHostSpawned;
+		public Observable<NetworkObject> OnClientSpawned => _onClientSpawned;
+
 		[SerializeField]
 		private NetworkObject _hostPlayerPrefab;
 		[SerializeField]
@@ -15,6 +19,9 @@ namespace Game.Network
 		private Transform _clientSpawnPoint;
 		[SerializeField]
 		private Transform _container;
+
+		private readonly Subject<NetworkObject> _onHostSpawned = new();
+		private readonly Subject<NetworkObject> _onClientSpawned = new();
 
 		private void Start()
 		{
@@ -32,11 +39,13 @@ namespace Game.Network
 			{
 				var player = Instantiate(_hostPlayerPrefab, _hostSpawnPoint.position, _hostSpawnPoint.rotation, _container);
 				player.SpawnAsPlayerObject(clientId);
+				_onHostSpawned.OnNext(player);
 			}
 			else
 			{
 				var player = Instantiate(_clientPlayerPrefab, _clientSpawnPoint.position, _clientSpawnPoint.rotation, _container);
 				player.SpawnAsPlayerObject(clientId);
+				_onClientSpawned.OnNext(player);
 			}
 		}
 

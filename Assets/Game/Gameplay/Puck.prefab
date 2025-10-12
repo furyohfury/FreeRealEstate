@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 310193186902521967}
   - component: {fileID: 2874541949952654518}
   - component: {fileID: 6556827426333394223}
+  - component: {fileID: 4558947220663037846}
   m_Layer: 0
   m_Name: Puck
   m_TagString: Untagged
@@ -152,6 +153,19 @@ MonoBehaviour:
   UseRigidBodyForMotion: 1
   AutoUpdateKinematicState: 1
   AutoSetKinematicOnDespawn: 1
+--- !u!114 &4558947220663037846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 408779829811255459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 262ee53ca7874f74ae733b3f2be449ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rigidbody: {fileID: 6323034853349756774}
 --- !u!1 &952970786756802267
 GameObject:
   m_ObjectHideFlags: 0

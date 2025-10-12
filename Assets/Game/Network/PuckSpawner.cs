@@ -1,4 +1,6 @@
-﻿using Sirenix.OdinInspector;
+﻿using Gameplay;
+using R3;
+using Sirenix.OdinInspector;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -6,12 +8,16 @@ namespace Game.Network
 {
 	public sealed class PuckSpawner : MonoBehaviour
 	{
+		public Observable<Puck> OnPuckSpawned => _onPuckSpawned;
+		
 		[SerializeField]
-		private NetworkObject _puckPrefab;
+		private Puck _puckPrefab;
 		[SerializeField]
 		private Transform _puckSpawnPoint;
 		[SerializeField]
 		private Transform _container;
+		
+		private Subject<Puck> _onPuckSpawned = new Subject<Puck>();
 
 		private void Start()
 		{
@@ -36,8 +42,9 @@ namespace Game.Network
 		[Button]
 		private void SpawnPuck()
 		{
-			var player = Instantiate(_puckPrefab, _puckSpawnPoint.position, _puckSpawnPoint.rotation, _container);
-			player.Spawn();
+			var puck = Instantiate(_puckPrefab, _puckSpawnPoint.position, _puckSpawnPoint.rotation, _container);
+			puck.GetComponent<NetworkObject>().Spawn();
+			_onPuckSpawned.OnNext(puck);
 		}
 
 		private void OnDestroy()
