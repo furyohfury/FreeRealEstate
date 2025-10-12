@@ -60,8 +60,45 @@ PrefabInstance:
       propertyPath: m_Name
       value: BatBlue
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7908165900491206326, guid: 7897a6e5dc92d7340958233e6603cace, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5054750500806738334, guid: 7897a6e5dc92d7340958233e6603cace, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8976228616106529511}
   m_SourcePrefab: {fileID: 100100000, guid: 7897a6e5dc92d7340958233e6603cace, type: 3}
+--- !u!114 &67583732083514974 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8157551052659843780, guid: 7897a6e5dc92d7340958233e6603cace, type: 3}
+  m_PrefabInstance: {fileID: 8198075785786539162}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4027201792375389444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 746108c32385abf448c8cf3232523554, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &4027201792375389444 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5054750500806738334, guid: 7897a6e5dc92d7340958233e6603cace, type: 3}
+  m_PrefabInstance: {fileID: 8198075785786539162}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8976228616106529511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4027201792375389444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac1c602520904296920079950f17f79e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  _moveComponent: {fileID: 67583732083514974}
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 256
