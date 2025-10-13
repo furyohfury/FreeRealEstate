@@ -1,6 +1,4 @@
-﻿using Unity.Netcode;
-
-namespace Gameplay
+﻿namespace Gameplay
 {
 	public sealed class RoundRestarter
 	{
@@ -42,8 +40,8 @@ namespace Gameplay
 
 		public void RestartInHostSide()
 		{
-				MovePlayersToDefaultPos();
-				SpawnPuckInHostPos();
+			MovePlayersToDefaultPos();
+			SpawnPuckInHostPos();
 		}
 
 		public void RestartInClientSide()
