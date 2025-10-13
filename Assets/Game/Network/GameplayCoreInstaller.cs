@@ -53,6 +53,9 @@ namespace Installers
 
 			Container.BindInterfacesTo<PuckSpawnObserver>()
 			         .AsSingle();
+
+			Container.Bind<Score>()
+			         .AsSingle();
 		}
 	}
 }

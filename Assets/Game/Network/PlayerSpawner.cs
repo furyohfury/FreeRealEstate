@@ -1,4 +1,5 @@
-﻿using R3;
+﻿using Gameplay;
+using R3;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -6,13 +7,13 @@ namespace Game.Network
 {
 	public class PlayerSpawner : MonoBehaviour
 	{
-		public Observable<NetworkObject> OnHostSpawned => _onHostSpawned;
-		public Observable<NetworkObject> OnClientSpawned => _onClientSpawned;
+		public Observable<Bat> OnHostSpawned => _onHostSpawned;
+		public Observable<Bat> OnClientSpawned => _onClientSpawned;
 
 		[SerializeField]
-		private NetworkObject _hostPlayerPrefab;
+		private Bat _hostPlayerPrefab;
 		[SerializeField]
-		private NetworkObject _clientPlayerPrefab;
+		private Bat _clientPlayerPrefab;
 		[SerializeField]
 		private Transform _hostSpawnPoint;
 		[SerializeField]
@@ -20,8 +21,8 @@ namespace Game.Network
 		[SerializeField]
 		private Transform _container;
 
-		private readonly Subject<NetworkObject> _onHostSpawned = new();
-		private readonly Subject<NetworkObject> _onClientSpawned = new();
+		private readonly Subject<Bat> _onHostSpawned = new();
+		private readonly Subject<Bat> _onClientSpawned = new();
 
 		private void Start()
 		{
@@ -38,13 +39,13 @@ namespace Game.Network
 			if (NetworkManager.Singleton.LocalClientId == clientId) // host
 			{
 				var player = Instantiate(_hostPlayerPrefab, _hostSpawnPoint.position, _hostSpawnPoint.rotation, _container);
-				player.SpawnAsPlayerObject(clientId);
+				player.NetworkObject.SpawnAsPlayerObject(clientId);
 				_onHostSpawned.OnNext(player);
 			}
 			else
 			{
 				var player = Instantiate(_clientPlayerPrefab, _clientSpawnPoint.position, _clientSpawnPoint.rotation, _container);
-				player.SpawnAsPlayerObject(clientId);
+				player.NetworkObject.SpawnAsPlayerObject(clientId);
 				_onClientSpawned.OnNext(player);
 			}
 		}

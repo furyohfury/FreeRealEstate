@@ -20,6 +20,26 @@ namespace Gameplay
 			_puckService = puckService;
 		}
 
+		public void RestartToSide(Player player)
+		{
+			if (player == Player.One)
+			{
+				RestartInHostSide();
+			}
+			else
+			{
+				RestartInClientSide();
+			}
+		}
+
+		public void RestartByGoalHit(Player player)
+		{
+			player = player == Player.One
+				? Player.Two
+				: Player.One;
+			RestartToSide(player);
+		}
+
 		public void RestartInHostSide()
 		{
 			if (NetworkManager.Singleton.IsServer)

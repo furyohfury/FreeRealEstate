@@ -1,9 +1,7 @@
-﻿using Unity.Netcode;
-
-namespace Gameplay
+﻿namespace Gameplay
 {
 	public sealed class HostPlayerService
 	{
-		public NetworkObject HostPlayer { get; set; }
+		public Bat HostPlayer { get; set; }
 	}
 }
