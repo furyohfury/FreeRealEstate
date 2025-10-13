@@ -42,11 +42,8 @@ namespace Gameplay
 
 		public void RestartInHostSide()
 		{
-			if (NetworkManager.Singleton.IsServer)
-			{
 				MovePlayersToDefaultPos();
 				SpawnPuckInHostPos();
-			}
 		}
 
 		public void RestartInClientSide()

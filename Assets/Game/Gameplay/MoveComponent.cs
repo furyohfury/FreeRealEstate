@@ -1,8 +1,9 @@
+using Unity.Netcode;
 using UnityEngine;
 
 namespace Gameplay
 {
-	public sealed class MoveComponent : MonoBehaviour
+	public sealed class MoveComponent : NetworkBehaviour
 	{
 		public Vector3 Destination { get; private set; }
 		public Vector3 Position => _rigidbody.position;
@@ -24,7 +25,10 @@ namespace Gameplay
 
 		private void FixedUpdate()
 		{
-			Move(Destination, Time.fixedDeltaTime);
+			if (IsServer)
+			{
+				Move(Destination, Time.fixedDeltaTime);
+			}
 		}
 
 		private void Move(Vector3 destination, float deltaTime)

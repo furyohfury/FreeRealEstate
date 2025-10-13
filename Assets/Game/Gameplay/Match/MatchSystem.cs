@@ -27,11 +27,6 @@ namespace Gameplay
 
 		public void Initialize()
 		{
-			if (NetworkManager.Singleton.IsServer == false)
-			{
-				return; // TODO ui то должен как то обновляться
-			}
-
 			_disposable = _goalObservable.OnHitGoal
 			                             .Subscribe(OnHitGoal);
 		}
