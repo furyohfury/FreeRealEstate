@@ -9,21 +9,21 @@ namespace Game.Network
 	public sealed class PuckSpawner : MonoBehaviour
 	{
 		public Observable<Puck> OnPuckSpawned => _onPuckSpawned;
-		
+
 		[SerializeField]
 		private Puck _puckPrefab;
 		[SerializeField]
 		private Transform _puckSpawnPoint;
 		[SerializeField]
 		private Transform _container;
-		
-		private Subject<Puck> _onPuckSpawned = new Subject<Puck>();
+
+		private readonly Subject<Puck> _onPuckSpawned = new();
 
 		private void Start()
 		{
 			if (NetworkManager.Singleton == null)
 			{
-				UnityEngine.Debug.LogError("no manager yet");
+				Debug.LogError("no manager yet");
 			}
 
 			NetworkManager.Singleton.OnServerStarted += OnServerStart;

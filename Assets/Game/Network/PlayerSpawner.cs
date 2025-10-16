@@ -1,7 +1,9 @@
-﻿using Gameplay;
+﻿using System.Collections.Generic;
+using Gameplay;
 using R3;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Game.Network
 {
@@ -26,35 +28,48 @@ namespace Game.Network
 
 		private void Start()
 		{
-			NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
+			NetworkManager.Singleton.SceneManager.OnLoadEventCompleted += OnSceneLoaded;
 		}
 
-		private void OnClientConnected(ulong clientId)
+		private void OnSceneLoaded(string s, LoadSceneMode sceneMode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut)
 		{
-			if (NetworkManager.Singleton.IsServer == false)
+			if (NetworkManager.Singleton.IsHost == false)
 			{
 				return;
 			}
 
-			if (NetworkManager.Singleton.LocalClientId == clientId) // host
+			foreach (var clientId in clientsCompleted)
 			{
-				var player = Instantiate(_hostPlayerPrefab, _hostSpawnPoint.position, _hostSpawnPoint.rotation, _container);
-				player.NetworkObject.SpawnAsPlayerObject(clientId);
-				_onHostSpawned.OnNext(player);
+				if (NetworkManager.Singleton.LocalClientId == clientId) // host
+				{
+					SpawnHostPlayer(clientId);
+				}
+				else
+				{
+					SpawnClientPlayer(clientId);
+				}
 			}
-			else
-			{
-				var player = Instantiate(_clientPlayerPrefab, _clientSpawnPoint.position, _clientSpawnPoint.rotation, _container);
-				player.NetworkObject.SpawnAsPlayerObject(clientId);
-				_onClientSpawned.OnNext(player);
-			}
+		}
+
+		private void SpawnHostPlayer(ulong clientId)
+		{
+			var player = Instantiate(_hostPlayerPrefab, _hostSpawnPoint.position, _hostSpawnPoint.rotation, _container);
+			player.NetworkObject.SpawnAsPlayerObject(clientId);
+			_onHostSpawned.OnNext(player);
+		}
+
+		private void SpawnClientPlayer(ulong clientId)
+		{
+			var player = Instantiate(_clientPlayerPrefab, _clientSpawnPoint.position, _clientSpawnPoint.rotation, _container);
+			player.NetworkObject.SpawnAsPlayerObject(clientId);
+			_onClientSpawned.OnNext(player);
 		}
 
 		private void OnDestroy()
 		{
 			if (NetworkManager.Singleton != null)
 			{
-				NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected;
+				NetworkManager.Singleton.SceneManager.OnLoadEventCompleted -= OnSceneLoaded;
 			}
 		}
 	}
