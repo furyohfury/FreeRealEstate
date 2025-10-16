@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Debug
+namespace GameDebug
 {
 	public sealed class SleepThresholdDebug : MonoBehaviour
 	{

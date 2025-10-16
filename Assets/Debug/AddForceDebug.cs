@@ -1,7 +1,7 @@
 ﻿using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Debug
+namespace GameDebug
 {
 	public class AddForceDebug : MonoBehaviour
 	{

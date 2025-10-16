@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Debug
+namespace GameDebug
 {
 	public class SceneReloaderDebug : MonoBehaviour
 	{

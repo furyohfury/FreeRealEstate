@@ -3,7 +3,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenject;
 
-namespace Debug
+namespace GameDebug
 {
 	public sealed class EnterNameMenuDebug : MonoBehaviour
 	{

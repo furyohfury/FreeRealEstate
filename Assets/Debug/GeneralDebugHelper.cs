@@ -4,7 +4,7 @@ using Unity.Netcode;
 using UnityEngine;
 using Zenject;
 
-namespace Debug
+namespace GameDebug
 {
 	public sealed class GeneralDebugHelper : MonoBehaviour
 	{

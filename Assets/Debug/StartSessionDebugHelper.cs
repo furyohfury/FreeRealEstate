@@ -2,7 +2,7 @@
 using Unity.Netcode;
 using UnityEngine;
 
-namespace Debug
+namespace GameDebug
 {
 	public class StartSessionDebugHelper : MonoBehaviour
 	{
