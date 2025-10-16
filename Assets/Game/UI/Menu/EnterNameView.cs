@@ -16,7 +16,7 @@ namespace Game.UI
 
 		private CompositeDisposable _disposable = new CompositeDisposable();
 
-		private void Awake()
+		public void Init()
 		{
 			_inputField.OnValueChangedAsObservable()
 			           .Subscribe(value => _enterButton.interactable = string.IsNullOrEmpty(value) == false)

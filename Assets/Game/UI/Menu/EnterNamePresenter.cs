@@ -19,6 +19,7 @@ namespace Game.UI
 
 		public void Initialize()
 		{
+			_enterNameView.Init();
 			_disposable = _enterNameView.OnNicknameNameEntered
 			                            .Subscribe(nickname => _playerNickname.Nickname = nickname);
 		}

@@ -1,0 +1,59 @@
+﻿using R3;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace Game.UI
+{
+	public sealed class GameModeView : MonoBehaviour
+	{
+		public Observable<Unit> OnQuickPlayPressed;
+		public Observable<Unit> OnHostGamePressed;
+		public Observable<Unit> OnJoinGamePressed;
+		public Observable<Unit> OnCopySessionIdPressed;
+		public string HostSessionId
+		{
+			get => _hostSessionIdField.text;
+			set => _hostSessionIdField.text = value;
+		}
+
+		public string JoinSessionId
+		{
+			get => _joinInputField.text;
+			set => _joinInputField.text = value;
+		}
+
+		[SerializeField]
+		private Button _quickPlayBtn;
+		[Header("Host game")]
+		[SerializeField]
+		private Button _hostGameBtn;
+		[SerializeField]
+		private TMP_InputField _hostSessionIdField;
+		[SerializeField]
+		private Button _copySessionIdBtn;
+		[Header("Join game")]
+		[SerializeField]
+		private Button _joinGameBtn;
+		[SerializeField]
+		private TMP_InputField _joinInputField;
+
+		public void Init()
+		{
+			OnQuickPlayPressed = _quickPlayBtn.OnClickAsObservable();
+			OnHostGamePressed = _hostGameBtn.OnClickAsObservable();
+			OnJoinGamePressed = _joinGameBtn.OnClickAsObservable();
+			OnCopySessionIdPressed = _copySessionIdBtn.OnClickAsObservable();
+		}
+
+		public void SetHostButtonInteractable(bool isActive)
+		{
+			_hostGameBtn.interactable = isActive;
+		}
+
+		public void SetJoinButtonInteractable(bool isActive)
+		{
+			_joinGameBtn.interactable = isActive;
+		}
+	}
+}
