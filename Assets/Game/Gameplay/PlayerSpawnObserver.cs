@@ -23,7 +23,10 @@ namespace Game
 		public void Initialize()
 		{
 			_playerSpawner.OnHostSpawned
-			              .Subscribe(player => _hostPlayerService.HostPlayer = player)
+			              .Subscribe(player =>
+			              {
+				              _hostPlayerService.HostPlayer = player;
+			              })
 			              .AddTo(_disposable);
 
 			_playerSpawner.OnClientSpawned

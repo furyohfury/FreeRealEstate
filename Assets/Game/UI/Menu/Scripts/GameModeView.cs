@@ -11,6 +11,7 @@ namespace Game.UI
 		public Observable<Unit> OnHostGamePressed;
 		public Observable<Unit> OnJoinGamePressed;
 		public Observable<Unit> OnCopySessionIdPressed;
+		
 		public string HostSessionId
 		{
 			get => _hostSessionIdField.text;
@@ -38,12 +39,19 @@ namespace Game.UI
 		[SerializeField]
 		private TMP_InputField _joinInputField;
 
+		private string _quickPlayButtonDefaultText;
+
 		public void Init()
 		{
 			OnQuickPlayPressed = _quickPlayBtn.OnClickAsObservable();
 			OnHostGamePressed = _hostGameBtn.OnClickAsObservable();
 			OnJoinGamePressed = _joinGameBtn.OnClickAsObservable();
 			OnCopySessionIdPressed = _copySessionIdBtn.OnClickAsObservable();
+		}
+		
+		public void SetQuickGameButtonInteractable(bool isActive)
+		{
+			_quickPlayBtn.interactable = isActive;
 		}
 
 		public void SetHostButtonInteractable(bool isActive)
@@ -54,6 +62,16 @@ namespace Game.UI
 		public void SetJoinButtonInteractable(bool isActive)
 		{
 			_joinGameBtn.interactable = isActive;
+		}
+		
+		public void Show()
+		{
+			gameObject.SetActive(true);
+		}
+
+		public void Hide()
+		{
+			gameObject.SetActive(false);
 		}
 	}
 }

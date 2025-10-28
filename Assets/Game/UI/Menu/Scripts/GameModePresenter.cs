@@ -12,20 +12,26 @@ namespace Game.UI
 	public sealed class GameModePresenter : IInitializable, IDisposable
 	{
 		private readonly GameModeView _gameModeView;
+		private readonly QuickPlayMenu _quickPlayMenu;
 		private readonly SessionSystem _sessionSystem;
 		private readonly PlayerNickname _playerNickname;
 		private readonly CompositeDisposable _disposable = new();
 
-		public GameModePresenter(GameModeView gameModeView, SessionSystem sessionSystem, PlayerNickname playerNickname)
+		public GameModePresenter(GameModeView gameModeView, QuickPlayMenu quickPlayMenu, SessionSystem sessionSystem, PlayerNickname playerNickname)
 		{
 			_gameModeView = gameModeView;
 			_sessionSystem = sessionSystem;
 			_playerNickname = playerNickname;
+			_quickPlayMenu = quickPlayMenu;
 		}
 
 		public void Initialize()
 		{
 			_gameModeView.Init();
+
+			_gameModeView.OnQuickPlayPressed
+			             .Subscribe(OnQuickPlayPressed)
+			             .AddTo(_disposable);
 
 			_gameModeView.OnHostGamePressed
 			             .SubscribeAwait(OnHostGamePressed)
@@ -40,19 +46,19 @@ namespace Game.UI
 			             .AddTo(_disposable);
 		}
 
+		private void OnQuickPlayPressed(Unit _)
+		{
+			_gameModeView.Hide();
+			_quickPlayMenu.Show();
+		}
+
 		private async ValueTask OnHostGamePressed(Unit arg1, CancellationToken arg2)
 		{
 			_gameModeView.SetHostButtonInteractable(false);
 
 			try
 			{
-				var activeSession = _sessionSystem.ActiveSession;
-				if (activeSession != null)
-				{
-					await activeSession.LeaveAsync();
-				}
-
-				await _sessionSystem.StartSessionAsHost(_playerNickname.Nickname);
+				await _sessionSystem.HostPrivateSession(_playerNickname.Nickname);
 				var newSession = _sessionSystem.ActiveSession;
 				var code = newSession.Code;
 				_gameModeView.HostSessionId = code;

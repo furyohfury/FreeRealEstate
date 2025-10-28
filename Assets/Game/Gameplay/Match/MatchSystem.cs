@@ -1,6 +1,6 @@
 ﻿using System;
 using R3;
-using Unity.Netcode;
+using UnityEngine;
 using Zenject;
 
 namespace Gameplay
@@ -35,7 +35,7 @@ namespace Gameplay
 		{
 			_score.AddPoint(player);
 #if UNITY_EDITOR
-			UnityEngine.Debug.Log(
+			Debug.Log(
 				$"<color=green> Goal hit by {player.ToString()}. Score is {_score.GetScore(Player.One)} : {_score.GetScore(Player.Two)}");
 #endif
 			if (_score.GetScore(player) <= _matchSettings.PointsToWin)

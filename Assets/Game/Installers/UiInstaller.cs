@@ -21,6 +21,17 @@ namespace Installers
 			Container.BindInterfacesTo<ScoreUIObserver>()
 			         .AsCached()
 			         .WithArguments(_scorePlayerTwoText, Player.Two);
+
+			Container.Bind<WinPopup>()
+			         .FromComponentInHierarchy()
+			         .AsSingle();
+			
+			Container.Bind<LosePopup>()
+			         .FromComponentInHierarchy()
+			         .AsSingle();
+
+			Container.BindInterfacesTo<GameOverPopupPresenter>()
+			         .AsSingle();
 		}
 	}
 }

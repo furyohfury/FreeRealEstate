@@ -28,26 +28,54 @@ namespace Game.Network
 
 		private void Start()
 		{
-			NetworkManager.Singleton.SceneManager.OnLoadEventCompleted += OnSceneLoaded;
+			var sceneManager = NetworkManager.Singleton.SceneManager;
+			if (sceneManager != null)
+			{
+				sceneManager.OnLoadEventCompleted += OnSceneLoaded;
+			}
+			else
+			{
+				NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnectedCallback;
+			}
+		}
+
+		private void OnClientConnectedCallback(ulong clientId)
+		{
+			if (IsHost() == false)
+			{
+				return;
+			}
+
+			SpawnPlayer(clientId);
 		}
 
 		private void OnSceneLoaded(string s, LoadSceneMode sceneMode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut)
 		{
-			if (NetworkManager.Singleton.IsHost == false)
+			if (IsHost() == false)
 			{
 				return;
 			}
 
 			foreach (var clientId in clientsCompleted)
 			{
-				if (NetworkManager.Singleton.LocalClientId == clientId) // host
-				{
-					SpawnHostPlayer(clientId);
-				}
-				else
-				{
-					SpawnClientPlayer(clientId);
-				}
+				SpawnPlayer(clientId);
+			}
+		}
+
+		private static bool IsHost()
+		{
+			return NetworkManager.Singleton.IsHost;
+		}
+
+		private void SpawnPlayer(ulong clientId)
+		{
+			if (NetworkManager.Singleton.LocalClientId == clientId) // host
+			{
+				SpawnHostPlayer(clientId);
+			}
+			else
+			{
+				SpawnClientPlayer(clientId);
 			}
 		}
 
@@ -69,7 +97,15 @@ namespace Game.Network
 		{
 			if (NetworkManager.Singleton != null)
 			{
-				NetworkManager.Singleton.SceneManager.OnLoadEventCompleted -= OnSceneLoaded;
+				var sceneManager = NetworkManager.Singleton.SceneManager;
+				if (sceneManager != null)
+				{
+					sceneManager.OnLoadEventCompleted -= OnSceneLoaded;
+				}
+				else
+				{
+					NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnectedCallback;
+				}
 			}
 		}
 	}

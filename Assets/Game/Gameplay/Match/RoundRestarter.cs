@@ -1,4 +1,6 @@
-﻿namespace Gameplay
+﻿using Unity.Netcode;
+
+namespace Gameplay
 {
 	public sealed class RoundRestarter
 	{
@@ -18,7 +20,21 @@
 			_puckService = puckService;
 		}
 
-		public void RestartToSide(Player player)
+		public void RestartByGoalHit(Player player)
+		{
+			if (NetworkManager.Singleton.IsHost == false)
+			{
+				return;
+			}
+			
+			player = player == Player.One
+				? Player.Two
+				: Player.One;
+			
+			RestartToSide(player);
+		}
+
+		private void RestartToSide(Player player)
 		{
 			if (player == Player.One)
 			{
@@ -30,21 +46,13 @@
 			}
 		}
 
-		public void RestartByGoalHit(Player player)
-		{
-			player = player == Player.One
-				? Player.Two
-				: Player.One;
-			RestartToSide(player);
-		}
-
-		public void RestartInHostSide()
+		private void RestartInHostSide()
 		{
 			MovePlayersToDefaultPos();
 			SpawnPuckInHostPos();
 		}
 
-		public void RestartInClientSide()
+		private void RestartInClientSide()
 		{
 			MovePlayersToDefaultPos();
 			SpawnPuckInClientPos();
@@ -53,11 +61,9 @@
 		private void MovePlayersToDefaultPos()
 		{
 			var host = _hostPlayerService.HostPlayer;
-			host.transform.position = _playersSpawnService.HostSpawnPos.position;
-			host.GetComponent<MoveComponent>().MoveTo(host.transform.position);
+			host.MoveTo(_playersSpawnService.HostSpawnPos.position);
 			var client = _clientPlayerService.ClientPlayer;
-			client.transform.position = _playersSpawnService.ClientSpawnPos.position;
-			client.GetComponent<MoveComponent>().MoveTo(client.transform.position);
+			client.MoveTo(_playersSpawnService.ClientSpawnPos.position);
 		}
 
 		private void SpawnPuckInHostPos()
