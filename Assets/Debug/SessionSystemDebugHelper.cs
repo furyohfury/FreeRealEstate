@@ -1,6 +1,8 @@
-﻿using Game.Network;
+﻿using System;
+using Game.Network;
 using Sirenix.OdinInspector;
 using Unity.Netcode;
+using Unity.Services.Multiplayer;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
@@ -12,10 +14,13 @@ namespace GameDebug
 		[Inject]
 		private SessionSystem _sessionSystem;
 
+		[ShowInInspector]
+		private ISession ActiveSession => _sessionSystem.ActiveSession;
+
 		[Button]
 		private void StartAsHost(string name)
 		{
-			_sessionSystem.StartSessionAsHost(name);
+			_sessionSystem.HostPrivateSession(name);
 		}
 
 		[Button]
