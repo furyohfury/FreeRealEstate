@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.App;
 using Game.Network;
 using Sirenix.OdinInspector;
 using Unity.Netcode;
@@ -13,6 +14,8 @@ namespace GameDebug
 	{
 		[Inject]
 		private SessionSystem _sessionSystem;
+		[Inject]
+		private PlayerNickname _playerNickname;
 
 		[ShowInInspector]
 		private ISession ActiveSession => _sessionSystem.ActiveSession;
@@ -26,7 +29,7 @@ namespace GameDebug
 		[Button]
 		private async void JoinSessionByCode(string code)
 		{
-			await _sessionSystem.JoinSessionByCode(code);
+			await _sessionSystem.JoinSessionByCode(code, _playerNickname.Nickname);
 		}
 
 		[Button]

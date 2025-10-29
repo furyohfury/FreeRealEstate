@@ -25,12 +25,19 @@ namespace Installers
 			Container.Bind<WinPopup>()
 			         .FromComponentInHierarchy()
 			         .AsSingle();
-			
+
 			Container.Bind<LosePopup>()
 			         .FromComponentInHierarchy()
 			         .AsSingle();
 
 			Container.BindInterfacesTo<GameOverPopupPresenter>()
+			         .AsSingle();
+
+			Container.Bind<ScoreView>()
+			         .FromComponentInHierarchy()
+			         .AsSingle();
+
+			Container.BindInterfacesTo<ScoreViewPresenter>()
 			         .AsSingle();
 		}
 	}

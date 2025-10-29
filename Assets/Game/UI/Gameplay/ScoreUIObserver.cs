@@ -22,9 +22,12 @@ namespace Game.UI
 		public void Initialize()
 		{
 			Observable<int> observable = _score.GetScoreObservable(_player);
-			_disposable = observable.Subscribe(
-				score => _view.SetText(score.ToString())
-				);
+			_disposable = observable.Subscribe(OnScoreChanged);
+		}
+
+		private void OnScoreChanged(int score)
+		{
+			_view.SetText(score.ToString());
 		}
 
 		public void Dispose()

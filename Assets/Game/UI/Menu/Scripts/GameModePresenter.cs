@@ -92,7 +92,7 @@ namespace Game.UI
 			try
 			{
 				_gameModeView.SetJoinButtonInteractable(false);
-				await _sessionSystem.JoinSessionByCode(_gameModeView.JoinSessionId);
+				await _sessionSystem.JoinSessionByCode(_gameModeView.JoinSessionId, _playerNickname.Nickname);
 			}
 			catch (Exception e)
 			{

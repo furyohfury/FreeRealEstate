@@ -55,6 +55,7 @@ namespace Installers
 			         .AsSingle();
 
 			Container.Bind<Score>()
+			         .FromComponentInHierarchy()
 			         .AsSingle();
 		}
 	}

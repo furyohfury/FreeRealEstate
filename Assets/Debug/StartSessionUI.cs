@@ -1,13 +1,23 @@
-﻿using Unity.Netcode;
+﻿using Cysharp.Threading.Tasks;
+using Game.App;
+using Game.Network;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace GameDebug
 {
 	public class StartSessionUI : MonoBehaviour
 	{
 		public Button StartHost;
+		public TMP_InputField hostCode;
 		public Button StartClient;
+		public TMP_InputField clientCode;
+		[Inject]
+		private SessionSystem _sessionSystem;
+		[Inject]
+		private PlayerNickname _playerNickname;
 
 		private void OnEnable()
 		{
@@ -15,14 +25,15 @@ namespace GameDebug
 			StartClient.onClick.AddListener(OnStartClient);
 		}
 
-		private void OnStartHost()
+		private async void OnStartHost()
 		{
-			NetworkManager.Singleton.StartHost();
+			await _sessionSystem.HostPublicSession(_playerNickname.Nickname);
+			hostCode.text = _sessionSystem.ActiveSession.Code;
 		}
 
 		private void OnStartClient()
 		{
-			NetworkManager.Singleton.StartClient();
+			_sessionSystem.JoinSessionByCode(clientCode.text, _playerNickname.Nickname).Forget();
 		}
 
 		private void OnDisable()

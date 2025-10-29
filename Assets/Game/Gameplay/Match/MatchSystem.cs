@@ -35,8 +35,8 @@ namespace Gameplay
 		{
 			_score.AddPoint(player);
 #if UNITY_EDITOR
-			Debug.Log(
-				$"<color=green> Goal hit by {player.ToString()}. Score is {_score.GetScore(Player.One)} : {_score.GetScore(Player.Two)}");
+			// Debug.Log(
+			// 	$"<color=green> Goal hit by {player.ToString()}. Score is {_score.GetScore(Player.One)} : {_score.GetScore(Player.Two)}");
 #endif
 			if (_score.GetScore(player) <= _matchSettings.PointsToWin)
 			{
