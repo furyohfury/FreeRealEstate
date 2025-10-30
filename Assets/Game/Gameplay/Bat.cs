@@ -29,5 +29,11 @@ namespace Gameplay
 		{
 			_moveComponent.SetDestination(Position);
 		}
+
+		public void DisableMovement()
+		{
+			StopMovement();
+			_moveComponent.Disable();
+		}
 	}
 }

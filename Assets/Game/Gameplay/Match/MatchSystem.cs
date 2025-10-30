@@ -1,6 +1,5 @@
 ﻿using System;
 using R3;
-using UnityEngine;
 using Zenject;
 
 namespace Gameplay
@@ -38,7 +37,7 @@ namespace Gameplay
 			// Debug.Log(
 			// 	$"<color=green> Goal hit by {player.ToString()}. Score is {_score.GetScore(Player.One)} : {_score.GetScore(Player.Two)}");
 #endif
-			if (_score.GetScore(player) <= _matchSettings.PointsToWin)
+			if (_score.GetScore(player) < _matchSettings.PointsToWin)
 			{
 				_roundRestarter.RestartByGoalHit(player);
 			}
@@ -50,7 +49,7 @@ namespace Gameplay
 
 		private void FinishGameByPlayerWon(Player player)
 		{
-			_gameFinisher.FinishGame(player);
+			_gameFinisher.FinishGameByPlayerWon(player);
 		}
 
 		public void Dispose()

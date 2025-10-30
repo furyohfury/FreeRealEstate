@@ -28,6 +28,11 @@ namespace Gameplay
 			_rigidbody.position = point;
 		}
 
+		public void Disable()
+		{
+			_rigidbody.isKinematic = true;
+		}
+
 		private void FixedUpdate()
 		{
 			if (IsServer)

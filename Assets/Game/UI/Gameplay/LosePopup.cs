@@ -15,5 +15,10 @@ namespace Game.UI
 		{
 			OnBackButtonPressed = _backBTN.OnClickAsObservable();
 		}
+
+		public void Show()
+		{
+			gameObject.SetActive(true);
+		}
 	}
 }

@@ -21,6 +21,13 @@ namespace Game.UI
 
 		public void Initialize()
 		{
+			var nickname = _playerNickname.Nickname;
+			if (string.IsNullOrEmpty(nickname) == false)
+			{
+				ProceedToGameModeMenu();
+				return;
+			}
+			
 			_enterNameView.Init();
 			_disposable = _enterNameView.OnNicknameNameEntered
 			                            .Subscribe(OnEnterPressed);
@@ -29,6 +36,11 @@ namespace Game.UI
 		private void OnEnterPressed(string nickname)
 		{
 			_playerNickname.Nickname = nickname;
+			ProceedToGameModeMenu();
+		}
+
+		private void ProceedToGameModeMenu()
+		{
 			_gameModeView.Show();
 		}
 
