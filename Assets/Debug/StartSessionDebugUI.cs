@@ -8,12 +8,14 @@ using Zenject;
 
 namespace GameDebug
 {
-	public class StartSessionUI : MonoBehaviour
+	public class StartSessionDebugUI : MonoBehaviour
 	{
 		public Button StartHost;
 		public TMP_InputField hostCode;
 		public Button StartClient;
 		public TMP_InputField clientCode;
+		public Button LeaveGameButton;
+
 		[Inject]
 		private SessionSystem _sessionSystem;
 		[Inject]
@@ -23,6 +25,12 @@ namespace GameDebug
 		{
 			StartHost.onClick.AddListener(OnStartHost);
 			StartClient.onClick.AddListener(OnStartClient);
+			LeaveGameButton.onClick.AddListener(OnLeaveGame);
+		}
+
+		private void OnLeaveGame()
+		{
+			_sessionSystem.LeaveCurrentSession().Forget();
 		}
 
 		private async void OnStartHost()
@@ -40,6 +48,7 @@ namespace GameDebug
 		{
 			StartHost.onClick.RemoveListener(OnStartHost);
 			StartClient.onClick.RemoveListener(OnStartClient);
+			LeaveGameButton.onClick.RemoveListener(OnLeaveGame);
 		}
 	}
 }

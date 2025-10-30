@@ -10,7 +10,7 @@ namespace Installers
 		private Collider _playerOneScoreZoneCollider;
 		[SerializeField]
 		private Collider _playerTwoScoreZoneCollider;
-		[SerializeField] 
+		[SerializeField]
 		private MatchSettings _matchSettings;
 
 		public override void InstallBindings()
@@ -27,6 +27,9 @@ namespace Installers
 			         .AsSingle();
 
 			Container.BindInterfacesAndSelfTo<MatchSystem>()
+			         .AsSingle();
+
+			Container.BindInterfacesTo<PlayerDisconnectObserver>()
 			         .AsSingle();
 		}
 	}
