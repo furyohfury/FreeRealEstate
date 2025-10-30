@@ -15,12 +15,17 @@ namespace Gameplay
 
 		private void Start()
 		{
-			Destination = transform.position;
+			Destination = Position;
 		}
 
-		public void MoveTo(Vector3 point)
+		public void SetDestination(Vector3 point)
 		{
 			Destination = point;
+		}
+
+		public void MoveInstantly(Vector3 point)
+		{
+			_rigidbody.position = point;
 		}
 
 		private void FixedUpdate()

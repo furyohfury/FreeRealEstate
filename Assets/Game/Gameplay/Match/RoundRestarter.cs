@@ -20,18 +20,18 @@ namespace Gameplay
 			_puckService = puckService;
 		}
 
-		public void RestartByGoalHit(Player player)
+		public void RestartByGoalHit(Player lostPlayer)
 		{
 			if (NetworkManager.Singleton.IsHost == false)
 			{
 				return;
 			}
 			
-			player = player == Player.One
+			lostPlayer = lostPlayer == Player.One
 				? Player.Two
 				: Player.One;
 			
-			RestartToSide(player);
+			RestartToSide(lostPlayer);
 		}
 
 		private void RestartToSide(Player player)
@@ -61,9 +61,14 @@ namespace Gameplay
 		private void MovePlayersToDefaultPos()
 		{
 			var host = _hostPlayerService.HostPlayer;
-			host.MoveTo(_playersSpawnService.HostSpawnPos.position);
+			host.GetComponent<HostPlayerController>().ResetInput();
+			host.MoveInstantly(_playersSpawnService.HostSpawnPos.position);
+			host.StopMovement();
+			
 			var client = _clientPlayerService.ClientPlayer;
-			client.MoveTo(_playersSpawnService.ClientSpawnPos.position);
+			client.GetComponent<ClientPlayerController>().ResetInput();
+			client.MoveInstantly(_playersSpawnService.ClientSpawnPos.position);
+			client.StopMovement();
 		}
 
 		private void SpawnPuckInHostPos()
