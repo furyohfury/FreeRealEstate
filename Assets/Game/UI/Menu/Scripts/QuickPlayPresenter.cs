@@ -104,7 +104,7 @@ namespace Game.UI
 
 		private async ValueTask OnBackButtonPressed(Unit arg1, CancellationToken arg2)
 		{
-			await _sessionSystem.LeaveCurrentSession();
+			await _sessionSystem.CheckForExistingSession();
 			_quickPlayMenu.Hide();
 			_gameModeView.Show();
 		}

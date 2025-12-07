@@ -46,7 +46,7 @@ namespace Game.UI
 
 		public void Dispose()
 		{
-			_disposable.Dispose();
+			_disposable?.Dispose();
 		}
 	}
 }

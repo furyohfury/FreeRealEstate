@@ -35,7 +35,7 @@ namespace Game.Network
 
 		public async UniTask HostPrivateSession(string playerNickname)
 		{
-			await LeaveCurrentSession();
+			await CheckForExistingSession();
 
 			var playerProperties = GetPlayerProperties(playerNickname);
 			var options = new SessionOptions()
@@ -50,7 +50,7 @@ namespace Game.Network
 		
 		public async UniTask<ISession> HostPublicSession(string playerNickname)
 		{
-			await LeaveCurrentSession();
+			await CheckForExistingSession();
 
 			var playerProperties = GetPlayerProperties(playerNickname);
 			var options = new SessionOptions()
@@ -84,7 +84,7 @@ namespace Game.Network
 
 		public async UniTask QuickPlay()
 		{
-			await LeaveCurrentSession();
+			await CheckForExistingSession();
 			
 			var quickJoinOptions = new QuickJoinOptions()
 			                       {
@@ -101,7 +101,7 @@ namespace Game.Network
 			_onSessionStarted.OnNext(ActiveSession);
 		}
 
-		public async UniTask LeaveCurrentSession()
+		public async UniTask CheckForExistingSession()
 		{
 			if (ActiveSession != null)
 			{
@@ -111,6 +111,14 @@ namespace Game.Network
 					return;
 				}
 
+				await LeaveCurrentSession();
+			}
+		}
+
+		public async UniTask LeaveCurrentSession()
+		{
+			if (ActiveSession != null)
+			{
 				await ActiveSession.LeaveAsync();
 				Debug.Log("In session now. Leaving...");
 			}
