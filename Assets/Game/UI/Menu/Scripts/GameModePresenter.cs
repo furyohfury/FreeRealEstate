@@ -60,7 +60,7 @@ namespace Game.UI
 			{
 				await _sessionSystem.HostPrivateSession(_playerNickname.Nickname);
 				var newSession = _sessionSystem.ActiveSession;
-				var code = newSession.Code;
+				var code = newSession.CurrentValue.Code;
 				_gameModeView.HostSessionId = code;
 			}
 			catch (Exception e)
@@ -78,7 +78,7 @@ namespace Game.UI
 			var session = _sessionSystem.ActiveSession;
 			if (session != null)
 			{
-				CopyToClipboard(session.Code);
+				CopyToClipboard(session.CurrentValue.Code);
 			}
 		}
 

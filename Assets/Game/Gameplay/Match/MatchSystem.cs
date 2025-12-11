@@ -47,7 +47,7 @@ namespace Gameplay
 			}
 		}
 
-		private void FinishGameByPlayerWon(Player player)
+		public void FinishGameByPlayerWon(Player player)
 		{
 			_gameFinisher.FinishGameByPlayerWon(player);
 		}

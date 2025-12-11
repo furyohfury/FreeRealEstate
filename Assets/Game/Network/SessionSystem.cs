@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
 using Cysharp.Threading.Tasks;
 using R3;
 using Unity.Netcode;
@@ -16,8 +15,11 @@ namespace Game.Network
 	public sealed class SessionSystem : IInitializable
 	{
 		public Observable<ISession> OnSessionStarted => _onSessionStarted;
-		private Subject<ISession> _onSessionStarted = new Subject<ISession>();
-		public ISession ActiveSession { get; private set; }
+		public ReadOnlyReactiveProperty<ISession> ActiveSession => activeSession;
+		public bool IsLeaving {get; private set;}
+
+		private readonly ReactiveProperty<ISession> activeSession = new ReactiveProperty<ISession>();
+		private readonly Subject<ISession> _onSessionStarted = new Subject<ISession>();
 
 		public async void Initialize()
 		{
@@ -38,43 +40,49 @@ namespace Game.Network
 			await CheckForExistingSession();
 
 			var playerProperties = GetPlayerProperties(playerNickname);
-			var options = new SessionOptions()
+			var options = new SessionOptions
 			              {
-				              MaxPlayers = 2, IsLocked = false, IsPrivate = true, PlayerProperties = playerProperties
+				              MaxPlayers = 2
+				              , IsLocked = false
+				              , IsPrivate = true
+				              , PlayerProperties = playerProperties
 			              }.WithRelayNetwork();
-			
-			ActiveSession = await MultiplayerService.Instance.CreateSessionAsync(options);
-			_onSessionStarted.OnNext(ActiveSession);
-			Debug.Log($"Session {ActiveSession.Id} created! Join code: {ActiveSession.Code}");
+
+			activeSession.Value = await MultiplayerService.Instance.CreateSessionAsync(options);
+			_onSessionStarted.OnNext(ActiveSession.CurrentValue);
+			Debug.Log($"Session {ActiveSession.CurrentValue.Id} created! Join code: {ActiveSession.CurrentValue.Code}");
 		}
-		
+
 		public async UniTask<ISession> HostPublicSession(string playerNickname)
 		{
 			await CheckForExistingSession();
 
 			var playerProperties = GetPlayerProperties(playerNickname);
-			var options = new SessionOptions()
+			var options = new SessionOptions
 			              {
-				              MaxPlayers = 2, IsLocked = false, IsPrivate = false, PlayerProperties = playerProperties
+				              MaxPlayers = 2
+				              , IsLocked = false
+				              , IsPrivate = false
+				              , PlayerProperties = playerProperties
 			              }.WithRelayNetwork();
-			
-			ActiveSession = await MultiplayerService.Instance.CreateSessionAsync(options);
-			_onSessionStarted.OnNext(ActiveSession);
-			Debug.Log($"Public session {ActiveSession.Id} created!");
-			return ActiveSession;
+
+			activeSession.Value = await MultiplayerService.Instance.CreateSessionAsync(options);
+			_onSessionStarted.OnNext(ActiveSession.CurrentValue);
+			Debug.Log($"Public session {ActiveSession.CurrentValue.Id} created!");
+			return ActiveSession.CurrentValue;
 		}
 
 		public async UniTask<ISession> JoinSessionByCode(string code, string nickname)
 		{
-			var joinSessionOptions = new JoinSessionOptions()
+			var joinSessionOptions = new JoinSessionOptions
 			                         {
 				                         PlayerProperties = GetPlayerProperties(nickname)
 			                         };
-			
-			ActiveSession = await MultiplayerService.Instance.JoinSessionByCodeAsync(code, joinSessionOptions);
-			_onSessionStarted.OnNext(ActiveSession);
+
+			activeSession.Value = await MultiplayerService.Instance.JoinSessionByCodeAsync(code, joinSessionOptions);
+			_onSessionStarted.OnNext(ActiveSession.CurrentValue);
 			Debug.Log($"Joined session with code {code}");
-			return ActiveSession;
+			return ActiveSession.CurrentValue;
 		}
 
 		public void SwitchScene(Scenes scene)
@@ -85,25 +93,25 @@ namespace Game.Network
 		public async UniTask QuickPlay()
 		{
 			await CheckForExistingSession();
-			
-			var quickJoinOptions = new QuickJoinOptions()
+
+			var quickJoinOptions = new QuickJoinOptions
 			                       {
 				                       Filters = new List<FilterOption>
 				                                 {
-					                                 new(FilterField.AvailableSlots, "1", FilterOperation.Equal),
-				                                 },
-				                       Timeout = TimeSpan.FromSeconds(5)
+					                                 new FilterOption(FilterField.AvailableSlots, "1", FilterOperation.Equal)
+				                                 }
+				                       , Timeout = TimeSpan.FromSeconds(5)
 			                       };
-			
+
 			var sessionOptions = new SessionOptions().WithRelayNetwork(); // createsession is false so it's useless but ctr demands it
 
-			ActiveSession = await MultiplayerService.Instance.MatchmakeSessionAsync(quickJoinOptions, sessionOptions);
-			_onSessionStarted.OnNext(ActiveSession);
+			activeSession.Value = await MultiplayerService.Instance.MatchmakeSessionAsync(quickJoinOptions, sessionOptions);
+			_onSessionStarted.OnNext(ActiveSession.CurrentValue);
 		}
 
 		public async UniTask CheckForExistingSession()
 		{
-			if (ActiveSession != null)
+			if (ActiveSession.CurrentValue != null)
 			{
 				if (NetworkManager.Singleton.IsHost)
 				{
@@ -117,9 +125,12 @@ namespace Game.Network
 
 		public async UniTask LeaveCurrentSession()
 		{
-			if (ActiveSession != null)
+			if (ActiveSession.CurrentValue != null)
 			{
-				await ActiveSession.LeaveAsync();
+				IsLeaving = true;
+				await ActiveSession.CurrentValue.LeaveAsync();
+				activeSession.Value = null;
+				IsLeaving = false;
 				Debug.Log("In session now. Leaving...");
 			}
 		}

@@ -27,7 +27,7 @@ namespace Gameplay
 
 		public void Initialize()
 		{
-			var activeSession = _sessionSystem.ActiveSession;
+			var activeSession = _sessionSystem.ActiveSession.CurrentValue;
 
 			if (activeSession == null)
 			{
@@ -44,6 +44,12 @@ namespace Gameplay
 		{
 			var currentPlayerNickname = _playerNickname.Nickname;
 			string otherPlayerNickname = null;
+
+			if (activeSession == null
+			    || activeSession.Players == null)
+			{
+				return;
+			}
 
 			var playersData = activeSession.Players;
 

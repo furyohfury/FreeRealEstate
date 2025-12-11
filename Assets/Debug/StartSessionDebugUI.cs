@@ -1,8 +1,11 @@
 ﻿using Cysharp.Threading.Tasks;
 using Game.App;
 using Game.Network;
+using Gameplay;
 using TMPro;
+using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Zenject;
 
@@ -20,6 +23,8 @@ namespace GameDebug
 		private SessionSystem _sessionSystem;
 		[Inject]
 		private PlayerNickname _playerNickname;
+		[Inject]
+		private MatchSystem _matchSystem;
 
 		private void OnEnable()
 		{
@@ -30,13 +35,15 @@ namespace GameDebug
 
 		private void OnLeaveGame()
 		{
+			// TODO chicken sound
+			SceneManager.LoadScene(Scenes.MainMenu.ToString());
 			_sessionSystem.LeaveCurrentSession().Forget();
 		}
 
 		private async void OnStartHost()
 		{
 			await _sessionSystem.HostPublicSession(_playerNickname.Nickname);
-			hostCode.text = _sessionSystem.ActiveSession.Code;
+			hostCode.text = _sessionSystem.ActiveSession.CurrentValue.Code;
 		}
 
 		private void OnStartClient()

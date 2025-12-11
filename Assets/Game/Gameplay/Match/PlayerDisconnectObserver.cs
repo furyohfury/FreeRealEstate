@@ -1,6 +1,8 @@
 ﻿using System;
+using Game.Network;
 using R3;
 using Unity.Netcode;
+using UnityEngine;
 using Zenject;
 
 namespace Gameplay
@@ -9,13 +11,16 @@ namespace Gameplay
 	{
 		private readonly GameFinisher _gameFinisher;
 		private readonly MyPlayerService _myPlayerService;
+		private SessionSystem _sessionSystem;
+		
 		private bool _isGameFinished;
-		private readonly CompositeDisposable _disposable = new();
+		private readonly CompositeDisposable _disposable = new CompositeDisposable();
 
-		public PlayerDisconnectObserver(GameFinisher gameFinisher, MyPlayerService myPlayerService)
+		public PlayerDisconnectObserver(GameFinisher gameFinisher, MyPlayerService myPlayerService, SessionSystem sessionSystem)
 		{
 			_gameFinisher = gameFinisher;
 			_myPlayerService = myPlayerService;
+			_sessionSystem = sessionSystem;
 		}
 
 		public void Initialize()
@@ -38,11 +43,30 @@ namespace Gameplay
 
 		private void OnClientDisconnectCallback(ulong clientId)
 		{
-			if (!_isGameFinished &&
-			    clientId != NetworkManager.Singleton.LocalClient.ClientId) // TODO сначала кикает другого а потом дисконектается лол
+			bool hasClientDisconnected = HasClientDisconnected(clientId);
+			bool hasHostDisconnected = HasHostDisconnected(clientId);
+			Debug.Log($"Client {clientId} disconnected!. hasClientDisconnected =  {hasClientDisconnected}, hasHostDisconnected = {hasHostDisconnected}");
+			
+			if (hasClientDisconnected
+			    || hasHostDisconnected)
 			{
 				_gameFinisher.FinishGameByPlayerWon(_myPlayerService.MyPlayer);
 			}
+		}
+
+		private bool HasHostDisconnected(ulong clientId) // was kicked by host when he was leaving
+		{
+			return NetworkManager.Singleton.IsHost == false
+			       && !_isGameFinished
+			       && clientId == NetworkManager.Singleton.LocalClient.ClientId;
+		}
+		
+		private bool HasClientDisconnected(ulong clientId) // TODO засчитывает победу хосту в консоли
+		{
+			return NetworkManager.Singleton.IsHost
+			       && !_isGameFinished
+			       && clientId != NetworkManager.Singleton.LocalClient.ClientId
+			       && _sessionSystem.IsLeaving == false;
 		}
 
 		public void Dispose()
