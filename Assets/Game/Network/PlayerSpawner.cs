@@ -4,6 +4,7 @@ using R3;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Zenject;
 
 namespace Game.Network
 {
@@ -23,8 +24,15 @@ namespace Game.Network
 		[SerializeField]
 		private Transform _container;
 
-		private readonly Subject<Bat> _onHostSpawned = new();
-		private readonly Subject<Bat> _onClientSpawned = new();
+		private readonly Subject<Bat> _onHostSpawned = new Subject<Bat>();
+		private readonly Subject<Bat> _onClientSpawned = new Subject<Bat>();
+		private DiContainer _diContainer;
+
+		[Inject]
+		private void Construct(DiContainer container)
+		{
+			_diContainer = container;
+		}
 
 		private void Start()
 		{
@@ -81,16 +89,24 @@ namespace Game.Network
 
 		private void SpawnHostPlayer(ulong clientId)
 		{
-			var player = Instantiate(_hostPlayerPrefab, _hostSpawnPoint.position, _hostSpawnPoint.rotation, _container);
+			var player = SpawnBat(_hostPlayerPrefab, _hostSpawnPoint.position, _hostSpawnPoint.rotation);
 			player.NetworkObject.SpawnAsPlayerObject(clientId);
 			_onHostSpawned.OnNext(player);
 		}
 
 		private void SpawnClientPlayer(ulong clientId)
 		{
-			var player = Instantiate(_clientPlayerPrefab, _clientSpawnPoint.position, _clientSpawnPoint.rotation, _container);
+			var player = SpawnBat(_clientPlayerPrefab, _clientSpawnPoint.position, _clientSpawnPoint.rotation);
 			player.NetworkObject.SpawnAsPlayerObject(clientId);
 			_onClientSpawned.OnNext(player);
+		}
+
+		private Bat SpawnBat(Bat prefab, Vector3 position, Quaternion rotation)
+		{
+			Bat bat = Instantiate(prefab, position, rotation, _container);
+			_diContainer.InjectGameObject(bat.gameObject);
+
+			return bat;
 		}
 
 		private void OnDestroy()

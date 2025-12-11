@@ -1,5 +1,6 @@
 ﻿using Unity.Netcode;
 using UnityEngine;
+using Zenject;
 
 namespace Gameplay
 {
@@ -10,6 +11,16 @@ namespace Gameplay
 		[SerializeField]
 		private LayerMask _groundLayer;
 		private bool _isControlling;
+
+		private BoxCollider _collider;
+
+		[Inject]
+		private void Construct(
+			[Inject(Id = "ClientInputCollider")]
+			BoxCollider collider)
+		{
+			_collider = collider;
+		}
 
 		public void ResetInput()
 		{
@@ -34,13 +45,14 @@ namespace Gameplay
 				_isControlling = false;
 			}
 
-			if (Input.GetMouseButton(0) &&
-			    _isControlling &&
-			    Physics.Raycast(Camera.main!.ScreenPointToRay(Input.mousePosition), out var hit, 10000, _groundLayer))
+			if (Input.GetMouseButton(0)
+			    && _isControlling
+			    && Physics.Raycast(Camera.main!.ScreenPointToRay(Input.mousePosition), out var hit, 10000, _groundLayer))
 			{
 				var hitPoint = hit.point;
-				hitPoint.y = _moveComponent.Position.y;
-				SendMoveRequestServerRpc(hitPoint);
+				var closestPoint = _collider.ClosestPoint(hitPoint);
+				closestPoint.y = _moveComponent.Position.y;
+				SendMoveRequestServerRpc(closestPoint);
 			}
 		}
 

@@ -17,6 +17,10 @@ namespace Installers
 		private Transform _hostPuckSpawnPoint;
 		[SerializeField] [Required]
 		private Transform _clientPuckSpawnPoint;
+		[SerializeField] [Required]
+		private BoxCollider _hostInputCollider;
+		[SerializeField] [Required]
+		private BoxCollider _clientInputCollider;
 
 		public override void InstallBindings()
 		{
@@ -57,6 +61,16 @@ namespace Installers
 			Container.Bind<Score>()
 			         .FromComponentInHierarchy()
 			         .AsSingle();
+
+			Container.Bind<BoxCollider>()
+			         .WithId("HostInputCollider")
+			         .FromInstance(_hostInputCollider)
+			         .AsCached();
+
+			Container.Bind<BoxCollider>()
+			         .WithId("ClientInputCollider")
+			         .FromInstance(_clientInputCollider)
+			         .AsCached();
 		}
 	}
 }
