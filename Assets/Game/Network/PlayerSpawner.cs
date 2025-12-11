@@ -8,7 +8,7 @@ using Zenject;
 
 namespace Game.Network
 {
-	public class PlayerSpawner : MonoBehaviour
+	public class PlayerSpawner : NetworkBehaviour
 	{
 		public Observable<Bat> OnHostSpawned => _onHostSpawned;
 		public Observable<Bat> OnClientSpawned => _onClientSpawned;
@@ -26,13 +26,6 @@ namespace Game.Network
 
 		private readonly Subject<Bat> _onHostSpawned = new Subject<Bat>();
 		private readonly Subject<Bat> _onClientSpawned = new Subject<Bat>();
-		private DiContainer _diContainer;
-
-		[Inject]
-		private void Construct(DiContainer container)
-		{
-			_diContainer = container;
-		}
 
 		private void Start()
 		{
@@ -104,7 +97,6 @@ namespace Game.Network
 		private Bat SpawnBat(Bat prefab, Vector3 position, Quaternion rotation)
 		{
 			Bat bat = Instantiate(prefab, position, rotation, _container);
-			_diContainer.InjectGameObject(bat.gameObject);
 
 			return bat;
 		}

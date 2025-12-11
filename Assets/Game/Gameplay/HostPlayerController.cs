@@ -1,6 +1,6 @@
-﻿using Unity.Netcode;
+﻿using System.Linq;
+using Unity.Netcode;
 using UnityEngine;
-using Zenject;
 
 namespace Gameplay
 {
@@ -13,12 +13,11 @@ namespace Gameplay
 		private bool _isControlling;
 		private BoxCollider _collider;
 
-		[Inject]
-		private void Construct(
-			[Inject(Id = "HostInputCollider")]
-			BoxCollider collider)
+		public override void OnNetworkSpawn()
 		{
-			_collider = collider;
+			_collider = FindObjectsByType<PlayzoneCollider>(FindObjectsSortMode.None)
+			            .Single(collider => collider.Player == Player.One)
+			            .BoxCollider;
 		}
 
 		public void ResetInput()

@@ -2,7 +2,7 @@
 
 namespace Gameplay
 {
-	public sealed class Puck : MonoBehaviour
+	public class Puck : MonoBehaviour
 	{
 		[SerializeField]
 		private Rigidbody _rigidbody;
@@ -17,4 +17,5 @@ namespace Gameplay
 			_rigidbody.linearVelocity = Vector3.zero;
 		}
 	}
+
 }

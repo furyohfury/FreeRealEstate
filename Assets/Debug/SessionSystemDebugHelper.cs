@@ -17,9 +17,6 @@ namespace GameDebug
 		[Inject]
 		private PlayerNickname _playerNickname;
 
-		[ShowInInspector]
-		private ISession ActiveSession => _sessionSystem.ActiveSession.CurrentValue;
-
 		[Button]
 		private void StartAsHost(string name)
 		{

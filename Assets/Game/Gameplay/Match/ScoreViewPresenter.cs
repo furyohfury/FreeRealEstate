@@ -84,7 +84,7 @@ namespace Gameplay
 		{
 			if (NetworkManager.Singleton != null)
 			{
-				_disposable.Dispose();
+				_disposable?.Dispose();
 			}
 		}
 	}

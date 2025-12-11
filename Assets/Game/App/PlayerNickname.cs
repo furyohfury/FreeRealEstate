@@ -8,14 +8,14 @@ namespace Game.App
 		{
 			get
 			{
-#if UNITY_EDITOR
-				if (string.IsNullOrEmpty(_nickname))
-				{
-					return NetworkManager.Singleton.IsHost
-						? "HostTestPlayer"
-						: "ClientTestPlayer";
-				}
-#endif
+// #if UNITY_EDITOR
+// 				if (string.IsNullOrEmpty(_nickname))
+// 				{
+// 					return NetworkManager.Singleton.IsHost
+// 						? "HostTestPlayer"
+// 						: "ClientTestPlayer";
+// 				}
+// #endif
 				return _nickname;
 			}
 			set => _nickname = value;

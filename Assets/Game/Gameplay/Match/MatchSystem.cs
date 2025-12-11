@@ -27,17 +27,21 @@ namespace Gameplay
 		public void Initialize()
 		{
 			_disposable = _goalObservable.OnHitGoal
-			                             .Subscribe(OnHitGoal);
+			                             .Subscribe(ScoreGoal);
 		}
 
-		private void OnHitGoal(Player player)
+		public void ScoreGoal(Player player)
 		{
+			int score = _score.GetScore(player);
+
+			if (score >= _matchSettings.PointsToWin)
+			{
+				return;
+			}
+			
 			_score.AddPoint(player);
-#if UNITY_EDITOR
-			// Debug.Log(
-			// 	$"<color=green> Goal hit by {player.ToString()}. Score is {_score.GetScore(Player.One)} : {_score.GetScore(Player.Two)}");
-#endif
-			if (_score.GetScore(player) < _matchSettings.PointsToWin)
+			
+			if (score + 1 < _matchSettings.PointsToWin)
 			{
 				_roundRestarter.RestartByGoalHit(player);
 			}
