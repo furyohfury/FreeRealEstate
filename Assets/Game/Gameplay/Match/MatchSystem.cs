@@ -6,12 +6,17 @@ namespace Gameplay
 {
 	public sealed class MatchSystem : IInitializable, IDisposable
 	{
+		public Observable<Unit> OnMatchStarted => _onMatchStarted;
+		public Observable<Player> OnMatchWon => _onMatchWon;
+
 		private readonly RoundRestarter _roundRestarter;
 		private readonly GoalObservable _goalObservable;
 		private readonly Score _score;
 		private readonly GameFinisher _gameFinisher;
 		private readonly MatchSettings _matchSettings;
 
+		private readonly Subject<Unit> _onMatchStarted = new Subject<Unit>();
+		private readonly Subject<Player> _onMatchWon = new Subject<Player>();
 		private IDisposable _disposable;
 
 		public MatchSystem(RoundRestarter roundRestarter, GoalObservable goalObservable, MatchSettings matchSettings, GameFinisher gameFinisher
@@ -26,6 +31,7 @@ namespace Gameplay
 
 		public void Initialize()
 		{
+			_onMatchStarted.OnNext(Unit.Default);
 			_disposable = _goalObservable.OnHitGoal
 			                             .Subscribe(ScoreGoal);
 		}
@@ -38,9 +44,9 @@ namespace Gameplay
 			{
 				return;
 			}
-			
+
 			_score.AddPoint(player);
-			
+
 			if (score + 1 < _matchSettings.PointsToWin)
 			{
 				_roundRestarter.RestartByGoalHit(player);
@@ -53,6 +59,7 @@ namespace Gameplay
 
 		public void FinishGameByPlayerWon(Player player)
 		{
+			_onMatchWon.OnNext(player);
 			_gameFinisher.FinishGameByPlayerWon(player);
 		}
 

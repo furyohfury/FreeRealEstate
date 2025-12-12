@@ -1,4 +1,6 @@
-﻿using Unity.Netcode;
+﻿using System;
+using R3;
+using Unity.Netcode;
 using UnityEngine;
 using Zenject;
 
@@ -13,6 +15,7 @@ namespace Gameplay
 		private MatchSystem _matchSystem;
 		private float _timer;
 		private bool _isOnPlayerSide;
+		private bool _isMatchActive;
 		
 		private const float TIMEOUT = 7;
 
@@ -22,9 +25,20 @@ namespace Gameplay
 			_matchSystem = matchSystem;
 		}
 
+		private void Awake()
+		{
+			_matchSystem.OnMatchStarted
+			            .Subscribe(_ => _isMatchActive = true)
+			            .AddTo(this);
+			
+			_matchSystem.OnMatchWon
+			            .Subscribe(_ => _isMatchActive = false)
+			            .AddTo(this);
+		}
+
 		private void Update()
 		{
-			if (_isOnPlayerSide == false)
+			if (_isMatchActive == false || _isOnPlayerSide == false)
 			{
 				return;
 			}
@@ -46,6 +60,7 @@ namespace Gameplay
 			if (other.TryGetComponent(out Puck _))
 			{
 				_isOnPlayerSide = true;
+				_timer = 0f;
 			}
 		}
 

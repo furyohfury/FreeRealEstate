@@ -9,16 +9,16 @@ namespace Gameplay
 {
 	public sealed class PlayerDisconnectObserver : IInitializable, IDisposable
 	{
-		private readonly GameFinisher _gameFinisher;
+		private readonly MatchSystem _matchSystem;
 		private readonly MyPlayerService _myPlayerService;
 		private SessionSystem _sessionSystem;
 		
 		private bool _isGameFinished;
 		private readonly CompositeDisposable _disposable = new CompositeDisposable();
 
-		public PlayerDisconnectObserver(GameFinisher gameFinisher, MyPlayerService myPlayerService, SessionSystem sessionSystem)
+		public PlayerDisconnectObserver(MatchSystem matchSystem, MyPlayerService myPlayerService, SessionSystem sessionSystem)
 		{
-			_gameFinisher = gameFinisher;
+			_matchSystem = matchSystem;
 			_myPlayerService = myPlayerService;
 			_sessionSystem = sessionSystem;
 		}
@@ -36,7 +36,7 @@ namespace Gameplay
 			          .Subscribe(OnClientDisconnectCallback)
 			          .AddTo(_disposable);
 
-			_gameFinisher.OnPlayerWon
+			_matchSystem.OnMatchWon
 			             .Subscribe(_ => _isGameFinished = true)
 			             .AddTo(_disposable);
 		}
@@ -50,7 +50,7 @@ namespace Gameplay
 			if (hasClientDisconnected
 			    || hasHostDisconnected)
 			{
-				_gameFinisher.FinishGameByPlayerWon(_myPlayerService.MyPlayer);
+				_matchSystem.FinishGameByPlayerWon(_myPlayerService.MyPlayer);
 			}
 		}
 
