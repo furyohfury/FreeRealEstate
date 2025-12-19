@@ -1,19 +1,14 @@
 ﻿using Scellecs.Morpeh;
 using UnityEngine;
 
-namespace Game.GameEngine
+namespace GameEngine
 {
 	public sealed class DebugSystem : ISystem
 	{
-		public World World
-		{
-			get;
-			set;
-		}
+		public World World { get; set; }
 
 		public void OnAwake()
 		{
-			
 		}
 
 		public void OnUpdate(float deltaTime)
@@ -23,7 +18,6 @@ namespace Game.GameEngine
 
 		public void Dispose()
 		{
-			
 		}
 	}
 }
