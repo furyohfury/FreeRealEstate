@@ -1,5 +1,7 @@
 ﻿using System;
 using R3;
+using Unity.Netcode;
+using UnityEngine;
 using Zenject;
 
 namespace Gameplay
@@ -7,7 +9,7 @@ namespace Gameplay
 	public sealed class MatchSystem : IInitializable, IDisposable
 	{
 		public Observable<Unit> OnMatchStarted => _onMatchStarted;
-		public Observable<Player> OnMatchWon => _onMatchWon;
+		public readonly Observable<Player> OnMatchWon;
 
 		private readonly RoundRestarter _roundRestarter;
 		private readonly GoalObservable _goalObservable;
@@ -15,8 +17,7 @@ namespace Gameplay
 		private readonly GameFinisher _gameFinisher;
 		private readonly MatchSettings _matchSettings;
 
-		private readonly Subject<Unit> _onMatchStarted = new Subject<Unit>();
-		private readonly Subject<Player> _onMatchWon = new Subject<Player>();
+		private readonly Subject<Unit> _onMatchStarted = new();
 		private IDisposable _disposable;
 
 		public MatchSystem(RoundRestarter roundRestarter, GoalObservable goalObservable, MatchSettings matchSettings, GameFinisher gameFinisher
@@ -26,6 +27,7 @@ namespace Gameplay
 			_goalObservable = goalObservable;
 			_matchSettings = matchSettings;
 			_gameFinisher = gameFinisher;
+			OnMatchWon = _gameFinisher.OnPlayerWon;
 			_score = score;
 		}
 
@@ -47,19 +49,21 @@ namespace Gameplay
 
 			_score.AddPoint(player);
 
+			Debug.Log($"<color=green>Scored goal for player {player.ToString()}</color>");
+
 			if (score + 1 < _matchSettings.PointsToWin)
 			{
 				_roundRestarter.RestartByGoalHit(player);
 			}
 			else
 			{
-				FinishGameByPlayerWon(player);
+				FinishGameByPlayerWonRpc(player);
 			}
 		}
 
-		public void FinishGameByPlayerWon(Player player)
+		[ClientRpc]
+		public void FinishGameByPlayerWonRpc(Player player)
 		{
-			_onMatchWon.OnNext(player);
 			_gameFinisher.FinishGameByPlayerWon(player);
 		}
 

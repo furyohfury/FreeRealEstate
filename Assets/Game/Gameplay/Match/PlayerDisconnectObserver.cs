@@ -11,10 +11,10 @@ namespace Gameplay
 	{
 		private readonly MatchSystem _matchSystem;
 		private readonly MyPlayerService _myPlayerService;
-		private SessionSystem _sessionSystem;
-		
+		private readonly SessionSystem _sessionSystem;
+
 		private bool _isGameFinished;
-		private readonly CompositeDisposable _disposable = new CompositeDisposable();
+		private readonly CompositeDisposable _disposable = new();
 
 		public PlayerDisconnectObserver(MatchSystem matchSystem, MyPlayerService myPlayerService, SessionSystem sessionSystem)
 		{
@@ -33,24 +33,26 @@ namespace Gameplay
 						          NetworkManager.Singleton.OnClientDisconnectCallback -= h;
 					          }
 				          })
+			          .Where(_ => _isGameFinished == false)
 			          .Subscribe(OnClientDisconnectCallback)
 			          .AddTo(_disposable);
 
 			_matchSystem.OnMatchWon
-			             .Subscribe(_ => _isGameFinished = true)
-			             .AddTo(_disposable);
+			            .Subscribe(_ => _isGameFinished = true)
+			            .AddTo(_disposable);
 		}
 
 		private void OnClientDisconnectCallback(ulong clientId)
 		{
 			bool hasClientDisconnected = HasClientDisconnected(clientId);
 			bool hasHostDisconnected = HasHostDisconnected(clientId);
-			Debug.Log($"Client {clientId} disconnected!. hasClientDisconnected =  {hasClientDisconnected}, hasHostDisconnected = {hasHostDisconnected}");
-			
+			Debug.Log(
+				$"Client {clientId} disconnected!. hasClientDisconnected =  {hasClientDisconnected}, hasHostDisconnected = {hasHostDisconnected}");
+
 			if (hasClientDisconnected
 			    || hasHostDisconnected)
 			{
-				_matchSystem.FinishGameByPlayerWon(_myPlayerService.MyPlayer);
+				_matchSystem.FinishGameByPlayerWonRpc(_myPlayerService.MyPlayer);
 			}
 		}
 
@@ -60,7 +62,7 @@ namespace Gameplay
 			       && !_isGameFinished
 			       && clientId == NetworkManager.Singleton.LocalClient.ClientId;
 		}
-		
+
 		private bool HasClientDisconnected(ulong clientId) // TODO засчитывает победу хосту в консоли
 		{
 			return NetworkManager.Singleton.IsHost

@@ -1,5 +1,4 @@
 ﻿using Cysharp.Threading.Tasks;
-using Game.Network;
 using R3;
 using Unity.Netcode;
 using UnityEngine;
@@ -13,13 +12,11 @@ namespace Gameplay
 
 		private readonly HostPlayerService _hostPlayerService;
 		private readonly ClientPlayerService _clientPlayerService;
-		private SessionSystem _sessionSystem;
 
-		public GameFinisher(HostPlayerService hostPlayerService, ClientPlayerService clientPlayerService, SessionSystem sessionSystem)
+		public GameFinisher(HostPlayerService hostPlayerService, ClientPlayerService clientPlayerService)
 		{
 			_hostPlayerService = hostPlayerService;
 			_clientPlayerService = clientPlayerService;
-			_sessionSystem = sessionSystem;
 		}
 
 		public async UniTask FinishGameByPlayerWon(Player wonPlayer)
@@ -32,8 +29,6 @@ namespace Gameplay
 
 			Debug.Log($"<color=yellow> Player {wonPlayer.ToString()} won!</color>");
 			_onPlayerWon.OnNext(wonPlayer);
-			
-			await _sessionSystem.LeaveCurrentSession();
 		}
 	}
 }

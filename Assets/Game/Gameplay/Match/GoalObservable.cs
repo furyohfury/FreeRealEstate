@@ -10,6 +10,8 @@ namespace Gameplay
 
 		public GoalObservable(Collider playerOneGoalZone, Collider playerTwoGoalZone)
 		{
+			Debug.Log("Goalobservable");
+			
 			OnHitGoal = Observable.Merge<Player>(
 				playerOneGoalZone.OnTriggerEnterAsObservable()
 				                 .Select(_ => Player.Two),
