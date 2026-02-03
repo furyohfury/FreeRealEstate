@@ -4,27 +4,27 @@ using UnityEngine;
 
 namespace GameEngine
 {
-	public sealed class WheelForceCalculationSystem : ISystem
+	public sealed class WheelForceCalculationSystem : IFixedSystem
 	{
 		public World World { get; set; }
 		private Filter _filter;
-		private Stash<SuspensionComp> _suspensionStash;
-		private Stash<WheelRaycastComp> _raycastStash;
-		private Stash<ForceComp> _forceStash;
+		private Stash<Suspension> _suspensionStash;
+		private Stash<WheelRaycast> _raycastStash;
+		private Stash<ForceReq> _forceStash;
 		private Stash<TransformComp> _transformStash;
 		private Stash<RigidBodyComp> _rigidBodyStash;
 
 		public void OnAwake()
 		{
 			_filter = World.Filter
-			               .With<SuspensionComp>()
-			               .With<WheelRaycastComp>()
+			               .With<Suspension>()
+			               .With<WheelRaycast>()
 			               .With<TransformComp>()
 			               .Build();
 
-			_suspensionStash = World.GetStash<SuspensionComp>();
-			_raycastStash = World.GetStash<WheelRaycastComp>();
-			_forceStash = World.GetStash<ForceComp>();
+			_suspensionStash = World.GetStash<Suspension>();
+			_raycastStash = World.GetStash<WheelRaycast>();
+			_forceStash = World.GetStash<ForceReq>();
 			_transformStash = World.GetStash<TransformComp>();
 			_rigidBodyStash = World.GetStash<RigidBodyComp>();
 		}
@@ -33,12 +33,12 @@ namespace GameEngine
 		{
 			foreach (Entity entity in _filter)
 			{
-				SuspensionComp suspensionComp = _suspensionStash.Get(entity);
-				float length = suspensionComp.Radius;
-				float maxSuspension = suspensionComp.MaxSuspension;
-				WheelRaycastComp raycastComp = _raycastStash.Get(entity);
-				float distanceToGround = raycastComp.Distance;
-				bool isGrounded = raycastComp.IsGrounded;
+				Suspension suspension = _suspensionStash.Get(entity);
+				float length = suspension.Radius;
+				float maxSuspension = suspension.MaxSuspension;
+				WheelRaycast raycast = _raycastStash.Get(entity);
+				float distanceToGround = raycast.Distance;
+				bool isGrounded = raycast.IsGrounded;
 
 				if (!isGrounded)
 				{
@@ -49,8 +49,8 @@ namespace GameEngine
 					TransformComp transformComp = _transformStash.Get(entity);
 					RigidBodyComp rigidBodyComp = _rigidBodyStash.Get(entity);
 
-					float stiffness = suspensionComp.Stiffness;
-					float damper = suspensionComp.Damper;
+					float stiffness = suspension.Stiffness;
+					float damper = suspension.Damper;
 					Transform transform = transformComp.Transform;
 					Rigidbody rigidbody = rigidBodyComp.Rigidbody;
 					float compression = distanceToGround / (maxSuspension + length);
@@ -74,18 +74,12 @@ namespace GameEngine
 					t.z = 0;
 					t = transform.TransformDirection(t);
 
-					if (_forceStash.Has(entity))
-					{
-						ref ForceComp forceComp = ref _forceStash.Get(entity);
-						forceComp.Force += finalForce + (float3)t;
-						forceComp.Point += (float3)collisionPoint;
-					}
-					else
-					{
-						ref ForceComp forceComp = ref _forceStash.Add(entity);
-						forceComp.Force += finalForce + (float3)t;
-						forceComp.Point += (float3)collisionPoint;
-					}
+					Entity request = World.CreateEntity();
+					ref ForceReq forceReq = ref _forceStash.Add(request);
+					forceReq.Target = entity;
+					forceReq.Force = finalForce + (float3)t;
+					forceReq.Point = collisionPoint;
+					forceReq.ForceMode = ForceMode.Force;
 				}
 			}
 		}

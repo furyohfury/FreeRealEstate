@@ -2,7 +2,7 @@
 
 namespace GameEngine
 {
-	public sealed class WheelForceProvider : MonoProvider<ForceComp>
+	public sealed class WheelForceProvider : MonoProvider<ForceReq>
 	{
 	}
 }

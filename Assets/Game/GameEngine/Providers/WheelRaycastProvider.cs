@@ -2,7 +2,7 @@
 
 namespace GameEngine
 {
-	public sealed class WheelRaycastProvider : MonoProvider<WheelRaycastComp>
+	public sealed class WheelRaycastProvider : MonoProvider<WheelRaycast>
 	{
 	}
 }

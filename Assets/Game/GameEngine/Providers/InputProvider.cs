@@ -2,7 +2,7 @@
 
 namespace GameEngine
 {
-	public sealed class InputProvider : MonoProvider<InputComp>
+	public sealed class InputProvider : MonoProvider<Input>
 	{
 	}
 }

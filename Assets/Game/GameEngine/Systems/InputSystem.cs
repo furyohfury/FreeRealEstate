@@ -10,7 +10,7 @@ namespace GameEngine
 		private InputActions _inputActions;
 		private Vector2 _moveDirection;
 		private Filter _filter;
-		private Stash<InputComp> _inputStash;
+		private Stash<Input> _inputStash;
 
 		public void OnAwake()
 		{
@@ -19,10 +19,10 @@ namespace GameEngine
 			_inputActions.Player.Enable();
 			_inputActions.Player.AddCallbacks(this);
 
-			_inputStash = World.GetStash<InputComp>();
+			_inputStash = World.GetStash<Input>();
 			_filter = World.Filter
 			               .With<PlayerTag>()
-			               .With<InputComp>()
+			               .With<Input>()
 			               .Build();
 
 			Entity inputEntity = World.CreateEntity();
@@ -33,18 +33,13 @@ namespace GameEngine
 		{
 			foreach (Entity entity in _filter)
 			{
-				ref InputComp inputComp = ref _inputStash.Get(entity);
-				inputComp.Direction = _moveDirection;
-				Debug.Log("Input: " + inputComp.Direction);
+				ref Input input = ref _inputStash.Get(entity);
+				input.Direction = _inputActions.Player.Move.ReadValue<Vector2>();
 			}
 		}
 
 		public void OnMove(InputAction.CallbackContext context)
 		{
-			if (context.performed)
-			{
-				_moveDirection = context.ReadValue<Vector2>();
-			}
 		}
 
 		public void OnLook(InputAction.CallbackContext context)

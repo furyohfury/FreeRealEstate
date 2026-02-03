@@ -2,7 +2,7 @@
 
 namespace GameEngine
 {
-	public sealed class SuspensionProvider : MonoProvider<SuspensionComp>
+	public sealed class SuspensionProvider : MonoProvider<Suspension>
 	{
 	}
 }

@@ -1,5 +1,4 @@
 ﻿using Scellecs.Morpeh;
-using UnityEngine;
 
 namespace GameEngine
 {
@@ -11,13 +10,11 @@ namespace GameEngine
 			set;
 		}
 		private Filter _filter;
-		private Stash<ForceComp> _forceStash;
 
 		public void OnAwake()
 		{
-			_forceStash = World.GetStash<ForceComp>();
 			_filter = World.Filter
-			               .With<ForceComp>()
+			               .With<ForceReq>()
 			               .Build();
 		}
 
@@ -25,8 +22,7 @@ namespace GameEngine
 		{
 			foreach (var entity in _filter)
 			{
-				Debug.Log("force clean. Entity: " + entity.Id);
-				_forceStash.Remove(entity);
+				World.RemoveEntity(entity);
 			}
 		}
 

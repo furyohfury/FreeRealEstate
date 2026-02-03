@@ -10,7 +10,7 @@ namespace GameEngine
 		[SerializeField]
 		GameObject _player;
 		[SerializeField]
-		private Transform _point;
+		private UnityEngine.Transform _point;
 
 		[Button]
 		private void Respawn()
@@ -23,12 +23,12 @@ namespace GameEngine
 
 		private void Update()
 		{
-			if (Input.GetKeyDown(KeyCode.R))
+			if (UnityEngine.Input.GetKeyDown(KeyCode.R))
 			{
 				Respawn();
 			}
 
-			if (Input.GetKeyDown(KeyCode.F))
+			if (UnityEngine.Input.GetKeyDown(KeyCode.F))
 			{
 				Flip();
 			}

@@ -1,25 +1,34 @@
 ﻿using Scellecs.Morpeh;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace GameEngine
 {
-	public sealed class WheelAccelerationSystem : ISystem
+	public sealed class WheelAccelerationSystem : IFixedSystem
 	{
 		public World World { get; set; }
 		private Filter _filter;
-		private Stash<WheelComp> _wheelStash;
-		private Stash<AccelerationEvent> _accEventStash;
-		private Stash<WheelRaycastComp> _raycastStash;
+		private Stash<Wheel> _wheelStash;
+		private Stash<AccelerationReq> _accEventStash;
+		private Stash<WheelRaycast> _raycastStash;
 		private Stash<TransformComp> _transformStash;
+		private Stash<RigidBodyComp> _rbStash;
+		private Stash<TopSpeed> _speedStash;
+		private Stash<PowerCurve> _powerCurveStash;
+		private Stash<ForceReq> _forceStash;
 
 		public void OnAwake()
 		{
-			_wheelStash = World.GetStash<WheelComp>();
-			_accEventStash = World.GetStash<AccelerationEvent>();
-			_raycastStash = World.GetStash<WheelRaycastComp>();
+			_wheelStash = World.GetStash<Wheel>();
+			_accEventStash = World.GetStash<AccelerationReq>();
+			_raycastStash = World.GetStash<WheelRaycast>();
 			_transformStash = World.GetStash<TransformComp>();
+			_speedStash = World.GetStash<TopSpeed>();
+			_rbStash = World.GetStash<RigidBodyComp>();
+			_forceStash = World.GetStash<ForceReq>();
+			_powerCurveStash = World.GetStash<PowerCurve>();
 			_filter = World.Filter
-			               .With<AccelerationEvent>()
+			               .With<AccelerationReq>()
 			               .Build();
 		}
 
@@ -27,8 +36,8 @@ namespace GameEngine
 		{
 			foreach (var entity in _filter)
 			{
-				AccelerationEvent accelerationEvent = _accEventStash.Get(entity);
-				Entity wheelEntity = accelerationEvent.Entity;
+				var accelerationEvent = _accEventStash.Get(entity);
+				var wheelEntity = accelerationEvent.Entity;
 
 				if (_wheelStash.Has(wheelEntity) == false)
 				{
@@ -42,10 +51,28 @@ namespace GameEngine
 					continue;
 				}
 
-				TransformComp transformComp = _transformStash.Get(wheelEntity);
-				Transform wheelTransform = transformComp.Transform;
-				var accelDir = wheelTransform.forward;
-				// var carSpeed = Vector3.Dot(car) НУЖНА ЕЩЕ ТАЧКА ПО ВИДОСУ БЛЯ))
+				var transformComp = _transformStash.Get(wheelEntity);
+				var wheelTransform = transformComp.Transform;
+				var accelDir = (float3)wheelTransform.forward;
+				var wheelComp = _wheelStash.Get(wheelEntity);
+				var vehicle = wheelComp.Vehicle.Entity;
+				var vehicleRb = _rbStash.Get(vehicle).Rigidbody;
+				var vehicleTransform = _transformStash.Get(vehicle).Transform;
+
+				var carSpeed = Vector3.Dot(vehicleTransform.forward, vehicleRb.linearVelocity);
+				var topSpeed = _speedStash.Get(vehicle).MaxSpeed;
+				var normalizedSpeed = Mathf.Clamp01(Mathf.Abs(carSpeed) / topSpeed);
+				var powerCurve = _powerCurveStash.Get(vehicle).Curve;
+				var availableTorque = powerCurve.Evaluate(normalizedSpeed) * accelerationEvent.Acceleration.y;
+				var wheelForce = accelDir * availableTorque;
+
+				Entity request = World.CreateEntity();
+				ref var forceReq = ref _forceStash.Add(request);
+				forceReq.Target = wheelEntity;
+				forceReq.Force = wheelForce;
+				forceReq.Point = wheelTransform.position;
+				forceReq.ForceMode = ForceMode.Force;
+				Debug.Log("Created forcereq, FOrce =  " + forceReq.Force);
 			}
 		}
 

@@ -10,31 +10,33 @@ namespace GameEngine
 
 		private Filter _filter;
 		private Stash<RigidBodyComp> _rigidbodyStash;
-		private Stash<ForceComp> _forceStash;
+		private Stash<ForceReq> _forceStash;
 
 		public void OnAwake()
 		{
-			_filter = World.Filter
-			               .With<ForceComp>()
-			               .With<RigidBodyComp>()
-			               .Build();
-
 			_rigidbodyStash = World.GetStash<RigidBodyComp>();
-			_forceStash = World.GetStash<ForceComp>();
+			_forceStash = World.GetStash<ForceReq>();
+			_filter = World.Filter
+			               .With<ForceReq>()
+			               .Build();
 		}
 
 		public void OnUpdate(float deltaTime)
 		{
 			foreach (Entity entity in _filter)
 			{
-				Debug.Log("force app. Entity: " + entity.Id);
-				ForceComp forceComp = _forceStash.Get(entity);
-				float3 force = forceComp.Force;
-				RigidBodyComp rigidBodyComp = _rigidbodyStash.Get(entity);
-				Rigidbody rigidbody = rigidBodyComp.Rigidbody;
-				Vector3 point = forceComp.Point;
+				ForceReq forceReq = _forceStash.Get(entity);
+				Entity target = forceReq.Target;
+				RigidBodyComp rigidBodyComp = _rigidbodyStash.Get(target, out bool exist);
 
-				rigidbody.AddForceAtPosition(force, point, forceComp.ForceMode);
+				if (exist)
+				{
+					Rigidbody rigidbody = rigidBodyComp.Rigidbody;
+					float3 force = forceReq.Force;
+					Vector3 point = forceReq.Point;
+					ForceMode forceMode = forceReq.ForceMode;
+					rigidbody.AddForceAtPosition(force, point, forceMode);
+				}
 			}
 		}
 

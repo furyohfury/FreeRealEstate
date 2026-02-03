@@ -7,45 +7,45 @@ namespace GameEngine
 	{
 		public World World { get; set; }
 		private Filter _filter;
-		private Stash<WheelRaycastComp> _raycastStash;
+		private Stash<WheelRaycast> _raycastStash;
 		private Stash<TransformComp> _transformStash;
-		private Stash<SuspensionComp> _suspensionStash;
+		private Stash<Suspension> _suspensionStash;
 
 		public void OnAwake()
 		{
 			_filter = World.Filter
-			               .With<WheelRaycastComp>()
+			               .With<WheelRaycast>()
 			               .With<TransformComp>()
-			               .With<SuspensionComp>()
+			               .With<Suspension>()
 			               .Build();
 
-			_raycastStash = World.GetStash<WheelRaycastComp>();
+			_raycastStash = World.GetStash<WheelRaycast>();
 			_transformStash = World.GetStash<TransformComp>();
-			_suspensionStash = World.GetStash<SuspensionComp>();
+			_suspensionStash = World.GetStash<Suspension>();
 		}
 
 		public void OnUpdate(float deltaTime)
 		{
 			foreach (Entity entity in _filter)
 			{
-				ref WheelRaycastComp wheelRaycastComp = ref _raycastStash.Get(entity);
-				SuspensionComp suspensionComp = _suspensionStash.Get(entity);
+				ref WheelRaycast wheelRaycast = ref _raycastStash.Get(entity);
+				Suspension suspension = _suspensionStash.Get(entity);
 
 				TransformComp transformComp = _transformStash.Get(entity);
 				Transform transform = transformComp.Transform;
 				Vector3 position = transform.position;
-				float length = suspensionComp.Radius + suspensionComp.MaxSuspension;
+				float length = suspension.Radius + suspension.MaxSuspension;
 				bool raycast = Physics.Raycast(position, -transform.up, out var hit, length);
-				wheelRaycastComp.IsGrounded = raycast;
-				wheelRaycastComp.Normal = hit.normal;
+				wheelRaycast.IsGrounded = raycast;
+				wheelRaycast.Normal = hit.normal;
 
 				if (raycast)
 				{
-					wheelRaycastComp.Distance = hit.distance;
+					wheelRaycast.Distance = hit.distance;
 				}
 				else
 				{
-					wheelRaycastComp.Distance = 0.0f;
+					wheelRaycast.Distance = 0.0f;
 				}
 			}
 		}
