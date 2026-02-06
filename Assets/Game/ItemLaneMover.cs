@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using TriInspector;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game
 {
@@ -10,19 +6,22 @@ namespace Game
     {
         [SerializeField]
         private float _moveSpeed;
-        private List<Item> _items = new List<Item>();
-
-        [Button]
-        private void GetFromScene()
-        {
-            _items = FindObjectsByType<Item>(FindObjectsSortMode.None).ToList();
-        }
+        [SerializeField]
+        private LaneSystem _laneSystem;
 
         private void Update()
         {
-            foreach (var item in _items)
+            foreach (var lane in _laneSystem.Lanes)
             {
-                item.Move(Vector3.back * (_moveSpeed * Time.deltaTime));
+                if (lane.IsMoving == false)
+                {
+                    continue;
+                }
+
+                foreach (var item in lane.LinkedItems)
+                {
+                    item.Move(Vector3.back * (lane.Speed * Time.deltaTime));
+                }
             }
         }
     }

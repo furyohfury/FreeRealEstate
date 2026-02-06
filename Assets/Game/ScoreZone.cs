@@ -1,15 +1,22 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Game
 {
     public sealed class ScoreZone : MonoBehaviour
     {
+        [SerializeField]
+        private ItemSystem _itemSystem;
+        [SerializeField]
+        private Lane _lane;
+        
         private void OnCollisionEnter(Collision other)
         {
-            if (other.gameObject.TryGetComponent(out Item _))
+            if (other.gameObject.TryGetComponent(out Item item))
             {
                 Debug.Log("Scored");
-                Destroy(other.gameObject);
+                _lane.RemoveItem(item);
+                _itemSystem.DestroyItem(item);
             }
         }
     }
