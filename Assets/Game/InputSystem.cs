@@ -1,10 +1,14 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Game
 {
     public sealed class InputSystem : MonoBehaviour, InputSystem_Actions.IPlayerActions
     {
+        public event Action OnSwipeStarted;
+        public event Action OnSwipeCancelled;
+        public float PointerPositionX { get; private set; }
         private InputSystem_Actions _actions;
 
         private void Awake()
@@ -20,10 +24,21 @@ namespace Game
 
         public void OnMoveItem(InputAction.CallbackContext context)
         {
+            if (context.started)
+            {
+                PointerPositionX = context.ReadValue<float>();
+                OnSwipeStarted?.Invoke();
+                Debug.Log($"<color=green>swipe start</color>");
+            }
+
             if (context.performed)
             {
-                float xAxisValue = context.ReadValue<float>();
-                Debug.Log($"xAxisValue: {xAxisValue}");
+                PointerPositionX = context.ReadValue<float>();
+            }
+
+            if (context.canceled)
+            {
+                OnSwipeCancelled?.Invoke();
             }
         }
 

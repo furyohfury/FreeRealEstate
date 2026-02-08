@@ -402,7 +402,60 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Lane
   <Speed>k__BackingField: 3
+  <Number>k__BackingField: 0
   _spawnPos: {fileID: 665898523}
+--- !u!1 &279177309
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 279177310}
+  - component: {fileID: 279177311}
+  m_Layer: 0
+  m_Name: SwipeHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &279177310
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 279177309}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1487499783}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &279177311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 279177309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e4dc9cf3f78401a88469f54dd3273c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.SwipeHandler
+  _inputSystem: {fileID: 440180755}
+  _laneSystem: {fileID: 1848681567}
+  _screenRatioToSwipe: 0.1
+  _camera: {fileID: 519420031}
+  _itemsLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  _moveDuration: 0.5
 --- !u!1 &367685757
 GameObject:
   m_ObjectHideFlags: 0
@@ -1016,7 +1069,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1106341941
 Transform:
   m_ObjectHideFlags: 0
@@ -1223,6 +1276,7 @@ Transform:
   - {fileID: 11868999}
   - {fileID: 1848681568}
   - {fileID: 440180754}
+  - {fileID: 279177310}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1704913110
@@ -1756,6 +1810,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Lane
   <Speed>k__BackingField: 3
+  <Number>k__BackingField: 1
   _spawnPos: {fileID: 615135286}
 --- !u!65 &1942328019
 BoxCollider:
@@ -1854,7 +1909,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2041184927
 MonoBehaviour:
   m_ObjectHideFlags: 0
