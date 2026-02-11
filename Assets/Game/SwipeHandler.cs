@@ -10,6 +10,8 @@ namespace Game
         private InputSystem _inputSystem;
         [SerializeField]
         private LaneSystem _laneSystem;
+        [SerializeField]
+        private ItemLaneRegistry _itemLaneRegistry;
         [SerializeField] [Range(0, 1f)]
         private float _screenRatioToSwipe = 0.2f;
         [SerializeField]
@@ -78,22 +80,28 @@ namespace Game
                 {
                     if (lanes[i].LinkedItems.Contains(_selectedItem) == false)
                         continue;
-                    
-                    if (delta > 0 && i < count - 1)
+
+                    if (delta > 0
+                        && i < count - 1)
                     {
-                        MoveItemToLane(_selectedItem, lanes[i + 1]);
+                        MoveItemToLane(_selectedItem, lanes[i], lanes[i + 1]);
                     }
-                    else if (delta < 0 && i > 0)
+                    else if (delta < 0
+                             && i > 0)
                     {
-                        MoveItemToLane(_selectedItem, lanes[i - 1]);
+                        MoveItemToLane(_selectedItem, lanes[i], lanes[i - 1]);
                     }
                 }
             }
         }
 
-        private void MoveItemToLane(Item selectedItem, Lane lane)
+        private void MoveItemToLane(Item selectedItem, Lane initialLane, Lane newLane)
         {
-            selectedItem.transform.DOMoveX(lane.transform.position.x, _moveDuration);
+            _itemLaneRegistry.UnlinkItem(selectedItem, initialLane);
+            _itemLaneRegistry.LinkItem(selectedItem, newLane);
+            initialLane.LinkedItems.Remove(selectedItem);
+            newLane.LinkedItems.Add(selectedItem);
+            selectedItem.transform.DOMoveX(newLane.transform.position.x, _moveDuration);
         }
 
         private void OnDisable()

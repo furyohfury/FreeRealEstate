@@ -7,6 +7,7 @@ namespace Game
 	{
 		[field: SerializeField]
 		public float Speed { get; set; }
+		[field: SerializeField]
 		public Color Color { get; private set; }
 		public bool IsMoving { get; private set; } = true;
 		public Vector3 SpawnPos => _spawnPos.position;
