@@ -26,47 +26,73 @@ namespace Game
         private void Update()
         {
             HashSet<Item> linkedItems = _lane.LinkedItems;
+            List<Item> itemsToConsume = null;
 
-            foreach (Item item in linkedItems) // TODO modified collection
+            foreach (Item item in linkedItems)
             {
                 if (IsInConsumeRadius(item)
                     && _activeConsumingItems.Contains(item) == false)
                 {
                     Debug.Log("Scored");
 
-                    _lane.RemoveItem(item);
-                    _activeConsumingItems.Add(item);
-                    DOTween.Sequence()
-                           .Append(item.MoveTo(transform.position, _consumeDuration, _consumeAnimEasing))
-                           .Join(item.ChangeSize(0, _consumeRadius, _consumeAnimEasing))
-                           .AppendCallback(() =>
-                           {
-                               OnItemConsumed(item);
-                           });
+                    if (itemsToConsume == null)
+                    {
+                        itemsToConsume = new List<Item>
+                                         {
+                                             item
+                                         };
+                    }
+                    else
+                    {
+                        itemsToConsume.Add(item);
+                    }
                 }
             }
-        }
 
-        private void OnItemConsumed(Item item)
-        {
-            _activeConsumingItems.Remove(item);
-            _itemSystem.DestroyItem(item);
-
-            if (item.Color == _lane.Color)
+            if (itemsToConsume != null)
             {
-                _health.CurrentHealth += _gameParams.Params.RewardForRightItemColor;
-                // vfx
-            }
-            else
-            {
-                _health.CurrentHealth -= _gameParams.Params.PenaltyForWrongItemColor;
-                // vfx
+                ConsumeItems(itemsToConsume);
             }
         }
 
         private bool IsInConsumeRadius(Item item)
         {
             return (item.GetPosition() - transform.position).sqrMagnitude < _consumeRadius * _consumeRadius;
+        }
+
+        private void ConsumeItems(List<Item> itemsToConsume)
+        {
+            foreach (Item item in itemsToConsume)
+            {
+                _lane.RemoveItem(item);
+                _activeConsumingItems.Add(item);
+                DOTween.Sequence()
+                       // .Append(item.MoveTo(transform.position, _consumeDuration, false, _consumeAnimEasing))
+                       .Append(item.transform.DOMove(transform.position, _consumeDuration).SetEase(_consumeAnimEasing))
+                       .Join(item.ChangeSize(0, _consumeRadius, _consumeAnimEasing))
+                       .AppendCallback(() =>
+                       {
+                           OnItemConsumed(item);
+                       });
+            }
+        }
+
+        private void OnItemConsumed(Item item)
+        {
+            _activeConsumingItems.Remove(item);
+
+            if (item.Color == _lane.Color)
+            {
+                _health.CurrentHealth += _gameParams.Params.RewardForRightItemColor;
+                // TODO vfx
+            }
+            else
+            {
+                _health.CurrentHealth -= _gameParams.Params.PenaltyForWrongItemColor;
+                // TODO vfx
+            }
+
+            _itemSystem.DestroyItem(item);
         }
 
         private void OnDrawGizmos()

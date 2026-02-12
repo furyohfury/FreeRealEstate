@@ -1,29 +1,25 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using UnityEngine;
 
 namespace Game
 {
     public sealed class Item : MonoBehaviour
     {
+        /// <summary>
+        /// Only invokes by not swiped item
+        /// </summary>
+        public event Action<Item, Item> OnCollided;
+        public bool IsSwiped { get; set; }
         public Color Color { get; private set; }
         [SerializeField]
         private MeshRenderer _meshRenderer;
+        [SerializeField]
+        private Collider _collider;
 
         public void Move(Vector3 v)
         {
             transform.position += v;
-        }
-
-        public Tween MoveTo(Vector3 v, float duration, Ease ease =  Ease.Linear)
-        {
-            if (duration <= 0f)
-            {
-                Move(v);
-                return null;
-            }
-            
-            return transform.DOMove(v, duration)
-                     .SetEase(ease);
         }
 
         public Tween ChangeSize(float endVal, float duration, Ease ease = Ease.Linear)
@@ -40,6 +36,24 @@ namespace Game
         public Vector3 GetPosition()
         {
             return transform.position;
+        }
+
+        public void EnableCollision()
+        {
+            _collider.enabled = true;
+        }
+
+        public void DisableCollision()
+        {
+            _collider.enabled = false;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (!IsSwiped && other.TryGetComponent(out Item item))
+            {
+                OnCollided?.Invoke(this, item);
+            }
         }
     }
 }

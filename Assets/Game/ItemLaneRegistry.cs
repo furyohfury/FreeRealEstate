@@ -19,6 +19,11 @@ namespace Game
             lane.RemoveItem(item);
         }
 
+        public void SwapLane(Item item, Lane finalLane)
+        {
+            _itemsDict[item] = finalLane;
+        }
+
         public Lane GetLane(Item item)
         {
             return _itemsDict[item];

@@ -7,5 +7,6 @@ namespace Game
     {
         public float RewardForRightItemColor;
         public float PenaltyForWrongItemColor;
+        public float PenaltyForCollision;
     }
 }

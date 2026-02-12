@@ -97,11 +97,14 @@ namespace Game
 
         private void MoveItemToLane(Item selectedItem, Lane initialLane, Lane newLane)
         {
-            _itemLaneRegistry.UnlinkItem(selectedItem, initialLane);
-            _itemLaneRegistry.LinkItem(selectedItem, newLane);
+            _itemLaneRegistry.SwapLane(selectedItem, newLane);
             initialLane.LinkedItems.Remove(selectedItem);
             newLane.LinkedItems.Add(selectedItem);
-            selectedItem.transform.DOMoveX(newLane.transform.position.x, _moveDuration);
+            selectedItem.IsSwiped = true;
+
+            DOTween.Sequence()
+                   .Append(selectedItem.transform.DOMoveX(newLane.transform.position.x, _moveDuration))
+                   .AppendCallback(() => selectedItem.IsSwiped = false);
         }
 
         private void OnDisable()

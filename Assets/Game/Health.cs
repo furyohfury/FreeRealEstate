@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public sealed class Health : MonoBehaviour
+    public sealed class Health : Singleton<Health>
     {
         public event Action<float> OnHealthChanged;
 

@@ -2,7 +2,7 @@
 
 namespace Game
 {
-    public sealed class GameParams : MonoBehaviour
+    public sealed class GameParams : Singleton<GameParams>
     {
         [field: SerializeField]
         public SessionParams Params

@@ -502,7 +502,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.SwipeHandler
   _inputSystem: {fileID: 440180755}
   _laneSystem: {fileID: 1848681567}
-  _itemLaneRegistry: {fileID: 0}
+  _itemLaneRegistry: {fileID: 2144069429}
   _screenRatioToSwipe: 0.1
   _camera: {fileID: 519420031}
   _itemsLayerMask:
@@ -1070,6 +1070,53 @@ Transform:
   m_Children: []
   m_Father: {fileID: 230355644}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &703263033
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 703263034}
+  - component: {fileID: 703263035}
+  m_Layer: 0
+  m_Name: ItemCollisionHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &703263034
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703263033}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1569501235}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &703263035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703263033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c119c14cd00b488bbe9647dd407ab968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.ItemCollisionHandler
+  _knockDistance: 2
+  _speed: 5
+  _ease: 21
 --- !u!1 &779687496
 GameObject:
   m_ObjectHideFlags: 0
@@ -1221,7 +1268,7 @@ MonoBehaviour:
   _gameParams: {fileID: 1621737761}
   _consumeRadius: 2
   _consumeDuration: 1
-  _consumeAnimEasing: 2
+  _consumeAnimEasing: 30
 --- !u!65 &1106341943
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1542,6 +1589,7 @@ Transform:
   - {fileID: 1712887375}
   - {fileID: 11868999}
   - {fileID: 2144069430}
+  - {fileID: 703263034}
   m_Father: {fileID: 1487499783}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1621737759
@@ -1591,6 +1639,7 @@ MonoBehaviour:
   <Params>k__BackingField:
     RewardForRightItemColor: 5
     PenaltyForWrongItemColor: 15
+    PenaltyForCollision: 0
   Colors:
   - {r: 1, g: 0, b: 0, a: 0}
   - {r: 0, g: 1, b: 0, a: 0}
@@ -1778,7 +1827,7 @@ MonoBehaviour:
   _itemSystem: {fileID: 1712887376}
   _lane: {fileID: 1942328018}
   _gameParams: {fileID: 1621737761}
-  _spawnInterval: 1
+  _spawnInterval: 3
   _randomSpawnOffset: 0.4
   _randomAngleOffset: 30
 --- !u!1 &1712887374
@@ -1827,6 +1876,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.ItemSystem
   _itemFactory: {fileID: 11869000}
   _itemLaneRegistry: {fileID: 2144069429}
+  _itemCollisionHandler: {fileID: 703263035}
 --- !u!1 &1792636498
 GameObject:
   m_ObjectHideFlags: 0
@@ -1874,7 +1924,7 @@ MonoBehaviour:
   _itemSystem: {fileID: 1712887376}
   _lane: {fileID: 230355645}
   _gameParams: {fileID: 1621737761}
-  _spawnInterval: 1
+  _spawnInterval: 3
   _randomSpawnOffset: 0.4
   _randomAngleOffset: 30
 --- !u!1 &1848681566
@@ -2078,6 +2128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Item
   _meshRenderer: {fileID: 0}
+  _collider: {fileID: 0}
 --- !u!1 &1866966364
 GameObject:
   m_ObjectHideFlags: 0
@@ -2294,7 +2345,7 @@ MonoBehaviour:
   _gameParams: {fileID: 1621737761}
   _consumeRadius: 2
   _consumeDuration: 1
-  _consumeAnimEasing: 2
+  _consumeAnimEasing: 30
 --- !u!65 &2041184928
 BoxCollider:
   m_ObjectHideFlags: 0
