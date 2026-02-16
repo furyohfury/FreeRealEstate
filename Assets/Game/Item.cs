@@ -17,9 +17,9 @@ namespace Game
         [SerializeField]
         private Collider _collider;
 
-        public void Move(Vector3 v)
+        public void Move(Vector3 direction)
         {
-            transform.position += v;
+            transform.position += direction;
         }
 
         public Tween ChangeSize(float endVal, float duration, Ease ease = Ease.Linear)

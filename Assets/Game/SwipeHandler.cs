@@ -41,7 +41,7 @@ namespace Game
         {
             RaycastHit hit;
             bool raycastHit;
-#if UNITY_EDITOR || UNITY_STANDALONE_WIN
+#if UNITY_EDITOR || UNITY_STANDALONE_WIN // TODO WEB3
             var ray = _camera.ScreenPointToRay(Mouse.current.position.value);
             raycastHit = Physics.Raycast(ray,
                 out hit,

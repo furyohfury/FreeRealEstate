@@ -100,13 +100,22 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""DragItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""2a130f74-f7c2-44cb-a94e-1edb78c7fdc6"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Hold(duration=0.2)"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
                     ""id"": ""d7a4286d-99f9-41c3-b98b-8250ceda112f"",
-                    ""path"": ""<Touchscreen>/primaryTouch/delta/x"",
+                    ""path"": ""<Touchscreen>/primaryTouch/position/x"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Touch"",
@@ -146,6 +155,28 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""action"": ""MoveItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""05ab2440-a870-45bb-b246-5580839d3c9b"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""DragItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""534fcebd-3fdd-48c4-a6ac-5934a8611936"",
+                    ""path"": ""<Touchscreen>/Press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Touch"",
+                    ""action"": ""DragItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -222,6 +253,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_MoveItem = m_Player.FindAction("MoveItem", throwIfNotFound: true);
+        m_Player_DragItem = m_Player.FindAction("DragItem", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
     }
@@ -306,6 +338,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_MoveItem;
+    private readonly InputAction m_Player_DragItem;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -321,6 +354,10 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/MoveItem".
         /// </summary>
         public InputAction @MoveItem => m_Wrapper.m_Player_MoveItem;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/DragItem".
+        /// </summary>
+        public InputAction @DragItem => m_Wrapper.m_Player_DragItem;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -350,6 +387,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @MoveItem.started += instance.OnMoveItem;
             @MoveItem.performed += instance.OnMoveItem;
             @MoveItem.canceled += instance.OnMoveItem;
+            @DragItem.started += instance.OnDragItem;
+            @DragItem.performed += instance.OnDragItem;
+            @DragItem.canceled += instance.OnDragItem;
         }
 
         /// <summary>
@@ -364,6 +404,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @MoveItem.started -= instance.OnMoveItem;
             @MoveItem.performed -= instance.OnMoveItem;
             @MoveItem.canceled -= instance.OnMoveItem;
+            @DragItem.started -= instance.OnDragItem;
+            @DragItem.performed -= instance.OnDragItem;
+            @DragItem.canceled -= instance.OnDragItem;
         }
 
         /// <summary>
@@ -561,6 +604,13 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMoveItem(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "DragItem" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnDragItem(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

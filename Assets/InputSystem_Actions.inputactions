@@ -14,13 +14,22 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "DragItem",
+                    "type": "Button",
+                    "id": "2a130f74-f7c2-44cb-a94e-1edb78c7fdc6",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Hold(duration=0.2)",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
                     "name": "",
                     "id": "d7a4286d-99f9-41c3-b98b-8250ceda112f",
-                    "path": "<Touchscreen>/primaryTouch/delta/x",
+                    "path": "<Touchscreen>/primaryTouch/position/x",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Touch",
@@ -60,6 +69,28 @@
                     "action": "MoveItem",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "05ab2440-a870-45bb-b246-5580839d3c9b",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "DragItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "534fcebd-3fdd-48c4-a6ac-5934a8611936",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Touch",
+                    "action": "DragItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },

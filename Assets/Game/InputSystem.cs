@@ -8,6 +8,8 @@ namespace Game
     {
         public event Action OnSwipeStarted;
         public event Action OnSwipeCancelled;
+        public event Action OnDragStarted;
+        public event Action OnDragCancelled;
         public float PointerPositionX { get; private set; }
         private InputSystem_Actions _actions;
 
@@ -39,6 +41,21 @@ namespace Game
             if (context.canceled)
             {
                 OnSwipeCancelled?.Invoke();
+                Debug.Log($"<color=red>swipe start</color>");
+            }
+        }
+
+        public void OnDragItem(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                OnDragStarted?.Invoke();
+                Debug.Log($"<color=green>drag performed</color>");
+            }
+            if (context.canceled)
+            {
+                OnDragCancelled?.Invoke();
+                Debug.Log("<color=red>drag cancel</color>");
             }
         }
 
