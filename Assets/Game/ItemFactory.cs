@@ -8,10 +8,14 @@ namespace Game
         private Transform _container;
         [SerializeField]
         private Item[] _prefabs;
+        private int _counter = 0;
 
         public Item SpawnRandom(Vector3 position, Quaternion rotation)
         {
-            return Instantiate(_prefabs[Random.Range(0, _prefabs.Length)], position, rotation, _container);
+            Item newItem = Instantiate(_prefabs[Random.Range(0, _prefabs.Length)], position, rotation, _container);
+            newItem.gameObject.name = $"Item_{_counter++}";
+            
+            return newItem;
         }
     }
 }

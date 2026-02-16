@@ -9,7 +9,7 @@ namespace Game
         /// <summary>
         /// Only invokes by not swiped item
         /// </summary>
-        public event Action<Item, Item> OnCollided;
+        public event Action<Item, Item> OnKnocked;
         public bool IsSwiped { get; set; }
         public Color Color { get; private set; }
         [SerializeField]
@@ -52,7 +52,7 @@ namespace Game
         {
             if (!IsSwiped && other.TryGetComponent(out Item item))
             {
-                OnCollided?.Invoke(this, item);
+                OnKnocked?.Invoke(item, this);
             }
         }
     }

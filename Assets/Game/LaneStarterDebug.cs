@@ -1,5 +1,7 @@
-﻿using TriInspector;
+﻿using System;
+using TriInspector;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Game
 {
@@ -13,6 +15,14 @@ namespace Game
             foreach (LaneItemSpawner laneItemSpawner in findObjectsByType)
             {
                 laneItemSpawner.StartSpawning();
+            }
+        }
+
+        private void Update()
+        {
+            if (Keyboard.current.lKey.wasPressedThisFrame)
+            {
+                StartSpawn();
             }
         }
     }

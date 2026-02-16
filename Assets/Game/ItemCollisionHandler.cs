@@ -7,24 +7,28 @@ namespace Game
     public sealed class ItemCollisionHandler : MonoBehaviour
     {
         public event Action<Item> OnDestroyItem;
-        
+
         [SerializeField]
         private float _knockDistance;
-        [SerializeField] 
+        [SerializeField]
         private float _speed;
         [SerializeField]
-        private Ease _ease = Ease.OutCirc;
+        private Ease _moveAnimEase = Ease.OutCirc;
+        [SerializeField]
+        private float _scaleAnimDuration = 1f;
+        [SerializeField]
+        private Ease _scaleAnimEase = Ease.OutCirc;
 
         public void SubscribeToCollisionEvents(Item item)
         {
-            item.OnCollided += ItemOnOnCollided;
+            item.OnKnocked += ItemOnOnKnocked;
         }
 
-        private void ItemOnOnCollided(Item item, Item knockedItem)
+        private void ItemOnOnKnocked(Item item, Item knockedItem)
         {
             knockedItem.DisableCollision();
             Health.Instance.CurrentHealth -= GameParams.Instance.Params.PenaltyForCollision;
-            
+
             Vector3 swipedItemPos = item.GetPosition();
             Vector3 knockedItemPos = knockedItem.GetPosition();
             Vector3 direction = knockedItemPos - swipedItemPos;
@@ -36,18 +40,18 @@ namespace Game
             // TODO VFX
 
             DOTween.Sequence()
-                   .Append(knockedItem.transform.DOMove(targetPos, duration).SetEase(_ease))
-                   .Append(knockedItem.ChangeSize(0, duration, _ease))
+                   .Append(knockedItem.transform.DOMove(targetPos, duration).SetEase(_moveAnimEase))
+                   .Append(knockedItem.ChangeSize(0, _scaleAnimDuration, _scaleAnimEase))
                    .AppendCallback(() =>
                    {
                        // TODO VFX
-                       OnDestroyItem?.Invoke(item);
+                       OnDestroyItem?.Invoke(knockedItem);
                    });
         }
 
         public void UnsubscribeToCollisionEvents(Item item)
         {
-            item.OnCollided -= ItemOnOnCollided;
+            item.OnKnocked -= ItemOnOnKnocked;
         }
     }
 }
