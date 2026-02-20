@@ -24,7 +24,7 @@ namespace Game
             _actions.Player.Enable();
         }
 
-        public void OnMoveItem(InputAction.CallbackContext context)
+        public void OnSwipeItem(InputAction.CallbackContext context)
         {
             if (context.started)
             {
@@ -49,11 +49,13 @@ namespace Game
         {
             if (context.performed)
             {
+                _actions.Player.MoveItem.Disable();
                 OnDragStarted?.Invoke();
                 Debug.Log($"<color=green>drag performed</color>");
             }
             if (context.canceled)
             {
+                _actions.Player.MoveItem.Enable();
                 OnDragCancelled?.Invoke();
                 Debug.Log("<color=red>drag cancel</color>");
             }

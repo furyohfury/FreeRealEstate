@@ -384,9 +384,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
-            @MoveItem.started += instance.OnMoveItem;
-            @MoveItem.performed += instance.OnMoveItem;
-            @MoveItem.canceled += instance.OnMoveItem;
+            @MoveItem.started += instance.OnSwipeItem;
+            @MoveItem.performed += instance.OnSwipeItem;
+            @MoveItem.canceled += instance.OnSwipeItem;
             @DragItem.started += instance.OnDragItem;
             @DragItem.performed += instance.OnDragItem;
             @DragItem.canceled += instance.OnDragItem;
@@ -401,9 +401,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="PlayerActions" />
         private void UnregisterCallbacks(IPlayerActions instance)
         {
-            @MoveItem.started -= instance.OnMoveItem;
-            @MoveItem.performed -= instance.OnMoveItem;
-            @MoveItem.canceled -= instance.OnMoveItem;
+            @MoveItem.started -= instance.OnSwipeItem;
+            @MoveItem.performed -= instance.OnSwipeItem;
+            @MoveItem.canceled -= instance.OnSwipeItem;
             @DragItem.started -= instance.OnDragItem;
             @DragItem.performed -= instance.OnDragItem;
             @DragItem.canceled -= instance.OnDragItem;
@@ -603,7 +603,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnMoveItem(InputAction.CallbackContext context);
+        void OnSwipeItem(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "DragItem" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

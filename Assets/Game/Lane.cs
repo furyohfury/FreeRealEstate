@@ -28,5 +28,17 @@ namespace Game
 		{
 			LinkedItems.Remove(item);
 		}
+
+        public void Highlight()
+        {
+            // TODO VFX
+            GetComponent<MeshRenderer>().material.color = Color.aquamarine;
+        }
+        
+        public void DisableHighlight()
+        {
+            // TODO VFX
+            GetComponent<MeshRenderer>().material.color = Color;
+        }
 	}
 }

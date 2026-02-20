@@ -100,11 +100,11 @@ namespace Game
             _itemLaneRegistry.SwapLane(selectedItem, newLane);
             initialLane.LinkedItems.Remove(selectedItem);
             newLane.LinkedItems.Add(selectedItem);
-            selectedItem.IsSwiped = true;
+            selectedItem.IsPlayerControlled = true;
 
             DOTween.Sequence()
                    .Append(selectedItem.transform.DOMoveX(newLane.transform.position.x, _moveDuration))
-                   .AppendCallback(() => selectedItem.IsSwiped = false);
+                   .AppendCallback(() => selectedItem.IsPlayerControlled = false);
         }
 
         private void OnDisable()

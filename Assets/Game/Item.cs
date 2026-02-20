@@ -10,7 +10,7 @@ namespace Game
         /// Only invokes by not swiped item
         /// </summary>
         public event Action<Item, Item> OnKnocked;
-        public bool IsSwiped { get; set; }
+        public bool IsPlayerControlled { get; set; }
         public Color Color { get; private set; }
         [SerializeField]
         private MeshRenderer _meshRenderer;
@@ -50,7 +50,7 @@ namespace Game
 
         private void OnTriggerEnter(Collider other)
         {
-            if (!IsSwiped && other.TryGetComponent(out Item item))
+            if (!IsPlayerControlled && other.TryGetComponent(out Item item))
             {
                 OnKnocked?.Invoke(item, this);
             }

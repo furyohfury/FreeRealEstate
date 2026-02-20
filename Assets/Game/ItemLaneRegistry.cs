@@ -18,6 +18,13 @@ namespace Game
             _itemsDict.Remove(item);
             lane.RemoveItem(item);
         }
+        
+        public void UnlinkItem(Item item)
+        {
+            Lane lane = _itemsDict[item];
+            _itemsDict.Remove(item);
+            lane.RemoveItem(item);
+        }
 
         public void SwapLane(Item item, Lane finalLane)
         {

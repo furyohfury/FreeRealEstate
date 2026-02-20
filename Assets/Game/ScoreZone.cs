@@ -30,22 +30,27 @@ namespace Game
 
             foreach (Item item in linkedItems)
             {
-                if (IsInConsumeRadius(item)
-                    && _activeConsumingItems.Contains(item) == false)
+                if (!CanBeConsumed(item))
+                    continue;
+                
+                if (item.TryGetComponent(out GhostItem ghostItem))
                 {
-                    Debug.Log("Scored");
+                    ghostItem.ReachedScoreZone();
+                    continue;
+                }
+                    
+                Debug.Log("Scored");
 
-                    if (itemsToConsume == null)
-                    {
-                        itemsToConsume = new List<Item>
-                                         {
-                                             item
-                                         };
-                    }
-                    else
-                    {
-                        itemsToConsume.Add(item);
-                    }
+                if (itemsToConsume == null)
+                {
+                    itemsToConsume = new List<Item>
+                                     {
+                                         item
+                                     };
+                }
+                else
+                {
+                    itemsToConsume.Add(item);
                 }
             }
 
@@ -53,6 +58,13 @@ namespace Game
             {
                 ConsumeItems(itemsToConsume);
             }
+        }
+
+        private bool CanBeConsumed(Item item)
+        {
+            return IsInConsumeRadius(item)
+                   && item.IsPlayerControlled == false
+                   && _activeConsumingItems.Contains(item) == false;
         }
 
         private bool IsInConsumeRadius(Item item)
@@ -67,7 +79,6 @@ namespace Game
                 _lane.RemoveItem(item);
                 _activeConsumingItems.Add(item);
                 DOTween.Sequence()
-                       // .Append(item.MoveTo(transform.position, _consumeDuration, false, _consumeAnimEasing))
                        .Append(item.transform.DOMove(transform.position, _consumeDuration).SetEase(_consumeAnimEasing))
                        .Join(item.ChangeSize(0, _consumeRadius, _consumeAnimEasing))
                        .AppendCallback(() =>
