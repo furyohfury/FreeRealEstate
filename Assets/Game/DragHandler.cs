@@ -1,4 +1,5 @@
 ﻿using System.Threading;
+using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -17,6 +18,8 @@ namespace Game
         private ItemLaneRegistry _itemLaneRegistry;
         [SerializeField]
         private LaneSystem _laneSystem;
+        [SerializeField]
+        private ItemSystem _itemSystem;
         [field: SerializeField]
         public float DragCloseLaneDistance
         {
@@ -76,6 +79,9 @@ namespace Game
             }
             else
             {
+                DOTween.Sequence()
+                       .Append(ItemAnimationSystem.Instance.ScaleOnKnockAnim(activeItemTransform))
+                       .AppendCallback(() => _itemSystem.DestroyItem(_activeItem));
                 Debug.Log("no lane and no ghost item");
             }
         }
@@ -105,6 +111,11 @@ namespace Game
         {
             while (!cancelToken.IsCancellationRequested)
             {
+                if (ghostItem == null
+                    || ghostItem.gameObject.activeInHierarchy == false)
+                {
+                    break;
+                }
                 ghostItem.transform.position += Vector3.back * (_cachedLane.Speed * Time.deltaTime);
 
                 await Awaitable.NextFrameAsync(cancelToken);

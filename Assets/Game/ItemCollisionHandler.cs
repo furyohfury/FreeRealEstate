@@ -14,10 +14,6 @@ namespace Game
         private float _speed;
         [SerializeField]
         private Ease _moveAnimEase = Ease.OutCirc;
-        [SerializeField]
-        private float _scaleAnimDuration = 1f;
-        [SerializeField]
-        private Ease _scaleAnimEase = Ease.OutCirc;
 
         public void SubscribeToCollisionEvents(Item item)
         {
@@ -27,7 +23,7 @@ namespace Game
         private void ItemOnOnKnocked(Item item, Item knockedItem)
         {
             knockedItem.DisableCollision();
-            Health.Instance.CurrentHealth -= GameParams.Instance.Params.PenaltyForCollision;
+            HealthController.Instance.PenalizeForCollision();
 
             Vector3 swipedItemPos = item.GetPosition();
             Vector3 knockedItemPos = knockedItem.GetPosition();
@@ -41,7 +37,7 @@ namespace Game
 
             DOTween.Sequence()
                    .Append(knockedItem.transform.DOMove(targetPos, duration).SetEase(_moveAnimEase))
-                   .Append(knockedItem.ChangeSize(0, _scaleAnimDuration, _scaleAnimEase))
+                   .Append(ItemAnimationSystem.Instance.ScaleOnKnockAnim(knockedItem.transform))
                    .AppendCallback(() =>
                    {
                        // TODO VFX

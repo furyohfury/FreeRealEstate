@@ -14,6 +14,8 @@ namespace Game
 		public Quaternion SpawnRot => _spawnPos.rotation;
 		[field: SerializeField]
 		public int Number { get; set; }
+        [field: SerializeField]
+        public ScoreZone ScoreZone { get; set; }
 
 		[SerializeField]
 		private Transform _spawnPos;

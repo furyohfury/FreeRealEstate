@@ -10,6 +10,7 @@ namespace Game
         public void ReachedScoreZone()
         {
             OnReachedScoreZone?.Invoke(this);
+            Destroy();
             // TODO VFX dissolve mb and destroy
         }
 

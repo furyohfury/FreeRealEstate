@@ -32,12 +32,6 @@ namespace Game
             {
                 if (!CanBeConsumed(item))
                     continue;
-                
-                if (item.TryGetComponent(out GhostItem ghostItem))
-                {
-                    ghostItem.ReachedScoreZone();
-                    continue;
-                }
                     
                 Debug.Log("Scored");
 

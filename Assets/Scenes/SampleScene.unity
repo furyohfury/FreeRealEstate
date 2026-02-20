@@ -539,6 +539,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1866966365}
+  - {fileID: 910636888}
   m_Father: {fileID: 1487499783}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &367685757
@@ -1117,8 +1118,6 @@ MonoBehaviour:
   _knockDistance: 4
   _speed: 8
   _moveAnimEase: 21
-  _scaleAnimDuration: 1
-  _scaleAnimEase: 21
 --- !u!1 &779687496
 GameObject:
   m_ObjectHideFlags: 0
@@ -1202,6 +1201,7 @@ MonoBehaviour:
   _dragSpeed: 25
   _itemLaneRegistry: {fileID: 2144069429}
   _laneSystem: {fileID: 1848681567}
+  _itemSystem: {fileID: 0}
   <DragCloseLaneDistance>k__BackingField: 3
   _ghostItemColor: {r: 0.4716981, g: 0.4716981, b: 0.4716981, a: 0.654902}
 --- !u!1 &897206331
@@ -1237,6 +1237,50 @@ Transform:
   - {fileID: 1853563835}
   m_Father: {fileID: 471761150}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &910636887
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 910636888}
+  - component: {fileID: 910636889}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &910636888
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 910636887}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 348096490}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &910636889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 910636887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cff4e416934d460c9fbcb51181994aef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.HealthController
 --- !u!1 &976231768
 GameObject:
   m_ObjectHideFlags: 0
@@ -1622,6 +1666,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1569501235}
+  - component: {fileID: 1569501236}
   m_Layer: 0
   m_Name: '[Items]'
   m_TagString: Untagged
@@ -1648,6 +1693,20 @@ Transform:
   - {fileID: 703263034}
   m_Father: {fileID: 1487499783}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1569501236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1569501234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e8b50faa10e411280c3861db9547944, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.ItemAnimationSystem
+  _scaleAnimEase: 21
+  _scaleAnimDuration: 1
 --- !u!1 &1621737759
 GameObject:
   m_ObjectHideFlags: 0
