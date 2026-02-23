@@ -455,7 +455,7 @@ MonoBehaviour:
   <Speed>k__BackingField: 3
   <Color>k__BackingField: {r: 1, g: 0, b: 0, a: 0}
   <Number>k__BackingField: 0
-  <ScoreZone>k__BackingField: {fileID: 0}
+  <ScoreZone>k__BackingField: {fileID: 2041184927}
   _spawnPos: {fileID: 665898523}
 --- !u!1 &279177309
 GameObject:
@@ -2344,7 +2344,7 @@ MonoBehaviour:
   <Speed>k__BackingField: 3
   <Color>k__BackingField: {r: 0, g: 1, b: 0, a: 0}
   <Number>k__BackingField: 1
-  <ScoreZone>k__BackingField: {fileID: 0}
+  <ScoreZone>k__BackingField: {fileID: 1106341942}
   _spawnPos: {fileID: 615135286}
 --- !u!65 &1942328019
 BoxCollider:
