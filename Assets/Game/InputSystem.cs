@@ -30,7 +30,7 @@ namespace Game
             {
                 PointerPositionX = context.ReadValue<float>();
                 OnSwipeStarted?.Invoke();
-                Debug.Log($"<color=green>swipe start</color>");
+                // Debug.Log($"<color=green>swipe start</color>");
             }
 
             if (context.performed)
@@ -41,7 +41,7 @@ namespace Game
             if (context.canceled)
             {
                 OnSwipeCancelled?.Invoke();
-                Debug.Log($"<color=red>swipe start</color>");
+                // Debug.Log($"<color=red>swipe cancel</color>");
             }
         }
 
@@ -49,13 +49,13 @@ namespace Game
         {
             if (context.performed)
             {
-                _actions.Player.MoveItem.Disable();
+                _actions.Player.SwipeItem.Disable();
                 OnDragStarted?.Invoke();
                 Debug.Log($"<color=green>drag performed</color>");
             }
             if (context.canceled)
             {
-                _actions.Player.MoveItem.Enable();
+                _actions.Player.SwipeItem.Enable();
                 OnDragCancelled?.Invoke();
                 Debug.Log("<color=red>drag cancel</color>");
             }

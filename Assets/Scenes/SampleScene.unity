@@ -455,6 +455,7 @@ MonoBehaviour:
   <Speed>k__BackingField: 3
   <Color>k__BackingField: {r: 1, g: 0, b: 0, a: 0}
   <Number>k__BackingField: 0
+  <ScoreZone>k__BackingField: {fileID: 0}
   _spawnPos: {fileID: 665898523}
 --- !u!1 &279177309
 GameObject:
@@ -1362,11 +1363,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ac0beb36e1e4bd4af445629d1845334, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.ScoreZone
+  <ConsumeRadius>k__BackingField: 2
   _itemSystem: {fileID: 1712887376}
   _lane: {fileID: 1942328018}
   _health: {fileID: 1866966366}
   _gameParams: {fileID: 1621737761}
-  _consumeRadius: 2
   _consumeDuration: 1
   _consumeAnimEasing: 30
 --- !u!65 &1106341943
@@ -2343,6 +2344,7 @@ MonoBehaviour:
   <Speed>k__BackingField: 3
   <Color>k__BackingField: {r: 0, g: 1, b: 0, a: 0}
   <Number>k__BackingField: 1
+  <ScoreZone>k__BackingField: {fileID: 0}
   _spawnPos: {fileID: 615135286}
 --- !u!65 &1942328019
 BoxCollider:
@@ -2454,11 +2456,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ac0beb36e1e4bd4af445629d1845334, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.ScoreZone
+  <ConsumeRadius>k__BackingField: 2
   _itemSystem: {fileID: 1712887376}
   _lane: {fileID: 230355645}
   _health: {fileID: 1866966366}
   _gameParams: {fileID: 1621737761}
-  _consumeRadius: 2
   _consumeDuration: 1
   _consumeAnimEasing: 30
 --- !u!65 &2041184928

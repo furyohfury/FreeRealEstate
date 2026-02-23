@@ -4,8 +4,11 @@ using UnityEngine;
 
 namespace Game
 {
+    [SelectionBase]
     public sealed class ScoreZone : MonoBehaviour
     {
+        [field: SerializeField]
+        public float ConsumeRadius { get; private set; } = 1f;
         [SerializeField]
         private ItemSystem _itemSystem;
         [SerializeField]
@@ -14,8 +17,6 @@ namespace Game
         private Health _health;
         [SerializeField]
         private GameParams _gameParams;
-        [SerializeField]
-        private float _consumeRadius = 1f;
         [SerializeField]
         private float _consumeDuration = 1f;
         [SerializeField]
@@ -61,9 +62,14 @@ namespace Game
                    && _activeConsumingItems.Contains(item) == false;
         }
 
+        public bool IsInConsumeRadius(Vector3 pos)
+        {
+            return (pos - transform.position).sqrMagnitude < ConsumeRadius * ConsumeRadius;
+        }
+
         private bool IsInConsumeRadius(Item item)
         {
-            return (item.GetPosition() - transform.position).sqrMagnitude < _consumeRadius * _consumeRadius;
+            return IsInConsumeRadius(item.GetPosition());
         }
 
         private void ConsumeItems(List<Item> itemsToConsume)
@@ -71,10 +77,11 @@ namespace Game
             foreach (Item item in itemsToConsume)
             {
                 _lane.RemoveItem(item);
+                item.DisableCollision();
                 _activeConsumingItems.Add(item);
                 DOTween.Sequence()
                        .Append(item.transform.DOMove(transform.position, _consumeDuration).SetEase(_consumeAnimEasing))
-                       .Join(item.ChangeSize(0, _consumeRadius, _consumeAnimEasing))
+                       .Join(item.ChangeSize(0, ConsumeRadius, _consumeAnimEasing))
                        .AppendCallback(() =>
                        {
                            OnItemConsumed(item);
@@ -102,7 +109,7 @@ namespace Game
 
         private void OnDrawGizmos()
         {
-            Gizmos.DrawWireSphere(transform.position, _consumeRadius);
+            Gizmos.DrawWireSphere(transform.position, ConsumeRadius);
         }
     }
 }

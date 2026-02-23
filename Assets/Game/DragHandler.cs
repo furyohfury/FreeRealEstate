@@ -107,21 +107,6 @@ namespace Game
             }
         }
 
-        private async Awaitable MoveGhostItemAsync(GhostItem ghostItem, CancellationToken cancelToken)
-        {
-            while (!cancelToken.IsCancellationRequested)
-            {
-                if (ghostItem == null
-                    || ghostItem.gameObject.activeInHierarchy == false)
-                {
-                    break;
-                }
-                ghostItem.transform.position += Vector3.back * (_cachedLane.Speed * Time.deltaTime);
-
-                await Awaitable.NextFrameAsync(cancelToken);
-            }
-        }
-
         private static bool CanBeDragged(Item item)
         {
             return item.IsPlayerControlled == false;
@@ -137,6 +122,36 @@ namespace Game
             return ghostItem;
         }
 
+        private async Awaitable MoveGhostItemAsync(GhostItem ghostItem, CancellationToken cancelToken)
+        {
+            while (!cancelToken.IsCancellationRequested)
+            {
+                if (ghostItem == null
+                    || ghostItem.gameObject.activeInHierarchy == false)
+                {
+                    break;
+                }
+                
+                ghostItem.transform.position += Vector3.back * (_cachedLane.Speed * Time.deltaTime);
+                Debug.Log($"<color=green>moving ghost item</color>");
+                Lane[] lanes = _laneSystem.Lanes;
+
+                for (int i = 0, count = lanes.Length; i < count; i++)
+                {
+                    if (lanes[i].ScoreZone.IsInConsumeRadius(ghostItem.transform.position))
+                    {
+                        Debug.Log($"<color=red>destroy item</color>");
+                        ghostItem.Destroy();
+                        _ghostItem = null;
+                        // TODO VFX
+                        break;
+                    }
+                }
+
+                await Awaitable.NextFrameAsync(cancelToken);
+            }
+        }
+
         private async Awaitable DragItemAsync(Item item, CancellationToken cancelToken)
         {
             var tr = item.transform;
@@ -144,26 +159,15 @@ namespace Game
             while (!cancelToken.IsCancellationRequested)
             {
                 Vector3 itemPos = tr.position;
-
-                // Плоскость, по которой "едет" предмет: XZ на высоте предмета
                 var plane = new Plane(Vector3.up, new Vector3(0f, itemPos.y, 0f));
-
                 Vector2 mousePosSS = Mouse.current.position.ReadValue();
                 Ray ray = _cam.ScreenPointToRay(mousePosSS);
 
                 if (plane.Raycast(ray, out float enter))
                 {
                     Vector3 hit = ray.GetPoint(enter);
-
-                    // Двигаем по XZ, Y фиксируем как был
                     Vector3 targetPos = new Vector3(hit.x, itemPos.y, hit.z);
-
-                    // Если хочешь плавность — раскомментируй:
                     tr.position = Vector3.MoveTowards(itemPos, targetPos, Time.deltaTime * _dragSpeed);
-
-                    // tr.position = targetPos;
-
-                    // Важно: обрабатываем уже НОВУЮ позицию
                     ProcessNearLanes(tr.position);
                 }
 

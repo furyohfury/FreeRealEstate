@@ -93,7 +93,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             ""id"": ""df70fa95-8a34-4494-b137-73ab6b9c7d37"",
             ""actions"": [
                 {
-                    ""name"": ""MoveItem"",
+                    ""name"": ""SwipeItem"",
                     ""type"": ""Value"",
                     ""id"": ""1ce25b33-f460-4fe2-b0ac-c17ce7e788b3"",
                     ""expectedControlType"": ""Axis"",
@@ -119,7 +119,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Touch"",
-                    ""action"": ""MoveItem"",
+                    ""action"": ""SwipeItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -130,7 +130,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""MoveItem"",
+                    ""action"": ""SwipeItem"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -141,7 +141,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""MoveItem"",
+                    ""action"": ""SwipeItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -152,7 +152,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""MoveItem"",
+                    ""action"": ""SwipeItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -252,7 +252,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
 }");
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
-        m_Player_MoveItem = m_Player.FindAction("MoveItem", throwIfNotFound: true);
+        m_Player_SwipeItem = m_Player.FindAction("SwipeItem", throwIfNotFound: true);
         m_Player_DragItem = m_Player.FindAction("DragItem", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
@@ -337,7 +337,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     // Player
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
-    private readonly InputAction m_Player_MoveItem;
+    private readonly InputAction m_Player_SwipeItem;
     private readonly InputAction m_Player_DragItem;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
@@ -351,9 +351,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// </summary>
         public PlayerActions(@InputSystem_Actions wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "Player/MoveItem".
+        /// Provides access to the underlying input action "Player/SwipeItem".
         /// </summary>
-        public InputAction @MoveItem => m_Wrapper.m_Player_MoveItem;
+        public InputAction @SwipeItem => m_Wrapper.m_Player_SwipeItem;
         /// <summary>
         /// Provides access to the underlying input action "Player/DragItem".
         /// </summary>
@@ -384,9 +384,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
-            @MoveItem.started += instance.OnSwipeItem;
-            @MoveItem.performed += instance.OnSwipeItem;
-            @MoveItem.canceled += instance.OnSwipeItem;
+            @SwipeItem.started += instance.OnSwipeItem;
+            @SwipeItem.performed += instance.OnSwipeItem;
+            @SwipeItem.canceled += instance.OnSwipeItem;
             @DragItem.started += instance.OnDragItem;
             @DragItem.performed += instance.OnDragItem;
             @DragItem.canceled += instance.OnDragItem;
@@ -401,9 +401,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="PlayerActions" />
         private void UnregisterCallbacks(IPlayerActions instance)
         {
-            @MoveItem.started -= instance.OnSwipeItem;
-            @MoveItem.performed -= instance.OnSwipeItem;
-            @MoveItem.canceled -= instance.OnSwipeItem;
+            @SwipeItem.started -= instance.OnSwipeItem;
+            @SwipeItem.performed -= instance.OnSwipeItem;
+            @SwipeItem.canceled -= instance.OnSwipeItem;
             @DragItem.started -= instance.OnDragItem;
             @DragItem.performed -= instance.OnDragItem;
             @DragItem.canceled -= instance.OnDragItem;
@@ -598,7 +598,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         /// <summary>
-        /// Method invoked when associated input action "MoveItem" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "SwipeItem" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
