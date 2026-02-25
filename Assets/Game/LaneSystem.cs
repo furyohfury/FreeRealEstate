@@ -2,9 +2,9 @@
 
 namespace Game
 {
-    public sealed class LaneSystem : MonoBehaviour
+    public sealed class LaneSystem : Singleton<LaneSystem>
     {
         [field: SerializeField]
-        public Lane[] Lanes { get; private set; }
+        public Lane[] Lanes { get; set; }
     }
 }

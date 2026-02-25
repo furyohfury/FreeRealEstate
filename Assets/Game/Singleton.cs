@@ -10,6 +10,7 @@ namespace Game
         {
             if (Instance != null)
             {
+                Debug.LogError($"Dublicate singleton instance of {this.GetType().FullName}");
                 Destroy(Instance.gameObject);
             }
             Instance = this as T;

@@ -1,5 +1,6 @@
 ﻿using System;
 using DG.Tweening;
+using Game.Extensions;
 using UnityEngine;
 
 namespace Game
@@ -11,7 +12,7 @@ namespace Game
         /// </summary>
         public event Action<Item, Item> OnKnocked;
         public bool IsPlayerControlled { get; set; }
-        public Color Color { get; private set; }
+        public GameColor GameColor { get; private set; }
         [SerializeField]
         private MeshRenderer _meshRenderer;
         [SerializeField]
@@ -27,9 +28,19 @@ namespace Game
             return transform.DOScale(endVal, duration).SetEase(ease);
         }
 
-        public void SetColor(Color color)
+        public void SetColor(GameColor color)
         {
-            Color = color;
+            GameColor = color;
+            SetVisualColor(color);
+        }
+
+        private void SetVisualColor(GameColor color)
+        {
+            SetVisualColor(color.ToColor());
+        }
+        
+        private void SetVisualColor(Color color)
+        {
             _meshRenderer.material.color = color;
         }
 

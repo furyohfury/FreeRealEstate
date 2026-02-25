@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game
 {
-    public sealed class ItemSystem : MonoBehaviour
+    public sealed class ItemSystem : Singleton<ItemSystem>
     {
-        [SerializeField] private ItemFactory _itemFactory;
-        [SerializeField] private ItemLaneRegistry _itemLaneRegistry;
+        [SerializeField]
+        private ItemFactory _itemFactory;
+        [SerializeField]
+        private ItemLaneRegistry _itemLaneRegistry;
         [SerializeField]
         private ItemCollisionHandler _itemCollisionHandler;
         private readonly HashSet<Item> _activeItems = new HashSet<Item>();

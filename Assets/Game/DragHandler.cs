@@ -58,8 +58,15 @@ namespace Game
 
             _activeItem.IsPlayerControlled = false;
             Transform activeItemTransform = _activeItem.transform;
-
-            if (_nearLane != null)
+            
+            if (_ghostItem == null)
+            {
+                DOTween.Sequence()
+                       .Append(ItemAnimationSystem.Instance.ScaleOnKnockAnim(activeItemTransform))
+                       .AppendCallback(() => _itemSystem.DestroyItem(_activeItem));
+                Debug.Log("no lane and no ghost item");
+            }
+            else if (_nearLane != null)
             {
                 _itemLaneRegistry.LinkItem(_activeItem, _nearLane);
                 Vector3 lanePos = _nearLane.transform.position;
@@ -70,19 +77,12 @@ namespace Game
                 _ghostItem.Destroy();
                 _ghostItem = null;
             }
-            else if (_ghostItem != null)
+            else
             {
                 activeItemTransform.position = _ghostItem.transform.position;
                 _itemLaneRegistry.LinkItem(_activeItem, _cachedLane);
                 _ghostItem.Destroy();
                 _ghostItem = null;
-            }
-            else
-            {
-                DOTween.Sequence()
-                       .Append(ItemAnimationSystem.Instance.ScaleOnKnockAnim(activeItemTransform))
-                       .AppendCallback(() => _itemSystem.DestroyItem(_activeItem));
-                Debug.Log("no lane and no ghost item");
             }
         }
 
@@ -116,8 +116,8 @@ namespace Game
         {
             Item itemClone = Instantiate(item, item.transform.position, item.transform.rotation);
             itemClone.DisableCollision();
-            itemClone.SetColor(_ghostItemColor);
             var ghostItem = itemClone.AddComponent<GhostItem>();
+            ghostItem.SetColor(_ghostItemColor);
 
             return ghostItem;
         }

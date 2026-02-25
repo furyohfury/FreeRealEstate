@@ -10,13 +10,7 @@ namespace Game
         [field: SerializeField]
         public float ConsumeRadius { get; private set; } = 1f;
         [SerializeField]
-        private ItemSystem _itemSystem;
-        [SerializeField]
         private Lane _lane;
-        [SerializeField]
-        private Health _health;
-        [SerializeField]
-        private GameParams _gameParams;
         [SerializeField]
         private float _consumeDuration = 1f;
         [SerializeField]
@@ -33,7 +27,7 @@ namespace Game
             {
                 if (!CanBeConsumed(item))
                     continue;
-                    
+
                 Debug.Log("Scored");
 
                 if (itemsToConsume == null)
@@ -57,9 +51,7 @@ namespace Game
 
         private bool CanBeConsumed(Item item)
         {
-            return IsInConsumeRadius(item)
-                   && item.IsPlayerControlled == false
-                   && _activeConsumingItems.Contains(item) == false;
+            return IsInConsumeRadius(item) && item.IsPlayerControlled == false && _activeConsumingItems.Contains(item) == false;
         }
 
         public bool IsInConsumeRadius(Vector3 pos)
@@ -93,18 +85,23 @@ namespace Game
         {
             _activeConsumingItems.Remove(item);
 
-            if (item.Color == _lane.Color)
+            if (IsItemSameColorWithLane(item))
             {
-                _health.CurrentHealth += _gameParams.Params.RewardForRightItemColor;
+                HealthController.Instance.RewardForRightColor();
                 // TODO vfx
             }
             else
             {
-                _health.CurrentHealth -= _gameParams.Params.PenaltyForWrongItemColor;
+                HealthController.Instance.PenalizeForWrongColor();
                 // TODO vfx
             }
 
-            _itemSystem.DestroyItem(item);
+            ItemSystem.Instance.DestroyItem(item);
+        }
+
+        private bool IsItemSameColorWithLane(Item item)
+        {
+            return item.GameColor == _lane.GameColor;
         }
 
         private void OnDrawGizmos()

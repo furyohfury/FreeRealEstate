@@ -5,11 +5,9 @@ namespace Game
     public sealed class ItemLaneMover : MonoBehaviour
     {
         [SerializeField]
-        private float _moveSpeed;
-        [SerializeField]
         private LaneSystem _laneSystem;
 
-        private void Update()
+        public void MoveItems(float deltaTime)
         {
             foreach (var lane in _laneSystem.Lanes)
             {
@@ -20,7 +18,7 @@ namespace Game
 
                 foreach (var item in lane.LinkedItems)
                 {
-                    item.Move(Vector3.back * (lane.Speed * Time.deltaTime));
+                    item.Move(Vector3.back * (lane.Speed * deltaTime));
                 }
             }
         }

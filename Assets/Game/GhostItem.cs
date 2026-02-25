@@ -1,21 +1,18 @@
-﻿using System;
+﻿using TriInspector;
 using UnityEngine;
 
 namespace Game
 {
     public sealed class GhostItem : MonoBehaviour
     {
-        public event Action<GhostItem> OnReachedScoreZone; 
-        
-        public void ReachedScoreZone()
+        public void SetColor(Color ghostItemColor)
         {
-            OnReachedScoreZone?.Invoke(this);
-            Destroy();
-            // TODO VFX dissolve mb and destroy
+            GetComponent<MeshRenderer>().material.color = ghostItemColor;
         }
 
         public void Destroy()
         {
+            // TODO VFX dissolve mb and destroy
             Destroy(gameObject);
         }
     }

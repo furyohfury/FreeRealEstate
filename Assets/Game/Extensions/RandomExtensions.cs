@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Game.Extensions
 {
-    public static class Extensions
+    public static class RandomExtensions
     {
         private static readonly Random _random = new Random();
 

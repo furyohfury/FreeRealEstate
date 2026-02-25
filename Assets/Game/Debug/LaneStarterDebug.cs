@@ -10,12 +10,14 @@ namespace Game
         [Button]
         public void StartSpawn()
         {
-            LaneItemSpawner[] findObjectsByType = FindObjectsByType<LaneItemSpawner>(FindObjectsSortMode.None);
+            Lane[] lanes = LaneSystem.Instance.Lanes;
 
-            foreach (LaneItemSpawner laneItemSpawner in findObjectsByType)
+            foreach (Lane lane in lanes)
             {
-                laneItemSpawner.StartSpawning();
+                lane.StartSpawning();
             }
+            
+            FindAnyObjectByType<GameLoop>().IsActive = true;
         }
 
         private void Update()
