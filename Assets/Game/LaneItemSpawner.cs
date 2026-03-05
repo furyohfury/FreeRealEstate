@@ -8,9 +8,12 @@ namespace Game
         [SerializeField] private Lane _lane;
 
         [Header("Spawn Settings")]
-        [SerializeField] private float _spawnInterval;
-        [SerializeField] private float _randomSpawnOffset;
-        [SerializeField] private float _randomAngleOffset;
+        [field: SerializeField]
+        public float SpawnInterval { get; set; } = 3f;
+        [field: SerializeField]
+        public float RandomSpawnOffset { get; set; } = 1.5f;
+        [field: SerializeField]
+        public float RandomAngleOffset { get; set; } = 30f;
 
         private bool _isSpawning;
         private float _timer;
@@ -29,11 +32,10 @@ namespace Game
                 {
                     GameColor[] colors = GameParamsService.Instance.SessionParams.GameColors;
                     var randomColor = colors[Random.Range(0, colors.Length)];
-                    Quaternion rotation = _lane.SpawnRot * Quaternion.Euler(0, Random.Range(-_randomAngleOffset, _randomAngleOffset), 0);
-                    var newItem = ItemSystem.Instance.SpawnItem(_lane.SpawnPos, rotation, _lane);
+                    Quaternion rotation = _lane.SpawnRot * Quaternion.Euler(0, Random.Range(-RandomAngleOffset, RandomAngleOffset), 0);
+                    var newItem = ItemSystem.Instance.SpawnItemAtLane(_lane.SpawnPos, rotation, _lane);
                     newItem.SetColor(randomColor);
-                    _lane.AddItem(newItem);
-                    _timer = _spawnInterval + Random.Range(-_randomSpawnOffset, _randomSpawnOffset);
+                    _timer = SpawnInterval + Random.Range(-RandomSpawnOffset, RandomSpawnOffset);
                 }
 
                 _timer -= Time.deltaTime;

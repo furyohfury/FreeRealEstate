@@ -21,10 +21,12 @@ namespace Game
             {
                 var lane = Instantiate(_prefab, lanesTransforms[i].position, lanesTransforms[i].rotation, _container);
 
-                lane.name = $"Lane {i}";
+                lane.name = $"Lane_{i}";
                 lane.SetColor(sessionParams.GameColors[i]);
                 lane.Number = i;
-                // TODO speed
+                lane.Speed = sessionParams.LanesSpeedFormula.GetLanesSpeed(0);
+                lane.SetSpawnInterval(sessionParams.ItemSpawnIntervalFormula.GetInterval());
+                lane.SetRandomSpawnOffset(sessionParams.ItemSpawnIntervalFormula.GetRandomSpawnOffset());
                 lanes[i] = lane;
             }
 

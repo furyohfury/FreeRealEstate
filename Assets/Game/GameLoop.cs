@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class GameLoop : MonoBehaviour
+    public class GameLoop : Singleton<GameLoop>
     {
         public bool IsActive { get; set; } = false;
         [SerializeField][RequiredGet(InChildren =  true)]

@@ -28,11 +28,12 @@ namespace Game
             Destroy(item.gameObject);
         }
 
-        public Item SpawnItem(Vector3 position, Quaternion rotation, Lane linkedLane)
+        public Item SpawnItemAtLane(Vector3 position, Quaternion rotation, Lane linkedLane)
         {
             Item item = _itemFactory.SpawnRandom(position, rotation);
             _activeItems.Add(item);
             _itemLaneRegistry.LinkItem(item, linkedLane);
+            linkedLane.AddItem(item);
             _itemCollisionHandler.SubscribeToCollisionEvents(item);
 
             return item;

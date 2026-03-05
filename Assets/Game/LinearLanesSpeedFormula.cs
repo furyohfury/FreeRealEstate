@@ -11,10 +11,12 @@ namespace Game
         private AnimationCurve _curve;
         [SerializeField]
         private float _timeCoefficient;
+        [SerializeField]
+        private float _multiplier;
 
         public override float GetLanesSpeed(float sessionTime)
         {
-            return _baseSpeed + _curve.Evaluate(sessionTime * _timeCoefficient);
+            return _baseSpeed + _curve.Evaluate(sessionTime * _timeCoefficient) *  _multiplier;
         }
     }
 }

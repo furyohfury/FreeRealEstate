@@ -133,7 +133,6 @@ namespace Game
                 }
                 
                 ghostItem.transform.position += Vector3.back * (_cachedLane.Speed * Time.deltaTime);
-                Debug.Log($"<color=green>moving ghost item</color>");
                 Lane[] lanes = _laneSystem.Lanes;
 
                 for (int i = 0, count = lanes.Length; i < count; i++)

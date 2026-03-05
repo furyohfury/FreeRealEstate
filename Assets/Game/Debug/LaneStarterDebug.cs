@@ -2,6 +2,7 @@
 using TriInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 
 namespace Game
 {
@@ -10,14 +11,7 @@ namespace Game
         [Button]
         public void StartSpawn()
         {
-            Lane[] lanes = LaneSystem.Instance.Lanes;
-
-            foreach (Lane lane in lanes)
-            {
-                lane.StartSpawning();
-            }
-            
-            FindAnyObjectByType<GameLoop>().IsActive = true;
+            SessionLauncher.Instance.LaunchSession();
         }
 
         private void Update()

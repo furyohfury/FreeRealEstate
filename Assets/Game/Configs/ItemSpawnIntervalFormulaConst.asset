@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c712f2183454535a1824e3db64da61c, type: 3}
   m_Name: ItemSpawnIntervalFormulaConst
   m_EditorClassIdentifier: Assembly-CSharp::Game.ItemSpawnIntervalFormulaConst
-  _interval: 3
+  _interval: 3.3
+  _randomSpawnOffset: 1.5

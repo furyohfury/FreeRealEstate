@@ -28,7 +28,7 @@ namespace Game
         [RequiredGet]
         private MeshRenderer _meshRenderer;
         [SerializeField]
-        [RequiredGet(InChildren =  true)]
+        [RequiredGet(InChildren = true)]
         private LaneItemSpawner _laneItemSpawner;
         public readonly HashSet<Item> LinkedItems = new HashSet<Item>();
 
@@ -64,6 +64,16 @@ namespace Game
             _laneItemSpawner.SwitchSpawnState(false);
         }
 
+        public void SetSpawnInterval(float interval)
+        {
+            _laneItemSpawner.SpawnInterval = interval;
+        }
+
+        public void SetRandomSpawnOffset(float spawnOffset)
+        {
+            _laneItemSpawner.RandomSpawnOffset = spawnOffset;
+        }
+
         public void SetColor(GameColor color)
         {
             GameColor = color;
@@ -74,7 +84,7 @@ namespace Game
         {
             SetVisualColor(color.ToColor());
         }
-        
+
         private void SetVisualColor(Color color)
         {
             _meshRenderer.material.color = color;

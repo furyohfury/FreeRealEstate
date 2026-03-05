@@ -6,14 +6,17 @@ namespace Game
     {
         public static T Instance;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             if (Instance != null)
             {
                 Debug.LogError($"Dublicate singleton instance of {this.GetType().FullName}");
-                Destroy(Instance.gameObject);
+                Destroy(gameObject);
             }
-            Instance = this as T;
+            else
+            {
+                Instance = this as T;
+            }
         }
     }
 }

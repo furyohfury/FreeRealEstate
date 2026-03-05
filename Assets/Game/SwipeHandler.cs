@@ -12,7 +12,8 @@ namespace Game
         private LaneSystem _laneSystem;
         [SerializeField]
         private ItemLaneRegistry _itemLaneRegistry;
-        [SerializeField] [Range(0, 1f)]
+        [SerializeField]
+        [Range(0, 1f)]
         private float _screenRatioToSwipe = 0.2f;
         [SerializeField]
         private Camera _camera;
@@ -43,11 +44,7 @@ namespace Game
             bool raycastHit;
 #if UNITY_EDITOR || UNITY_STANDALONE_WIN // TODO WEB3
             var ray = _camera.ScreenPointToRay(Mouse.current.position.value);
-            raycastHit = Physics.Raycast(ray,
-                out hit,
-                10000f,
-                _itemsLayerMask
-                );
+            raycastHit = Physics.Raycast(ray, out hit, 10000f, _itemsLayerMask);
   #endif
             if (raycastHit)
             {
@@ -85,11 +82,13 @@ namespace Game
                         && i < count - 1)
                     {
                         MoveItemToLane(_selectedItem, lanes[i], lanes[i + 1]);
+                        _isSwiping = false;
                     }
                     else if (delta < 0
                              && i > 0)
                     {
                         MoveItemToLane(_selectedItem, lanes[i], lanes[i - 1]);
+                        _isSwiping = false;
                     }
                 }
             }
@@ -97,14 +96,17 @@ namespace Game
 
         private void MoveItemToLane(Item selectedItem, Lane initialLane, Lane newLane)
         {
-            _itemLaneRegistry.SwapLane(selectedItem, newLane);
             initialLane.LinkedItems.Remove(selectedItem);
-            newLane.LinkedItems.Add(selectedItem);
             selectedItem.IsPlayerControlled = true;
 
             DOTween.Sequence()
                    .Append(selectedItem.transform.DOMoveX(newLane.transform.position.x, _moveDuration))
-                   .AppendCallback(() => selectedItem.IsPlayerControlled = false);
+                   .AppendCallback(() =>
+                   {
+                       selectedItem.IsPlayerControlled = false;
+                       newLane.LinkedItems.Add(selectedItem);
+                       _itemLaneRegistry.SwapLane(selectedItem, newLane);
+                   });
         }
 
         private void OnDisable()

@@ -7,10 +7,17 @@ namespace Game
     {
         [SerializeField]
         private float _interval;
-        
-        public override float GetInterval(float sessionTime)
+        [SerializeField]
+        private float _randomSpawnOffset;
+
+        public override float GetInterval()
         {
             return _interval;
+        }
+
+        public override float GetRandomSpawnOffset()
+        {
+            return _randomSpawnOffset;
         }
     }
 }
