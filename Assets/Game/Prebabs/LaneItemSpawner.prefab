@@ -45,6 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.ItemSpawnSystem
   _lane: {fileID: 0}
-  _spawnInterval: 3
-  _randomSpawnOffset: 0.4
-  _randomAngleOffset: 30
+  <SpawnInterval>k__BackingField: 3
+  <RandomSpawnOffset>k__BackingField: 1.5
+  <RandomAngleOffset>k__BackingField: 30
+  _itemsMask:
+    serializedVersion: 2
+    m_Bits: 64

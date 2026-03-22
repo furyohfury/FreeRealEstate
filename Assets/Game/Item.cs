@@ -13,6 +13,7 @@ namespace Game
         public event Action<Item, Item> OnKnocked;
         public bool IsPlayerControlled { get; set; }
         public GameColor GameColor { get; private set; }
+        public Collider Collider => _collider;
         [SerializeField]
         private MeshRenderer _meshRenderer;
         [SerializeField]
