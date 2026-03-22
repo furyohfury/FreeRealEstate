@@ -26,7 +26,6 @@ namespace Game.Extensions
         {
             int count = items.Count;
             var randomElement = Random.Range(0, count);
-            int i = 0;
 
             return items[randomElement];
         }

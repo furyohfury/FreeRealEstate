@@ -37,7 +37,7 @@ namespace Game
             buttonUI.OnClick -= OnButtonClicked;
             int paramsIndex = _buttonToParamsMap[buttonUI];
             GameParamsService.Instance.SessionParams = _sessionParamsStorage.SessionParams[paramsIndex];
-            SceneManager.LoadScene(Scene.Gameplay.ToString(), LoadSceneMode.Single);
+            SceneManager.LoadScene((int) Scene.Gameplay, LoadSceneMode.Single);
         }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public sealed class ItemCollisionHandler : MonoBehaviour
+    public sealed class ItemCollisionHandler : Singleton<ItemCollisionHandler>
     {
         public event Action<Item> OnDestroyItem;
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
@@ -7,6 +8,9 @@ namespace Game
     [SelectionBase]
     public sealed class ScoreZone : MonoBehaviour
     {
+        public static event Action<Item> OnRightColorItemConsumed;
+        public static event Action<Item> OnWrongColorItemConsumed;
+
         [field: SerializeField]
         public float ConsumeRadius { get; private set; } = 1f;
         [SerializeField]
@@ -76,23 +80,25 @@ namespace Game
                        .Join(item.ChangeSize(0, ConsumeRadius, _consumeAnimEasing))
                        .AppendCallback(() =>
                        {
-                           OnItemConsumed(item);
+                           OnItemConsumedCallback(item);
                        });
             }
         }
 
-        private void OnItemConsumed(Item item)
+        private void OnItemConsumedCallback(Item item)
         {
             _activeConsumingItems.Remove(item);
 
             if (IsItemSameColorWithLane(item))
             {
                 HealthController.Instance.RewardForRightColor();
+                OnRightColorItemConsumed?.Invoke(item);
                 // TODO vfx
             }
             else
             {
                 HealthController.Instance.PenalizeForWrongColor();
+                OnWrongColorItemConsumed?.Invoke(item);
                 // TODO vfx
             }
 
