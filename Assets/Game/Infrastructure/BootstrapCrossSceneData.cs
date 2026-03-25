@@ -2,8 +2,7 @@
 {
     public static class BootstrapCrossSceneData
     {
-        public static bool SwitchedScene;
-        public static bool NeedToLoad;
+        public static bool BootstrapCompleted;
         public static int SceneToLoad;
     }
 }

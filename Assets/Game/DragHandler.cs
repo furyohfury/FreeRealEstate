@@ -28,6 +28,7 @@ namespace Game
         } = 3f;
         [SerializeField]
         private Color _ghostItemColor;
+        [SerializeField]
         private Camera _cam;
         private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
         private Lane _cachedLane;
@@ -35,11 +36,6 @@ namespace Game
         private Item _activeItem;
         private Vector3 _dragStartPos;
         private GhostItem _ghostItem;
-
-        private void Awake()
-        {
-            _cam = Camera.main;
-        }
 
         private void OnEnable()
         {
