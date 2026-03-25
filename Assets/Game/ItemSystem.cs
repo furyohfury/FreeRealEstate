@@ -20,10 +20,18 @@ namespace Game
 
         public void DestroyItem(Item item)
         {
+            if (item == null)
+                return;
+            
             _activeItems.Remove(item);
             Lane linkedLane = _itemLaneRegistry.GetLane(item);
-            _itemLaneRegistry.UnlinkItem(item, linkedLane);
-            linkedLane.RemoveItem(item);
+
+            if (linkedLane != null)
+            {
+                _itemLaneRegistry.UnlinkItem(item, linkedLane);
+                linkedLane.RemoveItem(item);
+            }
+            
             _itemCollisionHandler.UnsubscribeToCollisionEvents(item);
             Destroy(item.gameObject);
         }

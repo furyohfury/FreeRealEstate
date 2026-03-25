@@ -11,16 +11,18 @@ namespace Game
 
         public void LaunchSession()
         {
-            _lanesSessionSpawner.SpawnLanes();
-            
-            Lane[] lanes = LaneSystem.Instance.Lanes;
+            InitLanes();
+            GameLoop.Instance.Launch();
+        }
 
+        private void InitLanes()
+        {
+            _lanesSessionSpawner.SpawnLanes();
+            Lane[] lanes = LaneSystem.Instance.Lanes;
             foreach (Lane lane in lanes)
             {
                 lane.StartSpawning();
             }
-            
-            GameLoop.Instance.IsActive = true;
         }
     }
 }

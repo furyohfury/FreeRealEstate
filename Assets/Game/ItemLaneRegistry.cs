@@ -33,7 +33,7 @@ namespace Game
 
         public Lane GetLane(Item item)
         {
-            return _itemsDict[item];
+            return _itemsDict.GetValueOrDefault(item);
         }
     }
 }

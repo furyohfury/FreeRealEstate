@@ -1,13 +1,20 @@
-﻿using System;
-using TriInspector;
+﻿using TriInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Controls;
 
 namespace Game
 {
     public sealed class LaneStarterDebug : MonoBehaviour
     {
+        [SerializeField]
+        private bool _launchOnStart = true;
+
+        private void Start()
+        {
+            if (_launchOnStart)
+                StartSpawn();
+        }
+
         [Button]
         public void StartSpawn()
         {

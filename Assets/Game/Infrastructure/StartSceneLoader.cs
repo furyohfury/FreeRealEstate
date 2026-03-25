@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 
 namespace Game.Infrastructure
 {
+    [DefaultExecutionOrder(10000)]
     public sealed class StartSceneLoader : MonoBehaviour
     {
         [SerializeField]
@@ -10,9 +11,15 @@ namespace Game.Infrastructure
 
         private void Start()
         {
-            if (BootstrapCrossSceneData.NeedToLoad == false)
+            if (BootstrapCrossSceneData.BootstrapCompleted == false)
             {
+                BootstrapCrossSceneData.BootstrapCompleted = true;
                 SceneManager.LoadScene((int)_startScene, LoadSceneMode.Single);
+            }
+            else
+            {
+                BootstrapCrossSceneData.BootstrapCompleted = true;
+                SceneManager.LoadScene(BootstrapCrossSceneData.SceneToLoad, LoadSceneMode.Single);
             }
         }
     }
