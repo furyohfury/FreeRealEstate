@@ -2,8 +2,8 @@
 {
     public static class AnalyticsEvents
     {
-        public const string RIGHT_COLOR_ITEM_CONSUMED = "right.color.item.consumed";
-        public const string WRONG_COLOR_ITEM_CONSUMED = "wrong.color.item.consumed";
-        public const string ITEM_COLLIDED = "item.collided";
+        public const string RIGHT_COLOR_ITEM_CONSUMED = "right_color_item_consumed";
+        public const string WRONG_COLOR_ITEM_CONSUMED = "wrong_color_item_consumed";
+        public const string ITEM_COLLIDED = "item_collided";
     }
 }
