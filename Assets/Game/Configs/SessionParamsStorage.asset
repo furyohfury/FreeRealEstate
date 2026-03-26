@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: SessionParamsStorage
   m_EditorClassIdentifier: Assembly-CSharp::Game.SessionParamsStorage
   SessionParams:
+  - {fileID: 11400000, guid: 56f74102b63f36943924eca22adbae36, type: 2}
   - {fileID: 11400000, guid: 4356d3a2910024f40883ef62a3072deb, type: 2}
