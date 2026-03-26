@@ -16,6 +16,7 @@ MonoBehaviour:
   projectSettings:
     useYandexMetrica: 1
     metricaCounterID: 108199201
+    skipInterAdvAfterReward: 0
     autoPauseGame: 1
     selectWebGLTemplate: 1
     runInBackground: 0
