@@ -38,13 +38,28 @@ namespace Game
 
         public Item SpawnItemAtLane(Vector3 position, Quaternion rotation, Lane linkedLane)
         {
-            Item item = _itemFactory.SpawnRandom(position, rotation);
+            Item item = SpawnItem(position, rotation);
             _activeItems.Add(item);
             _itemLaneRegistry.LinkItem(item, linkedLane);
             linkedLane.AddItem(item);
             _itemCollisionHandler.SubscribeToCollisionEvents(item);
 
             return item;
+        }
+
+        public Item SpawnItem(Vector3 position, Quaternion rotation)
+        {
+            Item item = _itemFactory.SpawnRandom(position, rotation);
+            
+            return item;
+        }
+
+        public void InitItem(Item item, Lane linkedLane)
+        {
+            _activeItems.Add(item);
+            _itemLaneRegistry.LinkItem(item, linkedLane);
+            linkedLane.AddItem(item);
+            _itemCollisionHandler.SubscribeToCollisionEvents(item);
         }
 
         private void OnDisable()

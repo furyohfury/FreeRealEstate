@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Game
 {
+    [SelectionBase]
     public sealed class Item : MonoBehaviour
     {
         /// <summary>

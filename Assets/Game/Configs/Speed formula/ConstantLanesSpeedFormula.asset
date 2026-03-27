@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ffd8d4823034cca8bf537301dde3519, type: 3}
   m_Name: ConstantLanesSpeedFormula
   m_EditorClassIdentifier: Assembly-CSharp::Game.ConstantLanesSpeedFormula
-  _baseSpeed: 1
+  _baseSpeed: 4

@@ -26,9 +26,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1557283709158251238}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -8, y: -1.42, z: 14.8}
-  m_LocalScale: {x: 2, y: 1, z: 2.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6351343319357932062}
@@ -52,7 +52,6 @@ MonoBehaviour:
   <GameColor>k__BackingField: 0
   <Number>k__BackingField: 0
   <ScoreZone>k__BackingField: {fileID: 2753777553729291288}
-  _itemsSpawnPos: {fileID: 1950902817210394768}
   _meshRenderer: {fileID: 5677430535214296282}
   _laneItemSpawner: {fileID: 485021423990540584}
   _speed: 0
@@ -75,7 +74,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.75, y: 1, z: 8.09}
+  m_Size: {x: 3.68, y: 1, z: 20}
   m_Center: {x: 0, y: 0.68, z: 0}
 --- !u!1 &2469424241109345313
 GameObject:
@@ -192,7 +191,7 @@ Transform:
   m_GameObject: {fileID: 3240259407844273423}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.65, z: 3.659}
+  m_LocalPosition: {x: 0, y: 1.131, z: 9.449}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -404,7 +403,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 1, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 587522767507689072}
@@ -434,11 +433,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8121808852161806081, guid: 218f7a820cfee444d88aebdd21a16d6a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.44
       objectReference: {fileID: 0}
     - target: {fileID: 8121808852161806081, guid: 218f7a820cfee444d88aebdd21a16d6a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.806
+      value: -11.78
       objectReference: {fileID: 0}
     - target: {fileID: 8121808852161806081, guid: 218f7a820cfee444d88aebdd21a16d6a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -502,16 +501,24 @@ PrefabInstance:
       value: LaneItemSpawner
       objectReference: {fileID: 0}
     - target: {fileID: 9050524267983873288, guid: fabe52329bb137a46a34368aea5e554b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9050524267983873288, guid: fabe52329bb137a46a34368aea5e554b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9050524267983873288, guid: fabe52329bb137a46a34368aea5e554b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.44601
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9050524267983873288, guid: fabe52329bb137a46a34368aea5e554b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.66101
+      value: 4.67
       objectReference: {fileID: 0}
     - target: {fileID: 9050524267983873288, guid: fabe52329bb137a46a34368aea5e554b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.412544
+      value: 10.01
       objectReference: {fileID: 0}
     - target: {fileID: 9050524267983873288, guid: fabe52329bb137a46a34368aea5e554b, type: 3}
       propertyPath: m_LocalRotation.w

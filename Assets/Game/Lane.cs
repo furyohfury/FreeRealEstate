@@ -21,8 +21,6 @@ namespace Game
         [field: SerializeField]
         public GameColor GameColor { get; private set; }
         public bool IsMoving { get; private set; } = true;
-        public Vector3 SpawnPos => _itemsSpawnPos.position;
-        public Quaternion SpawnRot => _itemsSpawnPos.rotation;
         /// <summary>
         /// Номер линии. Начинается с нуля
         /// </summary>
@@ -30,9 +28,7 @@ namespace Game
         public int Number { get; set; }
         [field: SerializeField]
         public ScoreZone ScoreZone { get; private set; }
-
-        [SerializeField]
-        private Transform _itemsSpawnPos;
+        
         [SerializeField]
         private MeshRenderer _meshRenderer;
         [SerializeField]

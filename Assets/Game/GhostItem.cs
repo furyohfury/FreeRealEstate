@@ -1,5 +1,4 @@
-﻿using TriInspector;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game
 {
@@ -7,7 +6,7 @@ namespace Game
     {
         public void SetColor(Color ghostItemColor)
         {
-            GetComponent<MeshRenderer>().material.color = ghostItemColor;
+            GetComponentInChildren<MeshRenderer>().material.color = ghostItemColor;
         }
 
         public void Destroy()
