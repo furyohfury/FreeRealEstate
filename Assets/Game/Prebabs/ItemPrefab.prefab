@@ -99,6 +99,7 @@ MonoBehaviour:
   _meshRenderer: {fileID: 5083189161190132760}
   _collider: {fileID: 6732415114672551205}
   _highlightWhiteDegree: 0.7
+  _coloringDegree: 0.75
 --- !u!114 &5867725130822547657
 MonoBehaviour:
   m_ObjectHideFlags: 0

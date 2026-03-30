@@ -7,6 +7,7 @@ using UnityEngine;
 namespace Game
 {
     [SelectionBase]
+    [DeclareBoxGroup("Tests", Title = "Tests")]
     public sealed class Item : MonoBehaviour
     {
         /// <summary>
@@ -23,6 +24,9 @@ namespace Game
         [SerializeField]
         [Range(0, 1)]
         private float _highlightWhiteDegree;
+        [Tooltip("Насколько закрашивается в gamecolor")]
+        [SerializeField] [Range(0, 1f)]
+        private float _coloringDegree = 1f;
 
         public void Move(Vector3 direction)
         {
@@ -48,7 +52,8 @@ namespace Game
 
         private void SetVisualColor(Color color)
         {
-            _meshRenderer.material.color = color;
+            Color newColor = Color.Lerp(_meshRenderer.material.color, color, _coloringDegree);
+            _meshRenderer.material.color = newColor;
         }
 
         public Vector3 GetPosition()
@@ -72,7 +77,7 @@ namespace Game
             Color newColor = Color.Lerp(_meshRenderer.material.color, Color.white, _highlightWhiteDegree);
             _meshRenderer.material.color = newColor;
         }
-        
+
         [Button]
         public void DisableHighlight()
         {
@@ -87,5 +92,23 @@ namespace Game
                 OnKnocked?.Invoke(item, this);
             }
         }
+
+        #if UNITY_EDITOR
+        [Button]
+        [Group("Tests")]
+        private void TestColor(GameColor gameColor)
+        {
+            var color = gameColor.ToColor();
+            Color newColor = Color.Lerp(_meshRenderer.sharedMaterial.color, color, _coloringDegree);
+            _meshRenderer.sharedMaterial.color = newColor;
+        }
+
+        [Button]
+        [Group("Tests")]
+        private void RevertColor()
+        {
+            _meshRenderer.sharedMaterial.color = Color.white;
+        }
+        #endif
     }
 }

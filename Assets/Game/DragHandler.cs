@@ -21,11 +21,7 @@ namespace Game
         [SerializeField]
         private ItemSystem _itemSystem;
         [field: SerializeField]
-        public float DragCloseLaneDistance
-        {
-            get;
-            set;
-        } = 3f;
+        public float DragCloseLaneDistance { get; set; } = 3f;
         [SerializeField]
         private Color _ghostItemColor;
         [SerializeField]
@@ -54,12 +50,10 @@ namespace Game
 
             _activeItem.IsPlayerControlled = false;
             Transform activeItemTransform = _activeItem.transform;
-            
+
             if (_ghostItem == null)
             {
-                DOTween.Sequence()
-                       .Append(ItemAnimationSystem.Instance.ScaleOnKnockAnim(activeItemTransform))
-                       .AppendCallback(DestroyActiveItem);
+                DOTween.Sequence().Append(ItemAnimationSystem.Instance.ScaleOnKnockAnim(activeItemTransform)).AppendCallback(DestroyActiveItem);
                 Debug.Log("no lane and no ghost item");
             }
             else if (_nearLane != null)
@@ -84,6 +78,7 @@ namespace Game
 
         private void DestroyActiveItem()
         {
+            VFXManager.Instance.SpawnDestroyItemVFX(_activeItem.transform.position);
             ItemSystem.Instance.DestroyItem(_activeItem);
             _activeItem = null;
             // TODO VFX
@@ -134,7 +129,7 @@ namespace Game
                 {
                     break;
                 }
-                
+
                 ghostItem.transform.position += Vector3.back * (_cachedLane.Speed * Time.deltaTime);
                 Lane[] lanes = _laneSystem.Lanes;
 

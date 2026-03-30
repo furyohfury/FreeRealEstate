@@ -144,7 +144,7 @@ namespace Game
                    .Join(
                        item.transform.DOScale(Vector3.one, _pipeItemMoveDuration * (1 - _changeScaleMoveProgressRatio))
                            .SetEase(_scaleToNormalSizeEase))
-                   .Append(item.transform.DOPunchScale(new Vector3(_enlargeAnimScale, _enlargeAnimScale, _enlargeAnimScale), _enlargeAnimTime, vibrato: 1, elasticity: 1));
+                   .Append(item.transform.DOPunchScale(_enlargeAnimScale * Vector3.one, _enlargeAnimTime, vibrato: 1, elasticity: 1));
                    
             
             return Awaitable.WaitForSecondsAsync(_pipeItemMoveDuration);

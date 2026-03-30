@@ -40,7 +40,7 @@ namespace Game
                    .Append(ItemAnimationSystem.Instance.ScaleOnKnockAnim(knockedItem.transform))
                    .AppendCallback(() =>
                    {
-                       // TODO VFX
+                       VFXManager.Instance.SpawnDestroyItemVFX(knockedItem.transform.position);
                        OnDestroyItem?.Invoke(knockedItem);
                    });
         }

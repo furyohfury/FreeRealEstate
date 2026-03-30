@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: _meshRenderer
       value: 
       objectReference: {fileID: 7551666567732615791}
+    - target: {fileID: 917282944135880636, guid: 53a1f799f19ee5b43a9aa0f3bd7caaa5, type: 3}
+      propertyPath: _coloringDegree
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 3619925932222807695, guid: 53a1f799f19ee5b43a9aa0f3bd7caaa5, type: 3}
       propertyPath: m_Name
       value: ItemPrefab Variant 4
