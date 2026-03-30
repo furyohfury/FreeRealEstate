@@ -59,7 +59,7 @@ namespace Game
             {
                 DOTween.Sequence()
                        .Append(ItemAnimationSystem.Instance.ScaleOnKnockAnim(activeItemTransform))
-                       .AppendCallback(() => _itemSystem.DestroyItem(_activeItem));
+                       .AppendCallback(DestroyActiveItem);
                 Debug.Log("no lane and no ghost item");
             }
             else if (_nearLane != null)
@@ -80,6 +80,13 @@ namespace Game
                 _ghostItem.Destroy();
                 _ghostItem = null;
             }
+        }
+
+        private void DestroyActiveItem()
+        {
+            ItemSystem.Instance.DestroyItem(_activeItem);
+            _activeItem = null;
+            // TODO VFX
         }
 
         private void OnDragStarted()
@@ -138,6 +145,8 @@ namespace Game
                         Debug.Log($"<color=red>destroy item</color>");
                         ghostItem.Destroy();
                         _ghostItem = null;
+                        DestroyActiveItem();
+                        CancelDrag();
                         // TODO VFX
                         break;
                     }

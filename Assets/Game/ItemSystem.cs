@@ -21,8 +21,12 @@ namespace Game
         public void DestroyItem(Item item)
         {
             if (item == null)
+            {
+                Debug.LogError($"Item is null when destroying");
+                
                 return;
-            
+            }
+                
             _activeItems.Remove(item);
             Lane linkedLane = _itemLaneRegistry.GetLane(item);
 

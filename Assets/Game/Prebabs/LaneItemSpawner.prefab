@@ -87,9 +87,12 @@ MonoBehaviour:
     m_Bits: 64
   _initialPoint: {fileID: 5181624343559797360}
   _itemsSpawnPos: {fileID: 5636501162413277657}
-  _pipeItemMoveDuration: 0.5
-  _itemInitialScale: 0.1
+  _pipeItemMoveDuration: 0.85
+  _itemInitialScale: 0.5
   _changeScaleMoveProgressRatio: 0.85
+  _scaleToNormalSizeEase: 14
+  _enlargeAnimScale: 1.4
+  _enlargeAnimTime: 0.4
 --- !u!1 &6604860299460260599
 GameObject:
   m_ObjectHideFlags: 0

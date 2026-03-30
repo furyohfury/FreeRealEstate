@@ -1,5 +1,6 @@
 ﻿using TriInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Game
 {
@@ -8,9 +9,19 @@ namespace Game
         [SerializeField]
         [RequiredGet(InChildren = true)]
         private LanesSessionSpawner _lanesSessionSpawner;
+        [SerializeField]
+        private bool _launchWithCountdown;
+        [SerializeField]
+        [RequiredGet(InChildren = true)]
+        public LaunchCountDownHandler launchCountdownHandler;
 
-        public void LaunchSession()
+        public async void LaunchSession()
         {
+            if (_launchWithCountdown)
+            {
+                await launchCountdownHandler.CountdownAsync();
+            }
+            
             InitLanes();
             GameLoop.Instance.Launch();
         }

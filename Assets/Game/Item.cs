@@ -1,6 +1,7 @@
 ﻿using System;
 using DG.Tweening;
 using Game.Extensions;
+using TriInspector;
 using UnityEngine;
 
 namespace Game
@@ -19,6 +20,9 @@ namespace Game
         private MeshRenderer _meshRenderer;
         [SerializeField]
         private Collider _collider;
+        [SerializeField]
+        [Range(0, 1)]
+        private float _highlightWhiteDegree;
 
         public void Move(Vector3 direction)
         {
@@ -30,6 +34,7 @@ namespace Game
             return transform.DOScale(endVal, duration).SetEase(ease);
         }
 
+        [Button]
         public void SetColor(GameColor color)
         {
             GameColor = color;
@@ -40,7 +45,7 @@ namespace Game
         {
             SetVisualColor(color.ToColor());
         }
-        
+
         private void SetVisualColor(Color color)
         {
             _meshRenderer.material.color = color;
@@ -61,9 +66,23 @@ namespace Game
             _collider.enabled = false;
         }
 
+        [Button]
+        public void Highlight()
+        {
+            Color newColor = Color.Lerp(_meshRenderer.material.color, Color.white, _highlightWhiteDegree);
+            _meshRenderer.material.color = newColor;
+        }
+        
+        [Button]
+        public void DisableHighlight()
+        {
+            SetColor(GameColor);
+        }
+
         private void OnTriggerEnter(Collider other)
         {
-            if (!IsPlayerControlled && other.TryGetComponent(out Item item))
+            if (!IsPlayerControlled
+                && other.TryGetComponent(out Item item))
             {
                 OnKnocked?.Invoke(item, this);
             }

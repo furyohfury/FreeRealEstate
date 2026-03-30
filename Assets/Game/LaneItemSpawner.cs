@@ -31,7 +31,13 @@ namespace Game
         private float _itemInitialScale = 0.1f;
         [SerializeField] 
         private float _changeScaleMoveProgressRatio = 0.85f;
-
+        [SerializeField]
+        private Ease _scaleToNormalSizeEase = Ease.InQuint;
+        [SerializeField]
+        private float _enlargeAnimScale = 1.4f;
+        [SerializeField]
+        private float _enlargeAnimTime = 0.4f;
+        
         private Vector3 InitialPos => _initialPoint.position;
         private Vector3 SpawnPos => _itemsSpawnPos.position;
         private Quaternion SpawnRot => _itemsSpawnPos.rotation;
@@ -131,10 +137,14 @@ namespace Game
             float distance = Vector3.Distance(itemPos, SpawnPos);
             Vector3 intermediatePos = itemPos + (SpawnPos - itemPos).normalized * (distance * _changeScaleMoveProgressRatio);
 
+            _enlargeAnimScale = 0.5f;
             DOTween.Sequence()
                    .Append(item.transform.DOMove(intermediatePos, _pipeItemMoveDuration * _changeScaleMoveProgressRatio))
                    .Append(item.transform.DOMove(SpawnPos, _pipeItemMoveDuration * (1 - _changeScaleMoveProgressRatio)))
-                   .Join(item.transform.DOScale(Vector3.one, _pipeItemMoveDuration * (1 - _changeScaleMoveProgressRatio)));
+                   .Join(
+                       item.transform.DOScale(Vector3.one, _pipeItemMoveDuration * (1 - _changeScaleMoveProgressRatio))
+                           .SetEase(_scaleToNormalSizeEase))
+                   .Append(item.transform.DOPunchScale(new Vector3(_enlargeAnimScale, _enlargeAnimScale, _enlargeAnimScale), _enlargeAnimTime, vibrato: 1, elasticity: 1));
                    
             
             return Awaitable.WaitForSecondsAsync(_pipeItemMoveDuration);
