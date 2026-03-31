@@ -49,4 +49,4 @@ MonoBehaviour:
   _collisionVFXPrefab: {fileID: 4739264407584629229, guid: 841004c4c6a39e244abe2257394de913, type: 3}
   _collisionVFXScale: 2
   _dragFallingParticlesPrefab: {fileID: 4033412786151888120, guid: 49057b33ea71fbb4da4e8f02a8db9f28, type: 3}
-  _dragFallingParticlesScale: 0.5
+  _dragFallingParticlesScale: 0.3
