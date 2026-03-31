@@ -81,7 +81,6 @@ namespace Game
             VFXManager.Instance.SpawnDestroyItemVFX(_activeItem.transform.position);
             ItemSystem.Instance.DestroyItem(_activeItem);
             _activeItem = null;
-            // TODO VFX
         }
 
         private void OnDragStarted()
@@ -142,7 +141,6 @@ namespace Game
                         _ghostItem = null;
                         DestroyActiveItem();
                         CancelDrag();
-                        // TODO VFX
                         break;
                     }
                 }

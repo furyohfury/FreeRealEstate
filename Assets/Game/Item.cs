@@ -13,7 +13,7 @@ namespace Game
         /// <summary>
         /// Only invokes by not swiped item
         /// </summary>
-        public event Action<Item, Item> OnKnocked;
+        public event Action<CollisionEventData> OnKnocked;
         public bool IsPlayerControlled { get; set; }
         public GameColor GameColor { get; private set; }
         public Collider Collider => _collider;
@@ -89,7 +89,14 @@ namespace Game
             if (!IsPlayerControlled
                 && other.TryGetComponent(out Item item))
             {
-                OnKnocked?.Invoke(item, this);
+                Vector3 contactPoint = _collider.ClosestPoint(other.transform.position);
+                var collisionEventData = new CollisionEventData()
+                                         {
+                                             ControlledItem = item,
+                                             HitItem = this,
+                                             HitPoint = contactPoint
+                                         };
+                OnKnocked?.Invoke(collisionEventData);
             }
         }
 

@@ -20,8 +20,10 @@ namespace Game
             item.OnKnocked += ItemOnOnKnocked;
         }
 
-        private void ItemOnOnKnocked(Item item, Item knockedItem)
+        private void ItemOnOnKnocked(CollisionEventData data)
         {
+            Item item = data.ControlledItem;
+            Item knockedItem = data.HitItem;
             knockedItem.DisableCollision();
             HealthController.Instance.PenalizeForCollision();
 
@@ -33,7 +35,7 @@ namespace Game
             var duration = direction.magnitude / _speed;
             var targetPos = knockedItemPos + direction;
 
-            // TODO VFX
+            VFXManager.Instance.SpawnCollisionVFX(data.HitPoint);
 
             DOTween.Sequence()
                    .Append(knockedItem.transform.DOMove(targetPos, duration).SetEase(_moveAnimEase))
