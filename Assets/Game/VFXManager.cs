@@ -12,6 +12,10 @@ namespace Game
         private ParticleSystem _collisionVFXPrefab;
         [SerializeField]
         private float _collisionVFXScale = 1f;
+        [SerializeField] 
+        private ParticleSystem _dragFallingParticlesPrefab;
+        [SerializeField]
+        private float _dragFallingParticlesScale = 0.5f;
 
         protected override void Awake()
         {
@@ -44,6 +48,15 @@ namespace Game
         {
             CameraProvider.Instance.CameraFacade.ShakeCamera();
             // TODO sfx
+        }
+
+        public GameObject SpawnDragFallingParticlesVFX(Transform parent)
+        {
+            ParticleSystem vfx = Instantiate(_dragFallingParticlesPrefab, parent);
+            vfx.transform.localScale = Vector3.one * _dragFallingParticlesScale;
+            // TODO add audiosource too
+            
+            return vfx.gameObject;
         }
 
         private ParticleSystem SpawnVFX(ParticleSystem ps, Vector3 position)

@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 5066275722808387916}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.08711, y: -0, z: 15.53334}
+  m_LocalPosition: {x: 0, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -48,3 +48,5 @@ MonoBehaviour:
   _destroyItemVFXScale: 0.5
   _collisionVFXPrefab: {fileID: 4739264407584629229, guid: 841004c4c6a39e244abe2257394de913, type: 3}
   _collisionVFXScale: 2
+  _dragFallingParticlesPrefab: {fileID: 4033412786151888120, guid: 49057b33ea71fbb4da4e8f02a8db9f28, type: 3}
+  _dragFallingParticlesScale: 0.5

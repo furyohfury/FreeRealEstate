@@ -38,6 +38,7 @@ namespace Game
         private Item _activeItem;
         private Vector3 _dragStartPos;
         private GhostItem _ghostItem;
+        private GameObject _activeItemVfx;
 
         private void OnEnable()
         {
@@ -52,6 +53,11 @@ namespace Game
             if (_activeItem == null)
             {
                 return;
+            }
+
+            if (_activeItemVfx != null)
+            {
+                Destroy(_activeItemVfx);
             }
 
             _activeItem.IsPlayerControlled = false;
@@ -103,12 +109,13 @@ namespace Game
                 && hit.collider.TryGetComponent(out Item item)
                 && CanBeDragged(item))
             {
-                // TODO VFX
                 _activeItem = item;
                 _cachedLane = _itemLaneRegistry.GetLane(item);
                 _itemLaneRegistry.UnlinkItem(item);
                 _activeItem.IsPlayerControlled = true;
                 _ghostItem = SpawnGhostItem(item);
+                _activeItemVfx = VFXManager.Instance.SpawnDragFallingParticlesVFX(item.transform);
+
                 _cancellationTokenSource = new CancellationTokenSource();
                 DragItemAsync(item, _cancellationTokenSource.Token);
                 MoveGhostItemAsync(_ghostItem, _cancellationTokenSource.Token);
