@@ -1,5 +1,4 @@
 ﻿using System.Threading;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Game
@@ -13,6 +12,7 @@ namespace Game
         public async Awaitable CountdownAsync(CancellationToken cancellationToken = default)
         {
             Countdown = _initialCountdown;
+            CountDownUI.Instance.LaunchCountdown(_initialCountdown);
 
             while (Countdown >= 0)
             {
