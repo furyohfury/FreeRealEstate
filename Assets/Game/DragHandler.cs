@@ -150,6 +150,12 @@ namespace Game
                         Debug.Log($"<color=red>destroy item</color>");
                         DestroyGhostItemWithDissolve(ghostItem);
                         _ghostItem = null;
+
+                        if (_nearLane != null)
+                        {
+                            _nearLane.DisableHighlight();
+                        }
+
                         DestroyActiveItem();
                         CancelDrag();
                         break;
