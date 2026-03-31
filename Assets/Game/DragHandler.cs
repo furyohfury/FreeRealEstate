@@ -26,6 +26,12 @@ namespace Game
         private Color _ghostItemColor;
         [SerializeField]
         private Camera _cam;
+        [Header("GhostItem")]
+        [SerializeField]
+        private Material _dissolveMaterialPrefab;
+        [SerializeField]
+        private float _dissolveAnimDuration;
+
         private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
         private Lane _cachedLane;
         private Lane _nearLane;
@@ -74,6 +80,11 @@ namespace Game
                 _ghostItem.Destroy();
                 _ghostItem = null;
             }
+        }
+
+        private void DestroyGhostItemWithDissolve(GhostItem ghostItem)
+        {
+            ghostItem.DestroyWithDissolve(_dissolveMaterialPrefab, _dissolveAnimDuration);
         }
 
         private void DestroyActiveItem()
@@ -137,7 +148,7 @@ namespace Game
                     if (lanes[i].ScoreZone.IsInConsumeRadius(ghostItem.transform.position))
                     {
                         Debug.Log($"<color=red>destroy item</color>");
-                        ghostItem.Destroy();
+                        DestroyGhostItemWithDissolve(ghostItem);
                         _ghostItem = null;
                         DestroyActiveItem();
                         CancelDrag();
