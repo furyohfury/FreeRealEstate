@@ -24,6 +24,7 @@ namespace Game
             ParticleSystem vfx = SpawnVFX(_destroyItemVFX, position);
             vfx.transform.localScale = Vector3.one * _destroyItemVFXScale;
             SetDestroyOnEnd(vfx);
+            // TODO sfx
         }
 
         public void SpawnCollisionVFX(Vector3 position)
@@ -31,11 +32,23 @@ namespace Game
             ParticleSystem vfx = SpawnVFX(_collisionVFXPrefab, position);
             vfx.transform.localScale = Vector3.one * _collisionVFXScale;
             SetDestroyOnEnd(vfx);
+            // TODO sfx
+        }
+
+        public void SpawnRightColorItemConsumedVFX(Vector3 position)
+        {
+            // TODO sfx
+        }
+
+        public void SpawnWrongColorItemConsumedVFX(Vector3 position)
+        {
+            CameraProvider.Instance.CameraFacade.ShakeCamera();
+            // TODO sfx
         }
 
         private ParticleSystem SpawnVFX(ParticleSystem ps, Vector3 position)
         {
-            ParticleSystem vfx = Instantiate(ps, position, Quaternion.identity);
+            ParticleSystem vfx = Instantiate(ps, position, Quaternion.identity, transform);
             return vfx;
         }
 

@@ -28,7 +28,7 @@ namespace Game
         public int Number { get; set; }
         [field: SerializeField]
         public ScoreZone ScoreZone { get; private set; }
-        
+
         [SerializeField]
         private MeshRenderer _meshRenderer;
         [SerializeField]
@@ -36,6 +36,8 @@ namespace Game
         private LaneItemSpawner _laneItemSpawner;
         [SerializeField]
         private float _speed;
+        [SerializeField]
+        private Color _highlightColor = Color.aquamarine;
 
         private static readonly int _stripColorKey = Shader.PropertyToID("_StripColor");
         private static readonly int _speedKey = Shader.PropertyToID("_Speed");
@@ -52,13 +54,11 @@ namespace Game
 
         public void Highlight()
         {
-            // TODO VFX
-            SetVisualColor(Color.aquamarine);
+            SetVisualColor(_highlightColor);
         }
 
         public void DisableHighlight()
         {
-            // TODO VFX
             SetVisualColor(GameColor);
         }
 

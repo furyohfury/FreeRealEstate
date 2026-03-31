@@ -9,9 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8121808852161806081}
-  - component: {fileID: 8343173739345602210}
-  - component: {fileID: 692104487947431155}
-  - component: {fileID: 4675262647490694008}
   - component: {fileID: 4254213589198887541}
   m_Layer: 0
   m_Name: Scorezone
@@ -36,84 +33,6 @@ Transform:
   - {fileID: 8813597696464191995}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &8343173739345602210
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4611160818912445866}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &692104487947431155
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4611160818912445866}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_MaskInteraction: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4675262647490694008
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4611160818912445866}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4254213589198887541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,6 +49,15 @@ MonoBehaviour:
   _lane: {fileID: 0}
   _consumeDuration: 1
   _consumeAnimEasing: 30
+  _renderers:
+  - {fileID: 3887917639068975544}
+  - {fileID: 1779302600599136804}
+  - {fileID: 5929488962472142520}
+  - {fileID: 4322568637206474260}
+  _rightItemConsumedColor: {r: 0, g: 1, b: 0, a: 1}
+  _rightItemConsumedAnimDuration: 0.5
+  _wrongItemConsumedColor: {r: 1, g: 0, b: 0, a: 1}
+  _wrongItemConsumedAnimDuration: 1
 --- !u!1001 &2811390705343737219
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -187,6 +115,26 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44cb92dcd4d1ed547bc848f076039ae5, type: 3}
+--- !u!23 &1779302600599136804 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4590657561060624295, guid: 44cb92dcd4d1ed547bc848f076039ae5, type: 3}
+  m_PrefabInstance: {fileID: 2811390705343737219}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &3887917639068975544 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1364793603300764731, guid: 44cb92dcd4d1ed547bc848f076039ae5, type: 3}
+  m_PrefabInstance: {fileID: 2811390705343737219}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &4322568637206474260 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2087640208478995351, guid: 44cb92dcd4d1ed547bc848f076039ae5, type: 3}
+  m_PrefabInstance: {fileID: 2811390705343737219}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &5929488962472142520 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8452647615259560763, guid: 44cb92dcd4d1ed547bc848f076039ae5, type: 3}
+  m_PrefabInstance: {fileID: 2811390705343737219}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8813597696464191995 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6725035997658754168, guid: 44cb92dcd4d1ed547bc848f076039ae5, type: 3}
