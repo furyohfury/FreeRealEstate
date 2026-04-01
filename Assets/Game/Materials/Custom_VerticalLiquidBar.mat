@@ -41,14 +41,15 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BoilIntensity: 0.066
+    - _BoilIntensity: 0.091
     - _BoilScale: 0.27
-    - _BoilSpeed: 0.24
+    - _BoilSpeed: 0.25
     - _ColorMask: 15
     - _EdgeSmoothness: 0.01
-    - _FillAmount: 0.446
+    - _FillAmount: 1
     - _Stencil: 0
-    - _StencilComp: 8
+    - _StencilComp: 2
+    - _StencilID: 0
     - _StencilOp: 0
     - _StencilReadMask: 255
     - _StencilWriteMask: 255
@@ -57,7 +58,8 @@ Material:
     - _WaveSpeed: 5.7
     - _WaveStrength: 0.0089
     m_Colors:
-    - _BaseColor: {r: 1, g: 0.118867874, b: 0.118867874, a: 1}
+    - _BaseColor: {r: 0.8037735, g: 0, b: 0, a: 1}
+    - _ClipRect: {r: 0, g: 0, b: 0, a: 0}
     - _EmptyColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

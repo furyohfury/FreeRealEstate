@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5ffe323b3d9675046a1347d1b67b10b4
+guid: ea5b0cc6cf3cce144a62bfc6a366b4fb
 importerOverride:
   nativeImporterType: 2089858483
   scriptedImporterType:
@@ -58,9 +58,9 @@ ScriptedImporter:
     filterMode: 1
     aniso: 1
     mipBias: 0
-    wrapU: 1
-    wrapV: 1
-    wrapW: 1
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
     normalMap: 0
     textureFormat: 0
     maxTextureSize: 0
@@ -88,7 +88,7 @@ ScriptedImporter:
       y: 0
       width: 0
       height: 0
-    spriteID: 050b5759f30e7254ebb1bda35032efcd
+    spriteID: 717d516586c4be44b9fb90716ba8981d
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -100,7 +100,7 @@ ScriptedImporter:
     spritePosition: {x: 0, y: 0}
   multiSpriteImportData: []
   layeredSpriteImportData:
-  - name: bar
+  - name: inner
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -108,11 +108,11 @@ ScriptedImporter:
     customData: 
     rect:
       serializedVersion: 2
-      x: 259
+      x: 445
       y: 4
-      width: 197
-      height: 1205
-    spriteID: 1c248ee158dc1f14cbd0e8c070fa491e
+      width: 322
+      height: 1199
+    spriteID: 27a4cccb4a6938f488652733f23d0824
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -120,8 +120,8 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 259, y: 4}
-    spritePosition: {x: 66, y: 32}
+    uvTransform: {x: 445, y: 4}
+    spritePosition: {x: 356, y: 177}
   - name: borders
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -132,9 +132,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 247
-      height: 1256
-    spriteID: ca236ce65d1eebf468987dd09504afe8
+      width: 433
+      height: 1312
+    spriteID: ad6d1ab7153f77d4fa2bf7f922321a06
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -142,8 +142,8 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: -41, y: -3}
-    spritePosition: {x: 45, y: 7}
+    uvTransform: {x: -297, y: -115}
+    spritePosition: {x: 301, y: 119}
   spriteImportData: []
   rigSpriteImportData: []
   sharedRigSpriteImportData: []
@@ -162,67 +162,7 @@ ScriptedImporter:
     characterGroups: []
     pivot: {x: 0, y: 0}
     boneReadOnly: 0
-  platformSettings:
-  - name: DefaultTexturePlatform
-    overridden: 0
-    ignorePlatformSupport: 0
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    androidETC2FallbackOverride: 0
-  - name: Standalone
-    overridden: 0
-    ignorePlatformSupport: 0
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    androidETC2FallbackOverride: 0
-  - name: Android
-    overridden: 0
-    ignorePlatformSupport: 0
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    androidETC2FallbackOverride: 0
-  - name: WebGL
-    overridden: 0
-    ignorePlatformSupport: 0
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    androidETC2FallbackOverride: 0
-  - name: Windows Store Apps
-    overridden: 0
-    ignorePlatformSupport: 0
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    androidETC2FallbackOverride: 0
+  platformSettings: []
   mosaicLayers: 1
   characterMode: 1
   documentPivot: {x: 0, y: 0}
@@ -251,13 +191,13 @@ ScriptedImporter:
   resliceFromLayer: 0
   pSDLayerImportSetting: []
   psdLayers:
-  - name: bar
-    spriteName: bar
+  - name: inner
+    spriteName: inner
     isGroup: 0
     parentIndex: -1
-    spriteID: 1c248ee158dc1f14cbd0e8c070fa491e
+    spriteID: 27a4cccb4a6938f488652733f23d0824
     layerID: 2
-    mosaicPosition: {x: 259, y: 4}
+    mosaicPosition: {x: 445, y: 4}
     flatten: 0
     isImported: 1
     isVisible: 1
@@ -265,7 +205,7 @@ ScriptedImporter:
     spriteName: borders
     isGroup: 0
     parentIndex: -1
-    spriteID: ca236ce65d1eebf468987dd09504afe8
+    spriteID: ad6d1ab7153f77d4fa2bf7f922321a06
     layerID: 3
     mosaicPosition: {x: 4, y: 4}
     flatten: 0
