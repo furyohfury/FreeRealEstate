@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Game
@@ -64,6 +65,14 @@ namespace Game
             _itemLaneRegistry.LinkItem(item, linkedLane);
             linkedLane.AddItem(item);
             _itemCollisionHandler.SubscribeToCollisionEvents(item);
+        }
+
+        public void ClearAll()
+        {
+            foreach (Item item in _activeItems.ToList())
+            {
+                DestroyItem(item);
+            }
         }
 
         private void OnDisable()

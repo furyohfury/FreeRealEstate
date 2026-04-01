@@ -19,8 +19,6 @@ namespace Game
         [SerializeField]
         private float _fallAnimDuration = 0.3f;
         [SerializeField]
-        private float _fallScalePunchDuration = 0.3f;
-        [SerializeField]
         private Vector3 _punchScaleStrength = new Vector3(0.3f, -0.2f, 0);
         [SerializeField]
         private float _punchDuration = 0.5f;

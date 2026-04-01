@@ -13,7 +13,7 @@ namespace Game
         private bool _launchWithCountdown;
         [SerializeField]
         [RequiredGet(InChildren = true)]
-        public LaunchCountDownHandler launchCountdownHandler;
+        private LaunchCountDownHandler launchCountdownHandler;
 
         public async void LaunchSession()
         {

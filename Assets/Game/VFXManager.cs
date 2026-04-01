@@ -12,7 +12,7 @@ namespace Game
         private ParticleSystem _collisionVFXPrefab;
         [SerializeField]
         private float _collisionVFXScale = 1f;
-        [SerializeField] 
+        [SerializeField]
         private ParticleSystem _dragFallingParticlesPrefab;
         [SerializeField]
         private float _dragFallingParticlesScale = 0.5f;
@@ -55,8 +55,16 @@ namespace Game
             ParticleSystem vfx = Instantiate(_dragFallingParticlesPrefab, parent);
             vfx.transform.localScale = Vector3.one * _dragFallingParticlesScale;
             // TODO add audiosource too
-            
+
             return vfx.gameObject;
+        }
+
+        public void ClearAllVFX()
+        {
+            foreach (Transform child in transform)
+            {
+                Destroy(child.gameObject);
+            }
         }
 
         private ParticleSystem SpawnVFX(ParticleSystem ps, Vector3 position)

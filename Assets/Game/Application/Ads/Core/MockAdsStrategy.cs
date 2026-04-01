@@ -8,7 +8,7 @@ namespace Game.Application.Ads
         {
             Debug.Log("Showing reward ad: " + id);
 
-            return Awaitable.WaitForSecondsAsync(3);
+            return AwaitableExtensions.WaitForSecondsRealtimeAsync(3);
         }
     }
 }

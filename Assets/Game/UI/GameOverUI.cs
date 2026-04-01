@@ -1,5 +1,6 @@
 ﻿using Game.Application.Ads;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Game
@@ -22,21 +23,32 @@ namespace Game
 
         public void Show()
         {
-            
+            gameObject.SetActive(true);
+        }
+
+        public void Hide()
+        {
+            gameObject.SetActive(false);
         }
 
         private async void OnContinueClicked()
         {
             await AdsManager.Instance.ShowRewardAd(AdsStaticData.CONTINUE_AD_ID);
             Debug.Log("Continue Ads over");
+            Health.Instance.CurrentHealth = Health.Instance.MaxHealth * GameParamsService.Instance.SessionParams.ContinueInitialHealthRatio;
+            ItemSystem.Instance.ClearAll();
+            GameCycleStateSwitcher.Instance.ResumeGame();
+            Hide();
         }
 
         private void OnRetryClicked()
         {
+            SessionRestarter.Instance.Restart();
         }
 
         private void OnExitClicked()
         {
+            SceneManager.LoadScene((int)Scene.MainMenu, LoadSceneMode.Single);
         }
 
         private void OnDisable()
