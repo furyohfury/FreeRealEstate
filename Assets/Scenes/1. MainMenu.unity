@@ -181,6 +181,11 @@ MonoBehaviour:
   _fallScalePunchDuration: 0.3
   _punchScaleStrength: {x: 0.3, y: -0.2, z: 0}
   _punchDuration: 0.5
+  _choiceMadeMaxScale: {x: 1.2, y: 1.2, z: 0}
+  _choiceMadeDuration: 0.1
+  _choiceMadeEase: 1
+  _choiceMadeDecreaseDuration: 0.3
+  _choiceMadeDecreaseEase: 1
 --- !u!114 &7836437
 MonoBehaviour:
   m_ObjectHideFlags: 0

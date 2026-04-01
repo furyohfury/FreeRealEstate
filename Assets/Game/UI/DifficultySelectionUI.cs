@@ -27,6 +27,16 @@ namespace Game
 
         private RectTransform _rectTransform;
         private Vector2 _originalAnchoredPosition;
+        [SerializeField]
+        private Vector3 _choiceMadeMaxScale = new Vector3(0.2f, 0.2f, 0);
+        [SerializeField]
+        private float _choiceMadeDuration = 0.5f;
+        [SerializeField]
+        private Ease _choiceMadeEase = Ease.Linear;
+        [SerializeField]
+        private float _choiceMadeDecreaseDuration = 0.3f;
+        [SerializeField]
+        private Ease _choiceMadeDecreaseEase = Ease.Linear;
 
         private void Awake()
         {
@@ -76,6 +86,27 @@ namespace Game
             buttonUI.OnClick -= OnButtonClicked;
             int paramsIndex = _buttonToParamsMap[buttonUI];
             GameParamsService.Instance.SessionParams = _sessionParamsStorage.SessionParams[paramsIndex];
+            LaunchDisappearSequence().AppendCallback(LoadNextScene);
+        }
+
+        [Button]
+        private Sequence LaunchDisappearSequence()
+        {
+            _rectTransform.pivot = new  Vector2(0.5f, 0.5f);
+            
+            return DOTween.Sequence()
+                          .Append(_rectTransform.DOScale(_choiceMadeMaxScale, _choiceMadeDuration).SetEase(_choiceMadeEase))
+                          .Append(_rectTransform.DOScale(Vector2.zero, _choiceMadeDecreaseDuration).SetEase(_choiceMadeDecreaseEase));
+        }
+
+        [Button]
+        public void RestoreScale()
+        {
+            _rectTransform.localScale = Vector3.one;
+        }
+
+        private void LoadNextScene()
+        {
             SceneManager.LoadScene((int)Scene.Gameplay, LoadSceneMode.Single);
         }
     }
