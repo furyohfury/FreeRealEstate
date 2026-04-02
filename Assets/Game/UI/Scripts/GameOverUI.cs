@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
 using Game.Application.Ads;
+using Game.Infrastructure;
 using TriInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -87,7 +88,7 @@ namespace Game
 
             await AwaitableExtensions.WaitForTweenRealtime(disappearSequence);
 
-            SceneManager.LoadScene((int)Scene.MainMenu, LoadSceneMode.Single);
+            SceneSwitcher.Instance.SwitchScene(Scene.MainMenu, LoadSceneMode.Single);
         }
 
         [Button]

@@ -14,12 +14,12 @@ namespace Game.Infrastructure
             if (BootstrapCrossSceneData.BootstrapCompleted == false)
             {
                 BootstrapCrossSceneData.BootstrapCompleted = true;
-                SceneManager.LoadScene((int)_startScene, LoadSceneMode.Single);
+                SceneSwitcher.Instance.SwitchScene(_startScene, LoadSceneMode.Single);
             }
             else
             {
                 BootstrapCrossSceneData.BootstrapCompleted = true;
-                SceneManager.LoadScene(BootstrapCrossSceneData.SceneToLoad, LoadSceneMode.Single);
+                SceneSwitcher.Instance.SwitchScene(BootstrapCrossSceneData.SceneToLoad, LoadSceneMode.Single);
             }
         }
     }

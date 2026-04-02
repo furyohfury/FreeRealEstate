@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using DG.Tweening;
+using Game.Infrastructure;
 using Game.Utils;
 using TriInspector;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Game
 {
@@ -101,7 +101,7 @@ namespace Game
 
         private void LoadNextScene()
         {
-            SceneManager.LoadScene((int)Scene.Gameplay, LoadSceneMode.Single);
+            SceneSwitcher.Instance.SwitchSceneWithLoadingScreen(Scene.Gameplay);
         }
 
 #if UNITY_EDITOR

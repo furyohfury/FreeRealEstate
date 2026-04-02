@@ -1,8 +1,8 @@
 ﻿using DG.Tweening;
+using Game.Infrastructure;
 using TriInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 namespace Game
 {
@@ -16,7 +16,7 @@ namespace Game
             // Health.Instance.CurrentHealth = Health.Instance.MaxHealth;
             // SessionLauncher.Instance.LaunchSession();
             Time.timeScale = 1;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneSwitcher.Instance.ReloadScene();
         }
 
 #if UNITY_EDITOR
