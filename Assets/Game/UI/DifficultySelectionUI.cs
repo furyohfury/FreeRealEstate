@@ -65,6 +65,7 @@ namespace Game
         [Button]
         private void LaunchAppearanceAnimation()
         {
+            SetPivot(_rectTransform, new Vector2(0.5f, 0f));
             DOTween.Kill(_rectTransform);
             _rectTransform.localScale = Vector3.one;
             float screenHeight = Screen.height;
@@ -90,22 +91,36 @@ namespace Game
         [Button]
         private Sequence LaunchDisappearSequence()
         {
-            _rectTransform.pivot = new  Vector2(0.5f, 0.5f);
-            
+            SetPivot(_rectTransform, new Vector2(0.5f, 0.5f));
+
             return DOTween.Sequence()
                           .Append(_rectTransform.DOScale(_choiceMadeMaxScale, _choiceMadeDuration).SetEase(_choiceMadeEase))
                           .Append(_rectTransform.DOScale(Vector2.zero, _choiceMadeDecreaseDuration).SetEase(_choiceMadeDecreaseEase));
         }
 
-        [Button]
-        public void RestoreScale()
+        private void SetPivot(RectTransform rectTransform, Vector2 pivot)
         {
-            _rectTransform.localScale = Vector3.one;
+            Vector2 size = rectTransform.rect.size;
+            Vector2 deltaPivot = rectTransform.pivot - pivot;
+            Vector3 deltaPosition = new Vector3(deltaPivot.x * size.x, deltaPivot.y * size.y) * rectTransform.localScale.x;
+
+            // Сдвигаем pivot
+            rectTransform.pivot = pivot;
+            // Компенсируем позицию, чтобы объект остался на месте
+            rectTransform.localPosition -= deltaPosition;
         }
 
         private void LoadNextScene()
         {
             SceneManager.LoadScene((int)Scene.Gameplay, LoadSceneMode.Single);
         }
+
+#if UNITY_EDITOR
+        [Button]
+        private void RestoreScale()
+        {
+            _rectTransform.localScale = Vector3.one;
+        }
+#endif
     }
 }
