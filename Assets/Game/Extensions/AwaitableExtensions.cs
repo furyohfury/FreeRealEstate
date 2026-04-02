@@ -1,4 +1,5 @@
 ﻿using System.Threading;
+using DG.Tweening;
 using UnityEngine;
 
 public static class AwaitableExtensions
@@ -11,5 +12,12 @@ public static class AwaitableExtensions
         {
             await Awaitable.NextFrameAsync(ct);
         }
+    }
+
+    public static async Awaitable WaitForTweenRealtime(Tween tween, CancellationToken ct = default)
+    {
+        float duration = tween.Duration();
+
+        await WaitForSecondsRealtimeAsync(duration, ct);
     }
 }

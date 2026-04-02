@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using DG.Tweening;
 using UnityEngine;
@@ -23,9 +24,6 @@ namespace Game
         [SerializeField]
         private MeshRenderer[] _renderers;
 
-        private readonly HashSet<Item> _activeConsumingItems = new HashSet<Item>();
-        private Color[][] _initialColors;
-        private CancellationTokenSource _cts;
         [SerializeField]
         private Color _rightItemConsumedColor = Color.green;
         [SerializeField]
@@ -34,6 +32,11 @@ namespace Game
         private Color _wrongItemConsumedColor = Color.red;
         [SerializeField]
         private float _wrongItemConsumedAnimDuration = 1f;
+
+        private readonly HashSet<Item> _activeConsumingItems = new HashSet<Item>();
+        private readonly HashSet<Tween> _activeTweens = new HashSet<Tween>();
+        private Color[][] _initialColors;
+        private CancellationTokenSource _cts;
 
         private void Awake()
         {
@@ -49,6 +52,22 @@ namespace Game
                     _initialColors[i][j] = materials[j].color;
                 }
             }
+        }
+
+        public void StopAllConsumingItems()
+        {
+            foreach (Item item in _activeConsumingItems.ToArray())
+            {
+                ItemSystem.Instance.DestroyItem(item);
+            }
+
+            foreach (Tween tween in _activeTweens)
+            {
+                tween.Kill();
+            }
+
+            _activeConsumingItems.Clear();
+            _activeTweens.Clear();
         }
 
         private void Update()
@@ -104,13 +123,15 @@ namespace Game
                 _lane.RemoveItem(item);
                 item.DisableCollision();
                 _activeConsumingItems.Add(item);
-                DOTween.Sequence()
-                       .Append(item.transform.DOMove(transform.position, _consumeDuration).SetEase(_consumeAnimEasing))
-                       .Join(item.ChangeSize(0, _consumeDuration, _consumeAnimEasing))
-                       .AppendCallback(() =>
-                       {
-                           OnItemConsumedCallback(item);
-                       });
+                var sequence = DOTween.Sequence()
+                                      .Append(item.transform.DOMove(transform.position, _consumeDuration).SetEase(_consumeAnimEasing))
+                                      .Join(item.ChangeSize(0, _consumeDuration, _consumeAnimEasing))
+                                      .AppendCallback(() =>
+                                      {
+                                          OnItemConsumedCallback(item);
+                                      });
+
+                _activeTweens.Add(sequence);
             }
         }
 

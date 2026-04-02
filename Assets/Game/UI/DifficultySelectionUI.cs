@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DG.Tweening;
+using Game.Utils;
 using TriInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -65,7 +66,7 @@ namespace Game
         [Button]
         private void LaunchAppearanceAnimation()
         {
-            SetPivot(_rectTransform, new Vector2(0.5f, 0f));
+            UiUtils.SetPivot(_rectTransform, new Vector2(0.5f, 0f));
             DOTween.Kill(_rectTransform);
             _rectTransform.localScale = Vector3.one;
             float screenHeight = Screen.height;
@@ -91,23 +92,11 @@ namespace Game
         [Button]
         private Sequence LaunchDisappearSequence()
         {
-            SetPivot(_rectTransform, new Vector2(0.5f, 0.5f));
+            UiUtils.SetPivot(_rectTransform, new Vector2(0.5f, 0.5f));
 
             return DOTween.Sequence()
                           .Append(_rectTransform.DOScale(_choiceMadeMaxScale, _choiceMadeDuration).SetEase(_choiceMadeEase))
                           .Append(_rectTransform.DOScale(Vector2.zero, _choiceMadeDecreaseDuration).SetEase(_choiceMadeDecreaseEase));
-        }
-
-        private void SetPivot(RectTransform rectTransform, Vector2 pivot)
-        {
-            Vector2 size = rectTransform.rect.size;
-            Vector2 deltaPivot = rectTransform.pivot - pivot;
-            Vector3 deltaPosition = new Vector3(deltaPivot.x * size.x, deltaPivot.y * size.y) * rectTransform.localScale.x;
-
-            // Сдвигаем pivot
-            rectTransform.pivot = pivot;
-            // Компенсируем позицию, чтобы объект остался на месте
-            rectTransform.localPosition -= deltaPosition;
         }
 
         private void LoadNextScene()
