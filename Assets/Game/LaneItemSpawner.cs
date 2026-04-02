@@ -27,9 +27,9 @@ namespace Game
         private Transform _itemsSpawnPos;
         [SerializeField]
         private float _pipeItemMoveDuration = 0.5f;
-        [SerializeField] 
+        [SerializeField]
         private float _itemInitialScale = 0.1f;
-        [SerializeField] 
+        [SerializeField]
         private float _changeScaleMoveProgressRatio = 0.85f;
         [SerializeField]
         private Ease _scaleToNormalSizeEase = Ease.InQuint;
@@ -37,7 +37,7 @@ namespace Game
         private float _enlargeAnimScale = 1.4f;
         [SerializeField]
         private float _enlargeAnimTime = 0.4f;
-        
+
         private Vector3 InitialPos => _initialPoint.position;
         private Vector3 SpawnPos => _itemsSpawnPos.position;
         private Quaternion SpawnRot => _itemsSpawnPos.rotation;
@@ -88,9 +88,9 @@ namespace Game
                     newItem.transform.localScale = new Vector3(_itemInitialScale, _itemInitialScale, _itemInitialScale);
                     newItem.SetColor(randomColor);
                     newItem.gameObject.SetActive(true);
-                    
+
                     await MoveItemDownPipeAsync(newItem);
-                    
+
                     ItemSystem.Instance.InitItem(newItem, _lane);
                     _timer = SpawnInterval + Random.Range(-RandomSpawnOffset, RandomSpawnOffset);
                 }
@@ -103,12 +103,7 @@ namespace Game
 
         private bool Collides(Item newItem, Vector3 rememberedSize)
         {
-            int collisionsCount = Physics.OverlapBoxNonAlloc(
-                SpawnPos,
-                rememberedSize,
-                _collisions,
-                newItem.transform.rotation,
-                _itemsMask);
+            int collisionsCount = Physics.OverlapBoxNonAlloc(SpawnPos, rememberedSize, _collisions, newItem.transform.rotation, _itemsMask);
 
             for (int i = 0; i < collisionsCount; i++)
             {
@@ -141,12 +136,11 @@ namespace Game
             DOTween.Sequence()
                    .Append(item.transform.DOMove(intermediatePos, _pipeItemMoveDuration * _changeScaleMoveProgressRatio))
                    .Append(item.transform.DOMove(SpawnPos, _pipeItemMoveDuration * (1 - _changeScaleMoveProgressRatio)))
-                   .Join(
-                       item.transform.DOScale(Vector3.one, _pipeItemMoveDuration * (1 - _changeScaleMoveProgressRatio))
-                           .SetEase(_scaleToNormalSizeEase))
-                   .Append(item.transform.DOPunchScale(_enlargeAnimScale * Vector3.one, _enlargeAnimTime, vibrato: 1, elasticity: 1));
-                   
-            
+                   .Join(item.transform.DOScale(Vector3.one, _pipeItemMoveDuration * (1 - _changeScaleMoveProgressRatio))
+                             .SetEase(_scaleToNormalSizeEase))
+                   .AppendCallback(() => AudioManager.Instance.PlayItemSpawnSound(item.transform.position))
+                   .Append(item.transform.DOPunchScale(_enlargeAnimScale * Vector3.one, _enlargeAnimTime, 1, 1));
+
             return Awaitable.WaitForSecondsAsync(_pipeItemMoveDuration);
         }
 

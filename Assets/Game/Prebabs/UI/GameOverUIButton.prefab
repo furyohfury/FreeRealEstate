@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 9193326290506753245}
   - component: {fileID: 7511806543261514366}
   - component: {fileID: 8549906603949887271}
+  - component: {fileID: 72246081677310314}
   m_Layer: 5
   m_Name: GameOverUIButton
   m_TagString: Untagged
@@ -212,6 +213,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.AnimatedButton
   _maxScale: 1.15
   _animDuration: 1
+--- !u!114 &72246081677310314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3379175615117253171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d4afac610914b148c176c4dc348ccb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.ButtonClick
 --- !u!1 &5329983142239216164
 GameObject:
   m_ObjectHideFlags: 0

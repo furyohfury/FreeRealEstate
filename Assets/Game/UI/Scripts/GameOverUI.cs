@@ -27,10 +27,12 @@ namespace Game
         private float _choiceMadeDecreaseDuration = 0.3f;
         [SerializeField]
         private Ease _choiceMadeDecreaseEase = Ease.Linear;
+        private Vector3 _initialScale;
 
         private void Awake()
         {
             _rectTransform = GetComponent<RectTransform>();
+            _initialScale = _rectTransform.localScale;
         }
 
         private void OnEnable()
@@ -42,6 +44,7 @@ namespace Game
 
         public void Show()
         {
+            _rectTransform.localScale = _initialScale;
             gameObject.SetActive(true);
         }
 

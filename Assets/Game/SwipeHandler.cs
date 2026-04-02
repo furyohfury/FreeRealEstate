@@ -98,6 +98,7 @@ namespace Game
         {
             initialLane.LinkedItems.Remove(selectedItem);
             selectedItem.IsPlayerControlled = true;
+            AudioManager.Instance.PlaySwipeItemSound(selectedItem.transform.position);
 
             DOTween.Sequence()
                    .Append(selectedItem.transform.DOMoveX(newLane.transform.position.x, _moveDuration))

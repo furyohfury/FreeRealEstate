@@ -704,7 +704,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.SessionLauncher
   _lanesSessionSpawner: {fileID: 214326103}
-  _launchWithCountdown: 1
+  _launchWithCountdown: 0
   launchCountdownHandler: {fileID: 1879829244}
 --- !u!1 &60906552
 GameObject:
@@ -11939,7 +11939,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.PlayerDeadObserver
   _gameOverUI: {fileID: 1217733130}
-  _isActive: 1
+  _isActive: 0
 --- !u!1001 &2023171247
 PrefabInstance:
   m_ObjectHideFlags: 0

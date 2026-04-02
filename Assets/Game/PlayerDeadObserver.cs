@@ -23,6 +23,7 @@ namespace Game
                 return;
 
             DOTween.KillAll();
+            AudioManager.Instance.PlayGameOverSound();
             GameCycleStateSwitcher.Instance.PauseGame();
             LeaderboardManager.Instance.SendResult(GameLoop.Instance.CurrentTime);
             LeaderboardManager.Instance.ShowLeaderboard();

@@ -28,7 +28,7 @@ namespace Game
             ParticleSystem vfx = SpawnVFX(_destroyItemVFX, position);
             vfx.transform.localScale = Vector3.one * _destroyItemVFXScale;
             SetDestroyOnEnd(vfx);
-            // TODO sfx
+            AudioManager.Instance.PlayDestroyItemSFX(position);
         }
 
         public void SpawnCollisionVFX(Vector3 position)
@@ -36,18 +36,18 @@ namespace Game
             ParticleSystem vfx = SpawnVFX(_collisionVFXPrefab, position);
             vfx.transform.localScale = Vector3.one * _collisionVFXScale;
             SetDestroyOnEnd(vfx);
-            // TODO sfx
+            AudioManager.Instance.PlayCollisionSFX(position);
         }
 
         public void SpawnRightColorItemConsumedVFX(Vector3 position)
         {
-            // TODO sfx
+            AudioManager.Instance.PlayRightColorItemConsumedSFX(position);
         }
 
         public void SpawnWrongColorItemConsumedVFX(Vector3 position)
         {
             CameraProvider.Instance.CameraFacade.ShakeCamera();
-            // TODO sfx
+            AudioManager.Instance.PlayWrongColorItemConsumedSFX(position);
         }
 
         public GameObject SpawnDragFallingParticlesVFX(Transform parent)
