@@ -54,7 +54,7 @@ namespace Game
         {
             ParticleSystem vfx = Instantiate(_dragFallingParticlesPrefab, parent);
             vfx.transform.localScale = Vector3.one * _dragFallingParticlesScale;
-            // TODO add audiosource too
+            AudioManager.Instance.AddShimmerSource(vfx.gameObject);
 
             return vfx.gameObject;
         }
