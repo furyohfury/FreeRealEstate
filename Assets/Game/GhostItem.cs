@@ -31,7 +31,12 @@ namespace Game
             {
                 MeshRenderer renderer = _renderers[i];
                 Material material = renderer.material;
-                DOTween.To(() => material.GetFloat(_dissolveAmount), val => material.SetFloat(_dissolveAmount, val), 1, dissolveAnimDuration);
+                DOTween.To(
+                           () => material.GetFloat(_dissolveAmount),
+                           val => material.SetFloat(_dissolveAmount, val),
+                           1,
+                           dissolveAnimDuration)
+                       .SetLink(gameObject);
             }
 
             await Awaitable.WaitForSecondsAsync(dissolveAnimDuration);

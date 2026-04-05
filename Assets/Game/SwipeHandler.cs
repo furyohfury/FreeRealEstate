@@ -109,7 +109,8 @@ namespace Game
                        selectedItem.IsPlayerControlled = false;
                        newLane.LinkedItems.Add(selectedItem);
                        _itemLaneRegistry.SwapLane(selectedItem, newLane);
-                   });
+                   })
+                   .SetLink(selectedItem.gameObject);
         }
 
         private void OnDisable()

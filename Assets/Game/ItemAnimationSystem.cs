@@ -13,7 +13,8 @@ namespace Game
         public Tween ScaleOnKnockAnim(Transform objTransform)
         {
             return objTransform.DOScale(0, _scaleAnimDuration)
-                               .SetEase(_scaleAnimEase);
+                               .SetEase(_scaleAnimEase)
+                               .SetLink(objTransform.gameObject);
         }
     }
 }

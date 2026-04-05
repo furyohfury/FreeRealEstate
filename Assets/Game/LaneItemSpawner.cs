@@ -139,7 +139,8 @@ namespace Game
                    .Join(item.transform.DOScale(Vector3.one, _pipeItemMoveDuration * (1 - _changeScaleMoveProgressRatio))
                              .SetEase(_scaleToNormalSizeEase))
                    .AppendCallback(() => AudioManager.Instance.PlayItemSpawnSound(item.transform.position))
-                   .Append(item.transform.DOPunchScale(_enlargeAnimScale * Vector3.one, _enlargeAnimTime, 1, 1));
+                   .Append(item.transform.DOPunchScale(_enlargeAnimScale * Vector3.one, _enlargeAnimTime, 1, 1))
+                   .SetLink(item.gameObject);
 
             return Awaitable.WaitForSecondsAsync(_pipeItemMoveDuration);
         }
