@@ -235,7 +235,7 @@ MonoBehaviour:
         extraData: 
   Metrica:
     enable: 1
-    metricaCounterID: 108199201
+    metricaCounterID: 108404770
     log: 1
     useYandexMetrica: 1
   RewardedAdv:
@@ -254,7 +254,7 @@ MonoBehaviour:
     loadSceneIfSDKLate: 0
     loadSceneIndex: 0
     initDelaySimulation: 0
-    buildNumber: 1
+    buildNumber: 11
   Simulation:
     device: 0
     language: ru

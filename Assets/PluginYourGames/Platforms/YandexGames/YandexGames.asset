@@ -15,7 +15,7 @@ MonoBehaviour:
   nameFull: YandexGamesPlatform
   projectSettings:
     useYandexMetrica: 1
-    metricaCounterID: 108199201
+    metricaCounterID: 108404770
     skipInterAdvAfterReward: 0
     autoPauseGame: 1
     selectWebGLTemplate: 1
