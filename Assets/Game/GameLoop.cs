@@ -18,9 +18,14 @@ namespace Game
             IsActive = true;
         }
 
-        public void Stop()
+        public void Pause()
         {
             IsActive = false;
+        }
+
+        public void Resume()
+        {
+            IsActive = true;
         }
         
         private void Update()

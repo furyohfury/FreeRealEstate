@@ -21,21 +21,24 @@ namespace Game
         [SerializeField]
         private ItemSystem _itemSystem;
         [field: SerializeField]
-        public float DragCloseLaneDistance
-        {
-            get;
-            set;
-        } = 3f;
+        public float DragCloseLaneDistance { get; set; } = 3f;
         [SerializeField]
         private Color _ghostItemColor;
         [SerializeField]
         private Camera _cam;
+        [Header("GhostItem")]
+        [SerializeField]
+        private Material _dissolveMaterialPrefab;
+        [SerializeField]
+        private float _dissolveAnimDuration;
+
         private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
         private Lane _cachedLane;
         private Lane _nearLane;
         private Item _activeItem;
         private Vector3 _dragStartPos;
         private GhostItem _ghostItem;
+        private GameObject _activeItemVfx;
 
         private void OnEnable()
         {
@@ -52,14 +55,17 @@ namespace Game
                 return;
             }
 
+            if (_activeItemVfx != null)
+            {
+                Destroy(_activeItemVfx);
+            }
+
             _activeItem.IsPlayerControlled = false;
             Transform activeItemTransform = _activeItem.transform;
-            
+
             if (_ghostItem == null)
             {
-                DOTween.Sequence()
-                       .Append(ItemAnimationSystem.Instance.ScaleOnKnockAnim(activeItemTransform))
-                       .AppendCallback(() => _itemSystem.DestroyItem(_activeItem));
+                DOTween.Sequence().Append(ItemAnimationSystem.Instance.ScaleOnKnockAnim(activeItemTransform)).AppendCallback(DestroyActiveItem);
                 Debug.Log("no lane and no ghost item");
             }
             else if (_nearLane != null)
@@ -82,6 +88,18 @@ namespace Game
             }
         }
 
+        private void DestroyGhostItemWithDissolve(GhostItem ghostItem)
+        {
+            ghostItem.DestroyWithDissolve(_dissolveMaterialPrefab, _dissolveAnimDuration);
+        }
+
+        private void DestroyActiveItem()
+        {
+            VFXManager.Instance.SpawnDestroyItemVFX(_activeItem.transform.position);
+            ItemSystem.Instance.DestroyItem(_activeItem);
+            _activeItem = null;
+        }
+
         private void OnDragStarted()
         {
             Ray ray = _cam.ScreenPointToRay(Mouse.current.position.value);
@@ -91,12 +109,13 @@ namespace Game
                 && hit.collider.TryGetComponent(out Item item)
                 && CanBeDragged(item))
             {
-                // TODO VFX
                 _activeItem = item;
                 _cachedLane = _itemLaneRegistry.GetLane(item);
                 _itemLaneRegistry.UnlinkItem(item);
                 _activeItem.IsPlayerControlled = true;
                 _ghostItem = SpawnGhostItem(item);
+                _activeItemVfx = VFXManager.Instance.SpawnDragFallingParticlesVFX(item.transform);
+
                 _cancellationTokenSource = new CancellationTokenSource();
                 DragItemAsync(item, _cancellationTokenSource.Token);
                 MoveGhostItemAsync(_ghostItem, _cancellationTokenSource.Token);
@@ -127,7 +146,7 @@ namespace Game
                 {
                     break;
                 }
-                
+
                 ghostItem.transform.position += Vector3.back * (_cachedLane.Speed * Time.deltaTime);
                 Lane[] lanes = _laneSystem.Lanes;
 
@@ -136,9 +155,16 @@ namespace Game
                     if (lanes[i].ScoreZone.IsInConsumeRadius(ghostItem.transform.position))
                     {
                         Debug.Log($"<color=red>destroy item</color>");
-                        ghostItem.Destroy();
+                        DestroyGhostItemWithDissolve(ghostItem);
                         _ghostItem = null;
-                        // TODO VFX
+
+                        if (_nearLane != null)
+                        {
+                            _nearLane.DisableHighlight();
+                        }
+
+                        DestroyActiveItem();
+                        CancelDrag();
                         break;
                     }
                 }

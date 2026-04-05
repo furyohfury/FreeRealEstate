@@ -17,13 +17,17 @@ namespace Game.Application.Leaderboard
         public override void ShowLeaderboard()
         {
             Debug.Log("Show mock Leaderboard");
-            _leaderboard.SetActive(true);
+
+            if (_leaderboard != null)
+                _leaderboard.SetActive(true);
         }
 
         public override void HideLeaderboard()
         {
             Debug.Log("hide mock Leaderboard");
-            _leaderboard.SetActive(false);
+
+            if (_leaderboard != null)
+                _leaderboard.SetActive(false);
         }
     }
 }

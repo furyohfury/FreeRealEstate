@@ -13,6 +13,7 @@ namespace Game
         public LanesSpeedFormula LanesSpeedFormula;
         public ItemSpawnIntervalFormula ItemSpawnIntervalFormula;
         public GameColor[] GameColors;
+        public float ContinueInitialHealthRatio = 0.5f;
 
         private void OnValidate()
         {

@@ -42,10 +42,12 @@ namespace Game
         {
             RaycastHit hit;
             bool raycastHit;
-#if UNITY_EDITOR || UNITY_STANDALONE_WIN || UNITY_WEBGL // TODO WEB3
+#if UNITY_EDITOR || UNITY_STANDALONE_WIN || UNITY_WEBGL
             var ray = _camera.ScreenPointToRay(Mouse.current.position.value);
             raycastHit = Physics.Raycast(ray, out hit, 10000f, _itemsLayerMask);
-  #endif
+#elif UNITY_ANDROID
+// TODO for android
+#endif
             if (raycastHit)
             {
                 _isSwiping = true;
@@ -98,6 +100,7 @@ namespace Game
         {
             initialLane.LinkedItems.Remove(selectedItem);
             selectedItem.IsPlayerControlled = true;
+            AudioManager.Instance.PlaySwipeItemSound(selectedItem.transform.position);
 
             DOTween.Sequence()
                    .Append(selectedItem.transform.DOMoveX(newLane.transform.position.x, _moveDuration))

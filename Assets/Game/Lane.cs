@@ -5,15 +5,22 @@ using UnityEngine;
 
 namespace Game
 {
+    [SelectionBase]
     public sealed class Lane : MonoBehaviour
     {
-        [field: SerializeField]
-        public float Speed { get; set; }
+        public readonly HashSet<Item> LinkedItems = new HashSet<Item>();
+        public float Speed
+        {
+            get => _speed;
+            set
+            {
+                _speed = value;
+                _meshRenderer.material.SetFloat(_speedKey, value / 4.8f);
+            }
+        }
         [field: SerializeField]
         public GameColor GameColor { get; private set; }
         public bool IsMoving { get; private set; } = true;
-        public Vector3 SpawnPos => _itemsSpawnPos.position;
-        public Quaternion SpawnRot => _itemsSpawnPos.rotation;
         /// <summary>
         /// Номер линии. Начинается с нуля
         /// </summary>
@@ -23,14 +30,17 @@ namespace Game
         public ScoreZone ScoreZone { get; private set; }
 
         [SerializeField]
-        private Transform _itemsSpawnPos;
-        [SerializeField]
-        [RequiredGet]
         private MeshRenderer _meshRenderer;
         [SerializeField]
         [RequiredGet(InChildren = true)]
         private LaneItemSpawner _laneItemSpawner;
-        public readonly HashSet<Item> LinkedItems = new HashSet<Item>();
+        [SerializeField]
+        private float _speed;
+        [SerializeField]
+        private Color _highlightColor = Color.aquamarine;
+
+        private static readonly int _stripColorKey = Shader.PropertyToID("_StripColor");
+        private static readonly int _speedKey = Shader.PropertyToID("_Speed");
 
         public void AddItem(Item item)
         {
@@ -44,13 +54,11 @@ namespace Game
 
         public void Highlight()
         {
-            // TODO VFX
-            SetVisualColor(Color.aquamarine);
+            SetVisualColor(_highlightColor);
         }
 
         public void DisableHighlight()
         {
-            // TODO VFX
             SetVisualColor(GameColor);
         }
 
@@ -85,9 +93,10 @@ namespace Game
             SetVisualColor(color.ToColor());
         }
 
+        [Button]
         private void SetVisualColor(Color color)
         {
-            _meshRenderer.material.color = color;
+            _meshRenderer.material.SetColor(_stripColorKey, color);
         }
     }
 }

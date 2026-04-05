@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Game
@@ -21,8 +22,12 @@ namespace Game
         public void DestroyItem(Item item)
         {
             if (item == null)
+            {
+                Debug.LogError($"Item is null when destroying");
+                
                 return;
-            
+            }
+                
             _activeItems.Remove(item);
             Lane linkedLane = _itemLaneRegistry.GetLane(item);
 
@@ -38,13 +43,36 @@ namespace Game
 
         public Item SpawnItemAtLane(Vector3 position, Quaternion rotation, Lane linkedLane)
         {
-            Item item = _itemFactory.SpawnRandom(position, rotation);
+            Item item = SpawnItem(position, rotation);
             _activeItems.Add(item);
             _itemLaneRegistry.LinkItem(item, linkedLane);
             linkedLane.AddItem(item);
             _itemCollisionHandler.SubscribeToCollisionEvents(item);
 
             return item;
+        }
+
+        public Item SpawnItem(Vector3 position, Quaternion rotation)
+        {
+            Item item = _itemFactory.SpawnRandom(position, rotation);
+            
+            return item;
+        }
+
+        public void InitItem(Item item, Lane linkedLane)
+        {
+            _activeItems.Add(item);
+            _itemLaneRegistry.LinkItem(item, linkedLane);
+            linkedLane.AddItem(item);
+            _itemCollisionHandler.SubscribeToCollisionEvents(item);
+        }
+
+        public void ClearAll()
+        {
+            foreach (Item item in _activeItems.ToList())
+            {
+                DestroyItem(item);
+            }
         }
 
         private void OnDisable()

@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 namespace Game
 {
-    public sealed class InputSystem : MonoBehaviour, InputSystem_Actions.IPlayerActions
+    public sealed class InputSystem : Singleton<InputSystem>, InputSystem_Actions.IPlayerActions
     {
         public event Action OnSwipeStarted;
         public event Action OnSwipeCancelled;
@@ -13,13 +13,19 @@ namespace Game
         public float PointerPositionX { get; private set; }
         private InputSystem_Actions _actions;
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             _actions = new InputSystem_Actions();
             _actions.Player.SetCallbacks(this);
         }
 
         private void OnEnable()
+        {
+            Enable();
+        }
+
+        public void Enable()
         {
             _actions.Player.Enable();
         }
@@ -62,6 +68,11 @@ namespace Game
         }
 
         private void OnDisable()
+        {
+            Disable();
+        }
+
+        public void Disable()
         {
             _actions.Player.Disable();
         }

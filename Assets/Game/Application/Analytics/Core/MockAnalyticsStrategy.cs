@@ -6,12 +6,12 @@ namespace Game.Application.Ads
     {
         public void SendEvent(string eventName)
         {
-            Debug.Log($"<color=green>Sent analytics event {eventName}</color>");
+            Debug.Log($"<color=green>Sent analytics event {eventName} by MockAnalyticsStrategy</color>");
         }
 
         public void SendEvent(string eventName, float value)
         {
-            Debug.Log($"<color=green>Sent analytics event {eventName} with value {value.ToString()}</color>");
+            Debug.Log($"<color=green>Sent analytics event {eventName} with value {value.ToString()} by MockAnalyticsStrategy</color>");
         }
     }
 }
