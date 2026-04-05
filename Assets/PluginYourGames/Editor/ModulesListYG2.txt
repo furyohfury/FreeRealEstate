@@ -1,4 +1,5 @@
 Authorization v1.022
+Flags v1.001
 Leaderboards v1.01
 Metrica v1.02
 PlayerStats v1.01
