@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using Game.Application;
 using Game.Application.Leaderboard;
 using UnityEngine;
 
@@ -14,6 +15,7 @@ namespace Game
         private void Start()
         {
             Health.Instance.OnHealthChanged += InstanceOnOnHealthChanged;
+            _isActive = AppConfigurationProvider.Instance.Configuration.GetTrackDeath();
         }
 
         private void InstanceOnOnHealthChanged(float hp)

@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.Application;
 using UnityEngine;
 
 namespace Game
@@ -21,5 +22,11 @@ namespace Game
 
         [SerializeField]
         private float _currentHealth;
+
+        private void Start()
+        {
+            MaxHealth = AppConfigurationProvider.Instance.Configuration.GetMaxHealth();
+            CurrentHealth = MaxHealth;
+        }
     }
 }

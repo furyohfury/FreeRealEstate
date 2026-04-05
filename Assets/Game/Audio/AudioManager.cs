@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Game.Application;
 using Game.Extensions;
 using UnityEngine;
 
@@ -47,6 +48,11 @@ namespace Game
         {
             base.Awake();
             DontDestroyOnLoad(gameObject);
+        }
+
+        private void Start()
+        {
+            _bgMusicVolumeMult = AppConfigurationProvider.Instance.Configuration.GetMusicVolumeMult();
         }
 
         public void PlayItemSpawnSound(Vector3 position)
