@@ -524,6 +524,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Application.AppConfigurationProvider
   _defaultAppConfiguration: {fileID: 11400000, guid: 505e3ab933b5b3740a0942c96d1a6361, type: 2}
+  _ygAppConfiguration: {fileID: 11400000, guid: 4905699a7eae3df408d11c6d51332684, type: 2}
 --- !u!4 &368940233
 Transform:
   m_ObjectHideFlags: 0
@@ -593,7 +594,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22400762, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000030517578
+      value: -0.000015258789
       objectReference: {fileID: 0}
     - target: {fileID: 22426080, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
       propertyPath: m_AnchorMax.x
