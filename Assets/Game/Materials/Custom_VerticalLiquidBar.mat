@@ -41,12 +41,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BoilIntensity: 0.35999998
+    - _BoilIntensity: 0.040000003
     - _BoilScale: 0.27
-    - _BoilSpeed: 0.45
+    - _BoilSpeed: 0.05
     - _ColorMask: 15
     - _EdgeSmoothness: 0.01
-    - _FillAmount: 0.9
+    - _FillAmount: 0.1
     - _Stencil: 0
     - _StencilComp: 2
     - _StencilID: 0

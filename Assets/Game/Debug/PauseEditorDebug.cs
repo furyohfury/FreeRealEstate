@@ -8,10 +8,13 @@ namespace Game
     {
         private void Update()
         {
+#if UNITY_EDITOR
+
             if (Keyboard.current.pKey.wasPressedThisFrame)
             {
                 EditorApplication.isPaused = true;
             }
+#endif
         }
     }
 }

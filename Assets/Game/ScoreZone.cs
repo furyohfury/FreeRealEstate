@@ -129,7 +129,8 @@ namespace Game
                                       .AppendCallback(() =>
                                       {
                                           OnItemConsumedCallback(item);
-                                      });
+                                      })
+                                      .SetLink(item.gameObject);
 
                 _activeTweens.Add(sequence);
             }

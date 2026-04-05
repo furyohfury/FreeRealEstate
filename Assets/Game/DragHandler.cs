@@ -65,7 +65,10 @@ namespace Game
 
             if (_ghostItem == null)
             {
-                DOTween.Sequence().Append(ItemAnimationSystem.Instance.ScaleOnKnockAnim(activeItemTransform)).AppendCallback(DestroyActiveItem);
+                DOTween.Sequence()
+                       .Append(ItemAnimationSystem.Instance.ScaleOnKnockAnim(activeItemTransform))
+                       .AppendCallback(DestroyActiveItem)
+                       .SetLink(_activeItem.gameObject);
                 Debug.Log("no lane and no ghost item");
             }
             else if (_nearLane != null)

@@ -44,7 +44,8 @@ namespace Game
                    {
                        VFXManager.Instance.SpawnDestroyItemVFX(knockedItem.transform.position);
                        OnDestroyItem?.Invoke(knockedItem);
-                   });
+                   })
+                   .SetLink(knockedItem.gameObject);
         }
 
         public void UnsubscribeToCollisionEvents(Item item)

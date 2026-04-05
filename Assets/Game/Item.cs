@@ -35,7 +35,9 @@ namespace Game
 
         public Tween ChangeSize(float endVal, float duration, Ease ease = Ease.Linear)
         {
-            return transform.DOScale(endVal, duration).SetEase(ease);
+            return transform.DOScale(endVal, duration)
+                            .SetEase(ease)
+                            .SetLink(gameObject);
         }
 
         [Button]
@@ -90,11 +92,11 @@ namespace Game
                 && other.TryGetComponent(out Item item))
             {
                 Vector3 contactPoint = _collider.ClosestPoint(other.transform.position);
-                var collisionEventData = new CollisionEventData()
+                var collisionEventData = new CollisionEventData
                                          {
-                                             ControlledItem = item,
-                                             HitItem = this,
-                                             HitPoint = contactPoint
+                                             ControlledItem = item
+                                             , HitItem = this
+                                             , HitPoint = contactPoint
                                          };
                 OnKnocked?.Invoke(collisionEventData);
             }
