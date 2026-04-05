@@ -13,6 +13,7 @@ namespace Game.Application
         protected override void Awake()
         {
             base.Awake();
+            DontDestroyOnLoad(gameObject);
 #if UNITY_EDITOR
             _appConfiguration = _defaultAppConfiguration;
 // #elif UNITY_WEBGL
