@@ -19,7 +19,6 @@ namespace Game
 
         private void ClickSound()
         {
-            // TODO sfx
             AudioManager.Instance.PlayClickButtonSound();
         }
 
