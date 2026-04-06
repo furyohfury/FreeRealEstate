@@ -14,16 +14,9 @@ namespace Game.Application.Leaderboard
             YG2.SetLBTimeConvert(LEADERBOARD_NAME, result);
         }
 
-        public override void ShowLeaderboard()
+        public override LeaderboardEntry[] GetEntries(string leaderboardId)
         {
-            Debug.Log("Show mock Leaderboard");
-            _leaderboard.gameObject.SetActive(true);
-        }
-
-        public override void HideLeaderboard()
-        {
-            Debug.Log("hide mock Leaderboard");
-            _leaderboard.gameObject.SetActive(false);
+            return null;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using TriInspector;
 using UnityEngine;
 
 namespace Game
@@ -9,6 +10,8 @@ namespace Game
         private Mode _mode;
         [SerializeField]
         private LeaderboardPresenterMock _leaderboardPresenterMock;
+        [SerializeField]
+        private LeaderboardPresenterYG _leaderboardPresenterYG;
         private LeaderboardPresenter _leaderboardPresenter;
 
         private void Start()
@@ -18,14 +21,19 @@ namespace Game
                 case Mode.Mock:
                     _leaderboardPresenter = _leaderboardPresenterMock;
                     break;
+                case Mode.YG:
+                    _leaderboardPresenter = _leaderboardPresenterYG;
+                    break;
             }
         }
 
+        [Button]
         public void ShowLeaderboard()
         {
             _leaderboardPresenter.ShowLeaderboard();
         }
 
+        [Button]
         public void HideLeaderboard()
         {
             _leaderboardPresenter.HideLeaderboard();
@@ -34,7 +42,8 @@ namespace Game
         [Flags]
         private enum Mode
         {
-            Mock
+            Mock,
+            YG
         }
     }
 }

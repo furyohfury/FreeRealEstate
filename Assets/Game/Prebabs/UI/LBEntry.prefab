@@ -450,6 +450,7 @@ GameObject:
   - component: {fileID: 1467219832961051658}
   - component: {fileID: 53210070876518995}
   - component: {fileID: 7019098678725439426}
+  - component: {fileID: 5014606818010766171}
   m_Layer: 5
   m_Name: ProfilePic (1)
   m_TagString: Untagged
@@ -514,6 +515,24 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5014606818010766171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7479802558702253536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e48d8d781d3e59d409adef5e128d2b04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::YG.ImageLoadYG
+  startLoad: 0
+  urlImage: 
+  rawImage: {fileID: 0}
+  spriteImage: {fileID: 7019098678725439426}
+  loadAnimObj: {fileID: 0}
+  log: 0
 --- !u!1 &8402627397072975260
 GameObject:
   m_ObjectHideFlags: 0
@@ -523,6 +542,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4277841073682088352}
+  - component: {fileID: 9080280001554706422}
   m_Layer: 5
   m_Name: LBEntry
   m_TagString: Untagged
@@ -554,6 +574,29 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -9.2843}
   m_SizeDelta: {x: 472.496, y: 86.7418}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &9080280001554706422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8402627397072975260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a183e821a3e219a4385ee48ec1bfabcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::YG.LBPlayerDataYG
+  imageLoad: {fileID: 5014606818010766171}
+  textLegasy:
+    rank: {fileID: 0}
+    name: {fileID: 0}
+    score: {fileID: 0}
+  textMP:
+    rank: {fileID: 5997104790251310816}
+    name: {fileID: 6703196876588683793}
+    score: {fileID: 1138654411899194685}
+  topPlayerActivityComponents: []
+  currentPlayerActivityComponents: []
 --- !u!1 &8470890218993352620
 GameObject:
   m_ObjectHideFlags: 0
@@ -653,7 +696,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
