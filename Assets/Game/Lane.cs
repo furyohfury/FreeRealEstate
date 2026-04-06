@@ -15,7 +15,7 @@ namespace Game
             set
             {
                 _speed = value;
-                _meshRenderer.material.SetFloat(_speedKey, value / 4.8f);
+                _meshRenderer.material.SetFloat(_speedKey, value / _visualSpeedDivider);
             }
         }
         [field: SerializeField]
@@ -38,6 +38,8 @@ namespace Game
         private float _speed;
         [SerializeField]
         private Color _highlightColor = Color.aquamarine;
+        [SerializeField]
+        private float _visualSpeedDivider = 4.8f;
 
         private static readonly int _stripColorKey = Shader.PropertyToID("_StripColor");
         private static readonly int _speedKey = Shader.PropertyToID("_Speed");
