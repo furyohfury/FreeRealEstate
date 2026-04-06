@@ -20,9 +20,11 @@ namespace Game
             {
                 case Mode.Mock:
                     _leaderboardPresenter = _leaderboardPresenterMock;
+                    _leaderboardPresenterYG.enabled = false;
                     break;
                 case Mode.YG:
                     _leaderboardPresenter = _leaderboardPresenterYG;
+                    _leaderboardPresenterMock.enabled = false;
                     break;
             }
         }
