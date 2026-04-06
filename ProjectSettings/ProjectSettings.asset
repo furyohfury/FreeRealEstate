@@ -783,25 +783,25 @@ PlayerSettings:
   webWasm2023: 0
   webEnableSubmoduleStrippingCompatibility: 0
   scriptingDefineSymbols:
-    Android: DOTWEEN;PLUGIN_YG_2;TMP_YG2;NJSON_YG2;RU_YG2;Authorization_yg;PlayerStats_yg;Metrica_yg;RewardedAdv_yg;StickyAdv_yg;Leaderboards_yg;UNITY_POST_PROCESSING_STACK_V2;Flags_yg
+    Android: DOTWEEN;PLUGIN_YG_2;TMP_YG2;NJSON_YG2;RU_YG2;Authorization_yg;PlayerStats_yg;Metrica_yg;RewardedAdv_yg;StickyAdv_yg;Leaderboards_yg;UNITY_POST_PROCESSING_STACK_V2;Flags_yg;YandexGamesPlatform_yg
     EmbeddedLinux: DOTWEEN;UNITY_POST_PROCESSING_STACK_V2
     GameCoreScarlett: DOTWEEN;UNITY_POST_PROCESSING_STACK_V2
     GameCoreXboxOne: DOTWEEN;UNITY_POST_PROCESSING_STACK_V2
     Kepler: UNITY_POST_PROCESSING_STACK_V2
-    LinuxHeadlessSimulation: DOTWEEN;PLUGIN_YG_2;TMP_YG2;NJSON_YG2;RU_YG2;Authorization_yg;PlayerStats_yg;Metrica_yg;RewardedAdv_yg;StickyAdv_yg;Leaderboards_yg;UNITY_POST_PROCESSING_STACK_V2;Flags_yg
-    Nintendo Switch: DOTWEEN;PLUGIN_YG_2;TMP_YG2;NJSON_YG2;RU_YG2;Authorization_yg;PlayerStats_yg;Metrica_yg;RewardedAdv_yg;StickyAdv_yg;Leaderboards_yg;UNITY_POST_PROCESSING_STACK_V2;Flags_yg
+    LinuxHeadlessSimulation: DOTWEEN;PLUGIN_YG_2;TMP_YG2;NJSON_YG2;RU_YG2;Authorization_yg;PlayerStats_yg;Metrica_yg;RewardedAdv_yg;StickyAdv_yg;Leaderboards_yg;UNITY_POST_PROCESSING_STACK_V2;Flags_yg;YandexGamesPlatform_yg
+    Nintendo Switch: DOTWEEN;PLUGIN_YG_2;TMP_YG2;NJSON_YG2;RU_YG2;Authorization_yg;PlayerStats_yg;Metrica_yg;RewardedAdv_yg;StickyAdv_yg;Leaderboards_yg;UNITY_POST_PROCESSING_STACK_V2;Flags_yg;YandexGamesPlatform_yg
     Nintendo Switch 2: UNITY_POST_PROCESSING_STACK_V2
-    PS4: DOTWEEN;PLUGIN_YG_2;TMP_YG2;NJSON_YG2;RU_YG2;Authorization_yg;PlayerStats_yg;Metrica_yg;RewardedAdv_yg;StickyAdv_yg;Leaderboards_yg;UNITY_POST_PROCESSING_STACK_V2;Flags_yg
-    PS5: DOTWEEN;PLUGIN_YG_2;TMP_YG2;NJSON_YG2;RU_YG2;Authorization_yg;PlayerStats_yg;Metrica_yg;RewardedAdv_yg;StickyAdv_yg;Leaderboards_yg;UNITY_POST_PROCESSING_STACK_V2;Flags_yg
+    PS4: DOTWEEN;PLUGIN_YG_2;TMP_YG2;NJSON_YG2;RU_YG2;Authorization_yg;PlayerStats_yg;Metrica_yg;RewardedAdv_yg;StickyAdv_yg;Leaderboards_yg;UNITY_POST_PROCESSING_STACK_V2;Flags_yg;YandexGamesPlatform_yg
+    PS5: DOTWEEN;PLUGIN_YG_2;TMP_YG2;NJSON_YG2;RU_YG2;Authorization_yg;PlayerStats_yg;Metrica_yg;RewardedAdv_yg;StickyAdv_yg;Leaderboards_yg;UNITY_POST_PROCESSING_STACK_V2;Flags_yg;YandexGamesPlatform_yg
     QNX: DOTWEEN;UNITY_POST_PROCESSING_STACK_V2
     ReservedCFE: DOTWEEN
-    Standalone: DOTWEEN;PLUGIN_YG_2;TMP_YG2;NJSON_YG2;RU_YG2;Authorization_yg;PlayerStats_yg;Metrica_yg;RewardedAdv_yg;StickyAdv_yg;Leaderboards_yg;UNITY_POST_PROCESSING_STACK_V2;SENTIS_ANALYTICS_ENABLED;APP_UI_EDITOR_ONLY;Flags_yg
+    Standalone: DOTWEEN;PLUGIN_YG_2;TMP_YG2;NJSON_YG2;RU_YG2;Authorization_yg;PlayerStats_yg;Metrica_yg;RewardedAdv_yg;StickyAdv_yg;Leaderboards_yg;UNITY_POST_PROCESSING_STACK_V2;SENTIS_ANALYTICS_ENABLED;APP_UI_EDITOR_ONLY;Flags_yg;YandexGamesPlatform_yg
     VisionOS: DOTWEEN;UNITY_POST_PROCESSING_STACK_V2
-    WebGL: DOTWEEN;PLUGIN_YG_2;TMP_YG2;NJSON_YG2;RU_YG2;Authorization_yg;PlayerStats_yg;Metrica_yg;RewardedAdv_yg;StickyAdv_yg;Leaderboards_yg;UNITY_POST_PROCESSING_STACK_V2;SENTIS_ANALYTICS_ENABLED;APP_UI_EDITOR_ONLY;Flags_yg
-    Windows Store Apps: DOTWEEN;PLUGIN_YG_2;TMP_YG2;NJSON_YG2;RU_YG2;Authorization_yg;PlayerStats_yg;Metrica_yg;RewardedAdv_yg;StickyAdv_yg;Leaderboards_yg;APP_UI_EDITOR_ONLY;SENTIS_ANALYTICS_ENABLED;Flags_yg
-    XboxOne: DOTWEEN;PLUGIN_YG_2;TMP_YG2;NJSON_YG2;RU_YG2;Authorization_yg;PlayerStats_yg;Metrica_yg;RewardedAdv_yg;StickyAdv_yg;Leaderboards_yg;UNITY_POST_PROCESSING_STACK_V2;Flags_yg
-    iPhone: DOTWEEN;PLUGIN_YG_2;TMP_YG2;NJSON_YG2;RU_YG2;Authorization_yg;PlayerStats_yg;Metrica_yg;RewardedAdv_yg;StickyAdv_yg;Leaderboards_yg;Flags_yg
-    tvOS: DOTWEEN;PLUGIN_YG_2;TMP_YG2;NJSON_YG2;RU_YG2;Authorization_yg;PlayerStats_yg;Metrica_yg;RewardedAdv_yg;StickyAdv_yg;Leaderboards_yg;UNITY_POST_PROCESSING_STACK_V2;Flags_yg
+    WebGL: DOTWEEN;PLUGIN_YG_2;TMP_YG2;NJSON_YG2;RU_YG2;Authorization_yg;PlayerStats_yg;Metrica_yg;RewardedAdv_yg;StickyAdv_yg;Leaderboards_yg;UNITY_POST_PROCESSING_STACK_V2;SENTIS_ANALYTICS_ENABLED;APP_UI_EDITOR_ONLY;Flags_yg;YandexGamesPlatform_yg
+    Windows Store Apps: DOTWEEN;PLUGIN_YG_2;TMP_YG2;NJSON_YG2;RU_YG2;Authorization_yg;PlayerStats_yg;Metrica_yg;RewardedAdv_yg;StickyAdv_yg;Leaderboards_yg;APP_UI_EDITOR_ONLY;SENTIS_ANALYTICS_ENABLED;Flags_yg;YandexGamesPlatform_yg
+    XboxOne: DOTWEEN;PLUGIN_YG_2;TMP_YG2;NJSON_YG2;RU_YG2;Authorization_yg;PlayerStats_yg;Metrica_yg;RewardedAdv_yg;StickyAdv_yg;Leaderboards_yg;UNITY_POST_PROCESSING_STACK_V2;Flags_yg;YandexGamesPlatform_yg
+    iPhone: DOTWEEN;PLUGIN_YG_2;TMP_YG2;NJSON_YG2;RU_YG2;Authorization_yg;PlayerStats_yg;Metrica_yg;RewardedAdv_yg;StickyAdv_yg;Leaderboards_yg;Flags_yg;YandexGamesPlatform_yg
+    tvOS: DOTWEEN;PLUGIN_YG_2;TMP_YG2;NJSON_YG2;RU_YG2;Authorization_yg;PlayerStats_yg;Metrica_yg;RewardedAdv_yg;StickyAdv_yg;Leaderboards_yg;UNITY_POST_PROCESSING_STACK_V2;Flags_yg;YandexGamesPlatform_yg
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
