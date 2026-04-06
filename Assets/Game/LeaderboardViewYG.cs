@@ -6,7 +6,7 @@ using YG.Utils.LB;
 
 namespace Game
 {
-    public sealed class LeaderboardPresenterYG : LeaderboardPresenter
+    public sealed class LeaderboardViewYG : LeaderboardView
     {
         [SerializeField]
         private LeaderboardYG _leaderboardYG;
@@ -20,7 +20,7 @@ namespace Game
             YG2.onGetLeaderboard += OnGetLeaderboard;
         }
 
-        public override void ShowLeaderboard()
+        public override void UpdateLeaderboard()
         {
             string sessionParamsId = GameParamsService.Instance.SessionParams.Id;
             sessionParamsId = SessionParamsToLeaderboardIdConverter.Convert(sessionParamsId);
@@ -28,11 +28,6 @@ namespace Game
             _leaderboardYG.nameLB = sessionParamsId;
             _leaderboardYG.UpdateLB();
             YG2.GetLeaderboard(sessionParamsId);
-        }
-
-        public override void HideLeaderboard()
-        {
-            _leaderboardYG.gameObject.SetActive(false);
         }
 
         private async void OnGetLeaderboard(LBData data)

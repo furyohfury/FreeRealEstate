@@ -10,12 +10,20 @@ namespace Game
 {
     public sealed class GameOverUI : MonoBehaviour
     {
+        [Header("References")]
+        [SerializeField]
+        private LeaderboardViewMock _mockLeaderboardPrefab;
+        [SerializeField]
+        private Transform _leaderboardContainer;
         [SerializeField]
         private Button _continueButton;
         [SerializeField]
         private Button _retryButton;
         [SerializeField]
         private Button _exitButton;
+        [Header("Parameters")]
+        [SerializeField]
+        private Mode _mode = Mode.Mock;
         [SerializeField]
         private Vector3 _choiceMadeMaxScale = new Vector3(0.2f, 0.2f, 0);
         [SerializeField]
@@ -26,6 +34,8 @@ namespace Game
         private float _choiceMadeDecreaseDuration = 0.3f;
         [SerializeField]
         private Ease _choiceMadeDecreaseEase = Ease.Linear;
+
+        private LeaderboardView _leaderboardView;
         private RectTransform _rectTransform;
         private Vector3 _initialScale;
 
@@ -45,16 +55,20 @@ namespace Game
         public void Show()
         {
             gameObject.SetActive(true);
+#if UNITY_EDITOR
+            switch (_mode)
+            {
+                case Mode.Mock:
+                    _leaderboardView = Instantiate(_mockLeaderboardPrefab, _leaderboardContainer);
+                    _leaderboardView.UpdateLeaderboard();
+                    break;
+            }
+#endif
 
             if (_rectTransform != null)
             {
                 _rectTransform.localScale = _initialScale;
             }
-        }
-
-        public void Hide()
-        {
-            gameObject.SetActive(false);
         }
 
         private async void OnContinueClicked()
@@ -78,6 +92,12 @@ namespace Game
             ItemSystem.Instance.ClearAll();
             GameCycleStateSwitcher.Instance.ResumeGame();
             Hide();
+        }
+
+        private void Hide()
+        {
+            Destroy(_leaderboardView.gameObject);
+            gameObject.SetActive(false);
         }
 
         private async void OnRetryClicked()
@@ -112,6 +132,11 @@ namespace Game
             _continueButton.onClick.RemoveListener(OnContinueClicked);
             _retryButton.onClick.RemoveListener(OnRetryClicked);
             _exitButton.onClick.RemoveListener(OnExitClicked);
+        }
+
+        private enum Mode
+        {
+            Mock
         }
     }
 }
