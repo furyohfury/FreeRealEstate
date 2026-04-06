@@ -14,6 +14,8 @@ namespace Game
         [SerializeField]
         private LeaderboardViewMock _mockLeaderboardPrefab;
         [SerializeField]
+        private LeaderboardViewYG _leaderboardViewYgPrefab;
+        [SerializeField]
         private Transform _leaderboardContainer;
         [SerializeField]
         private Button _continueButton;
@@ -60,11 +62,17 @@ namespace Game
             {
                 case Mode.Mock:
                     _leaderboardView = Instantiate(_mockLeaderboardPrefab, _leaderboardContainer);
-                    _leaderboardView.UpdateLeaderboard();
+                    break;
+                case Mode.YG:
+                    _leaderboardView = Instantiate(_leaderboardViewYgPrefab, _leaderboardContainer);
                     break;
             }
+#elif UNITY_WEBGL
+                    _leaderboardView = Instantiate(_leaderboardViewYgPrefab, _leaderboardContainer);
 #endif
 
+            _leaderboardView.UpdateLeaderboard();
+            
             if (_rectTransform != null)
             {
                 _rectTransform.localScale = _initialScale;
@@ -136,7 +144,8 @@ namespace Game
 
         private enum Mode
         {
-            Mock
+            Mock,
+            YG
         }
     }
 }
