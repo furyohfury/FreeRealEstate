@@ -28,7 +28,6 @@ namespace Game
             AudioManager.Instance.PlayGameOverSound();
             GameCycleStateSwitcher.Instance.PauseGame();
             LeaderboardManager.Instance.SendResult(GameLoop.Instance.CurrentTime);
-            LeaderboardDisplayer.Instance.ShowLeaderboard();
             _gameOverUI.Show();
         }
 
