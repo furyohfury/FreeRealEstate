@@ -16,7 +16,6 @@ namespace Game
         private Button _retryButton;
         [SerializeField]
         private Button _exitButton;
-        private RectTransform _rectTransform; 
         [SerializeField]
         private Vector3 _choiceMadeMaxScale = new Vector3(0.2f, 0.2f, 0);
         [SerializeField]
@@ -27,6 +26,7 @@ namespace Game
         private float _choiceMadeDecreaseDuration = 0.3f;
         [SerializeField]
         private Ease _choiceMadeDecreaseEase = Ease.Linear;
+        private RectTransform _rectTransform;
         private Vector3 _initialScale;
 
         private void Awake()
@@ -44,8 +44,12 @@ namespace Game
 
         public void Show()
         {
-            _rectTransform.localScale = _initialScale;
             gameObject.SetActive(true);
+
+            if (_rectTransform != null)
+            {
+                _rectTransform.localScale = _initialScale;
+            }
         }
 
         public void Hide()

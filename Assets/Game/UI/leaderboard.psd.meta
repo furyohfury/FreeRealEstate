@@ -108,8 +108,8 @@ ScriptedImporter:
     customData: 
     rect:
       serializedVersion: 2
-      x: 682
-      y: 791
+      x: 691
+      y: 4
       width: 93
       height: 93
     spriteID: 31775b8c5e74831478a9df1345bd4dfd
@@ -120,7 +120,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 682, y: 791}
+    uvTransform: {x: 691, y: 4}
     spritePosition: {x: 907, y: 515}
   - name: lbEntry
     originalName: 
@@ -131,7 +131,7 @@ ScriptedImporter:
     rect:
       serializedVersion: 2
       x: 4
-      y: 791
+      y: 787
       width: 670
       height: 123
     spriteID: 905d6e83fb24b8240a30e5aba6a7b43c
@@ -142,9 +142,31 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 3, y: 791}
+    uvTransform: {x: 3, y: 787}
     spritePosition: {x: 815, y: 499}
-  - name: Leaderboard
+  - name: button
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 682
+      y: 787
+      width: 245
+      height: 75
+    spriteID: 8d6a10378a4081f48b9a141fc0ffd43e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 682, y: 787}
+    spritePosition: {x: 821, y: 337}
+  - name: lb
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -155,8 +177,8 @@ ScriptedImporter:
       x: 4
       y: 4
       width: 679
-      height: 779
-    spriteID: e4cf19da4bad56d4a8195b3c131c49a6
+      height: 775
+    spriteID: bee8c0183f24eb74382d5f68c4b79234
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -164,31 +186,8 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 0, y: -1}
-    spritePosition: {x: 91, y: 113}
-  - name: "\u0412\u0441\u0442\u0430\u0432\u043B\u0435\u043D\u043D\u044B\u0439 \u0441\u043B\u043E\u0439
-      #1"
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 922
-      width: 614
-      height: 2
-    spriteID: de977f24d430a0d439dec4d4ea045bfa
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: -838, y: 425}
-    spritePosition: {x: 842, y: 497}
+    uvTransform: {x: 0, y: -11}
+    spritePosition: {x: 91, y: 117}
   spriteImportData: []
   rigSpriteImportData: []
   sharedRigSpriteImportData: []
@@ -207,7 +206,55 @@ ScriptedImporter:
     characterGroups: []
     pivot: {x: 0, y: 0}
     boneReadOnly: 0
-  platformSettings: []
+  platformSettings:
+  - name: DefaultTexturePlatform
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Standalone
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: WebGL
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Windows Store Apps
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
   mosaicLayers: 1
   characterMode: 1
   documentPivot: {x: 0, y: 0}
@@ -234,7 +281,19 @@ ScriptedImporter:
     categories: []
   spritePackingTag: 
   resliceFromLayer: 0
-  pSDLayerImportSetting: []
+  pSDLayerImportSetting:
+  - spriteId: 8d6a10378a4081f48b9a141fc0ffd43e
+    name: Leaderboard
+    layerId: 4
+    flatten: 0
+    isGroup: 0
+    importLayer: 1
+  - spriteId: bee8c0183f24eb74382d5f68c4b79234
+    name: lb
+    layerId: 5
+    flatten: 0
+    isGroup: 0
+    importLayer: 1
   psdLayers:
   - name: PlayerIcon
     spriteName: PlayerIcon
@@ -242,7 +301,7 @@ ScriptedImporter:
     parentIndex: -1
     spriteID: 31775b8c5e74831478a9df1345bd4dfd
     layerID: 2
-    mosaicPosition: {x: 682, y: 791}
+    mosaicPosition: {x: 691, y: 4}
     flatten: 0
     isImported: 1
     isVisible: 1
@@ -252,29 +311,27 @@ ScriptedImporter:
     parentIndex: -1
     spriteID: 905d6e83fb24b8240a30e5aba6a7b43c
     layerID: 3
-    mosaicPosition: {x: 4, y: 791}
+    mosaicPosition: {x: 4, y: 787}
     flatten: 0
     isImported: 1
     isVisible: 1
-  - name: Leaderboard
-    spriteName: Leaderboard
+  - name: button
+    spriteName: button
     isGroup: 0
     parentIndex: -1
-    spriteID: e4cf19da4bad56d4a8195b3c131c49a6
+    spriteID: 8d6a10378a4081f48b9a141fc0ffd43e
     layerID: 4
-    mosaicPosition: {x: 4, y: 4}
+    mosaicPosition: {x: 682, y: 787}
     flatten: 0
     isImported: 1
     isVisible: 1
-  - name: "\u0412\u0441\u0442\u0430\u0432\u043B\u0435\u043D\u043D\u044B\u0439 \u0441\u043B\u043E\u0439
-      #1"
-    spriteName: "\u0412\u0441\u0442\u0430\u0432\u043B\u0435\u043D\u043D\u044B\u0439
-      \u0441\u043B\u043E\u0439 #1"
+  - name: lb
+    spriteName: lb
     isGroup: 0
     parentIndex: -1
-    spriteID: de977f24d430a0d439dec4d4ea045bfa
+    spriteID: bee8c0183f24eb74382d5f68c4b79234
     layerID: 5
-    mosaicPosition: {x: 4, y: 922}
+    mosaicPosition: {x: 4, y: 4}
     flatten: 0
     isImported: 1
     isVisible: 1
