@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Restart
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: fb598e8b8019a7c40b97e8d3914b0413, type: 2}
-  m_sharedMaterial: {fileID: 3731260809763352510, guid: fb598e8b8019a7c40b97e8d3914b0413, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 209a8dd7cd6487240b2ac47810de074e, type: 2}
+  m_sharedMaterial: {fileID: 4402815781558269754, guid: 209a8dd7cd6487240b2ac47810de074e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -282,7 +282,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2554017995647697486}
-  - component: {fileID: 5417705101255992164}
   - component: {fileID: 3615046096944740338}
   m_Layer: 5
   m_Name: LeaderboardUI
@@ -315,34 +314,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 679, y: 779}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &5417705101255992164
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 903425573991890881}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 423e13a42d313f948a13bcedae13febe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nameLB: 
-  maxQuantityPlayers: 9
-  quantityTop: 3
-  quantityAround: 3
-  updateLBMethod: 2
-  entriesText: {fileID: 0}
-  advanced: 1
-  rootSpawnPlayersData: {fileID: 8392040556687370221}
-  playerDataPrefab: {fileID: 8402627397072975260, guid: 9fdab397fdcd1ef4da8455d4615c1699, type: 3}
-  playerPhoto: 1
-  isHiddenPlayerPhoto: {fileID: 0}
-  timeTypeConvert: 0
-  decimalSize: 0
-  onUpdateData:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &3615046096944740338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -358,8 +329,8 @@ MonoBehaviour:
   _continueButton: {fileID: 39365633671200404}
   _retryButton: {fileID: 5865593611449951134}
   _exitButton: {fileID: 4573141677854960914}
-  _choiceMadeMaxScale: {x: 0.2, y: 0.2, z: 0}
-  _choiceMadeDuration: 0.5
+  _choiceMadeMaxScale: {x: 1.2, y: 1.2, z: 0}
+  _choiceMadeDuration: 0.1
   _choiceMadeEase: 1
   _choiceMadeDecreaseDuration: 0.3
   _choiceMadeDecreaseEase: 1
@@ -641,8 +612,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: To menu
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: fb598e8b8019a7c40b97e8d3914b0413, type: 2}
-  m_sharedMaterial: {fileID: 3731260809763352510, guid: fb598e8b8019a7c40b97e8d3914b0413, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 209a8dd7cd6487240b2ac47810de074e, type: 2}
+  m_sharedMaterial: {fileID: 4402815781558269754, guid: 209a8dd7cd6487240b2ac47810de074e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1199,8 +1170,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: LEADERBOARD
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: fb598e8b8019a7c40b97e8d3914b0413, type: 2}
-  m_sharedMaterial: {fileID: 3731260809763352510, guid: fb598e8b8019a7c40b97e8d3914b0413, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 209a8dd7cd6487240b2ac47810de074e, type: 2}
+  m_sharedMaterial: {fileID: 4402815781558269754, guid: 209a8dd7cd6487240b2ac47810de074e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1224,7 +1195,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 48.6
+  m_fontSize: 38.6
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1574,8 +1545,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Continue
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: fb598e8b8019a7c40b97e8d3914b0413, type: 2}
-  m_sharedMaterial: {fileID: 3731260809763352510, guid: fb598e8b8019a7c40b97e8d3914b0413, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 209a8dd7cd6487240b2ac47810de074e, type: 2}
+  m_sharedMaterial: {fileID: 4402815781558269754, guid: 209a8dd7cd6487240b2ac47810de074e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
