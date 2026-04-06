@@ -35,12 +35,11 @@ namespace Game
         [RequiredGet(InChildren = true)]
         private LaneItemSpawner _laneItemSpawner;
         [SerializeField]
-        private float _speed;
-        [SerializeField]
         private Color _highlightColor = Color.aquamarine;
         [SerializeField]
         private float _visualSpeedDivider = 4.8f;
 
+        private float _speed;
         private static readonly int _stripColorKey = Shader.PropertyToID("_StripColor");
         private static readonly int _speedKey = Shader.PropertyToID("_Speed");
 
@@ -100,5 +99,13 @@ namespace Game
         {
             _meshRenderer.material.SetColor(_stripColorKey, color);
         }
+
+#if UNITY_EDITOR
+        [Button]
+        private void SetSpeed(float speed)
+        {
+            Speed = speed;
+        }
+#endif
     }
 }
