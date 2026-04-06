@@ -6211,6 +6211,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24697fe550be43789297359d83f542c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.LeaderboardPresenterYG
+  _restartButton: {fileID: 1782907398}
+  _quitButton: {fileID: 1782907397}
   _leaderboardYG: {fileID: 1782907396}
   _currentPlayerDataYG: {fileID: 387037504}
   _anonymousPlayerSprite: {fileID: 21300000, guid: 505887ddf9ca1d441a99f8b7cb40f728, type: 3}
@@ -10962,6 +10964,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 423e13a42d313f948a13bcedae13febe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1782907397 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2263373603929313226, guid: 68fc501c463b6f545a7449915a30e892, type: 3}
+  m_PrefabInstance: {fileID: 1782907393}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 100b9459922a48c79483130c94e49c76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.ButtonUI
+--- !u!114 &1782907398 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1875738511804268712, guid: 68fc501c463b6f545a7449915a30e892, type: 3}
+  m_PrefabInstance: {fileID: 1782907393}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 100b9459922a48c79483130c94e49c76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.ButtonUI
 --- !u!4 &1785526300 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1379641026529207157, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
@@ -11328,6 +11352,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ca671f6c2a24fdd81474105524dc10e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.LeaderboardPresenterMock
+  _restartButton: {fileID: 1782907398}
+  _quitButton: {fileID: 1782907397}
   _leaderboard: {fileID: 1782907395}
 --- !u!1001 &1840048891
 PrefabInstance:
