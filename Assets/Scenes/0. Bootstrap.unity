@@ -222,8 +222,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: LOADING...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: bd35f23716d351c46bc1615bd398aa23, type: 2}
-  m_sharedMaterial: {fileID: 8608819660598802460, guid: bd35f23716d351c46bc1615bd398aa23, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 209a8dd7cd6487240b2ac47810de074e, type: 2}
+  m_sharedMaterial: {fileID: 4402815781558269754, guid: 209a8dd7cd6487240b2ac47810de074e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -637,7 +637,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22400762, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000038146973
+      value: -0.000011444092
       objectReference: {fileID: 0}
     - target: {fileID: 22426080, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
       propertyPath: m_AnchorMax.x
