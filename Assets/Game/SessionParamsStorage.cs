@@ -1,10 +1,12 @@
-﻿using UnityEngine;
-
-namespace Game
+﻿namespace Game
 {
-    [CreateAssetMenu(fileName = "SessionParamsStorage", menuName = "Game/SessionParamsStorage")]
-    public sealed class SessionParamsStorage : ScriptableObject
+    public sealed class SessionParamsStorage
     {
         public SessionParams[] SessionParams;
+
+        public SessionParamsStorage(SessionParams[] sessionParams)
+        {
+            SessionParams = sessionParams;
+        }
     }
 }

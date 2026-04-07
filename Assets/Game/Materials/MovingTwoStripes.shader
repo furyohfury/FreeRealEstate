@@ -6,6 +6,7 @@
         _StripColor ("Strip Color", Color) = (0, 1, 0.5, 1)    // Цвет полосок
         _StripWidth ("Strip Width", Range(0, 0.5)) = 0.1      // Ширина каждой полоски
         _Speed ("Movement Speed", Float) = 1.0               // Скорость движения
+        _Offset ("Offset", Float) = 1.0               // офсет движения
     }
 
     SubShader
@@ -38,6 +39,7 @@
                 float4 _StripColor;
                 float _StripWidth;
                 float _Speed;
+            float _Offset;
             CBUFFER_END
 
             Varyings vert(Attributes IN)
@@ -50,14 +52,11 @@
 
             half4 frag(Varyings IN) : SV_Target
             {
-                // Рассчитываем движение по времени. 
-                // Используем frac, чтобы значение всегда было от 0 до 1.
-                float timeOffset = _Time.y * _Speed;
-                
-                // Полоска 1 (основная)
-                float pos1 = frac(IN.uv.y + timeOffset);
-                // Полоска 2 (смещенная на полцикла)
-                float pos2 = frac(IN.uv.y + timeOffset + 0.5);
+                // Теперь мы не зависим от внутреннего времени шейдера
+    float timeOffset = _Offset; 
+    
+    float pos1 = frac(IN.uv.y + timeOffset);
+    float pos2 = frac(IN.uv.y + timeOffset + 0.5);
 
                 // Проверяем, попадает ли текущая UV координата в диапазон ширины полосок
                 bool isStrip1 = pos1 < _StripWidth;

@@ -7,9 +7,11 @@ namespace Game
     {
         public bool IsActive { get; set; } = false;
         public float CurrentTime { get; private set; } = 0;
-        [SerializeField] [RequiredGet(InChildren = true)]
+        [SerializeField]
+        [RequiredGet(InChildren = true)]
         private ItemLaneMover _itemLaneMover;
-        [SerializeField] [RequiredGet(InChildren = true)]
+        [SerializeField]
+        [RequiredGet(InChildren = true)]
         private LanesSpeedUpdater _lanesSpeedUpdater;
 
         public void Launch()
@@ -27,7 +29,7 @@ namespace Game
         {
             IsActive = true;
         }
-        
+
         private void Update()
         {
             if (!IsActive)
@@ -35,9 +37,10 @@ namespace Game
                 return;
             }
 
-            CurrentTime += Time.deltaTime;
-            _itemLaneMover.MoveItems(Time.deltaTime);
-            _lanesSpeedUpdater.UpdateLanesSpeed(CurrentTime);
+            float deltaTime = Time.deltaTime;
+            CurrentTime += deltaTime;
+            _lanesSpeedUpdater.UpdateLanesSpeed(CurrentTime, deltaTime);
+            _itemLaneMover.MoveItems(deltaTime);
         }
     }
 }

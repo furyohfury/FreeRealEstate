@@ -24,9 +24,9 @@ namespace Game
                 lane.name = $"Lane_{i}";
                 lane.SetColor(sessionParams.GameColors[i]);
                 lane.Number = i;
-                lane.Speed = sessionParams.LanesSpeedFormula.GetLanesSpeed(0);
-                lane.SetSpawnInterval(sessionParams.ItemSpawnIntervalFormula.GetInterval());
-                lane.SetRandomSpawnOffset(sessionParams.ItemSpawnIntervalFormula.GetRandomSpawnOffset());
+                lane.Speed = sessionParams.lanesLaneSpeedFormula.GetLanesSpeed(0);
+                lane.SetSpawnInterval(sessionParams.itemSpawnIntervalFormula.GetInterval());
+                lane.SetRandomSpawnOffset(sessionParams.itemSpawnIntervalFormula.GetRandomSpawnOffset());
                 lanes[i] = lane;
             }
 

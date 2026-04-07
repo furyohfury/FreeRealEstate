@@ -7,5 +7,6 @@ namespace Game.Application
         public abstract float GetMaxHealth();
         public abstract bool GetTrackDeath();
         public abstract float GetMusicVolumeMult();
+        public abstract SessionParamsStorage GetSessionParamsStorage();
     }
 }

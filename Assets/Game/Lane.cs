@@ -39,9 +39,13 @@ namespace Game
         [SerializeField]
         private float _visualSpeedDivider = 4.8f;
 
+        [ReadOnly]
+        [ShowInInspector]
         private float _speed;
         private static readonly int _stripColorKey = Shader.PropertyToID("_StripColor");
         private static readonly int _speedKey = Shader.PropertyToID("_Speed");
+        private float _currentOffset = 0f;
+        private static readonly int _offsetKey = Shader.PropertyToID("_Offset");
 
         public void AddItem(Item item)
         {
@@ -98,6 +102,19 @@ namespace Game
         private void SetVisualColor(Color color)
         {
             _meshRenderer.material.SetColor(_stripColorKey, color);
+        }
+        
+        public void UpdateVisualOffset(float deltaTime)
+        {
+            // Накапливаем смещение точно так же, как двигаем предметы
+            // Делим на делитель здесь, чтобы синхронизировать масштаб
+            _currentOffset += (Speed / _visualSpeedDivider) * deltaTime;
+
+            // Чтобы float не переполнился через неделю игры, 
+            // можно зациклить его (так как в шейдере используется frac)
+            _currentOffset %= 1f; 
+
+            _meshRenderer.material.SetFloat(_offsetKey, _currentOffset);
         }
 
 #if UNITY_EDITOR

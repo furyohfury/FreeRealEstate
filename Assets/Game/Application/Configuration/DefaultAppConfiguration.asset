@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: DefaultAppConfiguration
   m_EditorClassIdentifier: Assembly-CSharp::Game.Application.DefaultAppConfiguration
   _maxHealth: 100
-  _trackDeath: 0
-  _musicVolume: 0.5
+  _trackDeath: 1
+  _musicVolumeMultiplier: 0.5
+  _sessionParamsStorageConfig: {fileID: 11400000, guid: 87fd18f347fd5e249984ce89466acf9d, type: 2}

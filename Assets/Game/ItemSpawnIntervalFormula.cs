@@ -1,8 +1,6 @@
-﻿using UnityEngine;
-
-namespace Game
+﻿namespace Game
 {
-    public abstract class ItemSpawnIntervalFormula : ScriptableObject
+    public abstract class ItemSpawnIntervalFormula
     {
         public abstract float GetInterval();
         
