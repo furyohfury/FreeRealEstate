@@ -35,7 +35,7 @@ namespace Game
                 else
                 {
                     Debug.LogError($"Network Error: {request.error}");
-                    return default(SessionParamsStorage);
+                    return null;
                 }
             }
             catch (Exception e)

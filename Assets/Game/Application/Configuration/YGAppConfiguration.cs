@@ -20,7 +20,7 @@ namespace Game.Application
         private string _sessionParamsStorageURL =
             "https://raw.githubusercontent.com/furyohfury/FreeRealEstate/refs/heads/conveyors-yandex/Assets/StreamingAssets/SessionParamsStorage.json";
 
-        public async void Init()
+        public async Awaitable Init()
         {
             if (YG2.TryGetFlagAsFloat(YGAppConfigurationFlags.MAX_HP, out _maxHealth))
             {
