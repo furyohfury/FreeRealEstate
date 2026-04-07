@@ -5,14 +5,10 @@ namespace Game
     [CreateAssetMenu(fileName = "LinearLanesSpeedFormula", menuName = "Game/LinearLanesSpeedFormula")]
     public class LinearLanesSpeedFormula : LanesSpeedFormula
     {
-        [SerializeField]
-        private float _baseSpeed;
-        [SerializeField]
-        private AnimationCurve _curve;
-        [SerializeField]
-        private float _timeCoefficient;
-        [SerializeField]
-        private float _multiplier;
+        public float _baseSpeed;
+        public AnimationCurve _curve;
+        public float _timeCoefficient;
+        public float _multiplier;
 
         public override float GetLanesSpeed(float sessionTime)
         {

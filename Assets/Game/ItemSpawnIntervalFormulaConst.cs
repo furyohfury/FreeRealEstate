@@ -5,10 +5,8 @@ namespace Game
     [CreateAssetMenu(fileName = "ItemSpawnIntervalFormulaConst", menuName = "Game/ItemSpawnIntervalFormulaConst")]
     public class ItemSpawnIntervalFormulaConst : ItemSpawnIntervalFormula
     {
-        [SerializeField]
-        private float _interval;
-        [SerializeField]
-        private float _randomSpawnOffset;
+        public float _interval;
+        public float _randomSpawnOffset;
 
         public override float GetInterval()
         {
