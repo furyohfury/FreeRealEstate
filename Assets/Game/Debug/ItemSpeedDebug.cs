@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TriInspector;
+using UnityEngine;
 
 namespace Game
 {
@@ -10,6 +11,13 @@ namespace Game
         public Transform _end;
         public float _sqrDist = 0.1f;
         public bool _isActive = true;
+
+        [Button]
+        private void Launch()
+        {
+            _go.transform.position = _start.position;
+            _isActive = true;
+        }
 
         private void Update()
         {
