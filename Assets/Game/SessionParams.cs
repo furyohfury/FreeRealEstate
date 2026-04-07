@@ -1,17 +1,18 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Game
 {
-    [CreateAssetMenu(fileName = "SessionParams", menuName = "Game/SessionParams")]
-    public sealed class SessionParams : ScriptableObject
+    [Serializable]
+    public class SessionParams
     {
         public string Id;
         public float RewardForRightItemColor;
         public float PenaltyForWrongItemColor;
         public float PenaltyForCollision;
         public int LanesNumber;
-        public LanesSpeedFormula LanesSpeedFormula;
-        public ItemSpawnIntervalFormula ItemSpawnIntervalFormula;
+        public LaneSpeedFormula lanesLaneSpeedFormula;
+        public ItemSpawnIntervalFormula itemSpawnIntervalFormula;
         public GameColor[] GameColors;
         public float ContinueInitialHealthRatio = 0.5f;
 

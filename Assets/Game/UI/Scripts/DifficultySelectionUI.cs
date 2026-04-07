@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DG.Tweening;
+using Game.Application;
 using Game.Infrastructure;
 using Game.Utils;
 using TriInspector;
@@ -9,8 +10,6 @@ namespace Game
 {
     public sealed class DifficultySelectionUI : MonoBehaviour
     {
-        [SerializeField]
-        private SessionParamsStorage _sessionParamsStorage;
         [SerializeField]
         private Transform _container;
         [SerializeField]
@@ -50,7 +49,8 @@ namespace Game
                 Destroy(child.gameObject);
             }
 
-            SessionParams[] sessionParams = _sessionParamsStorage.SessionParams;
+            SessionParamsStorage sessionParamsStorage = AppConfigurationProvider.Instance.Configuration.GetSessionParamsStorage();
+            SessionParams[] sessionParams = sessionParamsStorage.SessionParams;
 
             for (int i = 0, count = sessionParams.Length; i < count; i++)
             {
@@ -85,7 +85,8 @@ namespace Game
         {
             buttonUI.OnClick -= OnButtonClicked;
             int paramsIndex = _buttonToParamsMap[buttonUI];
-            GameParamsService.Instance.SessionParams = _sessionParamsStorage.SessionParams[paramsIndex];
+            SessionParamsStorage sessionParamsStorage = AppConfigurationProvider.Instance.Configuration.GetSessionParamsStorage();
+            GameParamsService.Instance.SessionParams = sessionParamsStorage.SessionParams[paramsIndex];
             LaunchDisappearSequence().AppendCallback(LoadNextScene);
         }
 

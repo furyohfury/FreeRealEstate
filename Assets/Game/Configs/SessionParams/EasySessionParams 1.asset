@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef5128688e9141469037d7d10adc6945, type: 3}
-  m_Name: HardSessionParams
+  m_Name: EasySessionParams 1
   m_EditorClassIdentifier: Assembly-CSharp::Game.SessionParams
-  Id: Hard
+  Id: Easy
   RewardForRightItemColor: 5
   PenaltyForWrongItemColor: 15
   PenaltyForCollision: 5
   LanesNumber: 3
-  LanesSpeedFormula: {fileID: 11400000, guid: 44b15a5a3f673eb4eb9b768b1b250cc7, type: 2}
-  ItemSpawnIntervalFormula: {fileID: 11400000, guid: 03d1bd3286ef3a24491edb5dd7c8e644, type: 2}
+  lanesLaneSpeedFormulaConfig: {fileID: 11400000, guid: 44b15a5a3f673eb4eb9b768b1b250cc7, type: 2}
+  itemSpawnIntervalFormulaConfig: {fileID: 11400000, guid: 03d1bd3286ef3a24491edb5dd7c8e644, type: 2}
   GameColors: 030000000000000001000000
+  ContinueInitialHealthRatio: 0.8

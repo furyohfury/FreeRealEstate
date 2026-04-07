@@ -1,21 +1,24 @@
-﻿using UnityEngine;
-
-namespace Game
+﻿namespace Game
 {
-    [CreateAssetMenu(fileName = "ItemSpawnIntervalFormulaConst", menuName = "Game/ItemSpawnIntervalFormulaConst")]
     public class ItemSpawnIntervalFormulaConst : ItemSpawnIntervalFormula
     {
-        public float _interval;
-        public float _randomSpawnOffset;
+        public float interval;
+        public float randomSpawnOffset;
+
+        public ItemSpawnIntervalFormulaConst(float interval, float randomSpawnOffset)
+        {
+            this.interval = interval;
+            this.randomSpawnOffset = randomSpawnOffset;
+        }
 
         public override float GetInterval()
         {
-            return _interval;
+            return interval;
         }
 
         public override float GetRandomSpawnOffset()
         {
-            return _randomSpawnOffset;
+            return randomSpawnOffset;
         }
     }
 }

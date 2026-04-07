@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e737d11ceab045a28e19bb3f32da9d2b, type: 3}
   m_Name: SessionParamsStorage
   m_EditorClassIdentifier: Assembly-CSharp::Game.SessionParamsStorage
-  SessionParams:
-  - {fileID: 11400000, guid: 56f74102b63f36943924eca22adbae36, type: 2}
-  - {fileID: 11400000, guid: 4356d3a2910024f40883ef62a3072deb, type: 2}
+  _sessionParamConfigs:
+  - {fileID: 11400000, guid: 9c998d8d1a8943b4897b6e3c96308b93, type: 2}
   - {fileID: 11400000, guid: 7fd2802c81a318f4b9c8ca279bd2a5d6, type: 2}
-  - {fileID: 11400000, guid: fa6b47c5b22b3184d961536e7d97fb40, type: 2}
+  - {fileID: 11400000, guid: 64ffe887ccc7f24469f049ec218616e1, type: 2}
