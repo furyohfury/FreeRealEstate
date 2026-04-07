@@ -7546,6 +7546,56 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2741452516404356964, guid: ab8348f32dfde3d41b9998dcf80000f9, type: 3}
   m_PrefabInstance: {fileID: 641466107}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1242120698
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1242120699}
+  - component: {fileID: 1242120700}
+  m_Layer: 0
+  m_Name: ItemSpeedDebug
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1242120699
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1242120698}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1540178944}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1242120700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1242120698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e97c38f552a04a9c99ff7120542aa4b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.ItemSpeedDebug
+  _go: {fileID: 0}
+  _speed: 1
+  _start: {fileID: 2023171249}
+  _end: {fileID: 2023171248}
+  _sqrDist: 0.1
+  _isActive: 0
 --- !u!4 &1266196568 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1379641026529207157, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
@@ -9393,6 +9443,7 @@ Transform:
   - {fileID: 1861256597}
   - {fileID: 86787970}
   - {fileID: 2104411013}
+  - {fileID: 1242120699}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1554941931 stripped
@@ -12013,6 +12064,16 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d43e709cab1c8948b72b88b840aaade, type: 3}
+--- !u!4 &2023171248 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7893425581530177900, guid: 2d43e709cab1c8948b72b88b840aaade, type: 3}
+  m_PrefabInstance: {fileID: 2023171247}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2023171249 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1950902817210394768, guid: 2d43e709cab1c8948b72b88b840aaade, type: 3}
+  m_PrefabInstance: {fileID: 2023171247}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2024499170 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 16233580331575051, guid: d36e53c4a70c0164cb160034374b0626, type: 3}
