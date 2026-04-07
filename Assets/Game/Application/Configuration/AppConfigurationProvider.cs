@@ -12,7 +12,7 @@ namespace Game.Application
         private YGAppConfiguration _ygAppConfiguration;
         private AppConfiguration _appConfiguration;
 
-        protected override void Awake()
+        protected async override void Awake()
         {
             base.Awake();
             DontDestroyOnLoad(gameObject);
@@ -20,6 +20,7 @@ namespace Game.Application
             _appConfiguration = _defaultAppConfiguration;
 #elif UNITY_WEBGL
            _appConfiguration = _ygAppConfiguration;
+            await _ygAppConfiguration.Init();
 #endif
         }
     }
