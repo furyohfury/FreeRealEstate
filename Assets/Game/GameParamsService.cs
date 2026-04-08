@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Game.Application;
+using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace Game
@@ -13,6 +14,12 @@ namespace Game
         {
             base.Awake();
             DontDestroyOnLoad(this);
+        }
+
+        private void Start()
+        {
+            SessionParamsStorage sessionParamsStorage = AppConfigurationProvider.Instance.Configuration.GetSessionParamsStorage();
+            SessionParams = sessionParamsStorage.SessionParams[0];
         }
     }
 }
