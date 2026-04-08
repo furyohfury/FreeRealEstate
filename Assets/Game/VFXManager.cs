@@ -16,6 +16,8 @@ namespace Game
         private ParticleSystem _dragFallingParticlesPrefab;
         [SerializeField]
         private float _dragFallingParticlesScale = 0.5f;
+        [SerializeField]
+        private float _wrongColorAnimDuration = 0.5f;
 
         protected override void Awake()
         {
@@ -46,7 +48,8 @@ namespace Game
 
         public void SpawnWrongColorItemConsumedVFX(Vector3 position)
         {
-            CameraProvider.Instance.CameraFacade.ShakeCamera();
+            CameraProvider.Instance.CameraFacade.ShakeCamera(_wrongColorAnimDuration);
+            CameraProvider.Instance.CameraFacade.LaunchChromaticAbberation(_wrongColorAnimDuration);
             AudioManager.Instance.PlayWrongColorItemConsumedSFX(position);
         }
 
