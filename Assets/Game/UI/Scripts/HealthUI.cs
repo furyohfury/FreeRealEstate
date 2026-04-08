@@ -1,5 +1,4 @@
-﻿using TMPro;
-using TriInspector;
+﻿using TriInspector;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,8 +6,6 @@ namespace Game
 {
     public sealed class HealthUI : MonoBehaviour
     {
-        [SerializeField]
-        private TMP_Text _healthText;
         [SerializeField]
         private Health _health;
         [SerializeField]
@@ -41,8 +38,6 @@ namespace Game
         [Button]
         private void HealthOnOnHealthChanged(float hp)
         {
-            _healthText.text = hp.ToString();
-
             float reverseRatio = 1 - hp / _health.MaxHealth;
             _healthBarMaterial.SetFloat(_fillAmount, reverseRatio);
             _healthBarMaterial.SetFloat(_boilIntensity, Mathf.Lerp(0, _maxHeight, reverseRatio));

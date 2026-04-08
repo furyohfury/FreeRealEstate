@@ -13,15 +13,21 @@ namespace Game
         private PostProcessController _postProcessController;
 
         [Button]
-        public void ShakeCamera()
+        public void ShakeCamera(float duration)
         {
-            _shaker.Shake();
+            _shaker.Shake(duration);
         }
 
         [Button]
         public void SetVignette(float value)
         {
             _postProcessController.FadeVignette01(value);
+        }
+
+        [Button]
+        public void LaunchChromaticAbberation(float duration)
+        {
+            _postProcessController.LaunchAndFadeChromaticAbberation(duration);
         }
     }
 }
