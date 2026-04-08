@@ -19,7 +19,7 @@ namespace Game
                 if (request.result == UnityWebRequest.Result.Success)
                 {
                     string json = request.downloadHandler.text;
-                    Debug.Log($"<color=green>Loaded storage {json}</color>");
+                    Debug.Log($"<color=green>Loaded storage</color>");
 
                     // Удаляем BOM, если он есть
                     if (json.StartsWith("\uFEFF"))

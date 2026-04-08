@@ -53,10 +53,12 @@ namespace Game.Application
 
             if (sessionParamsStorage != null)
             {
+                Debug.Log("Session params storage loaded from web");
                 _sessionParamsStorage = sessionParamsStorage;
             }
             else
             {
+                Debug.LogError("Session params storage wasnt loaded from web. Taking default");
                 _sessionParamsStorage = _sessionParamsStorageConfig.GetStorage();
             }
         }
