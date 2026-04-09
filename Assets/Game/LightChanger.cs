@@ -25,6 +25,8 @@ namespace Game
         private float _minBloom = 30f;
         [SerializeField]
         private float _maxBloom = 110f;
+        [SerializeField]
+        private CameraFacade _cameraFacade;
 
         private const float HALF_DAY_SECONDS = 43200f;
 
@@ -37,6 +39,10 @@ namespace Game
                 float dayCycleValue = GetDayCycleValue(now);
                 SetTimeOfDay(dayCycleValue);
                 Debug.Log($"System time is {now.Hour}:{now.Minute}. Set light for scene at {dayCycleValue} value");
+            }
+            else
+            {
+                SetTimeOfDay(1);
             }
         }
 
@@ -56,11 +62,7 @@ namespace Game
         {
             _ratio = ratio;
             SetLight(ratio);
-
-            if (CameraProvider.Instance != null)
-            {
-                CameraProvider.Instance.CameraFacade.SetBloomIntensity(Mathf.Lerp(_maxBloom, _minBloom, ratio));
-            }
+            _cameraFacade.SetBloomIntensity(Mathf.Lerp(_maxBloom, _minBloom, ratio));
         }
 
         private void SetLight(float ratio)
