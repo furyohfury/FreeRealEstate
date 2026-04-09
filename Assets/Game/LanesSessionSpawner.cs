@@ -9,6 +9,14 @@ namespace Game
         [SerializeField]
         private Lane _prefab;
 
+        private void Awake()
+        {
+            foreach (Transform sceneLane in _container)
+            {
+                Destroy(sceneLane.gameObject);
+            }
+        }
+
         public void SpawnLanes()
         {
             ClearExistingLanes();
