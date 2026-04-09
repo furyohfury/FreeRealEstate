@@ -12,6 +12,8 @@ namespace Game
     {
         [Header("References")]
         [SerializeField]
+        private GameObject _contentContainer;
+        [SerializeField]
         private LeaderboardViewMock _mockLeaderboardPrefab;
         [SerializeField]
         private LeaderboardViewYG _leaderboardViewYgPrefab;
@@ -56,7 +58,7 @@ namespace Game
 
         public void Show()
         {
-            gameObject.SetActive(true);
+            _contentContainer.SetActive(true);
 #if UNITY_EDITOR
             switch (_mode)
             {
@@ -105,7 +107,7 @@ namespace Game
         private void Hide()
         {
             Destroy(_leaderboardView.gameObject);
-            gameObject.SetActive(false);
+            _contentContainer.SetActive(false);
         }
 
         private async void OnRetryClicked()
