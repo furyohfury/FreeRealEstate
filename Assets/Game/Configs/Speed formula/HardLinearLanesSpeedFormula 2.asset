@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: HardLinearLanesSpeedFormula 2
   m_EditorClassIdentifier: Assembly-CSharp::Game.LinearLanesSpeedFormula
   baseSpeed: 3
-  timeCoefficient: 0.23
+  timeCoefficient: 0.18

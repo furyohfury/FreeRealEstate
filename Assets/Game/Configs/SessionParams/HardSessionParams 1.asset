@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.SessionParams
   Id: Hard
   RewardForRightItemColor: 5
-  PenaltyForWrongItemColor: 15
-  PenaltyForCollision: 5
+  PenaltyForWrongItemColor: 30
+  PenaltyForCollision: 10
   LanesNumber: 5
   lanesLaneSpeedFormulaConfig: {fileID: 11400000, guid: 2c248700b4303f748af718ebe79fcc3c, type: 2}
   itemSpawnIntervalFormulaConfig: {fileID: 11400000, guid: 03d1bd3286ef3a24491edb5dd7c8e644, type: 2}
   GameColors: 0300000000000000010000000200000004000000
   ContinueInitialHealthRatio: 0.3
+  ContinueSpeedRatio: 0.7

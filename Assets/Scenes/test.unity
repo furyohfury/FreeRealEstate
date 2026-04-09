@@ -216,7 +216,7 @@ SpriteRenderer:
   m_Size: {x: 3.07, y: 3.17}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
 --- !u!4 &202554281
 Transform:
@@ -265,11 +265,11 @@ MonoBehaviour:
   sessionParamsStorageConfig: {fileID: 11400000, guid: 87fd18f347fd5e249984ce89466acf9d, type: 2}
   sessionParamsJson: '{"SessionParams":[{"Id":"Easy","RewardForRightItemColor":5.0,"PenaltyForWrongItemColor":15.0,"PenaltyForCollision":5.0,"LanesNumber":3,"lanesLaneSpeedFormula":{"$type":"Game.LaneSpeedFormulaLinear,
     Assembly-CSharp","baseSpeed":3.0,"timeCoefficient":0.15},"itemSpawnIntervalFormula":{"$type":"Game.ItemSpawnIntervalFormulaConst,
-    Assembly-CSharp","interval":3.3,"randomSpawnOffset":1.5},"GameColors":[3,0,1],"ContinueInitialHealthRatio":0.8},{"Id":"Medium","RewardForRightItemColor":5.0,"PenaltyForWrongItemColor":15.0,"PenaltyForCollision":5.0,"LanesNumber":4,"lanesLaneSpeedFormula":{"$type":"Game.LaneSpeedFormulaLinear,
+    Assembly-CSharp","interval":3.3,"randomSpawnOffset":1.5},"GameColors":[3,0,1],"ContinueInitialHealthRatio":0.8,"ContinueSpeedRatio":0.3},{"Id":"Medium","RewardForRightItemColor":5.0,"PenaltyForWrongItemColor":15.0,"PenaltyForCollision":5.0,"LanesNumber":4,"lanesLaneSpeedFormula":{"$type":"Game.LaneSpeedFormulaLinear,
     Assembly-CSharp","baseSpeed":3.0,"timeCoefficient":0.2},"itemSpawnIntervalFormula":{"$type":"Game.ItemSpawnIntervalFormulaConst,
-    Assembly-CSharp","interval":3.3,"randomSpawnOffset":1.5},"GameColors":[3,0,1,2],"ContinueInitialHealthRatio":0.5},{"Id":"Hard","RewardForRightItemColor":5.0,"PenaltyForWrongItemColor":15.0,"PenaltyForCollision":5.0,"LanesNumber":5,"lanesLaneSpeedFormula":{"$type":"Game.LaneSpeedFormulaLinear,
+    Assembly-CSharp","interval":3.3,"randomSpawnOffset":1.5},"GameColors":[3,0,1,2],"ContinueInitialHealthRatio":0.5,"ContinueSpeedRatio":0.3},{"Id":"Hard","RewardForRightItemColor":5.0,"PenaltyForWrongItemColor":15.0,"PenaltyForCollision":5.0,"LanesNumber":5,"lanesLaneSpeedFormula":{"$type":"Game.LaneSpeedFormulaLinear,
     Assembly-CSharp","baseSpeed":3.0,"timeCoefficient":0.23},"itemSpawnIntervalFormula":{"$type":"Game.ItemSpawnIntervalFormulaConst,
-    Assembly-CSharp","interval":3.3,"randomSpawnOffset":1.5},"GameColors":[3,0,1,2,4],"ContinueInitialHealthRatio":0.3}]}'
+    Assembly-CSharp","interval":3.3,"randomSpawnOffset":1.5},"GameColors":[3,0,1,2,4],"ContinueInitialHealthRatio":0.3,"ContinueSpeedRatio":0.3}]}'
   _sessionParams:
   - Id: Easy
     RewardForRightItemColor: 5
@@ -278,6 +278,7 @@ MonoBehaviour:
     LanesNumber: 3
     GameColors: 030000000000000001000000
     ContinueInitialHealthRatio: 0.8
+    ContinueSpeedRatio: 0.3
   - Id: Medium
     RewardForRightItemColor: 5
     PenaltyForWrongItemColor: 15
@@ -285,6 +286,7 @@ MonoBehaviour:
     LanesNumber: 4
     GameColors: 03000000000000000100000002000000
     ContinueInitialHealthRatio: 0.5
+    ContinueSpeedRatio: 0.3
   - Id: Hard
     RewardForRightItemColor: 5
     PenaltyForWrongItemColor: 15
@@ -292,6 +294,7 @@ MonoBehaviour:
     LanesNumber: 5
     GameColors: 0300000000000000010000000200000004000000
     ContinueInitialHealthRatio: 0.3
+    ContinueSpeedRatio: 0.3
   _sessionParamsStorageURL: https://raw.githubusercontent.com/furyohfury/FreeRealEstate/refs/heads/conveyors-yandex/Assets/StreamingAssets/SessionParamsStorage.json
 --- !u!4 &1890737090
 Transform:

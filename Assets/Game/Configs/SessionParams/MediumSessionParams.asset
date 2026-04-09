@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: MediumSessionParams
   m_EditorClassIdentifier: Assembly-CSharp::Game.SessionParams
   Id: Medium
-  RewardForRightItemColor: 5
-  PenaltyForWrongItemColor: 15
-  PenaltyForCollision: 5
+  RewardForRightItemColor: 10
+  PenaltyForWrongItemColor: 25
+  PenaltyForCollision: 15
   LanesNumber: 4
   lanesLaneSpeedFormulaConfig: {fileID: 11400000, guid: 01e95607b79b10344b1639cf0dffd203, type: 2}
   itemSpawnIntervalFormulaConfig: {fileID: 11400000, guid: 03d1bd3286ef3a24491edb5dd7c8e644, type: 2}
   GameColors: 03000000000000000100000002000000
   ContinueInitialHealthRatio: 0.5
+  ContinueSpeedRatio: 0.5

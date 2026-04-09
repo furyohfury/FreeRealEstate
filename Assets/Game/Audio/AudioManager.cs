@@ -150,6 +150,7 @@ namespace Game
 
             await Awaitable.WaitForSecondsAsync(clip.length);
 
+            _activeSources.Remove(source);
             _audioPool.Return(source);
         }
 
@@ -162,9 +163,9 @@ namespace Game
             source.Play();
             _activeSources.Add(source);
 
-            _activeSources.Remove(source);
             await Awaitable.WaitForSecondsAsync(clip.length);
 
+            _activeSources.Remove(source);
             _audioPool.Return(source);
         }
 
