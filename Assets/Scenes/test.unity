@@ -263,13 +263,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.JSONDebug
   sessionParamsStorageConfig: {fileID: 11400000, guid: 87fd18f347fd5e249984ce89466acf9d, type: 2}
-  sessionParamsJson: '{"SessionParams":[{"Id":"Easy","RewardForRightItemColor":5.0,"PenaltyForWrongItemColor":15.0,"PenaltyForCollision":5.0,"LanesNumber":3,"lanesLaneSpeedFormula":{"$type":"Game.LaneSpeedFormulaLinear,
-    Assembly-CSharp","baseSpeed":3.0,"timeCoefficient":0.15},"itemSpawnIntervalFormula":{"$type":"Game.ItemSpawnIntervalFormulaConst,
-    Assembly-CSharp","interval":3.3,"randomSpawnOffset":1.5},"GameColors":[3,0,1],"ContinueInitialHealthRatio":0.8,"ContinueSpeedRatio":0.3},{"Id":"Medium","RewardForRightItemColor":5.0,"PenaltyForWrongItemColor":15.0,"PenaltyForCollision":5.0,"LanesNumber":4,"lanesLaneSpeedFormula":{"$type":"Game.LaneSpeedFormulaLinear,
-    Assembly-CSharp","baseSpeed":3.0,"timeCoefficient":0.2},"itemSpawnIntervalFormula":{"$type":"Game.ItemSpawnIntervalFormulaConst,
-    Assembly-CSharp","interval":3.3,"randomSpawnOffset":1.5},"GameColors":[3,0,1,2],"ContinueInitialHealthRatio":0.5,"ContinueSpeedRatio":0.3},{"Id":"Hard","RewardForRightItemColor":5.0,"PenaltyForWrongItemColor":15.0,"PenaltyForCollision":5.0,"LanesNumber":5,"lanesLaneSpeedFormula":{"$type":"Game.LaneSpeedFormulaLinear,
-    Assembly-CSharp","baseSpeed":3.0,"timeCoefficient":0.23},"itemSpawnIntervalFormula":{"$type":"Game.ItemSpawnIntervalFormulaConst,
-    Assembly-CSharp","interval":3.3,"randomSpawnOffset":1.5},"GameColors":[3,0,1,2,4],"ContinueInitialHealthRatio":0.3,"ContinueSpeedRatio":0.3}]}'
+  sessionParamsJson: '{"SessionParams":[{"Id":"Easy","RewardForRightItemColor":10.0,"PenaltyForWrongItemColor":20.0,"PenaltyForCollision":10.0,"LanesNumber":3,"lanesLaneSpeedFormula":{"$type":"Game.LaneSpeedFormulaLinear,
+    Assembly-CSharp","baseSpeed":2.0,"timeCoefficient":0.05},"itemSpawnIntervalFormula":{"$type":"Game.ItemSpawnIntervalFormulaConst,
+    Assembly-CSharp","interval":3.3,"randomSpawnOffset":1.5},"GameColors":[3,0,1],"ContinueInitialHealthRatio":0.8,"ContinueSpeedRatio":0.3},{"Id":"Medium","RewardForRightItemColor":10.0,"PenaltyForWrongItemColor":25.0,"PenaltyForCollision":15.0,"LanesNumber":4,"lanesLaneSpeedFormula":{"$type":"Game.LaneSpeedFormulaLinear,
+    Assembly-CSharp","baseSpeed":2.5,"timeCoefficient":0.12},"itemSpawnIntervalFormula":{"$type":"Game.ItemSpawnIntervalFormulaConst,
+    Assembly-CSharp","interval":3.3,"randomSpawnOffset":1.5},"GameColors":[3,0,1,2],"ContinueInitialHealthRatio":0.5,"ContinueSpeedRatio":0.5},{"Id":"Hard","RewardForRightItemColor":5.0,"PenaltyForWrongItemColor":30.0,"PenaltyForCollision":10.0,"LanesNumber":5,"lanesLaneSpeedFormula":{"$type":"Game.LaneSpeedFormulaLinear,
+    Assembly-CSharp","baseSpeed":3.0,"timeCoefficient":0.18},"itemSpawnIntervalFormula":{"$type":"Game.ItemSpawnIntervalFormulaConst,
+    Assembly-CSharp","interval":3.3,"randomSpawnOffset":1.5},"GameColors":[3,0,1,2,4],"ContinueInitialHealthRatio":0.3,"ContinueSpeedRatio":0.7}]}'
   _sessionParams:
   - Id: Easy
     RewardForRightItemColor: 5

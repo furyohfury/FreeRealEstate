@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f4f90acc8118f1e4aa7ae5ccfe324251
+guid: a1d1578b8b04fd64581d8e10a01a8ec8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5778426648274837470
-    second: Lightmap-1_comp_light_0
+      213: -7815302828632229318
+    second: Lightmap-5_comp_light_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -139,7 +139,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Lightmap-1_comp_light_0
+      name: Lightmap-5_comp_light_0
       rect:
         serializedVersion: 2
         x: 0
@@ -154,8 +154,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2206dec2497eecfa0800000000000000
-      internalID: -5778426648274837470
+      spriteID: a3a354f0c777a8390800000000000000
+      internalID: -7815302828632229318
       vertices: []
       indices: 
       edges: []
@@ -174,7 +174,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Lightmap-1_comp_light_0: -5778426648274837470
+      Lightmap-5_comp_light_0: -7815302828632229318
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
