@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df6d002b0fdf4894af774eeb3212349b, type: 3}
   m_Name: EasyLinearLanesSpeedFormula
   m_EditorClassIdentifier: Assembly-CSharp::Game.LinearLanesSpeedFormula
-  baseSpeed: 3
-  timeCoefficient: 0.15
+  baseSpeed: 2
+  timeCoefficient: 0.05

@@ -14,6 +14,7 @@ namespace Game
         public ItemSpawnIntervalFormulaConfig itemSpawnIntervalFormulaConfig;
         public GameColor[] GameColors;
         public float ContinueInitialHealthRatio = 0.5f;
+        public float ContinueSpeedRatio = 0.3f;
 
         private SessionParams _sessionParams;
 
@@ -26,15 +27,16 @@ namespace Game
         {
             _sessionParams ??= new SessionParams
                                {
-                                   Id = Id,
-                                   RewardForRightItemColor = RewardForRightItemColor,
-                                   PenaltyForWrongItemColor = PenaltyForWrongItemColor,
-                                   PenaltyForCollision = PenaltyForCollision,
-                                   LanesNumber = LanesNumber,
-                                   itemSpawnIntervalFormula = itemSpawnIntervalFormulaConfig.GetFormula(),
-                                   GameColors = GameColors,
-                                   ContinueInitialHealthRatio = ContinueInitialHealthRatio,
-                                   lanesLaneSpeedFormula = lanesLaneSpeedFormulaConfig.GetLanesSpeedFormula()
+                                   Id = Id
+                                   , RewardForRightItemColor = RewardForRightItemColor
+                                   , PenaltyForWrongItemColor = PenaltyForWrongItemColor
+                                   , PenaltyForCollision = PenaltyForCollision
+                                   , LanesNumber = LanesNumber
+                                   , itemSpawnIntervalFormula = itemSpawnIntervalFormulaConfig.GetFormula()
+                                   , GameColors = GameColors
+                                   , ContinueInitialHealthRatio = ContinueInitialHealthRatio
+                                   , lanesLaneSpeedFormula = lanesLaneSpeedFormulaConfig.GetLanesSpeedFormula()
+                                   , ContinueSpeedRatio = ContinueSpeedRatio
                                };
 
             return _sessionParams;

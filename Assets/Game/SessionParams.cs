@@ -15,6 +15,7 @@ namespace Game
         public ItemSpawnIntervalFormula itemSpawnIntervalFormula;
         public GameColor[] GameColors;
         public float ContinueInitialHealthRatio = 0.5f;
+        public float ContinueSpeedRatio = 0.3f;
 
         private void OnValidate()
         {

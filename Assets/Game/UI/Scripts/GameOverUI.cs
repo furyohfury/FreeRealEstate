@@ -38,10 +38,13 @@ namespace Game
         private float _choiceMadeDecreaseDuration = 0.3f;
         [SerializeField]
         private Ease _choiceMadeDecreaseEase = Ease.Linear;
+        [SerializeField]
+        private int _numberOfAdContinues = 1;
 
         private LeaderboardView _leaderboardView;
         private RectTransform _rectTransform;
         private Vector3 _initialScale;
+        private int _currentRetries = 0;
 
         private void Awake()
         {
@@ -79,10 +82,13 @@ namespace Game
             {
                 _rectTransform.localScale = _initialScale;
             }
+
+            _continueButton.interactable = _currentRetries < _numberOfAdContinues;
         }
 
         private async void OnContinueClicked()
         {
+            _currentRetries++;
             Sequence disappearSequence = LaunchDisappearSequence();
 
             await AwaitableExtensions.WaitForTweenRealtime(disappearSequence);
@@ -95,6 +101,7 @@ namespace Game
 
             for (int i = 0, count = lanes.Length; i < count; i++)
             {
+                lanes[i].Speed *= GameParamsService.Instance.SessionParams.ContinueSpeedRatio;
                 ScoreZone scoreZone = lanes[i].ScoreZone;
                 scoreZone.StopAllConsumingItems();
             }

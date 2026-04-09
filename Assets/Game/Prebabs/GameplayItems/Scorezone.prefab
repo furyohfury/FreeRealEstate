@@ -70,6 +70,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pipe
       objectReference: {fileID: 0}
+    - target: {fileID: 1364793603300764731, guid: 44cb92dcd4d1ed547bc848f076039ae5, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087640208478995351, guid: 44cb92dcd4d1ed547bc848f076039ae5, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4590657561060624295, guid: 44cb92dcd4d1ed547bc848f076039ae5, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6725035997658754168, guid: 44cb92dcd4d1ed547bc848f076039ae5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -108,6 +120,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6725035997658754168, guid: 44cb92dcd4d1ed547bc848f076039ae5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8452647615259560763, guid: 44cb92dcd4d1ed547bc848f076039ae5, type: 3}
+      propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
