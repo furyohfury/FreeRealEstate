@@ -1,6 +1,5 @@
 ﻿using TriInspector;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Game
 {
@@ -14,14 +13,26 @@ namespace Game
         [SerializeField]
         [RequiredGet(InChildren = true)]
         private LaunchCountDownHandler launchCountdownHandler;
+#if UNITY_EDITOR
+        [SerializeField]
+  #endif
+        private bool _launchOnStart = true;
 
-        public async void LaunchSession()
+        private void Start()
+        {
+            if (_launchOnStart)
+            {
+                LaunchSession();
+            }
+        }
+
+        public async Awaitable LaunchSession()
         {
             if (_launchWithCountdown)
             {
                 await launchCountdownHandler.CountdownAsync();
             }
-            
+
             InitLanes();
             GameLoop.Instance.Launch();
         }
