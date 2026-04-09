@@ -87,6 +87,11 @@ namespace Game
 
         public void SetBloomIntensity(float value)
         {
+            if (_bloom == null)
+            {
+                _volume.profile.TryGet(out _bloom);
+            }
+            
             _bloom.intensity.value = value;
         }
     }
