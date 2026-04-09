@@ -1,5 +1,6 @@
 ﻿using TriInspector;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace Game
 {
@@ -30,9 +31,14 @@ namespace Game
             _postProcessController.LaunchAndFadeChromaticAbberation(duration);
         }
 
-        public void SetBloomIntensity(float value)
+        public void SetDayPP()
         {
-            _postProcessController.SetBloomIntensity(value);
+            _postProcessController.SetDayPP();
+        }
+        
+        public void SetNightPP()
+        {
+            _postProcessController.SetNightPP();
         }
     }
 }

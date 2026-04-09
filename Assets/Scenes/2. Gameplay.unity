@@ -93,7 +93,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: df29caae8b904f0499ca2d66d616a0a0, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: 18e1e653e25a5c34d9c0de94f8ec4117, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -3073,6 +3073,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1332770603}
+  - {fileID: 2062571388}
   - {fileID: 567591289}
   m_Father: {fileID: 1174958611}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3135,7 +3136,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 433b0435007549bf9dde48c7d697ada0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.PostProcessController
-  _volume: {fileID: 1332770604}
+  _dayVolume: {fileID: 1332770604}
+  _nightVolume: {fileID: 2062571389}
   _vignetteAnimDuration: 0.3
   _vignetteMaxValue: 0.5
   _chromAbbEndVal: 0.4
@@ -3513,15 +3515,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6869421da7e04bf4acbb118e8dc58aa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.LightChanger
-  _ratio: 1
+  _ratio: 0
   _light: {fileID: 592785659}
   _dayColor: {r: 0.99607843, g: 1, b: 0.9098039, a: 0}
   _nightColor: {r: 0.5176471, g: 0.6745098, b: 1, a: 0}
   _minLightIntensity: 0.73
   _maxLightIntensity: 0.9
   _isActive: 1
-  _minBloom: 20
-  _maxBloom: 110
   _cameraFacade: {fileID: 519420036}
 --- !u!1001 &595769775
 PrefabInstance:
@@ -4397,6 +4397,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 592785660}
+  - {fileID: 2128972445}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &785355530
@@ -5920,12 +5921,70 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 3927224636295491839, guid: 74bb5b023da26b74fb2f6fdb664d1bb6, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3927224636295491839, guid: 74bb5b023da26b74fb2f6fdb664d1bb6, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4288892461208997277, guid: 74bb5b023da26b74fb2f6fdb664d1bb6, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74bb5b023da26b74fb2f6fdb664d1bb6, type: 3}
+--- !u!1 &1070497524
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1070497526}
+  - component: {fileID: 1070497525}
+  m_Layer: 0
+  m_Name: ProbeVolumePerSceneData
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1070497525
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1070497524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a83d2f7ae04ab6f4f99b0d85377be998, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.ProbeVolumePerSceneData
+  serializedBakingSet: {fileID: 11400000, guid: d5e0a33293575b145b94fc44155c4b84, type: 2}
+  sceneGUID: 8c9cfa26abfee488c85f1582747f6a02
+  obsoleteAsset: {fileID: 0}
+  obsoleteCellSharedDataAsset: {fileID: 0}
+  obsoleteCellSupportDataAsset: {fileID: 0}
+  obsoleteSerializedScenarios: []
+--- !u!4 &1070497526
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1070497524}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1087035672
 GameObject:
   m_ObjectHideFlags: 0
@@ -7111,7 +7170,7 @@ GameObject:
   - component: {fileID: 1332770603}
   - component: {fileID: 1332770604}
   m_Layer: 0
-  m_Name: Global Volume
+  m_Name: Day
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10175,6 +10234,55 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e1b34515c498b64380ec03b22a4f6d9, type: 3}
+--- !u!1 &2062571387
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2062571388}
+  - component: {fileID: 2062571389}
+  m_Layer: 0
+  m_Name: Night
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2062571388
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2062571387}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.48555708, y: 0.00009251261, z: 0.0001562934, w: 0.874205}
+  m_LocalPosition: {x: 0.007080552, y: -10.305138, z: 16.55458}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 519420032}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2062571389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2062571387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.Volume
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 0
+  sharedProfile: {fileID: 11400000, guid: 90c45e12a7dbc1f498f8c662ab6ee2ce, type: 2}
 --- !u!4 &2063790941 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1379641026529207157, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
@@ -10337,6 +10445,82 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1379641026529207157, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
   m_PrefabInstance: {fileID: 1312467728}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2128972444
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2128972445}
+  - component: {fileID: 2128972446}
+  m_Layer: 0
+  m_Name: Adaptive Probe Volume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2128972445
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2128972444}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.101944, y: 6.2749424, z: 13.566292}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 779687497}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2128972446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2128972444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cded085d155cde949b60f67a11dbc3bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.ProbeVolume
+  mode: 2
+  size: {x: 65.07762, y: 23.87881, z: 51.444656}
+  overrideRendererFilters: 0
+  minRendererVolumeSize: 0.1
+  objectLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  lowestSubdivLevelOverride: 0
+  highestSubdivLevelOverride: 7
+  overridesSubdivLevels: 0
+  mightNeedRebaking: 0
+  cachedTransform:
+    e00: 1
+    e01: 0
+    e02: 0
+    e03: -1.101944
+    e10: 0
+    e11: 1
+    e12: 0
+    e13: -6.2749424
+    e20: 0
+    e21: 0
+    e22: 1
+    e23: -13.566292
+    e30: 0
+    e31: 0
+    e32: 0
+    e33: 1
+  cachedHashCode: -1936820086
+  fillEmptySpaces: 0
+  version: 2
+  globalVolume: 0
 --- !u!4 &2133108159 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3774934006573583763, guid: c88b29e8e824c7443aa9715801b96e25, type: 3}
@@ -10701,6 +10885,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -62.19125
       objectReference: {fileID: 0}
+    - target: {fileID: 8531763692176757638, guid: dcbd22b434c01484bbefded496dc6a14, type: 3}
+      propertyPath: _lightChanger
+      value: 
+      objectReference: {fileID: 592785661}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10718,3 +10906,4 @@ SceneRoots:
   - {fileID: 431413326}
   - {fileID: 1540178944}
   - {fileID: 52482599}
+  - {fileID: 1070497526}
