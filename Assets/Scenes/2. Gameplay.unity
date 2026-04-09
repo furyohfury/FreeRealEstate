@@ -3554,7 +3554,7 @@ Light:
   serializedVersion: 12
   m_Type: 1
   m_Color: {r: 0.99607843, g: 1, b: 0.9098039, a: 0}
-  m_Intensity: 0.9
+  m_Intensity: 0.35
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -3639,8 +3639,8 @@ MonoBehaviour:
   _light: {fileID: 592785659}
   _dayColor: {r: 0.99607843, g: 1, b: 0.9098039, a: 0}
   _nightColor: {r: 0.5176471, g: 0.6745098, b: 1, a: 0}
-  _minLightIntensity: 0.73
-  _maxLightIntensity: 0.9
+  _minLightIntensity: 0.15
+  _maxLightIntensity: 0.35
   _isActive: 1
   _cameraFacade: {fileID: 519420036}
 --- !u!1001 &595769775
