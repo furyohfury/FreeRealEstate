@@ -21,6 +21,7 @@ namespace Game
 
         private Vignette _vignette;
         private ChromaticAberration _chromaticAberration;
+        private Bloom _bloom;
         private Tween _activeVignetteTween;
         private Tween _activeChromAbTween;
 
@@ -42,6 +43,15 @@ namespace Game
             else
             {
                 Debug.LogError("chromatic abberation not found!");
+            }
+            
+            if (_volume.profile.TryGet(out _bloom))
+            {
+                Debug.Log("bloom found and ready!");
+            }
+            else
+            {
+                Debug.LogError("bloom not found!");
             }
         }
 
@@ -73,6 +83,11 @@ namespace Game
                                                         .SetEase(Ease.OutExpo))
                                          .Append(DOTween.To(getter, setter, 0, duration * (1 - _chromAbIncreaseDurationRatio))
                                                         .SetEase(Ease.InQuart));
+        }
+
+        public void SetBloomIntensity(float value)
+        {
+            _bloom.intensity.value = value;
         }
     }
 }

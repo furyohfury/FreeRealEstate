@@ -175,6 +175,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_inner_001
       objectReference: {fileID: 0}
+    - target: {fileID: 4543943674653384118, guid: 0cdcef42fbfbe414f95c818069f78a30, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -1039156084143216794, guid: 0cdcef42fbfbe414f95c818069f78a30, type: 3}
     m_RemovedGameObjects: []
@@ -378,6 +382,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Garland_002
       objectReference: {fileID: 0}
+    - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4339793726029327857, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
     m_RemovedGameObjects: []
@@ -457,6 +465,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 469197264}
     m_Modifications:
+    - target: {fileID: 2715127121304729710, guid: 3bee5d43780285348a05036e0b9c6fa8, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 8823fa4c5d66a8f4fbb425f6ee337828, type: 2}
     - target: {fileID: 3883577770252059393, guid: 3bee5d43780285348a05036e0b9c6fa8, type: 3}
       propertyPath: m_RootOrder
       value: 37
@@ -504,6 +516,10 @@ PrefabInstance:
     - target: {fileID: 4516808934443063739, guid: 3bee5d43780285348a05036e0b9c6fa8, type: 3}
       propertyPath: m_Name
       value: Christmass_tree_outdoor_001_toys
+      objectReference: {fileID: 0}
+    - target: {fileID: 4516808934443063739, guid: 3bee5d43780285348a05036e0b9c6fa8, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -7758573482534788318, guid: 3bee5d43780285348a05036e0b9c6fa8, type: 3}
@@ -582,6 +598,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Window_003
       objectReference: {fileID: 0}
+    - target: {fileID: 4328231868600002578, guid: 1f5435dd1cd939a4d98f4a786a119cbd, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -1025726248277893428, guid: 1f5435dd1cd939a4d98f4a786a119cbd, type: 3}
     m_RemovedGameObjects: []
@@ -648,6 +668,10 @@ PrefabInstance:
     - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
       propertyPath: m_Name
       value: Garland_002
+      objectReference: {fileID: 0}
+    - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4339793726029327857, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
@@ -755,6 +779,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Garland_002
       objectReference: {fileID: 0}
+    - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4339793726029327857, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
     m_RemovedGameObjects: []
@@ -816,6 +844,10 @@ PrefabInstance:
     - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
       propertyPath: m_Name
       value: Garland_002
+      objectReference: {fileID: 0}
+    - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4339793726029327857, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
@@ -906,6 +938,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_outer_001
       objectReference: {fileID: 0}
+    - target: {fileID: 7144978476174690312, guid: f3d21e1a9b8f2574ea3f21a68466a91a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 7522067721065075378, guid: f3d21e1a9b8f2574ea3f21a68466a91a, type: 3}
       propertyPath: m_RootOrder
       value: 179
@@ -974,9 +1010,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1087035673}
     m_Modifications:
+    - target: {fileID: 795454333733180095, guid: 2bbfc4ecb43ee6049b78c7150cc36e4d, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 8823fa4c5d66a8f4fbb425f6ee337828, type: 2}
     - target: {fileID: 1156011066574615402, guid: 2bbfc4ecb43ee6049b78c7150cc36e4d, type: 3}
       propertyPath: m_Name
       value: Christmass_tree_outdoor_002_toys
+      objectReference: {fileID: 0}
+    - target: {fileID: 1156011066574615402, guid: 2bbfc4ecb43ee6049b78c7150cc36e4d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 1963896388314589648, guid: 2bbfc4ecb43ee6049b78c7150cc36e4d, type: 3}
       propertyPath: m_RootOrder
@@ -1173,6 +1217,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Advent_Wreath_001
       objectReference: {fileID: 0}
+    - target: {fileID: 5501403547063627283, guid: 0268fd46cef47d24386a60116c9495d5, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8428136376405942977, guid: 0268fd46cef47d24386a60116c9495d5, type: 3}
     m_RemovedGameObjects: []
@@ -1200,6 +1248,10 @@ PrefabInstance:
     - target: {fileID: 4755945041573273157, guid: ad41006cd3d6b43479d181a8146b80eb, type: 3}
       propertyPath: m_Name
       value: Advent_Wreath_002
+      objectReference: {fileID: 0}
+    - target: {fileID: 4755945041573273157, guid: ad41006cd3d6b43479d181a8146b80eb, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 5281405687747904767, guid: ad41006cd3d6b43479d181a8146b80eb, type: 3}
       propertyPath: m_RootOrder
@@ -1307,6 +1359,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Garland_002
       objectReference: {fileID: 0}
+    - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4339793726029327857, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
     m_RemovedGameObjects: []
@@ -1392,6 +1448,10 @@ PrefabInstance:
     - target: {fileID: 8351277942054819853, guid: 2731b460379e78545b65f73dce9fdb7d, type: 3}
       propertyPath: m_Name
       value: Fireplace_001
+      objectReference: {fileID: 0}
+    - target: {fileID: 8351277942054819853, guid: 2731b460379e78545b65f73dce9fdb7d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8695997495350379191, guid: 2731b460379e78545b65f73dce9fdb7d, type: 3}
       propertyPath: m_RootOrder
@@ -1499,6 +1559,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Garland_002
       objectReference: {fileID: 0}
+    - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4339793726029327857, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
     m_RemovedGameObjects: []
@@ -1566,6 +1630,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Garland_002
       objectReference: {fileID: 0}
+    - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4339793726029327857, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
     m_RemovedGameObjects: []
@@ -1583,6 +1651,10 @@ PrefabInstance:
     - target: {fileID: 6345861093222237187, guid: 2b9bcbe1e6951e54b9e58c8157008f0e, type: 3}
       propertyPath: m_Name
       value: FX_Smoke_Big
+      objectReference: {fileID: 0}
+    - target: {fileID: 6345861093222237187, guid: 2b9bcbe1e6951e54b9e58c8157008f0e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6454284519261384081, guid: 2b9bcbe1e6951e54b9e58c8157008f0e, type: 3}
       propertyPath: m_RootOrder
@@ -1713,6 +1785,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Garland_002
       objectReference: {fileID: 0}
+    - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4339793726029327857, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
     m_RemovedGameObjects: []
@@ -1730,6 +1806,10 @@ PrefabInstance:
     - target: {fileID: 4755945041573273157, guid: ad41006cd3d6b43479d181a8146b80eb, type: 3}
       propertyPath: m_Name
       value: Advent_Wreath_002
+      objectReference: {fileID: 0}
+    - target: {fileID: 4755945041573273157, guid: ad41006cd3d6b43479d181a8146b80eb, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 5281405687747904767, guid: ad41006cd3d6b43479d181a8146b80eb, type: 3}
       propertyPath: m_RootOrder
@@ -1837,6 +1917,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cookie_002
       objectReference: {fileID: 0}
+    - target: {fileID: 5377468448086750318, guid: 55772c7cde3b1614cb22f0b2e29dc738, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -6592426726858721179, guid: 55772c7cde3b1614cb22f0b2e29dc738, type: 3}
     m_RemovedGameObjects: []
@@ -1929,6 +2013,10 @@ PrefabInstance:
     - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
       propertyPath: m_Name
       value: Garland_002
+      objectReference: {fileID: 0}
+    - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4339793726029327857, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
@@ -2085,6 +2173,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4339793726029327857, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
     m_RemovedGameObjects: []
@@ -2157,6 +2249,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Garland_002
       objectReference: {fileID: 0}
+    - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4339793726029327857, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
     m_RemovedGameObjects: []
@@ -2219,6 +2315,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Garland_002
       objectReference: {fileID: 0}
+    - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4339793726029327857, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
     m_RemovedGameObjects: []
@@ -2239,7 +2339,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &431413326
 Transform:
@@ -2358,6 +2458,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Garland_002
       objectReference: {fileID: 0}
+    - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4339793726029327857, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
     m_RemovedGameObjects: []
@@ -2420,6 +2524,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Window_003
       objectReference: {fileID: 0}
+    - target: {fileID: 4328231868600002578, guid: 1f5435dd1cd939a4d98f4a786a119cbd, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -1025726248277893428, guid: 1f5435dd1cd939a4d98f4a786a119cbd, type: 3}
     m_RemovedGameObjects: []
@@ -2440,7 +2548,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &469197264
 Transform:
@@ -2514,6 +2622,10 @@ PrefabInstance:
     - target: {fileID: 1159746251306103037, guid: dbdfcf54c2a98004caa624e11b4897b2, type: 3}
       propertyPath: m_Name
       value: Garland_001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1159746251306103037, guid: dbdfcf54c2a98004caa624e11b4897b2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 1969181064366697031, guid: dbdfcf54c2a98004caa624e11b4897b2, type: 3}
       propertyPath: m_RootOrder
@@ -2638,6 +2750,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Window_002
       objectReference: {fileID: 0}
+    - target: {fileID: 8837560311667032801, guid: 4732c4b3588a8cb4483f005b2f62d13b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7358868933024366859, guid: 4732c4b3588a8cb4483f005b2f62d13b, type: 3}
     m_RemovedGameObjects: []
@@ -2700,6 +2816,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Garland_002
       objectReference: {fileID: 0}
+    - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4339793726029327857, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
     m_RemovedGameObjects: []
@@ -2720,7 +2840,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &508519884
 Transform:
@@ -2797,6 +2917,10 @@ PrefabInstance:
     - target: {fileID: 2902935286476033616, guid: 0d7ca4c896f724c41ad86f6ff04a4d3f, type: 3}
       propertyPath: m_Name
       value: Door_001
+      objectReference: {fileID: 0}
+    - target: {fileID: 2902935286476033616, guid: 0d7ca4c896f724c41ad86f6ff04a4d3f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1871248104294394908, guid: 0d7ca4c896f724c41ad86f6ff04a4d3f, type: 3}
@@ -2932,7 +3056,7 @@ Camera:
   m_AllowMSAA: 0
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
-  m_OcclusionCulling: 0
+  m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
 --- !u!4 &519420032
@@ -3094,6 +3218,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Snow_001
       objectReference: {fileID: 0}
+    - target: {fileID: 1876022170203810109, guid: 671990e981a3c9e43bf1c64e2062e81e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -3776326413991790380, guid: 671990e981a3c9e43bf1c64e2062e81e, type: 3}
     m_RemovedGameObjects: []
@@ -3235,6 +3363,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Garland_002
       objectReference: {fileID: 0}
+    - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4339793726029327857, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
     m_RemovedGameObjects: []
@@ -3299,8 +3431,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 12
   m_Type: 1
-  m_Color: {r: 0.99607843, g: 1, b: 0.9098039, a: 0}
-  m_Intensity: 1
+  m_Color: {r: 0.5176471, g: 0.6745098, b: 1, a: 0}
+  m_Intensity: 0.73
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -3309,7 +3441,7 @@ Light:
     m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 1
+    m_Strength: 0
     m_Bias: 0.05
     m_NormalBias: 0.4
     m_NearPlane: 0.2
@@ -3381,13 +3513,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6869421da7e04bf4acbb118e8dc58aa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.LightChanger
-  _ratio: 1
+  _ratio: 0
   _light: {fileID: 592785659}
   _dayColor: {r: 0.99607843, g: 1, b: 0.9098039, a: 0}
   _nightColor: {r: 0.5176471, g: 0.6745098, b: 1, a: 0}
   _minLightIntensity: 0.73
   _maxLightIntensity: 1
   _isActive: 1
+  _minBloom: 20
+  _maxBloom: 110
 --- !u!1001 &595769775
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3399,6 +3533,10 @@ PrefabInstance:
     - target: {fileID: 8085374717042186563, guid: 8ab2e2d7945b929479944c632cfc4263, type: 3}
       propertyPath: m_Name
       value: Wall_003
+      objectReference: {fileID: 0}
+    - target: {fileID: 8085374717042186563, guid: 8ab2e2d7945b929479944c632cfc4263, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8898785050700088313, guid: 8ab2e2d7945b929479944c632cfc4263, type: 3}
       propertyPath: m_RootOrder
@@ -3568,6 +3706,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shugar_cane_001
       objectReference: {fileID: 0}
+    - target: {fileID: 6419205389590542079, guid: 179ed0039d548844b87bf2d298733861, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6848670943834855261, guid: 179ed0039d548844b87bf2d298733861, type: 3}
     m_RemovedGameObjects: []
@@ -3638,6 +3780,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Snow_002
       objectReference: {fileID: 0}
+    - target: {fileID: 5363169886205690306, guid: 0d600960c418101498db7857340adf66, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -7498236884066095026, guid: 0d600960c418101498db7857340adf66, type: 3}
     m_RemovedGameObjects: []
@@ -3699,6 +3845,10 @@ PrefabInstance:
     - target: {fileID: 3260685455750970846, guid: ab8348f32dfde3d41b9998dcf80000f9, type: 3}
       propertyPath: m_Name
       value: Doorway_001
+      objectReference: {fileID: 0}
+    - target: {fileID: 3260685455750970846, guid: ab8348f32dfde3d41b9998dcf80000f9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -1477033503522357619, guid: ab8348f32dfde3d41b9998dcf80000f9, type: 3}
@@ -3781,6 +3931,10 @@ PrefabInstance:
     - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
       propertyPath: m_Name
       value: Garland_002
+      objectReference: {fileID: 0}
+    - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4339793726029327857, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
@@ -3932,6 +4086,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Garland_002
       objectReference: {fileID: 0}
+    - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4339793726029327857, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
     m_RemovedGameObjects: []
@@ -3998,6 +4156,10 @@ PrefabInstance:
     - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
       propertyPath: m_Name
       value: Garland_002
+      objectReference: {fileID: 0}
+    - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4339793726029327857, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
@@ -4066,6 +4228,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Garland_002
       objectReference: {fileID: 0}
+    - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4339793726029327857, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
     m_RemovedGameObjects: []
@@ -4083,6 +4249,10 @@ PrefabInstance:
     - target: {fileID: 8172462342696755652, guid: bcaa1bf032370b24585c1d90243bc773, type: 3}
       propertyPath: m_Name
       value: Carpet_001
+      objectReference: {fileID: 0}
+    - target: {fileID: 8172462342696755652, guid: bcaa1bf032370b24585c1d90243bc773, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8800521442291759998, guid: bcaa1bf032370b24585c1d90243bc773, type: 3}
       propertyPath: m_RootOrder
@@ -4391,6 +4561,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cookie_002
       objectReference: {fileID: 0}
+    - target: {fileID: 5377468448086750318, guid: 55772c7cde3b1614cb22f0b2e29dc738, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -6592426726858721179, guid: 55772c7cde3b1614cb22f0b2e29dc738, type: 3}
     m_RemovedGameObjects: []
@@ -4452,6 +4626,10 @@ PrefabInstance:
     - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
       propertyPath: m_Name
       value: Garland_002
+      objectReference: {fileID: 0}
+    - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4339793726029327857, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
@@ -4529,6 +4707,10 @@ PrefabInstance:
     - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
       propertyPath: m_Name
       value: Garland_002
+      objectReference: {fileID: 0}
+    - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4339793726029327857, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
@@ -4645,6 +4827,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Snow_004
       objectReference: {fileID: 0}
+    - target: {fileID: 647957117042814694, guid: 5eec5bf5fcf24cd489cbe36ddde442b9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6800637740409161753, guid: 5eec5bf5fcf24cd489cbe36ddde442b9, type: 3}
     m_RemovedGameObjects: []
@@ -4670,7 +4856,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &892151860
 Transform:
@@ -4917,6 +5103,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shugar_cane_001
       objectReference: {fileID: 0}
+    - target: {fileID: 6419205389590542079, guid: 179ed0039d548844b87bf2d298733861, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6848670943834855261, guid: 179ed0039d548844b87bf2d298733861, type: 3}
     m_RemovedGameObjects: []
@@ -4979,6 +5169,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Garland_002
       objectReference: {fileID: 0}
+    - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4339793726029327857, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
     m_RemovedGameObjects: []
@@ -5040,6 +5234,10 @@ PrefabInstance:
     - target: {fileID: 1091493081811914466, guid: 594b01e3c91beb143b6d7c58f85d4516, type: 3}
       propertyPath: m_Name
       value: Window_001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1091493081811914466, guid: 594b01e3c91beb143b6d7c58f85d4516, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4937284772979477311, guid: 594b01e3c91beb143b6d7c58f85d4516, type: 3}
@@ -5107,6 +5305,10 @@ PrefabInstance:
     - target: {fileID: 7955626931715396609, guid: 5f9cb2d09f68d344b8c82a18d25930f3, type: 3}
       propertyPath: m_Name
       value: Floor_001
+      objectReference: {fileID: 0}
+    - target: {fileID: 7955626931715396609, guid: 5f9cb2d09f68d344b8c82a18d25930f3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5543240567444697905, guid: 5f9cb2d09f68d344b8c82a18d25930f3, type: 3}
@@ -5181,6 +5383,10 @@ PrefabInstance:
     - target: {fileID: 4551048871730222889, guid: c88b29e8e824c7443aa9715801b96e25, type: 3}
       propertyPath: m_Name
       value: Fence_001
+      objectReference: {fileID: 0}
+    - target: {fileID: 4551048871730222889, guid: c88b29e8e824c7443aa9715801b96e25, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -5293916132367233661, guid: c88b29e8e824c7443aa9715801b96e25, type: 3}
@@ -5260,6 +5466,10 @@ PrefabInstance:
     - target: {fileID: 4551048871730222889, guid: c88b29e8e824c7443aa9715801b96e25, type: 3}
       propertyPath: m_Name
       value: Fence_001
+      objectReference: {fileID: 0}
+    - target: {fileID: 4551048871730222889, guid: c88b29e8e824c7443aa9715801b96e25, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -5293916132367233661, guid: c88b29e8e824c7443aa9715801b96e25, type: 3}
@@ -5424,6 +5634,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Garland_002
       objectReference: {fileID: 0}
+    - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4339793726029327857, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
     m_RemovedGameObjects: []
@@ -5485,6 +5699,10 @@ PrefabInstance:
     - target: {fileID: 5501403547063627283, guid: 0268fd46cef47d24386a60116c9495d5, type: 3}
       propertyPath: m_Name
       value: Advent_Wreath_001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5501403547063627283, guid: 0268fd46cef47d24386a60116c9495d5, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8428136376405942977, guid: 0268fd46cef47d24386a60116c9495d5, type: 3}
@@ -5548,6 +5766,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Garland_002
       objectReference: {fileID: 0}
+    - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4339793726029327857, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
     m_RemovedGameObjects: []
@@ -5570,6 +5792,10 @@ PrefabInstance:
     - target: {fileID: 8477332754857607652, guid: 11ad218192f271b418eee6e3e07128ec, type: 3}
       propertyPath: m_Name
       value: Roof_snow_001
+      objectReference: {fileID: 0}
+    - target: {fileID: 8477332754857607652, guid: 11ad218192f271b418eee6e3e07128ec, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 9146346391107410782, guid: 11ad218192f271b418eee6e3e07128ec, type: 3}
       propertyPath: m_RootOrder
@@ -5689,6 +5915,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Christmass_tree_outdoor_002
       objectReference: {fileID: 0}
+    - target: {fileID: 3278815760241234218, guid: 74bb5b023da26b74fb2f6fdb664d1bb6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4288892461208997277, guid: 74bb5b023da26b74fb2f6fdb664d1bb6, type: 3}
     m_RemovedGameObjects: []
@@ -5709,7 +5939,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1087035673
 Transform:
@@ -5794,6 +6024,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Doorway_001
       objectReference: {fileID: 0}
+    - target: {fileID: 3260685455750970846, guid: ab8348f32dfde3d41b9998dcf80000f9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -1477033503522357619, guid: ab8348f32dfde3d41b9998dcf80000f9, type: 3}
     m_RemovedGameObjects: []
@@ -5816,6 +6050,10 @@ PrefabInstance:
     - target: {fileID: 2749786562971381511, guid: 0dd92bbac3ac99f42a0dfd31c13b2d87, type: 3}
       propertyPath: m_Name
       value: Wall_001
+      objectReference: {fileID: 0}
+    - target: {fileID: 2749786562971381511, guid: 0dd92bbac3ac99f42a0dfd31c13b2d87, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 3270427946333861309, guid: 0dd92bbac3ac99f42a0dfd31c13b2d87, type: 3}
       propertyPath: m_RootOrder
@@ -5923,6 +6161,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Garland_002
       objectReference: {fileID: 0}
+    - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4339793726029327857, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
     m_RemovedGameObjects: []
@@ -5989,6 +6231,10 @@ PrefabInstance:
     - target: {fileID: 7829747104588887492, guid: 13a221abab35b6942a078372f129fec6, type: 3}
       propertyPath: m_Name
       value: Wall_002
+      objectReference: {fileID: 0}
+    - target: {fileID: 7829747104588887492, guid: 13a221abab35b6942a078372f129fec6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1915607834662017962, guid: 13a221abab35b6942a078372f129fec6, type: 3}
@@ -6120,6 +6366,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fence_001
       objectReference: {fileID: 0}
+    - target: {fileID: 4551048871730222889, guid: c88b29e8e824c7443aa9715801b96e25, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -5293916132367233661, guid: c88b29e8e824c7443aa9715801b96e25, type: 3}
     m_RemovedGameObjects: []
@@ -6181,6 +6431,10 @@ PrefabInstance:
     - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
       propertyPath: m_Name
       value: Garland_002
+      objectReference: {fileID: 0}
+    - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4339793726029327857, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
@@ -6249,6 +6503,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door_001
       objectReference: {fileID: 0}
+    - target: {fileID: 2902935286476033616, guid: 0d7ca4c896f724c41ad86f6ff04a4d3f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1871248104294394908, guid: 0d7ca4c896f724c41ad86f6ff04a4d3f, type: 3}
     m_RemovedGameObjects: []
@@ -6311,6 +6569,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Garland_002
       objectReference: {fileID: 0}
+    - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4339793726029327857, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
     m_RemovedGameObjects: []
@@ -6328,6 +6590,10 @@ PrefabInstance:
     - target: {fileID: 7144978476174690312, guid: f3d21e1a9b8f2574ea3f21a68466a91a, type: 3}
       propertyPath: m_Name
       value: Roof_outer_001
+      objectReference: {fileID: 0}
+    - target: {fileID: 7144978476174690312, guid: f3d21e1a9b8f2574ea3f21a68466a91a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 7522067721065075378, guid: f3d21e1a9b8f2574ea3f21a68466a91a, type: 3}
       propertyPath: m_RootOrder
@@ -6454,6 +6720,10 @@ PrefabInstance:
     - target: {fileID: 4328231868600002578, guid: 1f5435dd1cd939a4d98f4a786a119cbd, type: 3}
       propertyPath: m_Name
       value: Window_003
+      objectReference: {fileID: 0}
+    - target: {fileID: 4328231868600002578, guid: 1f5435dd1cd939a4d98f4a786a119cbd, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -1025726248277893428, guid: 1f5435dd1cd939a4d98f4a786a119cbd, type: 3}
@@ -6590,6 +6860,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Garland_002
       objectReference: {fileID: 0}
+    - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4339793726029327857, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
     m_RemovedGameObjects: []
@@ -6607,6 +6881,10 @@ PrefabInstance:
     - target: {fileID: 4755945041573273157, guid: ad41006cd3d6b43479d181a8146b80eb, type: 3}
       propertyPath: m_Name
       value: Advent_Wreath_002
+      objectReference: {fileID: 0}
+    - target: {fileID: 4755945041573273157, guid: ad41006cd3d6b43479d181a8146b80eb, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 5281405687747904767, guid: ad41006cd3d6b43479d181a8146b80eb, type: 3}
       propertyPath: m_RootOrder
@@ -6714,6 +6992,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Garland_002
       objectReference: {fileID: 0}
+    - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4339793726029327857, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
     m_RemovedGameObjects: []
@@ -6806,6 +7088,10 @@ PrefabInstance:
     - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
       propertyPath: m_Name
       value: Garland_002
+      objectReference: {fileID: 0}
+    - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4339793726029327857, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
@@ -6980,6 +7266,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Garland_002
       objectReference: {fileID: 0}
+    - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4339793726029327857, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
     m_RemovedGameObjects: []
@@ -7047,6 +7337,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shugar_cane_001
       objectReference: {fileID: 0}
+    - target: {fileID: 6419205389590542079, guid: 179ed0039d548844b87bf2d298733861, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6848670943834855261, guid: 179ed0039d548844b87bf2d298733861, type: 3}
     m_RemovedGameObjects: []
@@ -7064,6 +7358,10 @@ PrefabInstance:
     - target: {fileID: 4755945041573273157, guid: ad41006cd3d6b43479d181a8146b80eb, type: 3}
       propertyPath: m_Name
       value: Advent_Wreath_002
+      objectReference: {fileID: 0}
+    - target: {fileID: 4755945041573273157, guid: ad41006cd3d6b43479d181a8146b80eb, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 5281405687747904767, guid: ad41006cd3d6b43479d181a8146b80eb, type: 3}
       propertyPath: m_RootOrder
@@ -7237,6 +7535,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Garland_002
       objectReference: {fileID: 0}
+    - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4339793726029327857, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
     m_RemovedGameObjects: []
@@ -7387,6 +7689,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Garland_002
       objectReference: {fileID: 0}
+    - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4339793726029327857, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
     m_RemovedGameObjects: []
@@ -7497,6 +7803,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Garland_002
       objectReference: {fileID: 0}
+    - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4339793726029327857, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
     m_RemovedGameObjects: []
@@ -7557,6 +7867,10 @@ PrefabInstance:
     - target: {fileID: 4755945041573273157, guid: ad41006cd3d6b43479d181a8146b80eb, type: 3}
       propertyPath: m_Name
       value: Advent_Wreath_002
+      objectReference: {fileID: 0}
+    - target: {fileID: 4755945041573273157, guid: ad41006cd3d6b43479d181a8146b80eb, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 5281405687747904767, guid: ad41006cd3d6b43479d181a8146b80eb, type: 3}
       propertyPath: m_RootOrder
@@ -7664,6 +7978,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Window_002
       objectReference: {fileID: 0}
+    - target: {fileID: 8837560311667032801, guid: 4732c4b3588a8cb4483f005b2f62d13b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7358868933024366859, guid: 4732c4b3588a8cb4483f005b2f62d13b, type: 3}
     m_RemovedGameObjects: []
@@ -7726,6 +8044,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor_001
       objectReference: {fileID: 0}
+    - target: {fileID: 7955626931715396609, guid: 5f9cb2d09f68d344b8c82a18d25930f3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5543240567444697905, guid: 5f9cb2d09f68d344b8c82a18d25930f3, type: 3}
     m_RemovedGameObjects: []
@@ -7751,7 +8073,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1516665638
 Transform:
@@ -7901,6 +8223,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fireplace_pipe_001
       objectReference: {fileID: 0}
+    - target: {fileID: 1877452161889427948, guid: 90754adbf49159c42bd59d56d20b7115, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -6961178655265379689, guid: 90754adbf49159c42bd59d56d20b7115, type: 3}
     m_RemovedGameObjects: []
@@ -8049,6 +8375,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Garland_002
       objectReference: {fileID: 0}
+    - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4339793726029327857, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
     m_RemovedGameObjects: []
@@ -8123,6 +8453,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall_004
       objectReference: {fileID: 0}
+    - target: {fileID: 5830633761777005181, guid: 1ee42b75a38562b4b860175198062d5a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 6602631299149490375, guid: 1ee42b75a38562b4b860175198062d5a, type: 3}
       propertyPath: m_RootOrder
       value: 212
@@ -8194,6 +8528,10 @@ PrefabInstance:
     - target: {fileID: 4755945041573273157, guid: ad41006cd3d6b43479d181a8146b80eb, type: 3}
       propertyPath: m_Name
       value: Advent_Wreath_002
+      objectReference: {fileID: 0}
+    - target: {fileID: 4755945041573273157, guid: ad41006cd3d6b43479d181a8146b80eb, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 5281405687747904767, guid: ad41006cd3d6b43479d181a8146b80eb, type: 3}
       propertyPath: m_RootOrder
@@ -8306,6 +8644,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Garland_002
       objectReference: {fileID: 0}
+    - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4339793726029327857, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
     m_RemovedGameObjects: []
@@ -8415,6 +8757,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Garland_002
       objectReference: {fileID: 0}
+    - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4339793726029327857, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
     m_RemovedGameObjects: []
@@ -8476,6 +8822,10 @@ PrefabInstance:
     - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
       propertyPath: m_Name
       value: Garland_002
+      objectReference: {fileID: 0}
+    - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4339793726029327857, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
@@ -8570,6 +8920,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Light_003
       objectReference: {fileID: 0}
+    - target: {fileID: 2257811852639896433, guid: 38146d75fe1b6f943a5a253d0c5cc8da, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1756554893604775472, guid: 38146d75fe1b6f943a5a253d0c5cc8da, type: 3}
     m_RemovedGameObjects: []
@@ -8658,6 +9012,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Garland_002
       objectReference: {fileID: 0}
+    - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4339793726029327857, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
     m_RemovedGameObjects: []
@@ -8685,7 +9043,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!23 &1818007423
 MeshRenderer:
@@ -8815,6 +9173,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Garland_002
       objectReference: {fileID: 0}
+    - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4339793726029327857, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
     m_RemovedGameObjects: []
@@ -8832,6 +9194,10 @@ PrefabInstance:
     - target: {fileID: 4755945041573273157, guid: ad41006cd3d6b43479d181a8146b80eb, type: 3}
       propertyPath: m_Name
       value: Advent_Wreath_002
+      objectReference: {fileID: 0}
+    - target: {fileID: 4755945041573273157, guid: ad41006cd3d6b43479d181a8146b80eb, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 5281405687747904767, guid: ad41006cd3d6b43479d181a8146b80eb, type: 3}
       propertyPath: m_RootOrder
@@ -9113,6 +9479,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Garland_002
       objectReference: {fileID: 0}
+    - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4339793726029327857, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
     m_RemovedGameObjects: []
@@ -9185,6 +9555,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Garland_002
       objectReference: {fileID: 0}
+    - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4339793726029327857, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
     m_RemovedGameObjects: []
@@ -9256,6 +9630,10 @@ PrefabInstance:
     - target: {fileID: 6419205389590542079, guid: 179ed0039d548844b87bf2d298733861, type: 3}
       propertyPath: m_Name
       value: Shugar_cane_001
+      objectReference: {fileID: 0}
+    - target: {fileID: 6419205389590542079, guid: 179ed0039d548844b87bf2d298733861, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6848670943834855261, guid: 179ed0039d548844b87bf2d298733861, type: 3}
@@ -9350,6 +9728,10 @@ PrefabInstance:
     - target: {fileID: 4551048871730222889, guid: c88b29e8e824c7443aa9715801b96e25, type: 3}
       propertyPath: m_Name
       value: Fence_001
+      objectReference: {fileID: 0}
+    - target: {fileID: 4551048871730222889, guid: c88b29e8e824c7443aa9715801b96e25, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -5293916132367233661, guid: c88b29e8e824c7443aa9715801b96e25, type: 3}
@@ -9461,6 +9843,10 @@ PrefabInstance:
     - target: {fileID: 1091493081811914466, guid: 594b01e3c91beb143b6d7c58f85d4516, type: 3}
       propertyPath: m_Name
       value: Window_001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1091493081811914466, guid: 594b01e3c91beb143b6d7c58f85d4516, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4937284772979477311, guid: 594b01e3c91beb143b6d7c58f85d4516, type: 3}
@@ -9641,6 +10027,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Garland_002
       objectReference: {fileID: 0}
+    - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4339793726029327857, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
     m_RemovedGameObjects: []
@@ -9718,6 +10108,10 @@ PrefabInstance:
     - target: {fileID: 1663994014040997299, guid: 7e1b34515c498b64380ec03b22a4f6d9, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1663994014040997299, guid: 7e1b34515c498b64380ec03b22a4f6d9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 2043615059950331657, guid: 7e1b34515c498b64380ec03b22a4f6d9, type: 3}
       propertyPath: m_RootOrder
@@ -9841,6 +10235,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Christmass_tree_outdoor_001
       objectReference: {fileID: 0}
+    - target: {fileID: 5376877495823139868, guid: ab3f65ad7588f97469371bd7acee8557, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1295271678492511001, guid: ab3f65ad7588f97469371bd7acee8557, type: 3}
     m_RemovedGameObjects: []
@@ -9907,6 +10305,10 @@ PrefabInstance:
     - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
       propertyPath: m_Name
       value: Garland_002
+      objectReference: {fileID: 0}
+    - target: {fileID: 1760529878045981135, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4339793726029327857, guid: 9d8b9d525333d754d801b20c28057093, type: 3}

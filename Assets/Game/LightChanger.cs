@@ -21,6 +21,10 @@ namespace Game
         private float _maxLightIntensity;
         [SerializeField]
         private bool _isActive = true;
+        [SerializeField]
+        private float _minBloom = 30f;
+        [SerializeField]
+        private float _maxBloom = 110f;
 
         private const float HALF_DAY_SECONDS = 43200f;
 
@@ -49,6 +53,17 @@ namespace Game
         }
 
         private void SetTimeOfDay(float ratio)
+        {
+            _ratio = ratio;
+            SetLight(ratio);
+
+            if (CameraProvider.Instance != null)
+            {
+                CameraProvider.Instance.CameraFacade.SetBloomIntensity(Mathf.Lerp(_maxBloom, _minBloom, ratio));
+            }
+        }
+
+        private void SetLight(float ratio)
         {
             _light.color = Color.Lerp(_nightColor, _dayColor, ratio);
             _light.intensity = Mathf.Lerp(_minLightIntensity, _maxLightIntensity, ratio);
