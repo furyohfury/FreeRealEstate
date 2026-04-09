@@ -29,5 +29,10 @@ namespace Game
         {
             _postProcessController.LaunchAndFadeChromaticAbberation(duration);
         }
+
+        public void SetBloomIntensity(float value)
+        {
+            _postProcessController.SetBloomIntensity(value);
+        }
     }
 }
