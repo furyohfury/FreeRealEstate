@@ -11,14 +11,20 @@ namespace Game.Application
         private float _maxHealth = 100f;
         [SerializeField]
         private bool _trackDeath = true;
-        [SerializeField] [Range(0f, 1f)]
+        [SerializeField]
+        [Range(0f, 1f)]
         private float _musicVolume = 0.25f;
-        [SerializeField] [Required]
+        [SerializeField]
+        private float _dayMainLightIntensity = 0.35f;
+        [SerializeField]
+        private float _nightMainLightIntensity = 0.15f;
+        [SerializeField]
+        [Required]
         private SessionParamsStorageConfig _sessionParamsStorageConfig;
-        private SessionParamsStorage _sessionParamsStorage;
         [SerializeField]
         private string _sessionParamsStorageURL =
             "https://raw.githubusercontent.com/furyohfury/FreeRealEstate/refs/heads/conveyors-yandex/Assets/StreamingAssets/SessionParamsStorage.json";
+        private SessionParamsStorage _sessionParamsStorage;
 
         public async Awaitable Init()
         {
@@ -49,6 +55,24 @@ namespace Game.Application
                 Debug.LogWarning($"Couldnt get flag {YGAppConfigurationFlags.MUSIC_VOLUME_MULT} from YG. Taking default</color>");
             }
 
+            if (YG2.TryGetFlagAsFloat(YGAppConfigurationFlags.DAY_MAIN_LIGHT_INTENSITY, out _dayMainLightIntensity))
+            {
+                Debug.Log($"<color=green>Got flag {YGAppConfigurationFlags.DAY_MAIN_LIGHT_INTENSITY} from YG</color>");
+            }
+            else
+            {
+                Debug.LogWarning($"Couldnt get flag {YGAppConfigurationFlags.DAY_MAIN_LIGHT_INTENSITY} from YG. Taking default</color>");
+            }
+
+            if (YG2.TryGetFlagAsFloat(YGAppConfigurationFlags.NIGHT_MAIN_LIGHT_INTENSITY, out _nightMainLightIntensity))
+            {
+                Debug.Log($"<color=green>Got flag {YGAppConfigurationFlags.NIGHT_MAIN_LIGHT_INTENSITY} from YG</color>");
+            }
+            else
+            {
+                Debug.LogWarning($"Couldnt get flag {YGAppConfigurationFlags.NIGHT_MAIN_LIGHT_INTENSITY} from YG. Taking default</color>");
+            }
+
             SessionParamsStorage sessionParamsStorage = await WebConfigLoader.LoadConfigAsync(_sessionParamsStorageURL);
 
             if (sessionParamsStorage != null)
@@ -76,6 +100,16 @@ namespace Game.Application
         public override float GetMusicVolumeMult()
         {
             return _musicVolume;
+        }
+
+        public override float GetDayMainLightIntensity()
+        {
+            return _dayMainLightIntensity;
+        }
+
+        public override float GetNightMainLightIntensity()
+        {
+            return _nightMainLightIntensity;
         }
 
         public override SessionParamsStorage GetSessionParamsStorage()

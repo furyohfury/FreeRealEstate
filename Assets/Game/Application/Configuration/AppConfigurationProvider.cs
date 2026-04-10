@@ -22,6 +22,7 @@ namespace Game.Application
            _appConfiguration = _ygAppConfiguration;
             await _ygAppConfiguration.Init();
 #endif
+            Debug.Log($"App configuration chosen: {_appConfiguration.GetType()}");
         }
     }
 }

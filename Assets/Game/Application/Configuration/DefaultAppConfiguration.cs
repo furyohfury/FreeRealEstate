@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game.Application
 {
@@ -10,8 +9,13 @@ namespace Game.Application
         private float _maxHealth = 100f;
         [SerializeField]
         private bool _trackDeath = false;
-        [SerializeField] [Range(0f, 1f)]
+        [SerializeField]
+        [Range(0f, 1f)]
         private float _musicVolumeMultiplier = 0.5f;
+        [SerializeField]
+        private float _dayMainLightIntensity = 0.35f;
+        [SerializeField]
+        private float _nightMainLightIntensity = 0.15f;
         [SerializeField]
         private SessionParamsStorageConfig _sessionParamsStorageConfig;
 
@@ -28,6 +32,16 @@ namespace Game.Application
         public override float GetMusicVolumeMult()
         {
             return _musicVolumeMultiplier;
+        }
+
+        public override float GetDayMainLightIntensity()
+        {
+            return _dayMainLightIntensity;
+        }
+
+        public override float GetNightMainLightIntensity()
+        {
+            return _nightMainLightIntensity;
         }
 
         public override SessionParamsStorage GetSessionParamsStorage()

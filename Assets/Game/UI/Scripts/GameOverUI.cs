@@ -27,7 +27,7 @@ namespace Game
         private Button _exitButton;
         [Header("Parameters")]
         [SerializeField]
-        private Mode _mode = Mode.Mock;
+        private PlatformMode _platformMode = PlatformMode.Mock;
         [SerializeField]
         private Vector3 _choiceMadeMaxScale = new Vector3(0.2f, 0.2f, 0);
         [SerializeField]
@@ -63,12 +63,12 @@ namespace Game
         {
             _contentContainer.SetActive(true);
 #if UNITY_EDITOR
-            switch (_mode)
+            switch (_platformMode)
             {
-                case Mode.Mock:
+                case PlatformMode.Mock:
                     _leaderboardView = Instantiate(_mockLeaderboardPrefab, _leaderboardContainer);
                     break;
-                case Mode.YG:
+                case PlatformMode.YG:
                     _leaderboardView = Instantiate(_leaderboardViewYgPrefab, _leaderboardContainer);
                     break;
             }
@@ -149,12 +149,6 @@ namespace Game
             _continueButton.onClick.RemoveListener(OnContinueClicked);
             _retryButton.onClick.RemoveListener(OnRetryClicked);
             _exitButton.onClick.RemoveListener(OnExitClicked);
-        }
-
-        private enum Mode
-        {
-            Mock,
-            YG
         }
     }
 }

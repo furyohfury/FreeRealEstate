@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.Application;
 using TriInspector;
 using UnityEngine;
 
@@ -23,7 +24,15 @@ namespace Game
         private bool _isActive = true;
         [SerializeField]
         private CameraFacade _cameraFacade;
-        private bool isDay;
+
+        private bool _isDay;
+
+        private void Awake()
+        {
+            AppConfiguration appConfiguration = AppConfigurationProvider.Instance.Configuration;
+            _minLightIntensity = appConfiguration.GetNightMainLightIntensity();
+            _maxLightIntensity = appConfiguration.GetDayMainLightIntensity();
+        }
 
         private void Start()
         {
@@ -51,7 +60,7 @@ namespace Game
 
         public void SwitchToOpposite()
         {
-            if (isDay)
+            if (_isDay)
             {
                 SwitchToNight();
             }
@@ -72,7 +81,8 @@ namespace Game
         {
             SetLight(1);
             _cameraFacade.SetDayPP();
-            isDay = true;
+            _isDay = true;
+            Debug.Log("Day is now " + _isDay);
         }
 
         [Button]
@@ -80,7 +90,8 @@ namespace Game
         {
             SetLight(0);
             _cameraFacade.SetNightPP();
-            isDay = false;
+            _isDay = false;
+            Debug.Log("Day is now " + _isDay);
         }
     }
 }

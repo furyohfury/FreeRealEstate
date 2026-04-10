@@ -21,19 +21,5 @@ namespace Game
             Time.timeScale = 1;
             InputSystem.Instance.Enable();
         }
-
-        #if UNITY_EDITOR
-        private void Update()
-        {
-            if (Keyboard.current.escapeKey.wasPressedThisFrame)
-            {
-                PauseGame();
-            }
-            if (Keyboard.current.cKey.wasPressedThisFrame)
-            {
-                ResumeGame();
-            }
-        }
-        #endif
     }
 }
