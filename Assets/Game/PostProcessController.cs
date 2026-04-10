@@ -13,6 +13,8 @@ namespace Game
         [SerializeField]
         private Volume _nightVolume;
         [SerializeField]
+        private Volume _persistentVolume;
+        [SerializeField]
         private float _vignetteAnimDuration = 0.3f;
         [SerializeField]
         private float _vignetteMaxValue = 0.5f;
@@ -21,13 +23,11 @@ namespace Game
         [SerializeField]
         private float _chromAbIncreaseDurationRatio = 0.2f;
 
-        private Volume _activeVolume;
         private Tween _activeVignetteTween;
         private Tween _activeChromAbTween;
 
         private void Awake()
         {
-            _activeVolume = _dayVolume;
             _dayVolume.weight = 1f;
             _nightVolume.weight = 0f;
         }
@@ -40,7 +40,7 @@ namespace Game
                 _activeVignetteTween.Kill();
             }
 
-            if (_activeVolume.profile.TryGet(out Vignette vignette))
+            if (_persistentVolume.profile.TryGet(out Vignette vignette))
             {
                 targetValue = Mathf.Lerp(0, _vignetteMaxValue, targetValue);
                 _activeVignetteTween = DOTween.To(() => vignette.intensity.value, x => vignette.intensity.value = x, targetValue,
@@ -56,7 +56,7 @@ namespace Game
                 _activeChromAbTween.Kill(true);
             }
 
-            if (_activeVolume.profile.TryGet(out ChromaticAberration cromAb))
+            if (_persistentVolume.profile.TryGet(out ChromaticAberration cromAb))
             {
                 DOGetter<float> getter = () => cromAb.intensity.value;
                 DOSetter<float> setter = x => cromAb.intensity.value = x;
@@ -70,60 +70,14 @@ namespace Game
 
         public void SetDayPP()
         {
-            _activeVolume = _dayVolume;
-            _activeVolume.weight = 1f;
+            _dayVolume.weight = 1f;
             _nightVolume.weight = 0f;
-            float chromAbInt = 0f;
-            float vignetteInt = 0f;
-
-            if (_nightVolume.profile.TryGet(out ChromaticAberration cromAb))
-            {
-                chromAbInt = cromAb.intensity.value;
-            }
-
-            if (_nightVolume.profile.TryGet(out Vignette vignette))
-            {
-                vignetteInt = vignette.intensity.value;
-            }
-
-            if (_dayVolume.profile.TryGet(out ChromaticAberration newCromAb))
-            {
-                newCromAb.intensity.value = chromAbInt;
-            }
-
-            if (_dayVolume.profile.TryGet(out Vignette newVignette))
-            {
-                newVignette.intensity.value = vignetteInt;
-            }
         }
 
         public void SetNightPP()
         {
-            _activeVolume = _nightVolume;
-            _activeVolume.weight = 1f;
+            _nightVolume.weight = 1f;
             _dayVolume.weight = 0f;
-            float chromAbInt = 0f;
-            float vignetteInt = 0f;
-
-            if (_dayVolume.profile.TryGet(out ChromaticAberration cromAb))
-            {
-                chromAbInt = cromAb.intensity.value;
-            }
-
-            if (_dayVolume.profile.TryGet(out Vignette vignette))
-            {
-                vignetteInt = vignette.intensity.value;
-            }
-
-            if (_nightVolume.profile.TryGet(out ChromaticAberration newCromAb))
-            {
-                newCromAb.intensity.value = chromAbInt;
-            }
-
-            if (_nightVolume.profile.TryGet(out Vignette newVignette))
-            {
-                newVignette.intensity.value = vignetteInt;
-            }
         }
     }
 }

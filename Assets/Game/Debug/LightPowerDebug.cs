@@ -30,8 +30,9 @@ namespace Game
 
         private void OnSliderValueChanged(float arg0)
         {
-            _mainLight.intensity = Mathf.Lerp(_minIntensity, _maxIntensity, arg0);
-            _text.text = $"{arg0}";
+            float intensity = Mathf.Lerp(_minIntensity, _maxIntensity, arg0);
+            _mainLight.intensity = intensity;
+            _text.text = intensity.ToString("F1");
         }
 
         private void OnDisable()

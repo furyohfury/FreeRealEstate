@@ -77,7 +77,7 @@ namespace Game
 #endif
 
             _leaderboardView.UpdateLeaderboard();
-            
+
             if (_rectTransform != null)
             {
                 _rectTransform.localScale = _initialScale;
@@ -120,6 +120,7 @@ namespace Game
         private async void OnRetryClicked()
         {
             Sequence disappearSequence = LaunchDisappearSequence();
+            Time.timeScale = 1;
 
             await AwaitableExtensions.WaitForTweenRealtime(disappearSequence);
 
@@ -132,6 +133,7 @@ namespace Game
 
             await AwaitableExtensions.WaitForTweenRealtime(disappearSequence);
 
+            Time.timeScale = 1f;
             SceneSwitcher.Instance.SwitchScene(Scene.MainMenu, LoadSceneMode.Single);
         }
 
