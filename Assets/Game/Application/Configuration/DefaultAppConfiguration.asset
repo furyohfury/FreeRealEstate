@@ -18,3 +18,4 @@ MonoBehaviour:
   _dayMainLightIntensity: 0.9
   _nightMainLightIntensity: 0.15
   _sessionParamsStorageConfig: {fileID: 11400000, guid: 87fd18f347fd5e249984ce89466acf9d, type: 2}
+  _qualityName: Medium

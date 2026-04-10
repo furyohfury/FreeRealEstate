@@ -18,6 +18,8 @@ namespace Game.Application
         private float _nightMainLightIntensity = 0.15f;
         [SerializeField]
         private SessionParamsStorageConfig _sessionParamsStorageConfig;
+        [SerializeField]
+        private string _qualityName = "Low";
 
         public override float GetMaxHealth()
         {
@@ -42,6 +44,11 @@ namespace Game.Application
         public override float GetNightMainLightIntensity()
         {
             return _nightMainLightIntensity;
+        }
+
+        public override string GetQualityLevelName()
+        {
+            return _qualityName;
         }
 
         public override SessionParamsStorage GetSessionParamsStorage()

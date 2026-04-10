@@ -25,6 +25,8 @@ namespace Game.Application
         private string _sessionParamsStorageURL =
             "https://raw.githubusercontent.com/furyohfury/FreeRealEstate/refs/heads/conveyors-yandex/Assets/StreamingAssets/SessionParamsStorage.json";
         private SessionParamsStorage _sessionParamsStorage;
+        [SerializeField]
+        private string _qualityLevelName = "Low";
 
         public async Awaitable Init()
         {
@@ -73,6 +75,15 @@ namespace Game.Application
                 Debug.LogWarning($"Couldnt get flag {YGAppConfigurationFlags.NIGHT_MAIN_LIGHT_INTENSITY} from YG. Taking default</color>");
             }
 
+            if (YG2.TryGetFlag(YGAppConfigurationFlags.QUALITY_LEVEL, out _qualityLevelName))
+            {
+                Debug.Log($"<color=green>Got flag {YGAppConfigurationFlags.QUALITY_LEVEL} from YG</color>");
+            }
+            else
+            {
+                Debug.LogWarning($"Couldnt get flag {YGAppConfigurationFlags.QUALITY_LEVEL} from YG. Taking default</color>");
+            }
+
             SessionParamsStorage sessionParamsStorage = await WebConfigLoader.LoadConfigAsync(_sessionParamsStorageURL);
 
             if (sessionParamsStorage != null)
@@ -110,6 +121,11 @@ namespace Game.Application
         public override float GetNightMainLightIntensity()
         {
             return _nightMainLightIntensity;
+        }
+
+        public override string GetQualityLevelName()
+        {
+            return _qualityLevelName;
         }
 
         public override SessionParamsStorage GetSessionParamsStorage()

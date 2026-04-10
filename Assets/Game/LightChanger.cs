@@ -21,8 +21,6 @@ namespace Game
         [SerializeField]
         private float _maxLightIntensity;
         [SerializeField]
-        private bool _isActive = true;
-        [SerializeField]
         private CameraFacade _cameraFacade;
 
         private bool _isDay;
