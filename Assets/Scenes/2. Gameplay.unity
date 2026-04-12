@@ -3628,7 +3628,6 @@ MonoBehaviour:
   _nightColor: {r: 0.5176471, g: 0.6745098, b: 1, a: 0}
   _minLightIntensity: 0.15
   _maxLightIntensity: 0.35
-  _isActive: 1
   _cameraFacade: {fileID: 519420036}
 --- !u!1001 &595769775
 PrefabInstance:
@@ -4530,7 +4529,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 592785660}
-  - {fileID: 2128972445}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &785355530
@@ -10840,82 +10838,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1379641026529207157, guid: 9d8b9d525333d754d801b20c28057093, type: 3}
   m_PrefabInstance: {fileID: 1312467728}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2128972444
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2128972445}
-  - component: {fileID: 2128972446}
-  m_Layer: 0
-  m_Name: Adaptive Probe Volume
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2128972445
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2128972444}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.101944, y: 6.2749424, z: 13.566292}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 779687497}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2128972446
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2128972444}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cded085d155cde949b60f67a11dbc3bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.ProbeVolume
-  mode: 2
-  size: {x: 65.07762, y: 23.87881, z: 51.444656}
-  overrideRendererFilters: 0
-  minRendererVolumeSize: 0.1
-  objectLayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  lowestSubdivLevelOverride: 0
-  highestSubdivLevelOverride: 7
-  overridesSubdivLevels: 0
-  mightNeedRebaking: 0
-  cachedTransform:
-    e00: 1
-    e01: 0
-    e02: 0
-    e03: -1.101944
-    e10: 0
-    e11: 1
-    e12: 0
-    e13: -6.2749424
-    e20: 0
-    e21: 0
-    e22: 1
-    e23: -13.566292
-    e30: 0
-    e31: 0
-    e32: 0
-    e33: 1
-  cachedHashCode: -1936820086
-  fillEmptySpaces: 0
-  version: 2
-  globalVolume: 0
 --- !u!4 &2133108159 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3774934006573583763, guid: c88b29e8e824c7443aa9715801b96e25, type: 3}
@@ -11215,6 +11137,10 @@ PrefabInstance:
     - target: {fileID: 7026823185363357993, guid: dcbd22b434c01484bbefded496dc6a14, type: 3}
       propertyPath: m_Name
       value: GameplayCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7671403321243524550, guid: dcbd22b434c01484bbefded496dc6a14, type: 3}
+      propertyPath: _platformMode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7986012198828156014, guid: dcbd22b434c01484bbefded496dc6a14, type: 3}
       propertyPath: m_AnchorMax.y

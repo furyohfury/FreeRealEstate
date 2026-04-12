@@ -13,7 +13,7 @@ namespace Game.Application.Leaderboard
                    };
         }
 
-        public override void SendResult(float result)
+        public async override Awaitable SendResult(float result)
         {
             Debug.Log("SendResult Leaderboard" + result);
         }

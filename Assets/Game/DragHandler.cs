@@ -81,6 +81,7 @@ namespace Game
                 _nearLane = null;
                 _ghostItem.Destroy();
                 _ghostItem = null;
+                _activeItem = null;
             }
             else
             {

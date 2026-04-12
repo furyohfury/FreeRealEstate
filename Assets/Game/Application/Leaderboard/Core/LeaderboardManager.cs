@@ -21,9 +21,9 @@ namespace Game.Application.Leaderboard
 #endif
         }
 
-        public void SendResult(float result)
+        public async Awaitable SendResult(float result)
         {
-            _leaderboardStrategy.SendResult(result);
+            await _leaderboardStrategy.SendResult(result);
         }
 
         public LeaderboardEntry[] GetEntries(string leaderboardId)

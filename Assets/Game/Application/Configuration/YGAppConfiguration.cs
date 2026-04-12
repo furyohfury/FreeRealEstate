@@ -27,6 +27,8 @@ namespace Game.Application
         private SessionParamsStorage _sessionParamsStorage;
         [SerializeField]
         private string _qualityLevelName = "Low";
+        [SerializeField]
+        private bool _isUsingQualityLevel = false;
 
         public async Awaitable Init()
         {
@@ -96,6 +98,15 @@ namespace Game.Application
                 Debug.LogError("Session params storage wasnt loaded from web. Taking default");
                 _sessionParamsStorage = _sessionParamsStorageConfig.GetStorage();
             }
+
+            if (YG2.TryGetFlagAsBool(YGAppConfigurationFlags.IS_USING_QUALITY_LEVEL, out _isUsingQualityLevel))
+            {
+                Debug.Log($"<color=green>Got flag {YGAppConfigurationFlags.IS_USING_QUALITY_LEVEL} from YG</color>");
+            }
+            else
+            {
+                Debug.LogWarning($"Couldnt get flag {YGAppConfigurationFlags.IS_USING_QUALITY_LEVEL} from YG. Taking default</color>");
+            }
         }
 
         public override float GetMaxHealth()
@@ -121,6 +132,11 @@ namespace Game.Application
         public override float GetNightMainLightIntensity()
         {
             return _nightMainLightIntensity;
+        }
+
+        public override bool GetIsUsingQualityLevel()
+        {
+            return _isUsingQualityLevel;
         }
 
         public override string GetQualityLevelName()

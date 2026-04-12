@@ -8,5 +8,6 @@
         public const string DAY_MAIN_LIGHT_INTENSITY = "day_main_light_intensity";
         public const string NIGHT_MAIN_LIGHT_INTENSITY = "night_main_light_intensity";
         public const string QUALITY_LEVEL = "quality_level";
+        public const string IS_USING_QUALITY_LEVEL = "is_using_quality_level";
     }
 }

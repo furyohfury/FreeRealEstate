@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 namespace Game
 {
+    [DefaultExecutionOrder(10)]
     public sealed class VolumeSlider : MonoBehaviour
     {
         [Header("References")]
@@ -27,6 +28,7 @@ namespace Game
             _iconButton.onClick.AddListener(OnIconButtonPressed);
             _volume = AudioManager.Instance.Volume;
             _cachedButtonValue = _volume;
+            _slider.value = _volume;
             OnSliderValueChanged(_volume);
         }
 

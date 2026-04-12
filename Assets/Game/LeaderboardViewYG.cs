@@ -23,32 +23,48 @@ namespace Game
         public override void UpdateLeaderboard()
         {
             string sessionParamsId = GameParamsService.Instance.SessionParams.Id;
-            sessionParamsId = SessionParamsToLeaderboardIdConverter.Convert(sessionParamsId);
+            var lbName = SessionParamsToLeaderboardIdConverter.Convert(sessionParamsId);
             _leaderboardYG.gameObject.SetActive(true);
-            _leaderboardYG.nameLB = sessionParamsId;
+            _leaderboardYG.nameLB = lbName;
             _leaderboardYG.UpdateLB();
-            YG2.GetLeaderboard(sessionParamsId);
         }
 
         private async void OnGetLeaderboard(LBData data)
         {
             bool authed = YG2.player.auth;
             string currentPlayerName = "You";
+            string score = "--:--";
+            string rank = "-";
             Sprite currentPlayerPic = _anonymousPlayerSprite;
+            LBPlayerDataYG.TextMP currentPlayerView = _currentPlayerDataYG.textMP;
 
             if (authed)
             {
                 currentPlayerName = YG2.player.name;
                 currentPlayerPic = await DownloadSpriteAsync(YG2.player.photo);
+                LBCurrentPlayerData currentPlayerData = data.currentPlayer;
+                Debug.Log($"<color=green>LeaderboardViewYG: is authed, trying to get currentPlayerData</color>");
+
+                if (currentPlayerData != null)
+                {
+                    Debug.Log($"<color=green>LeaderboardViewYG: is authed, trying to get currentPlayerData</color>");
+                    rank = currentPlayerData.rank.ToString();
+                    score = LBMethods.TimeTypeConvertStatic(currentPlayerData.score, _leaderboardYG.decimalSize);
+                }
+                else
+                {
+                    Debug.Log($"<color=red>LeaderboardViewYG currentPlayerData == null</color>");
+                }
+            }
+            else
+            {
+                Debug.Log($"<color=red>LeaderboardViewYG wasnt authed</color>");
             }
 
-            LBCurrentPlayerData currentPlayerData = data.currentPlayer;
-            LBPlayerDataYG.TextMP textMp = _currentPlayerDataYG.textMP;
-            textMp.name.text = currentPlayerName;
-            textMp.rank.text = currentPlayerData.rank.ToString();
-            string score = LBMethods.TimeTypeConvertStatic(currentPlayerData.score, _leaderboardYG.decimalSize);
-            textMp.score.text = score;
             _currentPlayerDataYG.imageLoad.spriteImage.sprite = currentPlayerPic;
+            currentPlayerView.rank.text = rank;
+            currentPlayerView.name.text = currentPlayerName;
+            currentPlayerView.score.text = score;
         }
 
         private async Awaitable<Sprite> DownloadSpriteAsync(string url)

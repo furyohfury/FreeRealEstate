@@ -18,7 +18,7 @@ namespace Game
             _isActive = AppConfigurationProvider.Instance.Configuration.GetTrackDeath();
         }
 
-        private void InstanceOnOnHealthChanged(float hp)
+        private async void InstanceOnOnHealthChanged(float hp)
         {
             if (!_isActive
                 || hp > 0)
@@ -27,7 +27,7 @@ namespace Game
             DOTween.KillAll();
             AudioManager.Instance.PlayGameOverSound();
             GameCycleStateSwitcher.Instance.PauseGame();
-            LeaderboardManager.Instance.SendResult(GameLoop.Instance.CurrentTime);
+            await LeaderboardManager.Instance.SendResult(GameLoop.Instance.CurrentTime);
             _gameOverUI.Show();
         }
 

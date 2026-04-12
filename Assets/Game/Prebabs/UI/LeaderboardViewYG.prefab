@@ -92,6 +92,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: LeaderboardViewYG
       objectReference: {fileID: 0}
+    - target: {fileID: 4621114446168430942, guid: 4bd6777f0a257b64a93016be9b58deca, type: 3}
+      propertyPath: m_text
+      value: --:--
+      objectReference: {fileID: 0}
+    - target: {fileID: 4621114446168430942, guid: 4bd6777f0a257b64a93016be9b58deca, type: 3}
+      propertyPath: m_fontSize
+      value: 33.1
+      objectReference: {fileID: 0}
     - target: {fileID: 5283439741744373398, guid: 4bd6777f0a257b64a93016be9b58deca, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0

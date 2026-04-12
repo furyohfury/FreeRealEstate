@@ -1,3 +1,3 @@
-﻿Build path: C:/Unity/Projects/Builds/Conveyors
-Build number: 25
+﻿Build path: E:/Programs/Unity/Builds/Conveyors/web3yandex
+Build number: 37
 PluginYG version: 2.008

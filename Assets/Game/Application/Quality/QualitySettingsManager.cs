@@ -7,8 +7,13 @@ namespace Game.Application.Quality
         private void Start()
         {
             AppConfiguration configuration = AppConfigurationProvider.Instance.Configuration;
-            string qualityLevelName = configuration.GetQualityLevelName();
-            SetQualityByName(qualityLevelName);
+            bool isUsingQualityLevel = configuration.GetIsUsingQualityLevel();
+
+            if (isUsingQualityLevel)
+            {
+                string qualityLevelName = configuration.GetQualityLevelName();
+                SetQualityByName(qualityLevelName);
+            }
         }
 
         private void SetQualityByName(string qualityName)
