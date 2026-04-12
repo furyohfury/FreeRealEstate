@@ -31,7 +31,7 @@ namespace Game.Application.Leaderboard
                 LBCurrentPlayerData currentPlayerData = leaderboardData.currentPlayer;
 
                 if (currentPlayerData == null
-                    || result > currentPlayerData.score)
+                    || Mathf.FloorToInt(result) > currentPlayerData.score / 1000)
                 {
                     YG2.SetLBTimeConvert(lbId, result);
                     Debug.Log($"<color=green>YGLeaderboardStrategy: Set leaderboard {lbId} result {result}</color>");
