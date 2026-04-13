@@ -82,7 +82,7 @@ MonoBehaviour:
     labelAdvSimLabel: 0
   Basic:
     platform: {fileID: 11400000, guid: 4e7bf023ababa8444b1f5a4fec90adf2, type: 2}
-    autoApplySettings: 1
+    autoApplySettings: 0
     autoPauseGame: 1
     editEventSystem: 1
     autoGRA: 1
