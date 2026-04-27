@@ -9,13 +9,6 @@
       },
       "hash": "a3e16eba86f985a55ca029bd3531dacfade01243"
     },
-    "com.svermeulen.extenject": {
-      "version": "https://github.com/Mathijs-Bakker/Extenject.git?path=UnityProject/Assets/Plugins/Zenject/Source",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "ec31a279be809bc98f5d1ed9f2add1ce3ddc77fc"
-    },
     "com.unity.2d.animation": {
       "version": "13.0.2",
       "depth": 1,
