@@ -47,17 +47,17 @@ namespace Game.GameEngine
 
         private static void AddSystemsToGameplayGroup(World world, GameplayGroup gameplayGroup)
         {
-            // var tankMoveSystem = world.CreateSystem<TankMovementAISystem>();
-            // gameplayGroup.AddSystemToUpdateList(tankMoveSystem);
-            //
-            // SystemHandle playersystem = world.CreateSystem<PlayerSystem>();
-            // gameplayGroup.AddSystemToUpdateList(playersystem);
-            //
-            // SystemHandle TankShootingSystem = world.CreateSystem<TankShootingSystem>();
-            // gameplayGroup.AddSystemToUpdateList(TankShootingSystem);
-            //
-            // SystemHandle TankSpawnSystem = world.CreateSystem<TankSpawnSystem>();
-            // gameplayGroup.AddSystemToUpdateList(TankSpawnSystem);
+            var tankMoveSystem = world.CreateSystem<TankMovementAISystem>();
+            gameplayGroup.AddSystemToUpdateList(tankMoveSystem);
+            
+            SystemHandle playersystem = world.CreateSystem<PlayerSystem>();
+            gameplayGroup.AddSystemToUpdateList(playersystem);
+            
+            SystemHandle TankShootingSystem = world.CreateSystem<TankShootingSystem>();
+            gameplayGroup.AddSystemToUpdateList(TankShootingSystem);
+            
+            SystemHandle TankSpawnSystem = world.CreateSystem<TankSpawnSystem>();
+            gameplayGroup.AddSystemToUpdateList(TankSpawnSystem);
         }
     }
 }
