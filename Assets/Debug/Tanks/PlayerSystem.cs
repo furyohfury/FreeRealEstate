@@ -12,6 +12,8 @@ namespace Debugging
         // this method, so we don't use the [BurstCompile] attribute here.
         public void OnUpdate(ref SystemState state)
         {
+            Debug.Log("PlayerSystem::OnUpdate");
+            
             float horizontal = 0;
 
             if (Keyboard.current.aKey.isPressed)

@@ -3,6 +3,7 @@ using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Rendering;
 using Unity.Transforms;
+using UnityEngine;
 
 namespace Debugging
 {
@@ -18,6 +19,9 @@ namespace Debugging
         // [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
+            Debug.Log("TankShootingSystem::OnUpdate");
+
+            
             _timer -= SystemAPI.Time.DeltaTime;
             if (_timer > 0)
             {

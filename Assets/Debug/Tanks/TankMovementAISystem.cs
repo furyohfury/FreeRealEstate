@@ -1,6 +1,7 @@
 ﻿using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
+using UnityEngine;
 
 namespace Debugging
 {
@@ -8,6 +9,8 @@ namespace Debugging
     {
         public void OnUpdate(ref SystemState state)
         {
+            Debug.Log("TankMovementAISystem::OnUpdate");
+            
             var deltatime = SystemAPI.Time.DeltaTime;
 
             foreach (var (transform, entity) in SystemAPI.Query<RefRW<LocalTransform>>()

@@ -15,6 +15,8 @@ namespace Debugging
 
         public void OnUpdate(ref SystemState state)
         {
+            Debug.Log("TankSpawnSystem::OnUpdate");
+
             state.Enabled = false;
 
             var tankSpawnConfig = SystemAPI.GetSingleton<TankSpawnConfig>();
