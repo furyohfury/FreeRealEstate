@@ -783,7 +783,7 @@ PlayerSettings:
   webWasm2023: 0
   webEnableSubmoduleStrippingCompatibility: 0
   scriptingDefineSymbols:
-    Android: DOTWEEN;PLUGIN_YG_2;TMP_YG2;NJSON_YG2;RU_YG2;Authorization_yg;PlayerStats_yg;Metrica_yg;RewardedAdv_yg;StickyAdv_yg;Leaderboards_yg;UNITY_POST_PROCESSING_STACK_V2;Flags_yg;YandexGamesPlatform_yg;SENTIS_ANALYTICS_ENABLED;APP_UI_EDITOR_ONLY
+    Android: DOTWEEN;PLUGIN_YG_2;TMP_YG2;NJSON_YG2;RU_YG2;Authorization_yg;PlayerStats_yg;Metrica_yg;RewardedAdv_yg;StickyAdv_yg;Leaderboards_yg;UNITY_POST_PROCESSING_STACK_V2;Flags_yg;YandexGamesPlatform_yg
     EmbeddedLinux: DOTWEEN;UNITY_POST_PROCESSING_STACK_V2
     GameCoreScarlett: DOTWEEN;UNITY_POST_PROCESSING_STACK_V2
     GameCoreXboxOne: DOTWEEN;UNITY_POST_PROCESSING_STACK_V2
@@ -812,7 +812,7 @@ PlayerSettings:
   il2cppStacktraceInformation: {}
   managedStrippingLevel:
     Standalone: 4
-    WebGL: 4
+    WebGL: 0
   incrementalIl2cppBuild: {}
   suppressCommonWarnings: 1
   allowUnsafeCode: 0
