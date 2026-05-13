@@ -26,7 +26,7 @@ namespace Game.Application.Ads
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-#elif UNITY_WEBGL
+#elif YANDEX_GAMES_BUILD
             _adsStrategy = new YGAdsStrategy();
 #endif
             Debug.Log($"Ads strategy of type {_adsStrategy.GetType()} Initialized");

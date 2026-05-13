@@ -14,9 +14,9 @@ namespace Game.Application.Leaderboard
         {
             base.Awake();
             DontDestroyOnLoad(gameObject);
-#if UNITY_WEBGL
+#if YANDEX_GAMES_BUILD
             _leaderboardStrategy = _ygLeaderboardStrategy;
-#elif UNITY_EDITOR
+#else
             _leaderboardStrategy = _mockLeaderboardStrategy;
 #endif
         }

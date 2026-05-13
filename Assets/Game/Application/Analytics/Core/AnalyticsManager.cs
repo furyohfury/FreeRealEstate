@@ -11,12 +11,12 @@ namespace Game.Application.Ads
         {
             base.Awake();
             DontDestroyOnLoad(gameObject);
-#if UNITY_EDITOR
-            _analyticsStrategy = new MockAnalyticsStrategy();
-            Debug.Log("MockAnalyticsStrategy Initialized");
-#elif UNITY_WEBGL
+#if YANDEX_GAMES_BUILD
             Debug.Log("YandexAnalyticsStrategy Initialized");
             _analyticsStrategy = new YandexAnalyticsStrategy();
+#else
+            _analyticsStrategy = new MockAnalyticsStrategy();
+            Debug.Log("MockAnalyticsStrategy Initialized");
 #endif
         }
 

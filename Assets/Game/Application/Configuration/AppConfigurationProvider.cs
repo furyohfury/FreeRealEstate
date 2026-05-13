@@ -16,11 +16,11 @@ namespace Game.Application
         {
             base.Awake();
             DontDestroyOnLoad(gameObject);
-#if UNITY_EDITOR
-            _appConfiguration = _defaultAppConfiguration;
-#elif UNITY_WEBGL
+#if YANDEX_GAMES_BUILD
            _appConfiguration = _ygAppConfiguration;
             await _ygAppConfiguration.Init();
+#else
+            _appConfiguration = _defaultAppConfiguration;
 #endif
             Debug.Log($"App configuration chosen: {_appConfiguration.GetType()}");
         }

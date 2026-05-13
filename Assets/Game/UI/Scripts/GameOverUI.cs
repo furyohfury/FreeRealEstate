@@ -72,8 +72,10 @@ namespace Game
                     _leaderboardView = Instantiate(_leaderboardViewYgPrefab, _leaderboardContainer);
                     break;
             }
-#elif UNITY_WEBGL
+#elif YANDEX_GAMES_BUILD
                     _leaderboardView = Instantiate(_leaderboardViewYgPrefab, _leaderboardContainer);
+#else
+            _leaderboardView = Instantiate(_mockLeaderboardPrefab, _leaderboardContainer);
 #endif
 
             _leaderboardView.UpdateLeaderboard();
