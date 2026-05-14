@@ -3,6 +3,7 @@
     "com.codewriter.triinspector": "https://github.com/codewriter-packages/Tri-Inspector.git",
     "com.svermeulen.extenject": "https://github.com/Mathijs-Bakker/Extenject.git?path=UnityProject/Assets/Plugins/Zenject/Source",
     "com.unity.burst": "1.8.28",
+    "com.unity.cinemachine": "3.1.6",
     "com.unity.collab-proxy": "2.11.2",
     "com.unity.dedicated-server": "2.0.2",
     "com.unity.feature.2d": "2.0.2",
