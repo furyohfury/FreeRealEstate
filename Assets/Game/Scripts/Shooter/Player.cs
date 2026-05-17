@@ -38,6 +38,12 @@ namespace Game.Scripts.Shooter
             _rotationComponent.Direction = direction;
         }
 
+        public void Shoot()
+        {
+            _animatorComponent.PlayShootAnim();
+            Debug.Log($"<color=green>Shoot</color>");
+        }
+
         private void Update()
         {
             _moveComponent.Update();
