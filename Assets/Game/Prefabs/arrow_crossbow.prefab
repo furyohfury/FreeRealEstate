@@ -61,10 +61,31 @@ PrefabInstance:
       addedObject: {fileID: 1665730242349833395}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ee35920dd788f41488dca6c8d1af6ef7, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4402899818068078311}
+      addedObject: {fileID: 5985710729140640907}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ee35920dd788f41488dca6c8d1af6ef7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2513761706243642410}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ee35920dd788f41488dca6c8d1af6ef7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5893916566564765094}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ee35920dd788f41488dca6c8d1af6ef7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4402899818068078311}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ee35920dd788f41488dca6c8d1af6ef7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7592739583277149392}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ee35920dd788f41488dca6c8d1af6ef7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1964458159920199166}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ee35920dd788f41488dca6c8d1af6ef7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 906103005149161848}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ee35920dd788f41488dca6c8d1af6ef7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1250806696411185105}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ee35920dd788f41488dca6c8d1af6ef7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6304080916375983283}
   m_SourcePrefab: {fileID: 100100000, guid: ee35920dd788f41488dca6c8d1af6ef7, type: 3}
 --- !u!1 &8014370022163759997 stripped
 GameObject:
@@ -92,11 +113,11 @@ MonoBehaviour:
   ActiveSceneSynchronization: 0
   SceneMigrationSynchronization: 1
   SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
+  DontDestroyWithOwner: 1
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
---- !u!114 &4402899818068078311
+--- !u!114 &5985710729140640907
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -105,12 +126,43 @@ MonoBehaviour:
   m_GameObject: {fileID: 8014370022163759997}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b212726b81254dd8b09625be694a644c, type: 3}
+  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Shooter.ProjectileComponent
+  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.Components.NetworkTransform
   ShowTopMostFoldoutHeaderGroup: 1
-  _speed: 10
-  _rigidbody: {fileID: 2513761706243642410}
+  NetworkTransformExpanded: 0
+  AutoOwnerAuthorityTickOffset: 1
+  PositionInterpolationType: 2
+  RotationInterpolationType: 1
+  ScaleInterpolationType: 0
+  PositionLerpSmoothing: 1
+  PositionMaxInterpolationTime: 0.1
+  RotationLerpSmoothing: 1
+  RotationMaxInterpolationTime: 0.1
+  ScaleLerpSmoothing: 1
+  ScaleMaxInterpolationTime: 0.1
+  AuthorityMode: 0
+  TickSyncChildren: 0
+  UseUnreliableDeltas: 0
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 0
+  SyncScaleY: 0
+  SyncScaleZ: 0
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
+  InLocalSpace: 0
+  SwitchTransformSpaceWhenParented: 0
+  Interpolate: 1
+  SlerpPosition: 0
 --- !u!54 &2513761706243642410
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -138,3 +190,111 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &5893916566564765094
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8014370022163759997}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.05, y: 0.05, z: 0.7485465}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4402899818068078311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8014370022163759997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b212726b81254dd8b09625be694a644c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Shooter.ProjectileComponent
+  ShowTopMostFoldoutHeaderGroup: 1
+  _speed: 10
+  _rigidbody: {fileID: 2513761706243642410}
+  _stickDistance: 0.1
+--- !u!114 &7592739583277149392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8014370022163759997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b028abf414341b8b1c1dc29b28259a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Shooter.LifetimeComponent
+  ShowTopMostFoldoutHeaderGroup: 1
+  _lifeTime: 10
+--- !u!114 &1964458159920199166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8014370022163759997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78902d4b0a9a4098a61f96ae261a1f67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Shooter.DealDamageOnTriggerComponent
+  ShowTopMostFoldoutHeaderGroup: 1
+  _damage: 1
+--- !u!114 &906103005149161848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8014370022163759997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ed86c814e2644e48f17f5b890d6ba80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Shooter.StickOnTriggerComponent
+  ShowTopMostFoldoutHeaderGroup: 1
+  _stickDistance: 0.1
+--- !u!114 &1250806696411185105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8014370022163759997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eb87e37a35f40f4a7be6bc40cd69936, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Shooter.DestroyAfterTriggerComponent
+  ShowTopMostFoldoutHeaderGroup: 1
+  _networkObject: {fileID: 1665730242349833395}
+  _delay: 2
+--- !u!114 &6304080916375983283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8014370022163759997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ad00bf565d74bdbaf5d2fcf168c7974, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Shooter.Projectile
+  ShowTopMostFoldoutHeaderGroup: 1
+  _moveForwardComponent: {fileID: 4402899818068078311}

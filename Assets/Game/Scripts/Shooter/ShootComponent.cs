@@ -29,12 +29,14 @@ namespace Game.Scripts.Shooter
         [ServerRpc]
         public void ShootServerRpc()
         {
+            Debug.Log($"[SERVER] RPC получен! Текущий таймер: {_timer}");
+
             if (_timer <= 0)
             {
+                Debug.Log("[SERVER] Кулдаун пройден. Пытаюсь заспавнить пулю...");
                 _timer = _cooldown;
-                NetworkManager.Singleton.SpawnManager.InstantiateAndSpawn(_projectilePrefab, position: _firePoint.position,
-                    rotation: transform.rotation);
-                // GameObject projectile = Instantiate(_projectilePrefab, _firePoint.position, Quaternion.Euler(transform.forward));
+                NetworkObject projectile = Instantiate(_projectilePrefab, _firePoint.position, transform.rotation);
+                projectile.Spawn();
             }
         }
     }

@@ -18,6 +18,8 @@ namespace Game.Scripts.Shooter
         private HealthComponent _healthComponent;
         [SerializeField]
         private PlayerUIComponent _playerUIComponent;
+        [SerializeField]
+        private ShootComponent _shootComponent;
 
         public override void OnNetworkSpawn()
         {
@@ -42,6 +44,7 @@ namespace Game.Scripts.Shooter
         public void Shoot()
         {
             _animatorComponent.PlayShootAnim();
+            _shootComponent.ShootServerRpc();
             Debug.Log($"<color=green>Shoot</color>");
         }
 
