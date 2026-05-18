@@ -3,7 +3,8 @@ using UnityEngine;
 
 namespace Game.Scripts.Shooter
 {
-    public class Player : NetworkBehaviour
+    public class Player : NetworkBehaviour,
+        IHealth
     {
         public NetworkVariable<float> MaxHealth => _healthComponent.MaxHealth;
         public NetworkVariable<float> Health => _healthComponent.Health;

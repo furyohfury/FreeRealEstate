@@ -2595,6 +2595,7 @@ MonoBehaviour:
   _spawnPoints:
   - {fileID: 248439260}
   - {fileID: 793752952}
+  _container: {fileID: 0}
 --- !u!1 &1657676998 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2638523739728097679, guid: a3e0641fa75a52e47a0b55700db0829a, type: 3}

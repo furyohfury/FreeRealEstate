@@ -1,30 +1,41 @@
-﻿using UnityEngine;
+﻿using Unity.Netcode;
+using UnityEngine;
 
 namespace Game.Scripts.Shooter
 {
-    public sealed class ShootComponent : MonoBehaviour
+    public sealed class ShootComponent : NetworkBehaviour
     {
         [SerializeField]
         private Transform _firePoint;
         [SerializeField]
-        private GameObject _projectilePrefab;
+        private NetworkObject _projectilePrefab;
         [SerializeField]
         private float _cooldown;
         private float _timer;
 
+        public override void OnNetworkSpawn()
+        {
+            _timer = _cooldown;
+        }
+
         private void Update()
         {
-            _timer -= Time.deltaTime;
-            if (_timer <= 0)
+            if (_timer > 0)
             {
-                _timer = _cooldown;
-                Shoot();
+                _timer -= Time.deltaTime;
             }
         }
 
-        public void Shoot()
+        [ServerRpc]
+        public void ShootServerRpc()
         {
-            GameObject projectile = Instantiate(_projectilePrefab, _firePoint.position, Quaternion.Euler(transform.forward));
+            if (_timer <= 0)
+            {
+                _timer = _cooldown;
+                NetworkManager.Singleton.SpawnManager.InstantiateAndSpawn(_projectilePrefab, position: _firePoint.position,
+                    rotation: transform.rotation);
+                // GameObject projectile = Instantiate(_projectilePrefab, _firePoint.position, Quaternion.Euler(transform.forward));
+            }
         }
     }
 }
