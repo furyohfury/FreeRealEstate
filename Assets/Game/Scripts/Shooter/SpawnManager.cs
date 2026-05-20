@@ -1,4 +1,5 @@
 ﻿using Unity.Netcode;
+using Unity.Netcode.Components;
 using UnityEngine;
 
 namespace Game
@@ -36,6 +37,14 @@ namespace Game
 
             // Передаем объект в сеть и назначаем ему владельца (clientId)
             playerInstance.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId);
+            
+            if (playerInstance.TryGetComponent<NetworkTransform>(out var networkTransform))
+            {
+                // В новых версиях NGO это заставит компонент принудительно взять текущие transform-координаты
+                playerInstance.transform.position = spawnPoint.position;
+                playerInstance.transform.rotation = spawnPoint.rotation;
+                networkTransform.AuthorityMode = NetworkTransform.AuthorityModes.Owner;
+            }
         }
     }
 }
