@@ -39,6 +39,7 @@ namespace Game.Scripts.Shooter
             if (_other == null)
             {
                 NetworkObject.Despawn();
+                return;
             }
 
             transform.position = _other.transform.position + _offset;

@@ -177,16 +177,17 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 787405947017620820}
+  - component: {fileID: 2841496123659668153}
+  - component: {fileID: 5043446391264993122}
   - component: {fileID: 8565779746445602030}
   - component: {fileID: 2504159889119551591}
   - component: {fileID: 4831772851508405276}
-  - component: {fileID: 2841496123659668153}
-  - component: {fileID: 5043446391264993122}
+  - component: {fileID: 2304485089612593097}
   - component: {fileID: 8136719973146494403}
   - component: {fileID: 1708365912853680008}
-  - component: {fileID: 1449883553656788775}
   - component: {fileID: 5275724174913494375}
   - component: {fileID: 1554016245962828044}
+  - component: {fileID: 1449883553656788775}
   - component: {fileID: 4271220376702099230}
   m_Layer: 0
   m_Name: Player
@@ -212,71 +213,6 @@ Transform:
   - {fileID: 4859193023154057153}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8565779746445602030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5438488679310955333}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 2270269626
-  InScenePlacedSourceGlobalObjectIdHash: 0
-  DeferredDespawnTick: 0
-  Ownership: 1
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 0
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
-  SyncOwnerTransformWhenParented: 1
-  AllowOwnerToParent: 0
---- !u!114 &2504159889119551591
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5438488679310955333}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70fc32ce8468470a80a57ce000a4ef44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Shooter.Player
-  ShowTopMostFoldoutHeaderGroup: 1
-  _moveComponent:
-    _characterController: {fileID: 2841496123659668153}
-    _speed: 5
-    _gravity: -9.81
-  _rotationComponent:
-    _rotationSpeed: 30
-    _transform: {fileID: 787405947017620820}
-  _animatorComponent:
-    _animator: {fileID: 5348159920563934387}
-  _healthComponent: {fileID: 5275724174913494375}
-  _playerUIComponent:
-    _playerUI: {fileID: 1621350433510286056}
-  _shootComponent: {fileID: 0}
---- !u!114 &4831772851508405276
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5438488679310955333}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c9c5a0cce5440acacb981de5159b660, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Shooter.PlayerController
-  ShowTopMostFoldoutHeaderGroup: 1
-  _player: {fileID: 2504159889119551591}
 --- !u!143 &2841496123659668153
 CharacterController:
   m_ObjectHideFlags: 0
@@ -361,10 +297,10 @@ MonoBehaviour:
     m_ActionName: 'Player/Look[/Mouse/delta]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1554016245962828044}
-        m_TargetAssemblyTypeName: Game.Scripts.Shooter.ShootComponent, Assembly-CSharp
-        m_MethodName: ShootServerRpc
-        m_Mode: 1
+      - m_Target: {fileID: 4831772851508405276}
+        m_TargetAssemblyTypeName: Game.Scripts.Shooter.PlayerController, Assembly-CSharp
+        m_MethodName: Shoot
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -420,6 +356,84 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &8565779746445602030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5438488679310955333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
+  GlobalObjectIdHash: 99404080
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 0
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
+--- !u!114 &2504159889119551591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5438488679310955333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70fc32ce8468470a80a57ce000a4ef44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Shooter.Player
+  ShowTopMostFoldoutHeaderGroup: 1
+  _moveComponent:
+    _characterController: {fileID: 2841496123659668153}
+    _speed: 5
+    _gravity: -9.81
+  _rotationComponent:
+    _rotationSpeed: 30
+    _transform: {fileID: 787405947017620820}
+  _animatorComponent: {fileID: 2304485089612593097}
+  _healthComponent: {fileID: 5275724174913494375}
+  _playerUIComponent:
+    _playerUI: {fileID: 1621350433510286056}
+  _shootComponent: {fileID: 1554016245962828044}
+--- !u!114 &4831772851508405276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5438488679310955333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c9c5a0cce5440acacb981de5159b660, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Shooter.PlayerController
+  ShowTopMostFoldoutHeaderGroup: 1
+  _player: {fileID: 2504159889119551591}
+--- !u!114 &2304485089612593097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5438488679310955333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 951abcbc55f743229bb237285d85f26b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Shooter.AnimatorComponent
+  ShowTopMostFoldoutHeaderGroup: 1
+  _animator: {fileID: 5348159920563934387}
 --- !u!114 &8136719973146494403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -447,41 +461,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Shooter.PlayerSetupComponent
   ShowTopMostFoldoutHeaderGroup: 1
   playerInput: {fileID: 5043446391264993122}
---- !u!114 &1449883553656788775
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5438488679310955333}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.Components.NetworkAnimator
-  ShowTopMostFoldoutHeaderGroup: 1
-  NetworkAnimatorExpanded: 0
-  AuthorityMode: 1
-  m_Animator: {fileID: 5348159920563934387}
-  TransitionStateInfoList:
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: -1388047211
-    DestinationState: 709569102
-    TransitionDuration: 0
-    TriggerNameHash: -1316629574
-    TransitionIndex: 0
-  AnimatorParameterEntries:
-    ParameterEntries:
-    - name: IsMoving
-      NameHash: 120489994
-      Synchronize: 1
-      ParameterType: 4
-    - name: Shoot
-      NameHash: -1316629574
-      Synchronize: 1
-      ParameterType: 9
-  AnimatorParametersExpanded: 0
 --- !u!114 &5275724174913494375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -521,6 +500,41 @@ MonoBehaviour:
   _firePoint: {fileID: 4729275586957657767}
   _projectilePrefab: {fileID: 1665730242349833395, guid: 89612b2bf2a58d54cae9a8feb2a5107a, type: 3}
   _cooldown: 1
+--- !u!114 &1449883553656788775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5438488679310955333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.Components.NetworkAnimator
+  ShowTopMostFoldoutHeaderGroup: 1
+  NetworkAnimatorExpanded: 0
+  AuthorityMode: 1
+  m_Animator: {fileID: 5348159920563934387}
+  TransitionStateInfoList:
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: -1388047211
+    DestinationState: 709569102
+    TransitionDuration: 0
+    TriggerNameHash: -1316629574
+    TransitionIndex: 0
+  AnimatorParameterEntries:
+    ParameterEntries:
+    - name: IsMoving
+      NameHash: 120489994
+      Synchronize: 1
+      ParameterType: 4
+    - name: Shoot
+      NameHash: -1316629574
+      Synchronize: 1
+      ParameterType: 9
+  AnimatorParametersExpanded: 0
 --- !u!114 &4271220376702099230
 MonoBehaviour:
   m_ObjectHideFlags: 0

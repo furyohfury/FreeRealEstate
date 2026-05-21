@@ -1,10 +1,9 @@
-﻿using System;
+﻿using Unity.Netcode;
 using UnityEngine;
 
 namespace Game.Scripts.Shooter
 {
-    [Serializable]
-    public sealed class AnimatorComponent
+    public sealed class AnimatorComponent : NetworkBehaviour
     {
         [SerializeField]
         private Animator _animator;
@@ -13,12 +12,18 @@ namespace Game.Scripts.Shooter
 
         public void SetIsMoving(bool isMoving)
         {
-            _animator.SetBool(_isMoving, isMoving);
+            if (IsOwner)
+            {
+                _animator.SetBool(_isMoving, isMoving);
+            }
         }
 
         public void PlayShootAnim()
         {
-            _animator.SetTrigger(_shoot);
+            if (IsOwner)
+            {
+                _animator.SetTrigger(_shoot);
+            }
         }
     }
 }
