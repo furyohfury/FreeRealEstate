@@ -10,6 +10,8 @@ namespace Game.Scripts.Shooter
         [SerializeField]
         private NetworkObject _projectilePrefab;
         [SerializeField]
+        private AimPointComponent _aimPointComponent;
+        [SerializeField]
         private float _cooldown;
         private float _timer;
 
@@ -35,7 +37,13 @@ namespace Game.Scripts.Shooter
             {
                 Debug.Log("[SERVER] Кулдаун пройден. Пытаюсь заспавнить пулю...");
                 _timer = _cooldown;
-                NetworkObject projectile = Instantiate(_projectilePrefab, _firePoint.position, transform.rotation);
+
+                Vector3 targetPoint = _aimPointComponent.GetAimPoint();
+
+                // Вычисляем направление от дула оружия к нашей точке прицеливания
+                Vector3 aimDirection = (targetPoint - _firePoint.position).normalized;
+
+                NetworkObject projectile = Instantiate(_projectilePrefab, _firePoint.position, Quaternion.LookRotation(aimDirection));
                 projectile.Spawn();
             }
         }
