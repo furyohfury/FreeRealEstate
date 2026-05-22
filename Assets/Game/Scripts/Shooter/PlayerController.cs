@@ -28,13 +28,25 @@ namespace Game.Scripts.Shooter
                 _player.SetRotationDirection(new Vector3(0, direction.x, 0));
             }
         }
-        
+
         public void Shoot(InputAction.CallbackContext context)
         {
             if (context.performed && IsOwner)
             {
                 Debug.Log($"<color=green>Shoot input</color>");
                 _player.Shoot();
+            }
+        }
+
+        public void Aim(InputAction.CallbackContext context)
+        {
+            if (context.started && IsOwner)
+            {
+                _player.Aim();
+            }
+            else if (context.canceled && IsOwner)
+            {
+                _player.CancelAim();
             }
         }
     }

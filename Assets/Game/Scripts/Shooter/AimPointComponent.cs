@@ -41,5 +41,12 @@ namespace Game.Scripts.Shooter
             targetPoint.y = _shootingHeight;
             return targetPoint;
         }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            var startpos = new Vector3(transform.position.x, _shootingHeight, transform.position.z);
+            Gizmos.DrawLine(startpos, startpos + transform.forward * _maxAimDistance);
+        }
     }
 }

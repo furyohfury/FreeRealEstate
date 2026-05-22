@@ -905,8 +905,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.7309303, y: 2.0299902, z: -1.4465942}
+  m_LocalRotation: {x: 0.007941151, y: 0, z: 0, w: 0.9999685}
+  m_LocalPosition: {x: 2.7690697, y: -0.91087556, z: 170.39182}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2810,6 +2810,10 @@ GameObject:
   - component: {fileID: 1670381760}
   - component: {fileID: 1670381763}
   - component: {fileID: 1670381764}
+  - component: {fileID: 1670381767}
+  - component: {fileID: 1670381765}
+  - component: {fileID: 1670381766}
+  - component: {fileID: 1670381768}
   m_Layer: 0
   m_Name: CinemachineCamera
   m_TagString: Untagged
@@ -2825,8 +2829,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1670381759}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.7309303, y: 2.0299902, z: -1.4465942}
+  m_LocalRotation: {x: 0.007941151, y: -0, z: 0, w: 0.9999685}
+  m_LocalPosition: {x: 2.7690697, y: -0.91087556, z: 170.39182}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2888,7 +2892,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineThirdPersonFollow
   Damping: {x: 0.1, y: 0.5, z: 0.3}
-  ShoulderOffset: {x: 1.5, y: 1.55, z: 0}
+  ShoulderOffset: {x: 1.5, y: 1.55, z: -0.7}
   VerticalArmLength: 0.4
   CameraSide: 1
   CameraDistance: 2.72
@@ -2901,6 +2905,104 @@ MonoBehaviour:
     CameraRadius: 0.2
     DampingIntoCollision: 0
     DampingFromCollision: 0.5
+--- !u!114 &1670381765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670381759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51227e395c9e45d899649795801e32fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CinemachineFollowPreset
+  _name: shoot
+  _thirdPersonFollow: {fileID: 1670381764}
+  _hasSavedData: 1
+  _savedData:
+    DampingX: 0.1
+    DampingY: 0.5
+    DampingZ: 0.3
+    ShoulderOffset: {x: 1.15, y: 0.18, z: 0.93}
+    HandOffset: {x: 0, y: 0, z: 0}
+    CameraDistance: 2.76
+    CameraSide: 1
+    CameraForward: 0
+    ObstacleLayers:
+      serializedVersion: 2
+      m_Bits: 0
+    CameraRadius: 0
+    VerticalArmLength: 0.78
+--- !u!114 &1670381766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670381759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51227e395c9e45d899649795801e32fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CinemachineFollowPreset
+  _name: walk
+  _thirdPersonFollow: {fileID: 1670381764}
+  _hasSavedData: 1
+  _savedData:
+    DampingX: 0.1
+    DampingY: 0.5
+    DampingZ: 0.3
+    ShoulderOffset: {x: 1.5, y: 1.55, z: -0.7}
+    HandOffset: {x: 0, y: 0, z: 0}
+    CameraDistance: 2.72
+    CameraSide: 1
+    CameraForward: 0
+    ObstacleLayers:
+      serializedVersion: 2
+      m_Bits: 0
+    CameraRadius: 0
+    VerticalArmLength: 0.4
+--- !u!114 &1670381767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670381759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
+  GlobalObjectIdHash: 2881302913
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 0
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
+--- !u!114 &1670381768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670381759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86b168c229024d03a5a00af441590976, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Shooter.CinemachinePresetsController
+  ShowTopMostFoldoutHeaderGroup: 1
+  _shootingPreset: {fileID: 1670381765}
+  _walkingPreset: {fileID: 1670381766}
 --- !u!1 &1716021086 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4657219229684584734, guid: a3e0641fa75a52e47a0b55700db0829a, type: 3}

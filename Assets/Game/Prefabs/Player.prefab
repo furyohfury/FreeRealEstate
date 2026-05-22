@@ -384,6 +384,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 9caa3d8a-6b2f-4e8e-8bad-6ede561bd9be
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4831772851508405276}
+        m_TargetAssemblyTypeName: Game.Scripts.Shooter.PlayerController, Assembly-CSharp
+        m_MethodName: Aim
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 20eaebba-5b47-439f-b828-de0534ba1e53
+    m_ActionName: 'Player/Aim[/Mouse/rightButton]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -439,6 +455,7 @@ MonoBehaviour:
   _playerUIComponent:
     _playerUI: {fileID: 1621350433510286056}
   _shootComponent: {fileID: 1554016245962828044}
+  _cameraComponent: {fileID: 8136719973146494403}
 --- !u!114 &4831772851508405276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -481,7 +498,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Shooter.CameraComponent
   ShowTopMostFoldoutHeaderGroup: 1
   _cameraTarget: {fileID: 4323219060578141677}
-  _aimPointComponent: {fileID: 7308858719972387681}
 --- !u!114 &1708365912853680008
 MonoBehaviour:
   m_ObjectHideFlags: 0
