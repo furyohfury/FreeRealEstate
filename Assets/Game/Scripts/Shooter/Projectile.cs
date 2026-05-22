@@ -10,6 +10,7 @@ namespace Game.Scripts.Shooter
 
         private void OnTriggerEnter(Collider other)
         {
+            Debug.Log($"<color=green>projectile OnTriggerEnter with {other.gameObject.name}</color>");
             TurnOffMoveForwardRpc();
         }
 

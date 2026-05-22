@@ -47,7 +47,7 @@ namespace Game.Scripts.Shooter
         public void Shoot()
         {
             _animatorComponent.PlayShootAnim();
-            _shootComponent.ShootServerRpc();
+            _shootComponent.Shoot();
             Debug.Log($"<color=green>Shoot</color>");
         }
 
