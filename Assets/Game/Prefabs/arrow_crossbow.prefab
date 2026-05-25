@@ -136,7 +136,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   NetworkTransformExpanded: 0
   AutoOwnerAuthorityTickOffset: 1
-  PositionInterpolationType: 2
+  PositionInterpolationType: 1
   RotationInterpolationType: 1
   ScaleInterpolationType: 0
   PositionLerpSmoothing: 1
