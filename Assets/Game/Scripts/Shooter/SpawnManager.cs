@@ -40,10 +40,11 @@ namespace Game
             
             if (playerInstance.TryGetComponent<NetworkTransform>(out var networkTransform))
             {
-                // В новых версиях NGO это заставит компонент принудительно взять текущие transform-координаты
+                // Отключаем на мгновение, чтобы применить координаты сервера
+                networkTransform.enabled = false; 
                 playerInstance.transform.position = spawnPoint.position;
                 playerInstance.transform.rotation = spawnPoint.rotation;
-                networkTransform.AuthorityMode = NetworkTransform.AuthorityModes.Owner;
+                networkTransform.enabled = true;
             }
         }
     }
