@@ -1,5 +1,4 @@
-﻿using Game.Scripts.ShooterS;
-using Unity.Netcode;
+﻿using Unity.Netcode;
 using UnityEngine;
 
 namespace Game.Scripts.Shooter
@@ -23,6 +22,8 @@ namespace Game.Scripts.Shooter
         private ShootComponent _shootComponent;
         [SerializeField]
         private CameraComponent _cameraComponent;
+        [SerializeField]
+        private AimUIComponent _aimUIComponent;
 
         public override void OnNetworkSpawn()
         {
@@ -46,19 +47,24 @@ namespace Game.Scripts.Shooter
 
         public void Shoot()
         {
-            _animatorComponent.PlayShootAnim();
-            _shootComponent.Shoot();
-            Debug.Log($"<color=green>Shoot</color>");
+            if (_cameraComponent.IsAiming)
+            {
+                _animatorComponent.PlayShootAnim();
+                _shootComponent.Shoot();
+                Debug.Log($"<color=green>Shoot</color>");
+            }
         }
 
         public void Aim()
         {
             _cameraComponent.SetShootingPreset();
+            _aimUIComponent.ShowAimUI();
         }
 
         public void CancelAim()
         {
             _cameraComponent.SetWalkingPreset();
+            _aimUIComponent.HideAimUI();
         }
 
         private void Update()

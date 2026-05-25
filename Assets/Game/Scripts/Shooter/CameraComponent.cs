@@ -1,15 +1,17 @@
-﻿using Game.Scripts.Shooter;
-using Unity.Cinemachine;
+﻿using Unity.Cinemachine;
 using Unity.Netcode;
 using UnityEngine;
 
-namespace Game.Scripts.ShooterS
+namespace Game.Scripts.Shooter
 {
     public class CameraComponent : NetworkBehaviour
     {
+        public bool IsAiming => _isAiming;
+
         [SerializeField]
         private Transform _cameraTarget;
         private CinemachineCamera _vcam;
+        private bool _isAiming;
 
         public override void OnNetworkSpawn()
         {
@@ -20,6 +22,8 @@ namespace Game.Scripts.ShooterS
                                {
                                    TrackingTarget = _cameraTarget
                                };
+
+                SetWalkingPreset();
             }
         }
 
@@ -28,6 +32,7 @@ namespace Game.Scripts.ShooterS
             if (IsOwner)
             {
                 _vcam.GetComponent<CinemachinePresetsController>().SetWalkingPreset();
+                _isAiming = false;
             }
         }
 
@@ -36,6 +41,7 @@ namespace Game.Scripts.ShooterS
             if (IsOwner)
             {
                 _vcam.GetComponent<CinemachinePresetsController>().SetShootingPreset();
+                _isAiming = true;
             }
         }
     }

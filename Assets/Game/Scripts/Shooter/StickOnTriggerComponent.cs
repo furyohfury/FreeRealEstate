@@ -7,43 +7,20 @@ namespace Game.Scripts.Shooter
     public sealed class StickOnTriggerComponent : NetworkBehaviour
     {
         [SerializeField]
-        private float _stickDistance = 0.1f;
+        private float _stickDistance = 0.3f;
         private bool _isCollided;
-        private Collider _other;
-        private Vector3 _offset;
-        private Quaternion _rotOffset;
 
         private void OnTriggerEnter(Collider other)
         {
             if (IsServer == false
-                || _isCollided)
+                || _isCollided
+                || other.TryGetComponent(out Player _))
             {
                 return;
             }
 
-            _other = other;
             transform.position += transform.forward * _stickDistance;
-            _offset = transform.position - other.transform.position;
-            _rotOffset = Quaternion.Inverse(other.transform.rotation) * transform.rotation;
             _isCollided = true;
-        }
-
-        private void Update()
-        {
-            if (IsServer == false
-                || _isCollided == false)
-            {
-                return;
-            }
-
-            if (_other == null)
-            {
-                NetworkObject.Despawn();
-                return;
-            }
-
-            transform.position = _other.transform.position + _offset;
-            transform.rotation = _other.transform.rotation * _rotOffset;
         }
     }
 }

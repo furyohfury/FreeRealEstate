@@ -228,9 +228,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Shooter.ProjectileComponent
   ShowTopMostFoldoutHeaderGroup: 1
-  _speed: 10
+  _speed: 40
   _rigidbody: {fileID: 2513761706243642410}
-  _stickDistance: 0.1
+  _stickDistance: 0.3
 --- !u!114 &7592739583277149392
 MonoBehaviour:
   m_ObjectHideFlags: 0
