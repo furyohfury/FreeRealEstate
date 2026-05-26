@@ -86,9 +86,6 @@ PrefabInstance:
       addedObject: {fileID: 906103005149161848}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ee35920dd788f41488dca6c8d1af6ef7, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1250806696411185105}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ee35920dd788f41488dca6c8d1af6ef7, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 6304080916375983283}
   m_SourcePrefab: {fileID: 100100000, guid: ee35920dd788f41488dca6c8d1af6ef7, type: 3}
 --- !u!1 &8014370022163759997 stripped
@@ -108,7 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 3036040753
+  GlobalObjectIdHash: 1807856040
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -273,21 +270,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Shooter.StickOnTriggerComponent
   ShowTopMostFoldoutHeaderGroup: 1
   _stickDistance: 0.1
---- !u!114 &1250806696411185105
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8014370022163759997}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1eb87e37a35f40f4a7be6bc40cd69936, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Shooter.DestroyAfterTriggerComponent
-  ShowTopMostFoldoutHeaderGroup: 1
-  _networkObject: {fileID: 1665730242349833395}
-  _delay: 2
+  _fakeObject: {fileID: 3538713333210881144, guid: db9fc257468c5c042a7796e9a53e45e6, type: 3}
 --- !u!114 &6304080916375983283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -302,3 +285,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Shooter.Projectile
   ShowTopMostFoldoutHeaderGroup: 1
   _moveForwardComponent: {fileID: 4402899818068078311}
+  _stickOnTriggerComponent: {fileID: 906103005149161848}
+  _lifetimeComponent: {fileID: 7592739583277149392}
+  _dealDamageComponent: {fileID: 1964458159920199166}

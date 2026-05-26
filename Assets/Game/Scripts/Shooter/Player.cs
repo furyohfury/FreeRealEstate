@@ -4,7 +4,8 @@ using UnityEngine;
 namespace Game.Scripts.Shooter
 {
     public class Player : NetworkBehaviour,
-        IHealth
+        IHealth,
+        IRagdollComponent
     {
         public NetworkVariable<float> MaxHealth => _healthComponent.MaxHealth;
         public NetworkVariable<float> Health => _healthComponent.Health;
@@ -24,6 +25,8 @@ namespace Game.Scripts.Shooter
         private CameraComponent _cameraComponent;
         [SerializeField]
         private AimUIComponent _aimUIComponent;
+        [SerializeField]
+        private RagdollComponent _ragdollComponent;
 
         public override void OnNetworkSpawn()
         {
@@ -65,6 +68,11 @@ namespace Game.Scripts.Shooter
         {
             _cameraComponent.SetWalkingPreset();
             _aimUIComponent.HideAimUI();
+        }
+
+        public Collider GetCollider(string boneId)
+        {
+            return _ragdollComponent.GetCollider(boneId);
         }
 
         private void Update()

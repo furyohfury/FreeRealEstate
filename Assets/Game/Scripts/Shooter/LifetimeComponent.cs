@@ -1,19 +1,17 @@
-﻿using Unity.Netcode;
+﻿using TriInspector;
 using UnityEngine;
 
 namespace Game.Scripts.Shooter
 {
-    public sealed class LifetimeComponent : NetworkBehaviour
+    public sealed class LifetimeComponent : MonoBehaviour
     {
         [SerializeField]
         private float _lifeTime = 10f;
 
-        public override void OnNetworkSpawn()
+        [Button]
+        public void Start()
         {
-            if (IsServer)
-            {
-                Destroy(gameObject, _lifeTime);
-            }
+            Destroy(gameObject, _lifeTime);
         }
     }
 }

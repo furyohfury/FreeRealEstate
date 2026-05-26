@@ -1,6 +1,6 @@
 ﻿namespace Game.Scripts.Shooter
 {
-    interface IHealth   
+    public interface IHealth   
     {
         void TakeDamage(float damage);
     }
