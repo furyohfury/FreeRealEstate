@@ -1,5 +1,4 @@
 ﻿using Unity.Netcode;
-using Unity.Netcode.Components;
 using UnityEngine;
 
 namespace Game
@@ -26,7 +25,8 @@ namespace Game
         private void OnClientConnected(ulong clientId)
         {
             // Спавнить имеет право ТОЛЬКО сервер
-            if (!NetworkManager.Singleton.IsServer) return;
+            if (!NetworkManager.Singleton.IsServer)
+                return;
 
             // Выбираем точку спавна
             Transform spawnPoint = _spawnPoints[_nextSpawnIndex];
@@ -37,14 +37,10 @@ namespace Game
 
             // Передаем объект в сеть и назначаем ему владельца (clientId)
             playerInstance.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId);
-            
-            if (playerInstance.TryGetComponent<NetworkTransform>(out var networkTransform))
+
+            if (playerInstance.TryGetComponent<GetToSpawnPositionComponent>(out var getToSpawnPositionComponent))
             {
-                // Отключаем на мгновение, чтобы применить координаты сервера
-                networkTransform.enabled = false; 
-                playerInstance.transform.position = spawnPoint.position;
-                playerInstance.transform.rotation = spawnPoint.rotation;
-                networkTransform.enabled = true;
+                getToSpawnPositionComponent.GetToSpawnPositionRpc(spawnPoint.position, spawnPoint.rotation);
             }
         }
     }

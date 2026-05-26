@@ -223,6 +223,7 @@ GameObject:
   - component: {fileID: 7308858719972387681}
   - component: {fileID: 5467770420629258014}
   - component: {fileID: 3597870567345541951}
+  - component: {fileID: 3380349605980128837}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -693,6 +694,19 @@ MonoBehaviour:
   - {fileID: 7986998106864737648}
   - {fileID: 7235429733855262553}
   - {fileID: 6456814331774957682}
+--- !u!114 &3380349605980128837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5438488679310955333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af73dc9cd11e41af87d4b8a23779ff20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.GetToSpawnPositionComponent
+  ShowTopMostFoldoutHeaderGroup: 1
 --- !u!1 &6444295933819203525
 GameObject:
   m_ObjectHideFlags: 0
