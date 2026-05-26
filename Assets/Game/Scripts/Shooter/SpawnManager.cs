@@ -38,7 +38,7 @@ namespace Game
             // Передаем объект в сеть и назначаем ему владельца (clientId)
             playerInstance.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId);
 
-            if (playerInstance.TryGetComponent<GetToSpawnPositionComponent>(out var getToSpawnPositionComponent))
+            if (playerInstance.TryGetComponent<SpawnPositionComponent>(out var getToSpawnPositionComponent))
             {
                 getToSpawnPositionComponent.GetToSpawnPositionRpc(spawnPoint.position, spawnPoint.rotation);
             }
