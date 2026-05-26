@@ -420,7 +420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 99404080
+  GlobalObjectIdHash: 2270269626
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -507,6 +507,7 @@ MonoBehaviour:
   _cameraComponent: {fileID: 8136719973146494403}
   _aimUIComponent: {fileID: 5467770420629258014}
   _ragdollComponent: {fileID: 3597870567345541951}
+  _spawnPositionComponent: {fileID: 3380349605980128837}
 --- !u!114 &4831772851508405276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -708,6 +709,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.GetToSpawnPositionComponent
   ShowTopMostFoldoutHeaderGroup: 1
   _networkTransform: {fileID: 4271220376702099230}
+  _characterController: {fileID: 2841496123659668153}
 --- !u!1 &6444295933819203525
 GameObject:
   m_ObjectHideFlags: 0

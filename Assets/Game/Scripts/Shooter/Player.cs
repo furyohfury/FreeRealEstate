@@ -27,6 +27,8 @@ namespace Game.Scripts.Shooter
         private AimUIComponent _aimUIComponent;
         [SerializeField]
         private RagdollComponent _ragdollComponent;
+        [SerializeField]
+        private SpawnPositionComponent _spawnPositionComponent;
 
         public override void OnNetworkSpawn()
         {
@@ -80,6 +82,11 @@ namespace Game.Scripts.Shooter
             _moveComponent.Update();
             _rotationComponent.Update();
             _animatorComponent.SetIsMoving(_moveComponent.Direction.x != 0 || _moveComponent.Direction.z != 0);
+        }
+
+        public void GetToSpawnPosition()
+        {
+            _spawnPositionComponent.GetToSpawnPositionRpc();
         }
 
         public override void OnNetworkDespawn()

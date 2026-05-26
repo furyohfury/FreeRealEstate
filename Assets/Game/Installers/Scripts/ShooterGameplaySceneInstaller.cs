@@ -10,12 +10,15 @@ namespace Game
                      .FromComponentsInHierarchy()
                      .AsCached();
 
-            Container.BindInterfacesTo<SpawnManager>()
+            Container.BindInterfacesAndSelfTo<SpawnManager>()
                      .AsSingle()
                      .NonLazy();
 
             Container.Bind<AimIcon>()
                      .FromComponentInHierarchy()
+                     .AsSingle();
+
+            Container.BindInterfacesTo<PlayerDeathObserver>()
                      .AsSingle();
         }
     }

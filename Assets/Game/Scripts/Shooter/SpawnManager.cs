@@ -9,6 +9,8 @@ namespace Game
 {
     public sealed class SpawnManager : IInitializable, IDisposable
     {
+        public event Action<ulong> OnPlayerNetworkObjectSpawned;
+
         private readonly Player _playerPrefab;
         private readonly SpawnPoint[] _spawnPoints;
         private int _nextSpawnIndex = 0;
@@ -45,12 +47,20 @@ namespace Game
             _container.InjectGameObject(playerInstance.gameObject);
 
             // Передаем объект в сеть и назначаем ему владельца (clientId)
-            playerInstance.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId);
+            var networkObject = playerInstance.GetComponent<NetworkObject>();
+            networkObject.SpawnAsPlayerObject(clientId);
+            NotifyPlayerNetworkObjectSpawnedRpc(networkObject.NetworkObjectId);
 
             if (playerInstance.TryGetComponent<SpawnPositionComponent>(out var getToSpawnPositionComponent))
             {
-                getToSpawnPositionComponent.GetToSpawnPositionRpc(spawnPoint.position, spawnPoint.rotation);
+                // getToSpawnPositionComponent.GetToSpawnPositionRpc(spawnPoint.position, spawnPoint.rotation);
             }
+        }
+
+        [Rpc(SendTo.ClientsAndHost)]
+        public void NotifyPlayerNetworkObjectSpawnedRpc(ulong networkObjectId)
+        {
+            OnPlayerNetworkObjectSpawned?.Invoke(networkObjectId);
         }
 
         public void Dispose()
