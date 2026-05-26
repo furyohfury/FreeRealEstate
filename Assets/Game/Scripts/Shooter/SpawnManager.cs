@@ -1,19 +1,27 @@
-﻿using Unity.Netcode;
+﻿using System;
+using Game.Scripts.Shooter;
+using Unity.Netcode;
 using UnityEngine;
+using Zenject;
+using Object = UnityEngine.Object;
 
 namespace Game
 {
-    public class SpawnManager : MonoBehaviour
+    public sealed class SpawnManager : IInitializable, IDisposable
     {
-        [SerializeField]
-        private GameObject _playerPrefab;
-        [SerializeField]
-        private Transform[] _spawnPoints;
-        [SerializeField]
-        private Transform _container;
+        private readonly Player _playerPrefab;
+        private readonly SpawnPoint[] _spawnPoints;
         private int _nextSpawnIndex = 0;
+        private readonly DiContainer _container;
 
-        private void Start()
+        public SpawnManager(SpawnPoint[] spawnPoints, Player playerPrefab, DiContainer container)
+        {
+            _container = container;
+            _spawnPoints = spawnPoints;
+            _playerPrefab = playerPrefab;
+        }
+
+        public void Initialize()
         {
             if (NetworkManager.Singleton != null)
             {
@@ -29,11 +37,12 @@ namespace Game
                 return;
 
             // Выбираем точку спавна
-            Transform spawnPoint = _spawnPoints[_nextSpawnIndex];
+            Transform spawnPoint = _spawnPoints[_nextSpawnIndex].transform;
             _nextSpawnIndex = (_nextSpawnIndex + 1) % _spawnPoints.Length;
 
             // Инстанцируем префаб в нужных координатах
-            GameObject playerInstance = Instantiate(_playerPrefab, spawnPoint.position, spawnPoint.rotation);
+            var playerInstance = Object.Instantiate(_playerPrefab, spawnPoint.position, spawnPoint.rotation);
+            _container.InjectGameObject(playerInstance.gameObject);
 
             // Передаем объект в сеть и назначаем ему владельца (clientId)
             playerInstance.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId);
@@ -41,6 +50,15 @@ namespace Game
             if (playerInstance.TryGetComponent<SpawnPositionComponent>(out var getToSpawnPositionComponent))
             {
                 getToSpawnPositionComponent.GetToSpawnPositionRpc(spawnPoint.position, spawnPoint.rotation);
+            }
+        }
+
+        public void Dispose()
+        {
+            if (NetworkManager.Singleton != null)
+            {
+                // Подписываемся на событие подключения клиента
+                NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected;
             }
         }
     }

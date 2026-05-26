@@ -1,4 +1,5 @@
 ﻿using Unity.Netcode;
+using Zenject;
 
 namespace Game.Scripts.Shooter
 {
@@ -6,11 +7,16 @@ namespace Game.Scripts.Shooter
     {
         private AimIcon _aimIcon;
 
+        [Inject]
+        private void Construct(AimIcon aimIcon)
+        {
+            _aimIcon = aimIcon;
+        }
+
         public override void OnNetworkSpawn()
         {
             if (IsOwner)
             {
-                _aimIcon = FindAnyObjectByType<AimIcon>();
                 HideAimUI();
             }
         }

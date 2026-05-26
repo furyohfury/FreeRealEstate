@@ -25,7 +25,7 @@ namespace Game
         }
 
         [Rpc(SendTo.ClientsAndHost)]
-        public void GetToSpawnPosition()
+        public void GetToSpawnPositionRpc()
         {
             if (IsOwner)
             {
