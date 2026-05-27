@@ -3,7 +3,6 @@ using Game.Scripts.Shooter;
 using Unity.Netcode;
 using UnityEngine;
 using Zenject;
-using Object = UnityEngine.Object;
 
 namespace Game
 {
@@ -15,6 +14,7 @@ namespace Game
         private readonly SpawnPoint[] _spawnPoints;
         private int _nextSpawnIndex = 0;
         private readonly DiContainer _container;
+        private ZenjectPlayerPrefabInstanceHandler _playerPrefabInstanceHandler;
 
         public SpawnManager(SpawnPoint[] spawnPoints, Player playerPrefab, DiContainer container)
         {
@@ -27,38 +27,38 @@ namespace Game
         {
             if (NetworkManager.Singleton != null)
             {
-                // Подписываемся на событие подключения клиента
                 NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
+
+                // Регистрируем хендлер для клиентов. 
+                // Теперь каждый раз, когда клиент получает команду от сервера заспавнить этот префаб,
+                // Netcode на клиенте автоматически вызовет наш ZenjectPlayerPrefabInstanceHandler.
+                var playerNetObject = _playerPrefab.GetComponent<NetworkObject>();
+                _playerPrefabInstanceHandler = new ZenjectPlayerPrefabInstanceHandler(_container, _playerPrefab);
+                NetworkManager.Singleton.PrefabHandler.AddHandler(playerNetObject, _playerPrefabInstanceHandler);
             }
         }
 
         private void OnClientConnected(ulong clientId)
         {
-            // Спавнить имеет право ТОЛЬКО сервер
             if (!NetworkManager.Singleton.IsServer)
                 return;
 
-            // Выбираем точку спавна
             Transform spawnPoint = _spawnPoints[_nextSpawnIndex].transform;
             _nextSpawnIndex = (_nextSpawnIndex + 1) % _spawnPoints.Length;
 
-            // Инстанцируем префаб в нужных координатах
-            var playerInstance = Object.Instantiate(_playerPrefab, spawnPoint.position, spawnPoint.rotation);
-            _container.InjectGameObject(playerInstance.gameObject);
+            // НА СЕРВЕРЕ: Явно вызываем наш хендлер.
+            // Он сделает Object.Instantiate + Zenject-инжекцию по точно такому же пути,
+            // по которому пойдет клиент. Никакого дублирования кода!
+            NetworkObject networkObject = _playerPrefabInstanceHandler.Instantiate(clientId, spawnPoint.position, spawnPoint.rotation);
 
-            // Передаем объект в сеть и назначаем ему владельца (clientId)
-            var networkObject = playerInstance.GetComponent<NetworkObject>();
+            // Передаем объект в сеть
             networkObject.SpawnAsPlayerObject(clientId);
-            NotifyPlayerNetworkObjectSpawnedRpc(networkObject.NetworkObjectId);
 
-            if (playerInstance.TryGetComponent<SpawnPositionComponent>(out var getToSpawnPositionComponent))
-            {
-                // getToSpawnPositionComponent.GetToSpawnPositionRpc(spawnPoint.position, spawnPoint.rotation);
-            }
+            NotifyPlayerNetworkObjectSpawnedRpc(networkObject.NetworkObjectId);
         }
 
         [Rpc(SendTo.ClientsAndHost)]
-        public void NotifyPlayerNetworkObjectSpawnedRpc(ulong networkObjectId)
+        private void NotifyPlayerNetworkObjectSpawnedRpc(ulong networkObjectId)
         {
             OnPlayerNetworkObjectSpawned?.Invoke(networkObjectId);
         }
@@ -67,8 +67,13 @@ namespace Game
         {
             if (NetworkManager.Singleton != null)
             {
-                // Подписываемся на событие подключения клиента
                 NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected;
+
+                if (NetworkManager.Singleton.PrefabHandler != null)
+                {
+                    var playerNetObject = _playerPrefab.GetComponent<NetworkObject>();
+                    NetworkManager.Singleton.PrefabHandler.RemoveHandler(playerNetObject);
+                }
             }
         }
     }
