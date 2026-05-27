@@ -1,63 +1,46 @@
 ﻿using System;
-using System.Collections.Generic;
 using Game.Scripts.Shooter;
-using Unity.Netcode;
 using Zenject;
 
 namespace Game
 {
     public sealed class PlayerDeathObserver : IInitializable, IDisposable
     {
-        private readonly SpawnManager _spawnManager;
-        private readonly HashSet<Player> _players = new HashSet<Player>();
+        private readonly RoundManager _roundManager;
+        private readonly PlayerSpawnSystem _playerSpawnSystem;
 
-        public PlayerDeathObserver(SpawnManager spawnManager)
+        public PlayerDeathObserver(RoundManager roundManager, PlayerSpawnSystem playerSpawnSystem)
         {
-            _spawnManager = spawnManager;
+            _roundManager = roundManager;
+            _playerSpawnSystem = playerSpawnSystem;
         }
 
         public void Initialize()
         {
-            _spawnManager.OnPlayerNetworkObjectSpawned += SpawnManagerOnOnPlayerNetworkObjectSpawned;
+            _playerSpawnSystem.OnPlayerSpawned += SpawnManagerOnOnPlayerNetworkObjectSpawned;
         }
 
-        private void SpawnManagerOnOnPlayerNetworkObjectSpawned(ulong obj)
+        private void SpawnManagerOnOnPlayerNetworkObjectSpawned(Player player)
         {
-            NetworkObject networkObject = NetworkManager.Singleton.SpawnManager.SpawnedObjects[obj];
-            var player = networkObject.GetComponent<Player>();
-            player.Health.OnValueChanged += OnHealthChanged;
-            _players.Add(player);
+            player.Health.OnValueChanged += HealthOnValueChanged;
         }
 
-        private void OnHealthChanged(float previousValue, float newValue)
+        private void HealthOnValueChanged(float previousValue, float newValue)
         {
             if (newValue <= 0)
             {
-                LaunchNextRound();
-            }
-        }
-
-        private void LaunchNextRound()
-        {
-            foreach (var player in _players)
-            {
-                player.GetToSpawnPosition();
-
-                if (NetworkManager.Singleton.IsServer)
-                {
-                    player.Health.Value = player.MaxHealth.Value;
-                }
+                _roundManager.LaunchNextRound();
             }
         }
 
         public void Dispose()
         {
-            _spawnManager.OnPlayerNetworkObjectSpawned += SpawnManagerOnOnPlayerNetworkObjectSpawned;
-
-            foreach (var player in _players)
+            foreach (var player in _playerSpawnSystem.Players)
             {
-                player.Health.OnValueChanged -= OnHealthChanged;
+                player.Health.OnValueChanged -= HealthOnValueChanged;
             }
+
+            _playerSpawnSystem.OnPlayerSpawned -= SpawnManagerOnOnPlayerNetworkObjectSpawned;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Game.Scripts.Shooter;
 using Unity.Netcode;
 using UnityEngine;
@@ -6,17 +7,19 @@ using Zenject;
 
 namespace Game
 {
-    public sealed class SpawnManager : IInitializable, IDisposable
+    public sealed class PlayerSpawnSystem : IInitializable, IDisposable
     {
-        public event Action<ulong> OnPlayerNetworkObjectSpawned;
-
+        public event Action<Player> OnPlayerSpawned;
+        public IReadOnlyCollection<Player> Players => _players;
         private readonly Player _playerPrefab;
+
+        private readonly HashSet<Player> _players = new HashSet<Player>();
         private readonly SpawnPoint[] _spawnPoints;
         private int _nextSpawnIndex = 0;
         private readonly DiContainer _container;
         private ZenjectPlayerPrefabInstanceHandler _playerPrefabInstanceHandler;
 
-        public SpawnManager(SpawnPoint[] spawnPoints, Player playerPrefab, DiContainer container)
+        public PlayerSpawnSystem(SpawnPoint[] spawnPoints, Player playerPrefab, DiContainer container)
         {
             _container = container;
             _spawnPoints = spawnPoints;
@@ -28,11 +31,7 @@ namespace Game
             if (NetworkManager.Singleton != null)
             {
                 NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
-
-                // Регистрируем хендлер для клиентов. 
-                // Теперь каждый раз, когда клиент получает команду от сервера заспавнить этот префаб,
-                // Netcode на клиенте автоматически вызовет наш ZenjectPlayerPrefabInstanceHandler.
-                var playerNetObject = _playerPrefab.GetComponent<NetworkObject>();
+                NetworkObject playerNetObject = _playerPrefab.GetComponent<NetworkObject>();
                 _playerPrefabInstanceHandler = new ZenjectPlayerPrefabInstanceHandler(_container, _playerPrefab);
                 NetworkManager.Singleton.PrefabHandler.AddHandler(playerNetObject, _playerPrefabInstanceHandler);
             }
@@ -45,14 +44,13 @@ namespace Game
 
             Transform spawnPoint = _spawnPoints[_nextSpawnIndex].transform;
             _nextSpawnIndex = (_nextSpawnIndex + 1) % _spawnPoints.Length;
-
-            // НА СЕРВЕРЕ: Явно вызываем наш хендлер.
-            // Он сделает Object.Instantiate + Zenject-инжекцию по точно такому же пути,
-            // по которому пойдет клиент. Никакого дублирования кода!
             NetworkObject networkObject = _playerPrefabInstanceHandler.Instantiate(clientId, spawnPoint.position, spawnPoint.rotation);
-
-            // Передаем объект в сеть
             networkObject.SpawnAsPlayerObject(clientId);
+
+            if (networkObject.TryGetComponent(out Player player))
+            {
+                _players.Add(player);
+            }
 
             NotifyPlayerNetworkObjectSpawnedRpc(networkObject.NetworkObjectId);
         }
@@ -60,7 +58,16 @@ namespace Game
         [Rpc(SendTo.ClientsAndHost)]
         private void NotifyPlayerNetworkObjectSpawnedRpc(ulong networkObjectId)
         {
-            OnPlayerNetworkObjectSpawned?.Invoke(networkObjectId);
+            IReadOnlyList<NetworkObject> playerObjects = NetworkManager.Singleton.SpawnManager.PlayerObjects;
+
+            for (int i = 0, count = playerObjects.Count; i < count; i++)
+            {
+                if (playerObjects[i].NetworkObjectId == networkObjectId && playerObjects[i]
+                        .TryGetComponent(out Player player))
+                {
+                    OnPlayerSpawned?.Invoke(player);
+                }
+            }
         }
 
         public void Dispose()

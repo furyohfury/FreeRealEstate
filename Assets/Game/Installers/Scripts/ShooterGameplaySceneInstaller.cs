@@ -10,7 +10,7 @@ namespace Game
                      .FromComponentsInHierarchy()
                      .AsCached();
 
-            Container.BindInterfacesAndSelfTo<SpawnManager>()
+            Container.BindInterfacesAndSelfTo<PlayerSpawnSystem>()
                      .AsSingle()
                      .NonLazy();
 
@@ -20,6 +20,10 @@ namespace Game
 
             Container.BindInterfacesTo<PlayerDeathObserver>()
                      .AsSingle();
+
+            Container.Bind<RoundManager>()
+                     .AsSingle()
+                     .NonLazy();
         }
     }
 }
