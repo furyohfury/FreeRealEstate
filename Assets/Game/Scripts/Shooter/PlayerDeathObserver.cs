@@ -6,12 +6,12 @@ namespace Game
 {
     public sealed class PlayerDeathObserver : IInitializable, IDisposable
     {
-        private readonly RoundManager _roundManager;
+        private readonly SessionSystem _sessionSystem;
         private readonly PlayerSpawnSystem _playerSpawnSystem;
 
-        public PlayerDeathObserver(RoundManager roundManager, PlayerSpawnSystem playerSpawnSystem)
+        public PlayerDeathObserver(SessionSystem sessionSystem, PlayerSpawnSystem playerSpawnSystem)
         {
-            _roundManager = roundManager;
+            _sessionSystem = sessionSystem;
             _playerSpawnSystem = playerSpawnSystem;
         }
 
@@ -29,7 +29,7 @@ namespace Game
         {
             if (newValue <= 0)
             {
-                _roundManager.LaunchNextRound();
+                _sessionSystem.LaunchNextRound();
             }
         }
 

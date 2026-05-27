@@ -3,12 +3,12 @@ using Unity.Netcode;
 
 namespace Game
 {
-    public sealed class RoundManager
+    public sealed class SessionSystem
     {
         private readonly PlayerSpawnSystem _playerSpawnSystem;
         private ScoreSystem _scoreSystem;
 
-        public RoundManager(PlayerSpawnSystem playerSpawnSystem, ScoreSystem scoreSystem)
+        public SessionSystem(PlayerSpawnSystem playerSpawnSystem, ScoreSystem scoreSystem)
         {
             _playerSpawnSystem = playerSpawnSystem;
             _scoreSystem = scoreSystem;

@@ -21,7 +21,7 @@ namespace Game
             Container.BindInterfacesTo<PlayerDeathObserver>()
                      .AsSingle();
 
-            Container.Bind<RoundManager>()
+            Container.Bind<SessionSystem>()
                      .AsSingle()
                      .NonLazy();
         }
