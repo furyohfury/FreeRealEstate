@@ -3,9 +3,7 @@ using UnityEngine;
 
 namespace Game.Scripts.Shooter
 {
-    public class Player : NetworkBehaviour,
-        IHealth,
-        IRagdollComponent
+    public class Player : NetworkBehaviour, IHealth, IRagdollComponent
     {
         public NetworkVariable<float> MaxHealth => _healthComponent.MaxHealth;
         public NetworkVariable<float> Health => _healthComponent.Health;
@@ -38,6 +36,11 @@ namespace Game.Scripts.Shooter
         public void TakeDamage(float damage)
         {
             _healthComponent.TakeDamage(damage);
+        }
+
+        public float GetCurrentHealth()
+        {
+            return _healthComponent.Health.Value;
         }
 
         public void SetDirection(Vector3 direction)

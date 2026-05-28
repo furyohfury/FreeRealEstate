@@ -1,6 +1,7 @@
 ﻿using Unity.Cinemachine;
 using Unity.Netcode;
 using UnityEngine;
+using Zenject;
 
 namespace Game.Scripts.Shooter
 {
@@ -13,11 +14,16 @@ namespace Game.Scripts.Shooter
         private CinemachineCamera _vcam;
         private bool _isAiming;
 
+        [Inject]
+        public void Construct(CinemachineCamera cam)
+        {
+            _vcam = cam;
+        }
+
         public override void OnNetworkSpawn()
         {
             if (IsOwner)
             {
-                _vcam = FindFirstObjectByType<CinemachineCamera>();
                 _vcam.Target = new CameraTarget
                                {
                                    TrackingTarget = _cameraTarget
@@ -31,7 +37,8 @@ namespace Game.Scripts.Shooter
         {
             if (IsOwner)
             {
-                _vcam.GetComponent<CinemachinePresetsController>().SetWalkingPreset();
+                _vcam.GetComponent<CinemachinePresetsController>()
+                     .SetWalkingPreset();
                 _isAiming = false;
             }
         }
@@ -40,7 +47,8 @@ namespace Game.Scripts.Shooter
         {
             if (IsOwner)
             {
-                _vcam.GetComponent<CinemachinePresetsController>().SetShootingPreset();
+                _vcam.GetComponent<CinemachinePresetsController>()
+                     .SetShootingPreset();
                 _isAiming = true;
             }
         }

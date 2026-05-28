@@ -6,41 +6,31 @@ namespace Game
 {
     public sealed class PlayerDeathObserver : IInitializable, IDisposable
     {
+        private readonly ScoreSystem _scoreSystem;
+        private readonly DealDamageSystem _dealDamageSystem;
         private readonly SessionSystem _sessionSystem;
-        private readonly PlayerSpawnSystem _playerSpawnSystem;
 
-        public PlayerDeathObserver(SessionSystem sessionSystem, PlayerSpawnSystem playerSpawnSystem)
+        public PlayerDeathObserver(ScoreSystem scoreSystem, DealDamageSystem dealDamageSystem, SessionSystem sessionSystem)
         {
+            _scoreSystem = scoreSystem;
+            _dealDamageSystem = dealDamageSystem;
             _sessionSystem = sessionSystem;
-            _playerSpawnSystem = playerSpawnSystem;
         }
 
         public void Initialize()
         {
-            _playerSpawnSystem.OnPlayerSpawned += SpawnManagerOnOnPlayerNetworkObjectSpawned;
+            _dealDamageSystem.OnKill += DealDamageSystemOnOnKill;
         }
 
-        private void SpawnManagerOnOnPlayerNetworkObjectSpawned(Player player)
+        private void DealDamageSystemOnOnKill(KillEvent obj)
         {
-            player.Health.OnValueChanged += HealthOnValueChanged;
-        }
-
-        private void HealthOnValueChanged(float previousValue, float newValue)
-        {
-            if (newValue <= 0)
-            {
-                _sessionSystem.LaunchNextRound();
-            }
+            _sessionSystem.LaunchNextRound();
+            _scoreSystem.ScoreKillPoints(obj.KillerNetworkObjectId);
         }
 
         public void Dispose()
         {
-            foreach (var player in _playerSpawnSystem.Players)
-            {
-                player.Health.OnValueChanged -= HealthOnValueChanged;
-            }
-
-            _playerSpawnSystem.OnPlayerSpawned -= SpawnManagerOnOnPlayerNetworkObjectSpawned;
+            _dealDamageSystem.OnKill -= DealDamageSystemOnOnKill;
         }
     }
 }

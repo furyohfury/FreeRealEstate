@@ -1,5 +1,6 @@
 ﻿using Unity.Netcode;
 using UnityEngine;
+using Zenject;
 
 namespace Game.Scripts.Shooter
 {
@@ -7,9 +8,17 @@ namespace Game.Scripts.Shooter
     {
         [SerializeField]
         private float _damage = 1f;
+        private DealDamageSystem _dealDamageSystem;
+
+        [Inject]
+        public void Construct(DealDamageSystem dealDamageSystem)
+        {
+            _dealDamageSystem = dealDamageSystem;
+        }
 
         public void DealDamage(IHealth health)
         {
+            _dealDamageSystem.DealDamage(new DealDamageEvent(OwnerClientId, _damage, health.OwnerClientId), health);
             health.TakeDamage(_damage);
         }
     }

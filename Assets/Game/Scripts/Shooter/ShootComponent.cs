@@ -1,5 +1,6 @@
 ﻿using Unity.Netcode;
 using UnityEngine;
+using Zenject;
 
 namespace Game.Scripts.Shooter
 {
@@ -14,6 +15,13 @@ namespace Game.Scripts.Shooter
         [SerializeField]
         private float _cooldown;
         private float _timer;
+        private ZenjectNetworkObjectSpawner _zenjectNetworkObjectSpawner;
+
+        [Inject]
+        public void Construct(ZenjectNetworkObjectSpawner zenjectNetworkObjectSpawner)
+        {
+            _zenjectNetworkObjectSpawner = zenjectNetworkObjectSpawner;
+        }
 
         public override void OnNetworkSpawn()
         {
@@ -44,8 +52,9 @@ namespace Game.Scripts.Shooter
         public void ShootServerRpc(Vector3 aimDirection)
         {
             Debug.Log($"[SERVER] RPC получен! Текущий таймер: {_timer}");
-            NetworkObject projectile = Instantiate(_projectilePrefab, _firePoint.position, Quaternion.LookRotation(aimDirection));
-            projectile.Spawn();
+            Vector3 position = _firePoint.position;
+            Quaternion rotation = Quaternion.LookRotation(aimDirection);
+            _zenjectNetworkObjectSpawner.SpawnPrefab(_projectilePrefab,position, rotation);
         }
     }
 }

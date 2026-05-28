@@ -1,4 +1,6 @@
-﻿using Zenject;
+﻿using Game.Scripts.Shooter;
+using Unity.Cinemachine;
+using Zenject;
 
 namespace Game
 {
@@ -6,24 +8,32 @@ namespace Game
     {
         public override void InstallBindings()
         {
-            Container.Bind<SpawnPoint>()
-                     .FromComponentsInHierarchy()
-                     .AsCached();
+            Container.Bind<CinemachineCamera>().FromComponentInHierarchy().AsSingle();
 
-            Container.BindInterfacesAndSelfTo<PlayerSpawnSystem>()
-                     .AsSingle()
-                     .NonLazy();
+            Container.Bind<SpawnPoint>().FromComponentsInHierarchy().AsCached();
 
-            Container.Bind<AimIcon>()
-                     .FromComponentInHierarchy()
-                     .AsSingle();
+            Container.BindInterfacesAndSelfTo<ZenjectNetworkObjectSpawner>().AsSingle();
 
-            Container.BindInterfacesTo<PlayerDeathObserver>()
-                     .AsSingle();
+            Container.BindInterfacesAndSelfTo<PlayerFactory>().AsSingle().NonLazy();
 
-            Container.Bind<SessionSystem>()
-                     .AsSingle()
-                     .NonLazy();
+            Container.Bind<AimIcon>().FromComponentInHierarchy().AsSingle();
+
+            Container.BindInterfacesTo<PlayerDeathObserver>().AsSingle();
+
+            Container.BindInterfacesAndSelfTo<SessionSystem>().FromComponentInHierarchy().AsSingle();
+
+            Container.Bind<DealDamageSystem>().AsSingle();
+
+            Container.BindInterfacesAndSelfTo<ScoreSystem>().FromComponentsInHierarchy().AsSingle();
+
+            BindUI();
+        }
+
+        private void BindUI()
+        {
+            Container.Bind<RoundInfoUI>().FromComponentInHierarchy().AsSingle();
+
+            Container.BindInterfacesTo<RoundInfoPresenter>().AsSingle();
         }
     }
 }

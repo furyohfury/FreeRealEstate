@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: ShooterAssetsInstaller
   m_EditorClassIdentifier: Assembly-CSharp::Game.ShooterAssetsInstaller
   _player: {fileID: 2504159889119551591, guid: cadb5f6c351f74347a1f2854ec482a3d, type: 3}
+  _scoreSettings: {fileID: 11400000, guid: 0c27baa6e2c17de45843169f25235c0b, type: 2}
+  _networkPrefabsList:
+  - {fileID: 11400000, guid: 26dd63367de05b645a9d4d529058dc9b, type: 2}

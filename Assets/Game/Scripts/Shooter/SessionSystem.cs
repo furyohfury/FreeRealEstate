@@ -1,35 +1,87 @@
-﻿using Game.Scripts.Shooter;
+﻿using System;
+using System.Collections.Generic;
+using Game.Scripts.Shooter;
 using Unity.Netcode;
+using Zenject;
 
 namespace Game
 {
-    public sealed class SessionSystem
+    public sealed class SessionSystem : NetworkBehaviour, IInitializable, IDisposable
     {
-        private readonly PlayerSpawnSystem _playerSpawnSystem;
-        private ScoreSystem _scoreSystem;
+        public event Action<PlayerData> OnPlayerJoined;
+        
+        // Для чтения снаружи предоставляем NetworkList
+        public NetworkList<PlayerData> PlayerDatas => _playerDatas;
 
-        public SessionSystem(PlayerSpawnSystem playerSpawnSystem, ScoreSystem scoreSystem)
+        private PlayerFactory _playerFactory;
+        
+        // Переходим на NetworkList
+        private readonly NetworkList<PlayerData> _playerDatas = new NetworkList<PlayerData>();
+
+        [Inject]
+        public void Construct(PlayerFactory playerFactory)
         {
-            _playerSpawnSystem = playerSpawnSystem;
-            _scoreSystem = scoreSystem;
+            _playerFactory = playerFactory;
+        }
+
+        public void Initialize()
+        {
+            NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
+        }
+
+        // NetworkList требует инициализации в Awake или OnNetworkSpawn
+        private void Awake()
+        {
+            // Обязательно подписываемся на изменения, если клиентам нужно реагировать локально
+            _playerDatas.OnListChanged += OnPlayerListChanged;
+        }
+
+        private void OnPlayerListChanged(NetworkListEvent<PlayerData> changeEvent)
+        {
+            // Триггерится и на сервере, и на клиентах при добавлении/удалении элементов
+            if (changeEvent.Type == NetworkListEvent<PlayerData>.EventType.Add)
+            {
+                OnPlayerJoined?.Invoke(changeEvent.Value);
+            }
+        }
+
+        private void OnClientConnected(ulong clientId)
+        {
+            if (!NetworkManager.Singleton.IsServer) return;
+
+            Player player = _playerFactory.SpawnPlayer(clientId);
+            
+            var playerData = new PlayerData
+                             {
+                                 clientID = clientId,
+                                 NetworkObjID = player.NetworkObjectId,
+                                 Nickname = $"Player_{clientId}" // Пример работы с FixedString
+                             };
+                             
+            // Теперь это автоматически синхронизируется с клиентами!
+            _playerDatas.Add(playerData); 
         }
 
         public void LaunchNextRound()
         {
-            if (!NetworkManager.Singleton.IsServer)
-                return;
+            if (!NetworkManager.Singleton.IsServer) return;
 
-            foreach (var player in _playerSpawnSystem.Players)
+            foreach (var playerData in _playerDatas)
             {
+                NetworkObject networkObject = NetworkManager.Singleton.SpawnManager.GetPlayerNetworkObject(playerData.clientID);
+                if (networkObject == null) continue;
+                
+                Player player = networkObject.GetComponent<Player>();
                 player.GetToSpawnPosition();
-
                 player.Health.Value = player.MaxHealth.Value;
             }
         }
 
-        public void AddPoints(Player player, int points)
+        public void Dispose()
         {
-            _scoreSystem.AddPoints(player, points);
+            _playerDatas.OnListChanged -= OnPlayerListChanged;
+            if (NetworkManager.Singleton != null)
+                NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected;
         }
     }
 }
