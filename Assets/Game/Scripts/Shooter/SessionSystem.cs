@@ -24,12 +24,12 @@ namespace Game
             _playerFactory = playerFactory;
         }
 
+        // NetworkList требует инициализации в Awake или OnNetworkSpawn
         public void Initialize()
         {
             NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
         }
 
-        // NetworkList требует инициализации в Awake или OnNetworkSpawn
         private void Awake()
         {
             // Обязательно подписываемся на изменения, если клиентам нужно реагировать локально
