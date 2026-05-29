@@ -655,8 +655,9 @@ MonoBehaviour:
   _maxAimDistance: 100
   _aimLayerMask:
     serializedVersion: 2
-    m_Bits: 129
+    m_Bits: 385
   _shootingHeight: 1
+  _gizmosRadius: 0.1
 --- !u!114 &5467770420629258014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -768,6 +769,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
+  m_UseReflectionProbes: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0

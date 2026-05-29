@@ -24,29 +24,26 @@ namespace Game.Scripts.Shooter
             Vector3 screenCenter = new Vector3(Screen.width / 2f, Screen.height / 2f, 0f);
             Ray ray = _camera.ScreenPointToRay(screenCenter);
 
-            Vector3 targetPoint;
-
-            // Делаем рейкаст, чтобы узнать, обо что спотыкается взгляд игрока
-            if (Physics.Raycast(ray, out RaycastHit hit, _maxAimDistance, _aimLayerMask))
-            {
-                // Если попали в объект (стену, врага), стрела полетит ровно в эту точку
-                targetPoint = hit.point;
-            }
-            else
-            {
-                // Если впереди пустота (небо), берем точку на максимальном расстоянии луча
-                targetPoint = ray.GetPoint(_maxAimDistance);
-            }
+            var targetPoint = Physics.Raycast(ray,
+                out RaycastHit hit,
+                _maxAimDistance,
+                _aimLayerMask)
+                ? hit.point
+                : ray.GetPoint(_maxAimDistance);
 
             targetPoint.y = _shootingHeight;
             return targetPoint;
         }
 
+#if UNITY_EDITOR
+        [SerializeField]
+        private float _gizmosRadius = 0.1f;
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
-            var startpos = new Vector3(transform.position.x, _shootingHeight, transform.position.z);
-            Gizmos.DrawLine(startpos, startpos + transform.forward * _maxAimDistance);
+            Vector3 aimPoint = GetAimPoint();
+            Gizmos.DrawWireSphere(aimPoint, _gizmosRadius);
         }
+#endif
     }
 }

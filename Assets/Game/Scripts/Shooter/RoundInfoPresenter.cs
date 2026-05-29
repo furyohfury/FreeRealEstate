@@ -50,7 +50,7 @@ namespace Game
             }
 
             NetworkList<PlayerScoreData> playerScores = _scoreSystem.PlayerScores;
-            Debug.Log($"playerdatas count: {playerDatas.Length}, playerscores count: {playerScores.Count}");
+            // Debug.Log($"playerdatas count: {playerDatas.Length}, playerscores count: {playerScores.Count}");
 
             foreach (PlayerData playerData in Enumerable.OrderBy(playerDatas, data => data.clientID))
             {
