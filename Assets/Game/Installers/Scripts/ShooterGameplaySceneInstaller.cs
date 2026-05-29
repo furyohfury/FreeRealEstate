@@ -2,7 +2,7 @@
 using Unity.Cinemachine;
 using Zenject;
 
-namespace Game
+namespace Game.Installers
 {
     public sealed class ShooterGameplaySceneInstaller : MonoInstaller
     {

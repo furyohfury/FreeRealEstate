@@ -3,9 +3,9 @@ using Unity.Netcode;
 using UnityEngine;
 using Zenject;
 
-namespace Game
+namespace Game.Installers
 {
-    [CreateAssetMenu(fileName = nameof(ShooterAssetsInstaller), menuName = "Game/Shooter/" + nameof(ShooterAssetsInstaller))]
+    [CreateAssetMenu(fileName = nameof(ShooterAssetsInstaller), menuName = "Game/Installers/" + nameof(ShooterAssetsInstaller))]
     public sealed class ShooterAssetsInstaller : ScriptableObjectInstaller
     {
         [SerializeField]
