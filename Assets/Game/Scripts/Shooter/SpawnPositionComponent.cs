@@ -52,9 +52,11 @@ namespace Game
         {
             if (IsOwner)
             {
-                _characterController.enabled = false;
+                // _characterController.enabled = false;
+                transform.position = _position;
+                transform.rotation = _rotation;
                 _networkTransform.Teleport(_position, _rotation, Vector3.one);
-                _characterController.enabled = true;
+                // _characterController.enabled = true;
             }
         }
     }

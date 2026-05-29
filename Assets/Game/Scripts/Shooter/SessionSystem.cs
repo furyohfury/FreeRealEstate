@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Game.Scripts.Shooter;
 using Unity.Netcode;
+using UnityEngine;
 using Zenject;
 
 namespace Game
@@ -72,8 +73,10 @@ namespace Game
                 if (networkObject == null) continue;
                 
                 Player player = networkObject.GetComponent<Player>();
-                player.GetToSpawnPosition();
+                Debug.Log($"Setting player {playerData.clientID} hp to max");
                 player.Health.Value = player.MaxHealth.Value;
+                Debug.Log($"player {playerData.clientID} hp = {player.Health.Value}, max = {player.MaxHealth.Value}");
+                player.GetToSpawnPosition();
             }
         }
 
