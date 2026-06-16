@@ -4,11 +4,11 @@ using Zenject;
 
 namespace Game
 {
-    public sealed class EntryPoint : IInitializable
+    public sealed class ProjectEntryPoint : IInitializable
     {
         private readonly AuthorizationSystem _authorizationSystem;
 
-        public EntryPoint(AuthorizationSystem authorizationSystem)
+        public ProjectEntryPoint(AuthorizationSystem authorizationSystem)
         {
             _authorizationSystem = authorizationSystem;
         }
