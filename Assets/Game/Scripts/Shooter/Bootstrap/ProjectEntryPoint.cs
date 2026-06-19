@@ -15,8 +15,11 @@ namespace Game
 
         public async void Initialize()
         {
-            await _authorizationSystem.Authorize();
-            SceneManager.LoadScene(ShooterScenes.MAIN_MENU);
+            if (SceneManager.GetActiveScene().name == ShooterScenes.BOOTSTRAP)
+            {
+                await _authorizationSystem.Authorize();
+                SceneManager.LoadScene(ShooterScenes.MAIN_MENU);
+            }
         }
     }
 }

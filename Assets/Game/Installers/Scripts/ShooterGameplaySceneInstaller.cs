@@ -31,9 +31,9 @@ namespace Game.Installers
 
         private void BindUI()
         {
-            Container.Bind<RoundInfoUI>().FromComponentInHierarchy().AsSingle();
+            Container.Bind<PlayerScoreTable>().FromComponentInHierarchy().AsSingle();
 
-            Container.BindInterfacesTo<RoundInfoPresenter>().AsSingle();
+            Container.BindInterfacesAndSelfTo<PlayerScoreTablePresenter>().AsSingle();
         }
     }
 }

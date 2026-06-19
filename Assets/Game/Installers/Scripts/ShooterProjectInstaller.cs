@@ -11,7 +11,7 @@ namespace Game.Installers
         {
             Container.BindInterfacesAndSelfTo<AuthorizationSystem>().AsSingle();
 
-            Container.BindInterfacesTo<ProjectEntryPoint>();
+            Container.BindInterfacesTo<ProjectEntryPoint>().AsSingle();
         }
     }
 }

@@ -1,18 +1,16 @@
 ﻿using System;
 using Unity.Netcode;
-using UnityEngine;
-using Enumerable = System.Linq.Enumerable;
 using IInitializable = Zenject.IInitializable;
 
 namespace Game
 {
-    public class RoundInfoPresenter : IInitializable, IDisposable
+    public class PlayerScoreTablePresenter : IInitializable, IDisposable
     {
         private readonly SessionSystem _sessionSystem;
         private readonly ScoreSystem _scoreSystem;
         private readonly PlayerScoreTable _playerScoreTable;
 
-        public RoundInfoPresenter(SessionSystem sessionSystem, ScoreSystem scoreSystem, PlayerScoreTable playerScoreTable)
+        public PlayerScoreTablePresenter(SessionSystem sessionSystem, ScoreSystem scoreSystem, PlayerScoreTable playerScoreTable)
         {
             _sessionSystem = sessionSystem;
             _scoreSystem = scoreSystem;
