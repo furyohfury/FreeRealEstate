@@ -12,6 +12,12 @@ namespace Game.Scripts.Shooter
 
         private void Start()
         {
+            // Add3();
+        }
+
+        [Button]
+        private void Add3()
+        {
             for (int i = 0; i < 3; i++)
             {
                 AddScoreTableItem(i);
@@ -25,13 +31,25 @@ namespace Game.Scripts.Shooter
         }
 
         [Button]
-        public void Move()
+        public void Move3()
         {
             _playerScoreTable.SortItems(new PlayerViewData[]
                                         {
                                             new PlayerViewData(2, 0),
                                             new PlayerViewData(0, 1),
                                             new PlayerViewData(1, 2),
+                                        });
+        }
+        
+        [Button]
+        public void Move4()
+        {
+            _playerScoreTable.SortItems(new PlayerViewData[]
+                                        {
+                                            new PlayerViewData(2, 1),
+                                            new PlayerViewData(0, 3),
+                                            new PlayerViewData(1, 2),
+                                            new PlayerViewData(3, 0)
                                         });
         }
     }

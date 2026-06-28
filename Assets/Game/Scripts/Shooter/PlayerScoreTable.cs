@@ -24,29 +24,33 @@ namespace Game
         private VerticalLayoutGroup _verticalLayoutGroup;
 
         private List<PlayerIdScoreItemPair> _scoreItemsMap = new List<PlayerIdScoreItemPair>();
+        private Sequence _activeMoveTween;
 
         private void Awake()
         {
             _verticalLayoutGroup.enabled = false;
-            
+
             foreach (Transform child in _container)
             {
                 Destroy(child.gameObject);
             }
         }
 
-        public void AddScore(int id)
+        public PlayerScoreItem AddScore(int id)
         {
             _verticalLayoutGroup.enabled = true;
-            var scoreItem = Instantiate(_playerScoreItemPrefab, _container);
+            PlayerScoreItem scoreItem = Instantiate(_playerScoreItemPrefab, _container);
             _scoreItemsMap.Add(new PlayerIdScoreItemPair(id, scoreItem));
+            LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)_verticalLayoutGroup.transform);
             _verticalLayoutGroup.enabled = false;
+
+            return scoreItem;
         }
 
         public void RemoveScore(int id)
         {
             _verticalLayoutGroup.enabled = true;
-            
+
             for (int i = 0, count = _scoreItemsMap.Count; i < count; i++)
             {
                 if (_scoreItemsMap[i].PlayerId == id)
@@ -54,23 +58,25 @@ namespace Game
                     _scoreItemsMap.RemoveAt(i);
                 }
             }
-            
+
             _verticalLayoutGroup.enabled = false;
         }
 
         public void SortItems(PlayerViewData[] playerViewData)
         {
+            _activeMoveTween?.Complete();
             Array.Sort(playerViewData, (data, other) => data.Order.CompareTo(other.Order));
 
             var newPairs = new List<PlayerIdScoreItemPair>(_scoreItemsMap.Count);
-
+            _activeMoveTween = DOTween.Sequence();
+            
             for (int i = 0, count = playerViewData.Length; i < count; i++)
             {
                 int playerId = playerViewData[i].PlayerId;
                 int order = playerViewData[i].Order;
                 var playerScoreItem = _scoreItemsMap.Find(pair => pair.PlayerId == playerId).ScoreItem;
                 PlayerScoreItem otherScoreItem = _scoreItemsMap[order].ScoreItem;
-                playerScoreItem.Move(otherScoreItem.GetPosition(), _sortAnimationDuration, _sortAnimationEase);
+                _activeMoveTween.Join(playerScoreItem.Move(otherScoreItem.GetPosition(), _sortAnimationDuration, _sortAnimationEase));
                 // newPairs[i] = new PlayerIdScoreItemPair(playerId, playerScoreItem);
             }
 
