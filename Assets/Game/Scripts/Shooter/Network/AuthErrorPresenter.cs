@@ -1,5 +1,5 @@
-﻿using System;
-using Game.Auth;
+﻿using Game.Auth;
+using UIStackSystem;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -7,15 +7,14 @@ using Zenject;
 
 namespace Game.UI
 {
-    public sealed class AuthErrorPresenter : IInitializable, IDisposable
+    public sealed class AuthErrorPresenter : IPresenter, IInitializable
     {
         private readonly AuthorizationSystem _authorizationSystem;
         private readonly AuthErrorUI _authErrorUI;
 
-        public AuthErrorPresenter(AuthorizationSystem authorizationSystem, AuthErrorUI authErrorUI)
+        public AuthErrorPresenter(AuthorizationSystem authorizationSystem)
         {
             _authorizationSystem = authorizationSystem;
-            _authErrorUI = authErrorUI;
         }
 
         public void Initialize()
@@ -44,8 +43,8 @@ namespace Game.UI
 
         public void Dispose()
         {
-            _authErrorUI.OnRetryPressed -= AuthErrorUIOnOnRetryPressed;
-            _authErrorUI.OnQuitPressed -= AuthErrorUIOnOnQuitPressed;
+            // _authErrorUI.OnRetryPressed -= AuthErrorUIOnOnRetryPressed;
+            // _authErrorUI.OnQuitPressed -= AuthErrorUIOnOnQuitPressed;
         }
     }
 }

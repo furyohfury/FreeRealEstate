@@ -1,11 +1,12 @@
 ﻿using System;
 using TMPro;
+using UIStackSystem;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Game.UI
 {
-    public sealed class AuthErrorUI : MonoBehaviour
+    public sealed class AuthErrorUI : Page<AuthErrorPresenter>
     {
         public event Action OnRetryPressed;
         public event Action OnQuitPressed;
