@@ -9,7 +9,7 @@ namespace UIStackSystem
     {
         [SerializeField]
         private RectTransform _container;
-        
+
         private PresenterFactory _presenterFactory;
         private UIRegistry _uiRegistry;
         private readonly Stack<PageContext> _stack = new Stack<PageContext>();
@@ -22,7 +22,7 @@ namespace UIStackSystem
             _uiRegistry.Initialize();
         }
 
-        public async UniTask<T> OpenPage<T>(OpenPageOptions openPageOptions = default) where T : IPresenter // layers?
+        public async UniTask<T> OpenPage<T>(OpenPageOptions openPageOptions) where T : IPresenter // layers?
         {
             T presenter = _presenterFactory.Create<T>();
             presenter.Init();
@@ -34,9 +34,19 @@ namespace UIStackSystem
                             , Presenter = presenter
                             , ShowAnimation = openPageOptions.AnimationMode
                         });
+            
             await spawnedPage.Open(presenter, openPageOptions);
 
             return presenter;
+        }
+
+        public async UniTask<T> OpenPage<T>() where T : IPresenter // layers?
+        {
+            UIPageAnimationMode defaultOpenAnimationMode = _uiRegistry.GetDefaultOpenAnimationMode<T>();
+            OpenPageOptions openPageOptions = OpenPageOptions.Create()
+                                                             .WithAnimationMode(defaultOpenAnimationMode);
+
+            return await OpenPage<T>(openPageOptions);
         }
 
         public async UniTask CloseTop(ClosePageOptions closePageOptions = default)

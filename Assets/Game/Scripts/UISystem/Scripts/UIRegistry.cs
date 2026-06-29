@@ -8,25 +8,45 @@ namespace UIStackSystem
     public sealed class UIRegistry : ScriptableObject
     {
         [SerializeField]
-        private Page[] _pagesPrefabs;
-        private readonly Dictionary<Type, Page> _dictionary = new Dictionary<Type, Page>();
+        private PagePrefabInfo[] _pagesPrefabs;
+        private readonly Dictionary<Type, PagePrefabInfo> _dictionary = new Dictionary<Type, PagePrefabInfo>();
 
         public void Initialize()
         {
             for (int i = 0; i < _pagesPrefabs.Length; i++)
             {
-                Page page = _pagesPrefabs[i];
+                PagePrefabInfo pagePrefabInfo = _pagesPrefabs[i];
+                Page page = pagePrefabInfo.PagePrefab;
                 Type presenterType = GetPresenterType(page);
-
-                _dictionary[presenterType] = page;
+                _dictionary[presenterType] = pagePrefabInfo;
             }
         }
 
         public Page<TPresenter> GetPagePrefab<TPresenter>() where TPresenter : IPresenter
         {
-            if (_dictionary.TryGetValue(typeof(TPresenter), out Page page))
+            if (_dictionary.TryGetValue(typeof(TPresenter), out PagePrefabInfo pagePrefabInfo))
             {
-                return (Page<TPresenter>)page;
+                return (Page<TPresenter>)pagePrefabInfo.PagePrefab;
+            }
+
+            throw new Exception($"The type {typeof(TPresenter).FullName} was not found.");
+        }
+
+        public UIPageAnimationMode GetDefaultOpenAnimationMode<TPresenter>() where TPresenter : IPresenter
+        {
+            if (_dictionary.TryGetValue(typeof(TPresenter), out PagePrefabInfo pagePrefabInfo))
+            {
+                return pagePrefabInfo.DefaultOpenAnimationMode;
+            }
+
+            throw new Exception($"The type {typeof(TPresenter).FullName} was not found.");
+        }
+        
+        public UIPageAnimationMode GetDefaultCloseAnimationMode<TPresenter>() where TPresenter : IPresenter
+        {
+            if (_dictionary.TryGetValue(typeof(TPresenter), out PagePrefabInfo pagePrefabInfo))
+            {
+                return pagePrefabInfo.DefaultCloseAnimationMode;
             }
 
             throw new Exception($"The type {typeof(TPresenter).FullName} was not found.");
@@ -48,6 +68,14 @@ namespace UIStackSystem
             }
 
             throw new Exception($"Page {page.name} does not inherit Page<TPresenter>");
+        }
+        
+        [Serializable]
+        private sealed class PagePrefabInfo
+        {
+            public Page PagePrefab;
+            public UIPageAnimationMode DefaultOpenAnimationMode;
+            public UIPageAnimationMode DefaultCloseAnimationMode;
         }
     }
 }

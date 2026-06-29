@@ -9,9 +9,14 @@ namespace Game.Installers
     {
         public override void InstallBindings()
         {
-            Container.BindInterfacesAndSelfTo<AuthorizationSystem>().AsSingle();
+            Container.BindInterfacesAndSelfTo<AuthorizationSystem>()
+                     .AsSingle();
 
-            Container.BindInterfacesTo<ProjectEntryPoint>().AsSingle();
+            Container.BindInterfacesAndSelfTo<PlayerProfile>()
+                     .AsSingle();
+
+            Container.BindInterfacesTo<ProjectEntryPoint>()
+                     .AsSingle();
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Cysharp.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
 using Game.Auth;
 using R3;
 using UIStackSystem;
@@ -16,7 +15,7 @@ namespace Game.UI
         public ReactiveProperty<bool> IsQuitInteractable { get; } = new ReactiveProperty<bool>(true);
         public ReactiveProperty<bool> IsErrorMessageActive { get; } = new ReactiveProperty<bool>(true);
         private readonly AuthorizationSystem _authorizationSystem;
-        private UIManager _uiManager;
+        private readonly UIManager _uiManager;
 
         public AuthErrorPresenter(AuthorizationSystem authorizationSystem, UIManager uiManager)
         {
@@ -29,7 +28,7 @@ namespace Game.UI
             await TryAuthorize();
         }
 
-        public async void AuthErrorUIOnOnRetryPressed()
+        public async UniTask AuthErrorUIOnOnRetryPressed()
         {
             await TryAuthorize();
         }
@@ -38,10 +37,10 @@ namespace Game.UI
         {
             IsRetryInteractable.Value = false;
             IsQuitInteractable.Value = false;
-            
+
             await UniTask.WhenAny(UniTask.Delay(5000),
                 _authorizationSystem.Authorize());
-            
+
             IsRetryInteractable.Value = true;
             IsQuitInteractable.Value = true;
 
@@ -49,6 +48,11 @@ namespace Game.UI
             {
                 IsErrorMessageActive.Value = false;
                 Debug.Log($"<color=green>opening next window after auth</color>");
+                
+                await _uiManager.CloseTop();
+                
+                _uiManager.OpenPage<EnterNicknamePresenter>()
+                          .Forget();
             }
             else
             {

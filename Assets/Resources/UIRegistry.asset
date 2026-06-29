@@ -13,4 +13,9 @@ MonoBehaviour:
   m_Name: UIRegistry
   m_EditorClassIdentifier: Assembly-CSharp::UIStackSystem.UIRegistry
   _pagesPrefabs:
-  - {fileID: 3482698839386701202, guid: 1f89b7d2119744d45873b0be2ef749c7, type: 3}
+  - PagePrefab: {fileID: 3482698839386701202, guid: 1f89b7d2119744d45873b0be2ef749c7, type: 3}
+    DefaultOpenAnimationMode: 2
+    DefaultCloseAnimationMode: 3
+  - PagePrefab: {fileID: 4400338438551431992, guid: a0adda5f3324a1f41a6b9d1bf45e5207, type: 3}
+    DefaultOpenAnimationMode: 2
+    DefaultCloseAnimationMode: 3
