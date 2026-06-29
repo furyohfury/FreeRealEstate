@@ -18,7 +18,7 @@ namespace UIStackSystem
                 Page page = _pagesPrefabs[i];
                 Type presenterType = GetPresenterType(page);
 
-                _dictionary.Add(presenterType, page);
+                _dictionary[presenterType] = page;
             }
         }
 

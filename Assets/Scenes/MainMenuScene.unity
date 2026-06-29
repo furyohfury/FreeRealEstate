@@ -1532,7 +1532,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89715ad69b973a14899afa2c6730b30b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Zenject::Zenject.SceneContext
-  _scriptableObjectInstallers: []
+  _scriptableObjectInstallers:
+  - {fileID: 11400000, guid: 76cb901e49f320048afc5e6d06c641de, type: 2}
   _monoInstallers: []
   _installerPrefabs: []
   _findSiblingMonoInstallers: 0
@@ -3311,21 +3312,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: AuthErrorUI
       objectReference: {fileID: 0}
+    - target: {fileID: 252259974793118574, guid: 1f89b7d2119744d45873b0be2ef749c7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5491207876771957529, guid: 1f89b7d2119744d45873b0be2ef749c7, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5491207876771957529, guid: 1f89b7d2119744d45873b0be2ef749c7, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5491207876771957529, guid: 1f89b7d2119744d45873b0be2ef749c7, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 177.50795
       objectReference: {fileID: 0}
     - target: {fileID: 5491207876771957529, guid: 1f89b7d2119744d45873b0be2ef749c7, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -194.36546
       objectReference: {fileID: 0}
     - target: {fileID: 7258813722242151595, guid: 1f89b7d2119744d45873b0be2ef749c7, type: 3}
       propertyPath: m_Pivot.x
@@ -3409,35 +3414,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8532765398697238536, guid: 1f89b7d2119744d45873b0be2ef749c7, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8532765398697238536, guid: 1f89b7d2119744d45873b0be2ef749c7, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8532765398697238536, guid: 1f89b7d2119744d45873b0be2ef749c7, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 177.50795
       objectReference: {fileID: 0}
     - target: {fileID: 8532765398697238536, guid: 1f89b7d2119744d45873b0be2ef749c7, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -70.40765
       objectReference: {fileID: 0}
     - target: {fileID: 8805758068204886330, guid: 1f89b7d2119744d45873b0be2ef749c7, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8805758068204886330, guid: 1f89b7d2119744d45873b0be2ef749c7, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8805758068204886330, guid: 1f89b7d2119744d45873b0be2ef749c7, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 177.50795
       objectReference: {fileID: 0}
     - target: {fileID: 8805758068204886330, guid: 1f89b7d2119744d45873b0be2ef749c7, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -301.46576
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
