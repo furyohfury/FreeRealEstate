@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
@@ -15,7 +16,7 @@ namespace Game.Auth
         {
             try
             {
-                await UnityServices.InitializeAsync();
+                await UnityServices.InitializeAsync().AsUniTask();
                 await AuthenticationService.Instance.SignInAnonymouslyAsync();
                 PlayerId = AuthenticationService.Instance.PlayerId;
                 IsAuthorized = true;

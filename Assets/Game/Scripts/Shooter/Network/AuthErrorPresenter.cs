@@ -1,38 +1,62 @@
-﻿using Game.Auth;
+﻿using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
+using Game.Auth;
+using R3;
 using UIStackSystem;
+using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-using Zenject;
 
 namespace Game.UI
 {
-    public sealed class AuthErrorPresenter : IPresenter, IInitializable
+    public sealed class AuthErrorPresenter : IPresenter
     {
+        public ReactiveProperty<bool> IsRetryInteractable { get; } = new ReactiveProperty<bool>(true);
+        public ReactiveProperty<bool> IsQuitInteractable { get; } = new ReactiveProperty<bool>(true);
+        public ReactiveProperty<bool> IsErrorMessageActive { get; } = new ReactiveProperty<bool>(true);
         private readonly AuthorizationSystem _authorizationSystem;
-        private readonly AuthErrorUI _authErrorUI;
+        private UIManager _uiManager;
 
-        public AuthErrorPresenter(AuthorizationSystem authorizationSystem)
+        public AuthErrorPresenter(AuthorizationSystem authorizationSystem, UIManager uiManager)
         {
+            _uiManager = uiManager;
             _authorizationSystem = authorizationSystem;
         }
 
-        public void Initialize()
+        public async void Init()
         {
-            _authErrorUI.OnRetryPressed += AuthErrorUIOnOnRetryPressed;
-            _authErrorUI.OnQuitPressed += AuthErrorUIOnOnQuitPressed;
+            await TryAuthorize();
         }
 
-        private async void AuthErrorUIOnOnRetryPressed()
+        public async void AuthErrorUIOnOnRetryPressed()
         {
-            await _authorizationSystem.Authorize();
+            await TryAuthorize();
+        }
+
+        private async UniTask TryAuthorize()
+        {
+            IsRetryInteractable.Value = false;
+            IsQuitInteractable.Value = false;
+            
+            await UniTask.WhenAny(UniTask.Delay(5000),
+                _authorizationSystem.Authorize());
+            
+            IsRetryInteractable.Value = true;
+            IsQuitInteractable.Value = true;
 
             if (_authorizationSystem.IsAuthorized)
             {
+                IsErrorMessageActive.Value = false;
+                Debug.Log($"<color=green>opening next window after auth</color>");
+            }
+            else
+            {
+                IsErrorMessageActive.Value = true;
             }
         }
 
-        private void AuthErrorUIOnOnQuitPressed()
+        public void AuthErrorUIOnOnQuitPressed()
         {
 #if UNITY_EDITOR
             EditorApplication.isPlaying = false;
@@ -43,8 +67,6 @@ namespace Game.UI
 
         public void Dispose()
         {
-            // _authErrorUI.OnRetryPressed -= AuthErrorUIOnOnRetryPressed;
-            // _authErrorUI.OnQuitPressed -= AuthErrorUIOnOnQuitPressed;
         }
     }
 }
