@@ -29,6 +29,14 @@ namespace Game
         public void Initialize()
         {
             NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
+            
+            if (NetworkManager.Singleton.IsServer)
+            {
+                foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
+                {
+                    OnClientConnected(clientId);
+                }
+            }
         }
 
         private void Awake()
@@ -48,7 +56,7 @@ namespace Game
 
         private void OnClientConnected(ulong clientId)
         {
-            if (!NetworkManager.Singleton.IsServer) return;
+            if (NetworkManager.Singleton.IsServer == false) return;
 
             Player player = _playerFactory.SpawnPlayer(clientId);
             
@@ -65,7 +73,7 @@ namespace Game
 
         public void LaunchNextRound()
         {
-            if (!NetworkManager.Singleton.IsServer) return;
+            if (NetworkManager.Singleton.IsServer == false) return;
 
             foreach (var playerData in _playerDatas)
             {

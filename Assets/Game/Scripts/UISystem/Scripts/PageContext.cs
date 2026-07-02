@@ -7,6 +7,7 @@
         public UIPageAnimationMode ShowAnimation;
         public UIPageAnimationMode HideAnimation;
         public bool IsModal;
+        public bool IsPersistentThroughScenes;
         public UILayer Layer;
     }
 }

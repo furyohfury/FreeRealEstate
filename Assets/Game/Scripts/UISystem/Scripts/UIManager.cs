@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Zenject;
 
 namespace UIStackSystem
@@ -22,19 +23,53 @@ namespace UIStackSystem
             _uiRegistry.Initialize();
         }
 
+        private void OnEnable()
+        {
+            SceneManager.activeSceneChanged += SceneManagerOnActiveSceneChanged;
+        }
+
+        private void SceneManagerOnActiveSceneChanged(Scene arg0, Scene arg1)
+        {
+            var tempStack = new  Stack<PageContext>();
+            
+            while (_stack.Count > 0)
+            {
+                PageContext topPageContext = _stack.Peek();
+
+                if (topPageContext.IsPersistentThroughScenes)
+                {
+                    tempStack.Push(topPageContext);
+                    continue;
+                }
+                
+                CloseTop();
+            }
+
+            while (tempStack.Count > 0)
+            {
+                _stack.Push(tempStack.Pop());
+            }
+        }
+
         public async UniTask<T> OpenPage<T>(OpenPageOptions openPageOptions) where T : IPresenter // layers?
         {
             T presenter = _presenterFactory.Create<T>();
             presenter.Init();
             Page<T> pagePrefab = _uiRegistry.GetPagePrefab<T>();
             Page<T> spawnedPage = Instantiate(pagePrefab, _container);
+
+            if (openPageOptions.AnimationMode == UIPageAnimationMode.None)
+            {
+                openPageOptions.AnimationMode = _uiRegistry.GetDefaultOpenAnimationMode<T>();
+            }
+
             _stack.Push(new PageContext
                         {
                             Page = spawnedPage
                             , Presenter = presenter
                             , ShowAnimation = openPageOptions.AnimationMode
                         });
-            
+
             await spawnedPage.Open(presenter, openPageOptions);
 
             return presenter;
@@ -63,6 +98,16 @@ namespace UIStackSystem
             await page.Close(closePageOptions);
 
             page.DestroyPage();
+        }
+
+        public Vector2 GetCanvasSize()
+        {
+            return _container.sizeDelta;
+        }
+
+        private void OnDisable()
+        {
+            SceneManager.activeSceneChanged -= SceneManagerOnActiveSceneChanged;
         }
     }
 }

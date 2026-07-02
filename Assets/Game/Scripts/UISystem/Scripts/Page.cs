@@ -52,8 +52,8 @@ namespace UIStackSystem
 
             switch (animationMode)
             {
+                case UIPageAnimationMode.None:
                 case UIPageAnimationMode.NoAnimation:
-                    break;
                 case UIPageAnimationMode.Fade:
                     break;
                 case UIPageAnimationMode.SlideRight:

@@ -2,6 +2,6 @@
 {
     public enum UIPageAnimationMode
     {
-        NoAnimation, Fade, SlideRight, SlideLeft, SlideUp, SlideDown
+        None, NoAnimation, Fade, SlideRight, SlideLeft, SlideUp, SlideDown
     }
 }

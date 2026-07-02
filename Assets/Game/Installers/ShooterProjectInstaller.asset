@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5cd9469abac4a48a3cd6f3c805def88, type: 3}
   m_Name: ShooterProjectInstaller
   m_EditorClassIdentifier: Assembly-CSharp::Game.Installers.ShooterProjectInstaller
+  _networkManagerPrefab: {fileID: 7296711149978743498, guid: 5a9720568738b9f4888805a883c183fb, type: 3}
