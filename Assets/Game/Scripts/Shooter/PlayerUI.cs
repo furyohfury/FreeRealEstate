@@ -12,5 +12,13 @@ namespace Game.Scripts.Shooter
         {
             _hpText.text = text;
         }
+
+        public void TurnTo(Vector3 targetPosition)
+        {
+            Vector3 direction = transform.position - targetPosition;
+            direction.y = 0;
+
+            transform.rotation = Quaternion.LookRotation(direction);
+        }
     }
 }

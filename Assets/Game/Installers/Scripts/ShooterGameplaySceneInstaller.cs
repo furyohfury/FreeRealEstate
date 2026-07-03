@@ -26,6 +26,15 @@ namespace Game.Installers
 
             Container.BindInterfacesAndSelfTo<ScoreSystem>().FromComponentsInHierarchy().AsSingle();
 
+            Container.Bind<PlayersProvider>()
+                     .AsSingle();
+
+            Container.BindInterfacesTo<PlayersProviderController>()
+                     .AsSingle();
+
+            Container.BindInterfacesTo<PlayersHpRotationController>()
+                     .AsSingle();
+
             BindUI();
         }
 

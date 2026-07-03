@@ -1,5 +1,6 @@
 ﻿using Unity.Netcode;
 using UnityEngine;
+using Zenject;
 
 namespace Game.Scripts.Shooter
 {
@@ -7,6 +8,8 @@ namespace Game.Scripts.Shooter
     {
         public NetworkVariable<float> MaxHealth => _healthComponent.MaxHealth;
         public NetworkVariable<float> Health => _healthComponent.Health;
+        public Vector3 Position => _moveComponent.Position;
+        
         [SerializeField]
         private MoveComponent _moveComponent;
         [SerializeField]
@@ -27,10 +30,18 @@ namespace Game.Scripts.Shooter
         private RagdollComponent _ragdollComponent;
         [SerializeField]
         private SpawnPositionComponent _spawnPositionComponent;
+        private PlayersProvider _playersProvider;
+
+        [Inject]
+        private void Construct(PlayersProvider playersProvider)
+        {
+            _playersProvider = playersProvider;
+        }
 
         public override void OnNetworkSpawn()
         {
             _playerUIComponent.Init(_healthComponent.Health);
+            _playersProvider.Register(this);
         }
 
         public void TakeDamage(float damage)
@@ -90,6 +101,11 @@ namespace Game.Scripts.Shooter
         public void GetToSpawnPosition()
         {
             _spawnPositionComponent.GetToSpawnPositionRpc();
+        }
+
+        public void TurnHpUiTo(Vector3 direction)
+        {
+            _playerUIComponent.TurnHpUiTo(direction);
         }
 
         public override void OnNetworkDespawn()

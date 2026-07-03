@@ -12,6 +12,9 @@ namespace Game.Scripts.Shooter
             get => _direction;
             set => _direction = value;
         }
+
+        public Vector3 Position => _characterController.transform.position;
+        
         [SerializeField]
         private CharacterController _characterController;
         [field: SerializeField]

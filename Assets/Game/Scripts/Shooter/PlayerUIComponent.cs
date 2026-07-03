@@ -32,5 +32,10 @@ namespace Game.Scripts.Shooter
         {
             _health.OnValueChanged -= OnValueChanged;
         }
+
+        public void TurnHpUiTo(Vector3 direction)
+        {
+            _playerUI.TurnTo(direction);
+        }
     }
 }

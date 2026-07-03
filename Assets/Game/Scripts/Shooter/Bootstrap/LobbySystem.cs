@@ -17,7 +17,7 @@ namespace Game
 
         private readonly Subject<LobbyEvent> _onLobbyEvent = new Subject<LobbyEvent>();
         private const string PLAYER_NAME_PROPERTY_KEY = "PLAYER_NAME_PROPERTY_KEY";
-        private NetworkManager _networkManager;
+        private readonly NetworkManager _networkManager;
 
         public LobbySystem(NetworkManager networkManager)
         {
@@ -135,9 +135,9 @@ namespace Game
                 {
                     Session.Changed -= OnSessionChanged;
                     Session.Deleted -= OnSessionDeleted;
-                    
+
                     await Session.LeaveAsync();
-                    
+
                     Session = null;
                     Debug.Log("Left session");
                     _onLobbyEvent.OnNext(new LobbyEvent(LobbyEventType.Leave, Session));
