@@ -1,48 +1,94 @@
 ﻿using System;
 using System.Collections.Generic;
+using Game.Auth;
 using Game.Scripts.Shooter;
 using Unity.Netcode;
+using Unity.Services.Authentication;
 using UnityEngine;
 using Zenject;
 
 namespace Game
 {
-    public sealed class SessionSystem : NetworkBehaviour, IInitializable, IDisposable
+    public sealed class SessionSystem : NetworkBehaviour
     {
         public event Action<PlayerData> OnPlayerJoined;
-        
+
         // Для чтения снаружи предоставляем NetworkList
         public NetworkList<PlayerData> PlayerDatas => _playerDatas;
 
         private PlayerFactory _playerFactory;
-        
+        private readonly Dictionary<ulong, string> _clientToNickname = new Dictionary<ulong, string>();
+
         // Переходим на NetworkList
         private readonly NetworkList<PlayerData> _playerDatas = new NetworkList<PlayerData>();
+        private LobbySystem _lobbySystem;
+        private AuthorizationSystem _authorizationSystem;
 
         [Inject]
-        public void Construct(PlayerFactory playerFactory)
+        public void Construct(PlayerFactory playerFactory, LobbySystem lobbySystem, AuthorizationSystem authorizationSystem)
         {
+            _authorizationSystem = authorizationSystem;
+            _lobbySystem = lobbySystem;
             _playerFactory = playerFactory;
-        }
-
-        // NetworkList требует инициализации в Awake или OnNetworkSpawn
-        public void Initialize()
-        {
-            NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
-            
-            if (NetworkManager.Singleton.IsServer)
-            {
-                foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
-                {
-                    OnClientConnected(clientId);
-                }
-            }
         }
 
         private void Awake()
         {
             // Обязательно подписываемся на изменения, если клиентам нужно реагировать локально
             _playerDatas.OnListChanged += OnPlayerListChanged;
+        }
+
+        public override void OnNetworkSpawn()
+        {
+            if (!IsClient)
+                return;
+
+            RegisterLobbyPlayerRpc(_authorizationSystem.IsAuthorized
+                ? AuthenticationService.Instance.PlayerId
+                : "playeridstub");
+
+            Debug.Log("[sessionsystem] RegisterLobbyPlayerRpc");
+        }
+
+        [Rpc(SendTo.Server)]
+        private void RegisterLobbyPlayerRpc(string playerId, RpcParams rpcParams = default)
+        {
+            var players = _lobbySystem.SessionInfo.Players;
+            var clientId = rpcParams.Receive.SenderClientId;
+
+            for (int i = 0, count = players.Count; i < count; i++)
+            {
+                LobbyPlayerInfo lobbyPlayerInfo = players[i];
+                string nickname = lobbyPlayerInfo.Nickname;
+
+                if (lobbyPlayerInfo.Id == playerId)
+                {
+                    _clientToNickname[clientId] = nickname;
+                }
+            }
+
+            if (_clientToNickname.Count == _lobbySystem.SessionInfo.Players.Count)
+            {
+                foreach (var playerInfo in _clientToNickname)
+                {
+                    SpawnPlayerObject(playerInfo.Key, playerInfo.Value);
+                }
+            }
+        }
+
+        public void SpawnPlayerObject(ulong clientId, string nickname)
+        {
+            Player player = _playerFactory.SpawnPlayer(clientId);
+
+            var playerData = new PlayerData
+                             {
+                                 clientID = clientId
+                                 , NetworkObjID = player.NetworkObjectId
+                                 , Nickname = nickname // Пример работы с FixedString
+                             };
+
+            // Теперь это автоматически синхронизируется с клиентами!
+            _playerDatas.Add(playerData);
         }
 
         private void OnPlayerListChanged(NetworkListEvent<PlayerData> changeEvent)
@@ -54,23 +100,6 @@ namespace Game
             }
         }
 
-        private void OnClientConnected(ulong clientId)
-        {
-            if (NetworkManager.Singleton.IsServer == false) return;
-
-            Player player = _playerFactory.SpawnPlayer(clientId);
-            
-            var playerData = new PlayerData
-                             {
-                                 clientID = clientId,
-                                 NetworkObjID = player.NetworkObjectId,
-                                 Nickname = $"Player_{clientId}" // Пример работы с FixedString
-                             };
-                             
-            // Теперь это автоматически синхронизируется с клиентами!
-            _playerDatas.Add(playerData); 
-        }
-
         public void LaunchNextRound()
         {
             if (NetworkManager.Singleton.IsServer == false) return;
@@ -79,7 +108,7 @@ namespace Game
             {
                 NetworkObject networkObject = NetworkManager.Singleton.SpawnManager.GetPlayerNetworkObject(playerData.clientID);
                 if (networkObject == null) continue;
-                
+
                 Player player = networkObject.GetComponent<Player>();
                 Debug.Log($"Setting player {playerData.clientID} hp to max");
                 player.Health.Value = player.MaxHealth.Value;
@@ -88,11 +117,23 @@ namespace Game
             }
         }
 
-        public void Dispose()
+        public PlayerData GetPlayerData(ulong clientId)
         {
+            for (int i = 0, count = _playerDatas.Count; i < count; i++)
+            {
+                if (_playerDatas[i].clientID == clientId)
+                {
+                    return _playerDatas[i];
+                }
+            }
+
+            return default(PlayerData);
+        }
+
+        public override void OnDestroy()
+        {
+            base.OnDestroy();
             _playerDatas.OnListChanged -= OnPlayerListChanged;
-            if (NetworkManager.Singleton != null)
-                NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected;
         }
     }
 }

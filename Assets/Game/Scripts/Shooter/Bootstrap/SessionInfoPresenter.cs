@@ -3,10 +3,7 @@ using System.Linq;
 using Cysharp.Threading.Tasks;
 using R3;
 using UIStackSystem;
-using Unity.Netcode;
 using Unity.Services.Multiplayer;
-using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Game
 {
@@ -18,14 +15,10 @@ namespace Game
         public ReactiveProperty<string[]> PlayerNicknames { get; } = new ReactiveProperty<string[]>(Array.Empty<string>());
 
         private readonly LobbySystem _lobbySystem;
-        private NetworkManager _networkManager;
-        UIManager _uiManager;
         private readonly CompositeDisposable _disposable = new CompositeDisposable();
 
-        public SessionInfoPresenter(LobbySystem lobbySystem, NetworkManager networkManager, UIManager uiManager)
+        public SessionInfoPresenter(LobbySystem lobbySystem)
         {
-            _networkManager = networkManager;
-            _uiManager = uiManager;
             _lobbySystem = lobbySystem;
         }
 
@@ -68,7 +61,7 @@ namespace Game
             NumberOfPlayers.Value = $"{session.PlayerCount}/{session.MaxPlayers}";
             IsLeaveButtonInteractable.Value = true;
             PlayerNicknames.Value = session.Players
-                                           .Select(player => _lobbySystem.GetPlayerName(player))
+                                           .Select(player => _lobbySystem.GetPlayerNickname(player))
                                            .ToArray();
         }
 

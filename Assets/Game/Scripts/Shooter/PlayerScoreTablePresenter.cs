@@ -1,76 +1,124 @@
 ﻿using System;
+using System.Collections.Generic;
 using Unity.Netcode;
-using IInitializable = Zenject.IInitializable;
+using Zenject;
 
 namespace Game
 {
-    public class PlayerScoreTablePresenter : IInitializable, IDisposable
+    public sealed class PlayerScoreTablePresenter : IInitializable, IDisposable
     {
-        private readonly SessionSystem _sessionSystem;
+        private readonly PlayerScoreTable _table;
         private readonly ScoreSystem _scoreSystem;
-        private readonly PlayerScoreTable _playerScoreTable;
+        private readonly SessionSystem _sessionSystem;
 
-        public PlayerScoreTablePresenter(SessionSystem sessionSystem, ScoreSystem scoreSystem, PlayerScoreTable playerScoreTable)
+        private readonly Dictionary<ulong, PlayerScoreItem> _items = new Dictionary<ulong, PlayerScoreItem>();
+        private LobbySystem _lobbySystem;
+
+        [Inject]
+        public PlayerScoreTablePresenter(PlayerScoreTable table, ScoreSystem scoreSystem, SessionSystem sessionSystem, LobbySystem lobbySystem)
         {
-            _sessionSystem = sessionSystem;
+            _lobbySystem = lobbySystem;
+            _table = table;
             _scoreSystem = scoreSystem;
-            _playerScoreTable = playerScoreTable;
+            _sessionSystem = sessionSystem;
         }
 
         public void Initialize()
         {
-            _scoreSystem.PlayerScores.OnListChanged += UpdateVisual;
-            UpdateVisual();
+            foreach (PlayerScoreData scoreData in _scoreSystem.PlayerScores)
+            {
+                CreateItem(scoreData);
+            }
+
+            RefreshAll();
+
+            _scoreSystem.PlayerScores.OnListChanged += HandleScoreChanged;
         }
 
-        private void UpdateVisual(NetworkListEvent<PlayerScoreData> _)
+        private void HandleScoreChanged(NetworkListEvent<PlayerScoreData> e)
         {
-            UpdateVisual();
+            switch (e.Type)
+            {
+                case NetworkListEvent<PlayerScoreData>.EventType.Add:
+                case NetworkListEvent<PlayerScoreData>.EventType.Insert:
+                    CreateItem(e.Value);
+                    break;
+
+                case NetworkListEvent<PlayerScoreData>.EventType.Remove:
+                    _table.RemoveScore((int)e.Value.ClientId);
+                    _items.Remove(e.Value.ClientId);
+                    break;
+
+                case NetworkListEvent<PlayerScoreData>.EventType.Clear:
+                    foreach (ulong id in _items.Keys)
+                    {
+                        _table.RemoveScore((int)id);
+                    }
+
+                    _items.Clear();
+                    break;
+            }
+
+            RefreshAll();
         }
 
-        private void UpdateVisual()
+        private void CreateItem(PlayerScoreData scoreData)
         {
-            // var currentPlayerNum = 0;
-            // string[] scores =
-            // {
-            //     "0", "0"
-            // };
-            //
-            // var playerDatasNetList = _sessionSystem.PlayerDatas;
-            // var playerDatas = new PlayerData[playerDatasNetList.Count];
-            //
-            // for (int i = 0, count = playerDatasNetList.Count; i < count; i++)
-            // {
-            //     playerDatas[i] = playerDatasNetList[i];
-            // }
-            //
-            // NetworkList<PlayerScoreData> playerScores = _scoreSystem.PlayerScores;
-            // // Debug.Log($"playerdatas count: {playerDatas.Length}, playerscores count: {playerScores.Count}");
-            //
-            // foreach (PlayerData playerData in Enumerable.OrderBy(playerDatas, data => data.clientID))
-            // {
-            //     foreach (PlayerScoreData playerScoreData in playerScores)
-            //     {
-            //         if (playerData.clientID != playerScoreData.ClientId)
-            //         {
-            //             continue;
-            //         }
-            //
-            //         scores[currentPlayerNum] = playerScoreData.Score.ToString();
-            //         _roundInfoUI.SetPlayerName(currentPlayerNum,
-            //             string.IsNullOrEmpty(playerData.Nickname.Value)
-            //                 ? "Player " + currentPlayerNum
-            //                 : playerData.Nickname.Value);
-            //         currentPlayerNum++;
-            //     }
-            // }
-            //
-            // _roundInfoUI.SetScore(string.Concat(scores[0], " : ", scores[1]));
+            if (_items.ContainsKey(scoreData.ClientId))
+                return;
+
+            // PlayerData player = _sessionSystem.PlayerDatas.first(scoreData.ClientId);
+            // PlayerScoreItem item = _table.AddScore((int)scoreData.ClientId);
+            // item.SetPlayerName(player.Nickname.ToString());
+            // item.SetScore(scoreData.Score.ToString());
+
+            // если есть аватар
+            // item.SetAvatar(...);
+
+            // _items.Add(scoreData.ClientId, item);
+        }
+
+        private void RefreshAll()
+        {
+            var viewData = new PlayerViewData[_scoreSystem.PlayerScores.Count];
+
+            for (int i = 0; i < _scoreSystem.PlayerScores.Count; i++)
+            {
+                PlayerScoreData scoreData = _scoreSystem.PlayerScores[i];
+
+                PlayerScoreItem item = _items[scoreData.ClientId];
+                item.SetScore(scoreData.Score.ToString());
+
+                viewData[i] = new PlayerViewData
+                              {
+                                  PlayerId = (int)scoreData.ClientId
+                                  , Order = i
+                                  , Score = scoreData.Score
+                              };
+            }
+
+            Array.Sort(viewData, (a, b) =>
+            {
+                int result = b.Score.CompareTo(a.Score);
+
+                if (result == 0)
+                    result = a.PlayerId.CompareTo(b.PlayerId);
+
+                return result;
+            });
+
+            for (int i = 0; i < viewData.Length; i++)
+            {
+                viewData[i].Order = i;
+            }
+
+            _table.SortItems(viewData);
         }
 
         public void Dispose()
         {
-            _scoreSystem.PlayerScores.OnListChanged -= UpdateVisual;
+            if (_scoreSystem != null)
+                _scoreSystem.PlayerScores.OnListChanged -= HandleScoreChanged;
         }
     }
 }

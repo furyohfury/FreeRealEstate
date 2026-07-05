@@ -23,7 +23,13 @@ namespace Game.Installers
                      .AsSingle();
 
             Container.Bind<NetworkManager>()
-                     .FromComponentInNewPrefab(_networkManagerPrefab)
+                     .FromMethod(ctx =>
+                     {
+                         var go = Instantiate(_networkManagerPrefab);
+                         DontDestroyOnLoad(go);
+
+                         return go.GetComponent<NetworkManager>();
+                     })
                      .AsSingle()
                      .NonLazy();
 

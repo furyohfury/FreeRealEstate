@@ -29,18 +29,17 @@ namespace Game.Scripts.Shooter
                     NetworkPrefab networkPrefab = networkPrefabsList.PrefabList[j];
                     var networkObject = networkPrefab.Prefab.GetComponent<NetworkObject>();
                     var handler = new ZenjectPrefabInstanceHandler(_container, networkObject);
-                    _map.Add(networkObject, handler);
+                    _map[networkObject] = handler;
                     NetworkManager.Singleton.PrefabHandler.AddHandler(networkObject, handler);
                 }
             }
         }
 
-        public NetworkObject SpawnPrefab(
-            ulong clientId,
-            NetworkObject prefab,
-            Vector3 pos,
-            Quaternion rot,
-            Transform parent = null)
+        public NetworkObject SpawnPrefab(ulong clientId
+            , NetworkObject prefab
+            , Vector3 pos
+            , Quaternion rot
+            , Transform parent = null)
         {
             NetworkObject spawnedObj = CoreSpawn(clientId,
                 prefab,
@@ -54,11 +53,10 @@ namespace Game.Scripts.Shooter
             return spawnedObj;
         }
 
-        public NetworkObject SpawnPrefab(
-            NetworkObject prefab,
-            Vector3 pos,
-            Quaternion rot,
-            Transform parent = null)
+        public NetworkObject SpawnPrefab(NetworkObject prefab
+            , Vector3 pos
+            , Quaternion rot
+            , Transform parent = null)
         {
             return SpawnPrefab(NetworkManager.Singleton.LocalClientId,
                 prefab,
@@ -67,12 +65,11 @@ namespace Game.Scripts.Shooter
                 parent);
         }
 
-        public T SpawnPrefab<T>(
-            ulong clientId,
-            T prefab,
-            Vector3 pos,
-            Quaternion rot,
-            Transform parent = null) where T : NetworkBehaviour
+        public T SpawnPrefab<T>(ulong clientId
+            , T prefab
+            , Vector3 pos
+            , Quaternion rot
+            , Transform parent = null) where T : NetworkBehaviour
         {
             NetworkObject spawnedObj = CoreSpawn(clientId,
                 prefab,
@@ -86,11 +83,10 @@ namespace Game.Scripts.Shooter
             return spawnedObj.GetComponent<T>();
         }
 
-        public T SpawnPrefab<T>(
-            T prefab,
-            Vector3 pos,
-            Quaternion rot,
-            Transform parent = null) where T : NetworkBehaviour
+        public T SpawnPrefab<T>(T prefab
+            , Vector3 pos
+            , Quaternion rot
+            , Transform parent = null) where T : NetworkBehaviour
         {
             return SpawnPrefab(NetworkManager.Singleton.LocalClientId,
                 prefab,
@@ -99,12 +95,11 @@ namespace Game.Scripts.Shooter
                 parent);
         }
 
-        public T SpawnPlayerPrefab<T>(
-            ulong clientId,
-            T prefab,
-            Vector3 pos,
-            Quaternion rot,
-            Transform parent = null) where T : NetworkBehaviour
+        public T SpawnPlayerPrefab<T>(ulong clientId
+            , T prefab
+            , Vector3 pos
+            , Quaternion rot
+            , Transform parent = null) where T : NetworkBehaviour
         {
             NetworkObject spawnedObj = CoreSpawn(clientId,
                 prefab,
@@ -118,11 +113,10 @@ namespace Game.Scripts.Shooter
             return spawnedObj.GetComponent<T>();
         }
 
-        public T SpawnPlayerPrefab<T>(
-            T prefab,
-            Vector3 pos,
-            Quaternion rot,
-            Transform parent = null) where T : NetworkBehaviour
+        public T SpawnPlayerPrefab<T>(T prefab
+            , Vector3 pos
+            , Quaternion rot
+            , Transform parent = null) where T : NetworkBehaviour
         {
             return SpawnPlayerPrefab(NetworkManager.Singleton.LocalClientId,
                 prefab,
@@ -134,12 +128,12 @@ namespace Game.Scripts.Shooter
         /// <summary>
         /// Общая логика для поиска NetworkObject, работы с Zenject хэндлерами и фабрикации объекта.
         /// </summary>
-        private NetworkObject CoreSpawn(
-            ulong clientId,
-            Component prefab, // Используем Component, чтобы принимать и NetworkObject, и T (NetworkBehaviour)
-            Vector3 pos,
-            Quaternion rot,
-            Transform parent)
+        private NetworkObject CoreSpawn(ulong clientId
+            , Component prefab
+            , // Используем Component, чтобы принимать и NetworkObject, и T (NetworkBehaviour)
+            Vector3 pos
+            , Quaternion rot
+            , Transform parent)
         {
             if (!prefab.TryGetComponent(out NetworkObject networkObject))
             {
@@ -170,12 +164,11 @@ namespace Game.Scripts.Shooter
             return handler;
         }
 
-        private static NetworkObject InstantiateNetworkObject(
-            ulong clientId,
-            Vector3 pos,
-            Quaternion rot,
-            ZenjectPrefabInstanceHandler handler,
-            Transform parent)
+        private static NetworkObject InstantiateNetworkObject(ulong clientId
+            , Vector3 pos
+            , Quaternion rot
+            , ZenjectPrefabInstanceHandler handler
+            , Transform parent)
         {
             NetworkObject spawnedObj = handler.Instantiate(clientId, pos, rot);
             spawnedObj.transform.parent = parent;

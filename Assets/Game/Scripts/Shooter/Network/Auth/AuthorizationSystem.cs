@@ -17,7 +17,7 @@ namespace Game.Auth
             try
             {
                 await UnityServices.InitializeAsync().AsUniTask();
-                await AuthenticationService.Instance.SignInAnonymouslyAsync();
+                await AuthenticationService.Instance.SignInAnonymouslyAsync().AsUniTask();
                 PlayerId = AuthenticationService.Instance.PlayerId;
                 IsAuthorized = true;
                 Debug.Log($"Sign in anonymously succeeded! PlayerID: {PlayerId}");

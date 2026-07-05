@@ -6,13 +6,12 @@ using Unity.Netcode;
 using Unity.Services.Multiplayer;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Zenject;
 
 namespace Game
 {
-    public sealed class LobbySystem : IInitializable, IDisposable
+    public sealed class LobbySystem : IDisposable
     {
-        public ISession Session { get; private set; }
+        public SessionInfo SessionInfo { get; private set; }
         public Observable<LobbyEvent> OnLobbyEvent => _onLobbyEvent;
 
         private readonly Subject<LobbyEvent> _onLobbyEvent = new Subject<LobbyEvent>();
@@ -22,38 +21,6 @@ namespace Game
         public LobbySystem(NetworkManager networkManager)
         {
             _networkManager = networkManager;
-        }
-
-        public void Initialize()
-        {
-            _networkManager.OnClientConnectedCallback += OnClientConnectedCallback;
-            _networkManager.OnClientDisconnectCallback += OnClientDisconnectCallback;
-        }
-
-        private void OnClientConnectedCallback(ulong id)
-        {
-            if (Session == null)
-            {
-                return;
-            }
-
-            if (_networkManager.IsServer)
-            {
-                _onLobbyEvent.OnNext(new LobbyEvent(LobbyEventType.Changed, Session));
-            }
-        }
-
-        private async void OnClientDisconnectCallback(ulong id)
-        {
-            if (Session == null)
-            {
-                return;
-            }
-
-            if (_networkManager.IsServer)
-            {
-                _onLobbyEvent.OnNext(new LobbyEvent(LobbyEventType.Changed, Session));
-            }
         }
 
         public async UniTask<ISession> HostPrivateSessionOrNull(string lobbyName, string playerNickname)
@@ -74,7 +41,7 @@ namespace Game
                 Debug.Log($"Session {session.Id} created! Join code: {session.Code}");
                 session.Changed += OnSessionChanged;
                 session.Deleted += OnSessionDeleted;
-                Session = session;
+                SessionInfo = new SessionInfo(session, new LobbyPlayerInfo(session.Host, playerNickname));
                 _onLobbyEvent.OnNext(new LobbyEvent(LobbyEventType.Create, session));
 
                 return session;
@@ -85,15 +52,16 @@ namespace Game
                 return null;
             }
         }
-
+        
         private void OnSessionChanged()
         {
-            _onLobbyEvent.OnNext(new LobbyEvent(LobbyEventType.Changed, Session));
+            ISession session = SessionInfo.Session;
+            _onLobbyEvent.OnNext(new LobbyEvent(LobbyEventType.Changed, session));
 
             if (_networkManager.IsHost
-                && Session.PlayerCount == Session.MaxPlayers)
+                && session.PlayerCount == session.MaxPlayers)
             {
-                _networkManager.SceneManager.LoadScene(ShooterScenes.SHOOTER2_X2_SCENE, LoadSceneMode.Single);
+                // _networkManager.SceneManager.LoadScene(ShooterScenes.SHOOTER2_X2_SCENE, LoadSceneMode.Single); // todo load somehow or make observer and launcher
             }
         }
 
@@ -112,10 +80,20 @@ namespace Game
             try
             {
                 ISession session = await MultiplayerService.Instance.JoinSessionByCodeAsync(code, joinSessionOptions);
+
                 Debug.Log($"Joined session with code {code}");
                 session.Changed += OnSessionChanged;
                 session.Deleted += OnSessionDeleted;
-                Session = session;
+                IReadOnlyList<IReadOnlyPlayer> players = session.Players;
+
+                var lobbyPlayerInfos = new LobbyPlayerInfo[players.Count];
+
+                for (int i = 0, count = lobbyPlayerInfos.Length; i < count; i++)
+                {
+                    lobbyPlayerInfos[i] = new LobbyPlayerInfo(players[i].Id, GetPlayerNickname(players[i]));
+                }
+
+                SessionInfo = new SessionInfo(session, lobbyPlayerInfos);
                 _onLobbyEvent.OnNext(new LobbyEvent(LobbyEventType.Join, session));
 
                 return session;
@@ -129,18 +107,19 @@ namespace Game
 
         public async UniTask LeaveCurrentSession()
         {
-            if (Session != null)
+            if (SessionInfo != null)
             {
                 try
                 {
-                    Session.Changed -= OnSessionChanged;
-                    Session.Deleted -= OnSessionDeleted;
+                    ISession session = SessionInfo.Session;
+                    session.Changed -= OnSessionChanged;
+                    session.Deleted -= OnSessionDeleted;
 
-                    await Session.LeaveAsync();
+                    await session.LeaveAsync();
 
-                    Session = null;
+                    _onLobbyEvent.OnNext(new LobbyEvent(LobbyEventType.Leave, session));
+                    SessionInfo = null;
                     Debug.Log("Left session");
-                    _onLobbyEvent.OnNext(new LobbyEvent(LobbyEventType.Leave, Session));
                 }
                 catch
                 {
@@ -148,7 +127,7 @@ namespace Game
             }
         }
 
-        public string GetPlayerName(IReadOnlyPlayer player)
+        public string GetPlayerNickname(IReadOnlyPlayer player)
         {
             return player.Properties.TryGetValue(PLAYER_NAME_PROPERTY_KEY, out var playerNameProperty)
                 ? playerNameProperty.Value
@@ -168,7 +147,12 @@ namespace Game
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            if (SessionInfo != null)
+            {
+                ISession session = SessionInfo.Session;
+                session.Changed -= OnSessionChanged;
+                session.Deleted -= OnSessionDeleted;
+            }
         }
     }
 }

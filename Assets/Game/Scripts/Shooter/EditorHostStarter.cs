@@ -1,7 +1,9 @@
 ﻿using System;
 using Unity.Netcode;
+using Unity.Services.Authentication;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Zenject;
 
 namespace Game.Scripts.Shooter
 {
@@ -9,10 +11,15 @@ namespace Game.Scripts.Shooter
     {
         [SerializeField]
         private bool _enabled = true;
+        [Inject]
+        private SessionSystem _sessionSystem;
 
         private void Start()
         {
-            // NetworkManager.Singleton.StartHost();
+            // if (AuthenticationService.Instance.IsAuthorized == false)
+            // {
+            //     AuthenticationService.Instance.SignInAnonymouslyAsync();
+            // }
         }
 
         private void Update()
@@ -25,11 +32,19 @@ namespace Game.Scripts.Shooter
             if (Keyboard.current.hKey.wasPressedThisFrame)
             {
                 NetworkManager.Singleton.StartHost();
+                _sessionSystem.SpawnPlayerObject(NetworkManager.Singleton.LocalClientId, "host");
             }
             else if (Keyboard.current.cKey.wasPressedThisFrame)
             {
                 NetworkManager.Singleton.StartClient();
+                SpawnClientPlayerObjRpc(NetworkManager.Singleton.LocalClientId);
             }
+        }
+
+        [Rpc(SendTo.Server)]
+        private void SpawnClientPlayerObjRpc(ulong localClientId)
+        {
+            _sessionSystem.SpawnPlayerObject(localClientId, "client");
         }
     }
 }

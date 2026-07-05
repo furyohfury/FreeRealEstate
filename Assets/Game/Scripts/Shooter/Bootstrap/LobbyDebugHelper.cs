@@ -1,23 +1,23 @@
-﻿using TriInspector;
-using UIStackSystem;
+﻿using Unity.Netcode;
 using UnityEngine;
-using Zenject;
 
 namespace Game
 {
     public sealed class LobbyDebugHelper : MonoBehaviour
     {
-        [Inject]
-        private UIManager _uiManager;
-
-        [Button]
-        public async void OpenUI()
+        private void Awake()
         {
-            Vector2 canvasSize = _uiManager.GetCanvasSize();
-            await _uiManager.OpenPage<JoinSessionByCodePresenter>(OpenPageOptions.Create()
-                                                                                 .WithPosition(new Vector2(canvasSize.x * -0.25f, 0)));
-            await _uiManager.OpenPage<SessionInfoPresenter>(OpenPageOptions.Create()
-                                                                           .WithPosition(new Vector2(canvasSize.x* 0.25f,0)));
+            NetworkManager.Singleton.OnClientConnectedCallback += SingletonOnOnClientConnectedCallback;
+        }
+
+        private void SingletonOnOnClientConnectedCallback(ulong obj)
+        {
+            Debug.Log($"connected client: {obj}");
+        }
+
+        private void OnDestroy()
+        {
+            NetworkManager.Singleton.OnClientConnectedCallback -= SingletonOnOnClientConnectedCallback;
         }
     }
 }

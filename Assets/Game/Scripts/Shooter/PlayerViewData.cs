@@ -3,12 +3,7 @@
     public struct PlayerViewData
     {
         public int PlayerId;
+        public int Score;
         public int Order;
-
-        public PlayerViewData(int playerId, int order)
-        {
-            PlayerId = playerId;
-            Order = order;
-        }
     }
 }
