@@ -25,6 +25,7 @@ namespace Game
                 _playerPrefab,
                 spawnPoint.position,
                 spawnPoint.rotation);
+            player.NetworkObject.ChangeOwnership(clientId);
 
             return player;
         }

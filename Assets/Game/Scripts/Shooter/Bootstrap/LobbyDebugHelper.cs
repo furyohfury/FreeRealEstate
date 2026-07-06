@@ -17,7 +17,11 @@ namespace Game
 
         private void OnDestroy()
         {
-            NetworkManager.Singleton.OnClientConnectedCallback -= SingletonOnOnClientConnectedCallback;
+            NetworkManager manager = NetworkManager.Singleton;
+            if (manager != null)
+            {
+                manager.OnClientConnectedCallback -= SingletonOnOnClientConnectedCallback;
+            }
         }
     }
 }

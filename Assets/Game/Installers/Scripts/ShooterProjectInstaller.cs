@@ -13,28 +13,23 @@ namespace Game.Installers
 
         public override void InstallBindings()
         {
-            Container.BindInterfacesAndSelfTo<AuthorizationSystem>()
-                     .AsSingle();
+            Container.BindInterfacesAndSelfTo<AuthorizationSystem>().AsSingle();
 
-            Container.BindInterfacesAndSelfTo<PlayerProfile>()
-                     .AsSingle();
+            Container.BindInterfacesAndSelfTo<PlayerProfile>().AsSingle();
 
-            Container.Bind<LobbySystem>()
-                     .AsSingle();
+            Container.Bind<LobbyGameplayLauncher>().AsSingle();
 
-            Container.Bind<NetworkManager>()
-                     .FromMethod(ctx =>
-                     {
-                         var go = Instantiate(_networkManagerPrefab);
-                         DontDestroyOnLoad(go);
+            Container.Bind<LobbySystem>().AsSingle();
 
-                         return go.GetComponent<NetworkManager>();
-                     })
-                     .AsSingle()
-                     .NonLazy();
+            Container.Bind<NetworkManager>().FromMethod(ctx =>
+            {
+                var go = Instantiate(_networkManagerPrefab);
+                DontDestroyOnLoad(go);
 
-            Container.BindInterfacesTo<ProjectEntryPoint>()
-                     .AsSingle();
+                return go.GetComponent<NetworkManager>();
+            }).AsSingle().NonLazy();
+
+            Container.BindInterfacesTo<ProjectEntryPoint>().AsSingle();
         }
     }
 }

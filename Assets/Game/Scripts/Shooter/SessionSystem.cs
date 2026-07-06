@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Game.Auth;
 using Game.Scripts.Shooter;
 using Unity.Netcode;
-using Unity.Services.Authentication;
 using UnityEngine;
 using Zenject;
 
@@ -12,17 +11,14 @@ namespace Game
     public sealed class SessionSystem : NetworkBehaviour
     {
         public event Action<PlayerData> OnPlayerJoined;
-
-        // Для чтения снаружи предоставляем NetworkList
         public NetworkList<PlayerData> PlayerDatas => _playerDatas;
 
         private PlayerFactory _playerFactory;
-        private readonly Dictionary<ulong, string> _clientToNickname = new Dictionary<ulong, string>();
-
-        // Переходим на NetworkList
-        private readonly NetworkList<PlayerData> _playerDatas = new NetworkList<PlayerData>();
         private LobbySystem _lobbySystem;
         private AuthorizationSystem _authorizationSystem;
+
+        private readonly NetworkList<PlayerData> _playerDatas = new NetworkList<PlayerData>();
+        private readonly List<PlayerData> _pendingPlayerDatas = new List<PlayerData>();
 
         [Inject]
         public void Construct(PlayerFactory playerFactory, LobbySystem lobbySystem, AuthorizationSystem authorizationSystem)
@@ -40,12 +36,12 @@ namespace Game
 
         public override void OnNetworkSpawn()
         {
-            if (!IsClient)
+            if (!IsOwner)
                 return;
 
             RegisterLobbyPlayerRpc(_authorizationSystem.IsAuthorized
-                ? AuthenticationService.Instance.PlayerId
-                : "playeridstub");
+                ? _authorizationSystem.PlayerId
+                : $"Player_{NetworkManager.Singleton.LocalClientId}");
 
             Debug.Log("[sessionsystem] RegisterLobbyPlayerRpc");
         }
@@ -63,28 +59,32 @@ namespace Game
 
                 if (lobbyPlayerInfo.Id == playerId)
                 {
-                    _clientToNickname[clientId] = nickname;
+                    _pendingPlayerDatas.Add(new PlayerData
+                                            {
+                                                clientID = clientId,
+                                                Nickname = nickname
+                                            });
                 }
             }
 
-            if (_clientToNickname.Count == _lobbySystem.SessionInfo.Players.Count)
+            if (_playerDatas.Count <= 0 && _pendingPlayerDatas.Count == _lobbySystem.SessionInfo.Players.Count)
             {
-                foreach (var playerInfo in _clientToNickname)
+                foreach (var playerData in _pendingPlayerDatas)
                 {
-                    SpawnPlayerObject(playerInfo.Key, playerInfo.Value);
+                    SpawnPlayerObject(playerData.clientID, playerData.Nickname.ToString());
                 }
             }
         }
 
-        public void SpawnPlayerObject(ulong clientId, string nickname)
+        private void SpawnPlayerObject(ulong clientId, string nickname)
         {
             Player player = _playerFactory.SpawnPlayer(clientId);
 
             var playerData = new PlayerData
                              {
-                                 clientID = clientId
-                                 , NetworkObjID = player.NetworkObjectId
-                                 , Nickname = nickname // Пример работы с FixedString
+                                 clientID = clientId,
+                                 NetworkObjID = player.NetworkObjectId,
+                                 Nickname = nickname // Пример работы с FixedString
                              };
 
             // Теперь это автоматически синхронизируется с клиентами!
@@ -102,12 +102,14 @@ namespace Game
 
         public void LaunchNextRound()
         {
-            if (NetworkManager.Singleton.IsServer == false) return;
+            if (NetworkManager.Singleton.IsServer == false)
+                return;
 
             foreach (var playerData in _playerDatas)
             {
                 NetworkObject networkObject = NetworkManager.Singleton.SpawnManager.GetPlayerNetworkObject(playerData.clientID);
-                if (networkObject == null) continue;
+                if (networkObject == null)
+                    continue;
 
                 Player player = networkObject.GetComponent<Player>();
                 Debug.Log($"Setting player {playerData.clientID} hp to max");

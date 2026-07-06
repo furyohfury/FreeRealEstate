@@ -1,6 +1,4 @@
-﻿using System;
-using Unity.Netcode;
-using Unity.Services.Authentication;
+﻿using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
@@ -13,13 +11,22 @@ namespace Game.Scripts.Shooter
         private bool _enabled = true;
         [Inject]
         private SessionSystem _sessionSystem;
+        [Inject]
+        private PlayerFactory _playerFactory;
 
-        private void Start()
+        private void OnEnable()
         {
-            // if (AuthenticationService.Instance.IsAuthorized == false)
-            // {
-            //     AuthenticationService.Instance.SignInAnonymouslyAsync();
-            // }
+            NetworkManager.Singleton.OnClientConnectedCallback += SingletonOnOnClientConnectedCallback;
+        }
+
+        private void SingletonOnOnClientConnectedCallback(ulong obj)
+        {
+            if (NetworkManager.Singleton.IsHost == false)
+            {
+                return;
+            }
+
+            _playerFactory.SpawnPlayer(obj);
         }
 
         private void Update()
@@ -32,19 +39,22 @@ namespace Game.Scripts.Shooter
             if (Keyboard.current.hKey.wasPressedThisFrame)
             {
                 NetworkManager.Singleton.StartHost();
-                _sessionSystem.SpawnPlayerObject(NetworkManager.Singleton.LocalClientId, "host");
             }
             else if (Keyboard.current.cKey.wasPressedThisFrame)
             {
                 NetworkManager.Singleton.StartClient();
-                SpawnClientPlayerObjRpc(NetworkManager.Singleton.LocalClientId);
             }
         }
 
         [Rpc(SendTo.Server)]
         private void SpawnClientPlayerObjRpc(ulong localClientId)
         {
-            _sessionSystem.SpawnPlayerObject(localClientId, "client");
+            _playerFactory.SpawnPlayer(localClientId);
+        }
+
+        private void OnDisable()
+        {
+            NetworkManager.Singleton.OnClientConnectedCallback -= SingletonOnOnClientConnectedCallback;
         }
     }
 }

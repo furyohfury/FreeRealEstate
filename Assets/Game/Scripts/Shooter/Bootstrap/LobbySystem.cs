@@ -5,7 +5,6 @@ using R3;
 using Unity.Netcode;
 using Unity.Services.Multiplayer;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Game
 {
@@ -17,10 +16,12 @@ namespace Game
         private readonly Subject<LobbyEvent> _onLobbyEvent = new Subject<LobbyEvent>();
         private const string PLAYER_NAME_PROPERTY_KEY = "PLAYER_NAME_PROPERTY_KEY";
         private readonly NetworkManager _networkManager;
+        private readonly LobbyGameplayLauncher _lobbyGameplayLauncher;
 
-        public LobbySystem(NetworkManager networkManager)
+        public LobbySystem(NetworkManager networkManager, LobbyGameplayLauncher lobbyGameplayLauncher)
         {
             _networkManager = networkManager;
+            _lobbyGameplayLauncher = lobbyGameplayLauncher;
         }
 
         public async UniTask<ISession> HostPrivateSessionOrNull(string lobbyName, string playerNickname)
@@ -28,11 +29,11 @@ namespace Game
             var playerProperties = GetPlayerProperties(playerNickname);
             var options = new SessionOptions
                           {
-                              Name = lobbyName
-                              , MaxPlayers = 2
-                              , IsLocked = false
-                              , IsPrivate = true
-                              , PlayerProperties = playerProperties
+                              Name = lobbyName,
+                              MaxPlayers = 2,
+                              IsLocked = false,
+                              IsPrivate = true,
+                              PlayerProperties = playerProperties
                           }.WithRelayNetwork();
 
             try
@@ -52,16 +53,15 @@ namespace Game
                 return null;
             }
         }
-        
+
         private void OnSessionChanged()
         {
             ISession session = SessionInfo.Session;
             _onLobbyEvent.OnNext(new LobbyEvent(LobbyEventType.Changed, session));
 
-            if (_networkManager.IsHost
-                && session.PlayerCount == session.MaxPlayers)
+            if (_networkManager.IsHost && session.PlayerCount == session.MaxPlayers)
             {
-                // _networkManager.SceneManager.LoadScene(ShooterScenes.SHOOTER2_X2_SCENE, LoadSceneMode.Single); // todo load somehow or make observer and launcher
+                _lobbyGameplayLauncher.LaunchGame(SessionInfo).Forget();
             }
         }
 
