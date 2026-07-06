@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using R3;
 using Unity.Netcode;
@@ -29,17 +30,19 @@ namespace Game
             var playerProperties = GetPlayerProperties(playerNickname);
             var options = new SessionOptions
                           {
-                              Name = lobbyName,
-                              MaxPlayers = 2,
-                              IsLocked = false,
-                              IsPrivate = true,
-                              PlayerProperties = playerProperties
+                              Name = lobbyName
+                              , MaxPlayers = 2
+                              , IsLocked = false
+                              , IsPrivate = true
+                              , PlayerProperties = playerProperties
                           }.WithRelayNetwork();
 
             try
             {
                 IHostSession session = await MultiplayerService.Instance.CreateSessionAsync(options);
                 Debug.Log($"Session {session.Id} created! Join code: {session.Code}");
+                session.PlayerJoined += SessionOnPlayerJoined;
+                session.PlayerHasLeft += SessionOnPlayerHasLeft;
                 session.Changed += OnSessionChanged;
                 session.Deleted += OnSessionDeleted;
                 SessionInfo = new SessionInfo(session, new LobbyPlayerInfo(session.Host, playerNickname));
@@ -54,12 +57,28 @@ namespace Game
             }
         }
 
+        private void SessionOnPlayerHasLeft(string playerId)
+        {
+            LobbyPlayerInfo lobbyPlayerInfo = SessionInfo.Players.FirstOrDefault(info => playerId == info.Id);
+
+            if (lobbyPlayerInfo != null)
+            {
+                SessionInfo.Players.Remove(lobbyPlayerInfo);
+            }
+        }
+
+        private void SessionOnPlayerJoined(string playerId)
+        {
+            SessionInfo.Players.Add(new LobbyPlayerInfo(playerId, GetPlayerNickname(SessionInfo.Session.GetPlayer(playerId))));
+        }
+
         private void OnSessionChanged()
         {
             ISession session = SessionInfo.Session;
             _onLobbyEvent.OnNext(new LobbyEvent(LobbyEventType.Changed, session));
 
-            if (_networkManager.IsHost && session.PlayerCount == session.MaxPlayers)
+            if (_networkManager.IsHost
+                && session.PlayerCount == session.MaxPlayers)
             {
                 _lobbyGameplayLauncher.LaunchGame(SessionInfo).Forget();
             }
@@ -82,6 +101,8 @@ namespace Game
                 ISession session = await MultiplayerService.Instance.JoinSessionByCodeAsync(code, joinSessionOptions);
 
                 Debug.Log($"Joined session with code {code}");
+                session.PlayerJoined += SessionOnPlayerJoined;
+                session.PlayerHasLeft += SessionOnPlayerHasLeft;
                 session.Changed += OnSessionChanged;
                 session.Deleted += OnSessionDeleted;
                 IReadOnlyList<IReadOnlyPlayer> players = session.Players;
@@ -114,6 +135,8 @@ namespace Game
                     ISession session = SessionInfo.Session;
                     session.Changed -= OnSessionChanged;
                     session.Deleted -= OnSessionDeleted;
+                    session.PlayerJoined -= SessionOnPlayerJoined;
+                    session.PlayerHasLeft -= SessionOnPlayerHasLeft;
 
                     await session.LeaveAsync();
 
@@ -152,6 +175,8 @@ namespace Game
                 ISession session = SessionInfo.Session;
                 session.Changed -= OnSessionChanged;
                 session.Deleted -= OnSessionDeleted;
+                session.PlayerJoined -= SessionOnPlayerJoined;
+                session.PlayerHasLeft -= SessionOnPlayerHasLeft;
             }
         }
     }

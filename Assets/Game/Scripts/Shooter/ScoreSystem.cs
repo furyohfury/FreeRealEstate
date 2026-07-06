@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using R3;
+﻿using R3;
 using TriInspector;
 using Unity.Netcode;
 using UnityEngine;
@@ -56,8 +55,8 @@ namespace Game
             for (int i = 0, count = PlayerScores.Count; i < count; i++)
             {
                 PlayerScoreData playerScoreData = PlayerScores[i];
-
-                if (PlayerScores[i].PlayerData == killerPlayerData)
+                
+                if (playerScoreData.PlayerData == killerPlayerData)
                 {
                     playerScoreData.Score += _scoreSettings.KillPoints;
                     PlayerScores[i] = playerScoreData;
@@ -74,14 +73,33 @@ namespace Game
 
         public int GetPlace(PlayerData playerData)
         {
-            SortedList<int, PlayerData> scores = new SortedList<int, PlayerData>();
+            int playerScore = 0;
+            bool found = false;
 
-            foreach (PlayerScoreData playerScoreData in PlayerScores)
+            // Находим счет игрока
+            foreach (var scoreData in PlayerScores)
             {
-                scores.Add(playerScoreData.Score, playerScoreData.PlayerData);
+                if (scoreData.PlayerData.Equals(playerData))
+                {
+                    playerScore = scoreData.Score;
+                    found = true;
+                    break;
+                }
             }
 
-            return scores.IndexOfValue(playerData) + 1;
+            if (!found)
+                return -1; // игрок отсутствует
+
+            // Подсчитываем, сколько игроков имеют больший счет
+            int place = 1;
+
+            foreach (var scoreData in PlayerScores)
+            {
+                if (scoreData.Score > playerScore)
+                    place++;
+            }
+
+            return place;
         }
 
 #if UNITY_EDITOR

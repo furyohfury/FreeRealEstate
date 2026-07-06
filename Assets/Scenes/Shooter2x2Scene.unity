@@ -2252,7 +2252,7 @@ MonoBehaviour:
   DeferredDespawnTick: 0
   Ownership: 1
   AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
+  SynchronizeTransform: 0
   ActiveSceneSynchronization: 0
   SceneMigrationSynchronization: 0
   SpawnWithObservers: 1
@@ -2274,10 +2274,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.ScoreSystem
   ShowTopMostFoldoutHeaderGroup: 1
   Scores: 
-  PlayerScores:
-    UpdateTraits:
-      MinSecondsBetweenUpdates: 0
-      MaxSecondsBetweenUpdates: 0
 --- !u!1 &1118873129 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1564093493651620877, guid: a3e0641fa75a52e47a0b55700db0829a, type: 3}

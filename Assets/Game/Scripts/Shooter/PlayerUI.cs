@@ -18,7 +18,8 @@ namespace Game.Scripts.Shooter
             Vector3 direction = transform.position - targetPosition;
             direction.y = 0;
 
-            transform.rotation = Quaternion.LookRotation(direction);
+            if (direction != Vector3.zero)
+                transform.rotation = Quaternion.LookRotation(direction);
         }
     }
 }

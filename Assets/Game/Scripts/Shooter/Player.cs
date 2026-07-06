@@ -35,6 +35,7 @@ namespace Game.Scripts.Shooter
         [Inject]
         private void Construct(PlayersProvider playersProvider)
         {
+            Debug.Log($"<color=yellow>[Player] Construct. playersProvider == null = {playersProvider == null}</color>");
             _playersProvider = playersProvider;
         }
 

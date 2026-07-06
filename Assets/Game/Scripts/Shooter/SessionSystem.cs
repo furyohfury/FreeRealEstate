@@ -30,12 +30,14 @@ namespace Game
 
         public override void OnNetworkSpawn()
         {
-            if (!IsOwner)
-                return;
-
+            Debug.Log("<color=yellow>[SessionSystem] OnNetworkSpawn</color>");
             RegisterLobbyPlayerRpc(_authorizationSystem.IsAuthorized
                 ? _authorizationSystem.PlayerId
                 : $"Player_{NetworkManager.Singleton.LocalClientId}");
+        }
+
+        private void Start()
+        {
         }
 
         [Rpc(SendTo.Server)]
@@ -47,6 +49,8 @@ namespace Game
                 return;
             }
 
+            Debug.Log($"<color=yellow>[SessionSystem] RegisterLobbyPlayerRpc. PlayerId = {playerId}</color>");
+
             var players = _lobbySystem.SessionInfo.Players;
             var clientId = rpcParams.Receive.SenderClientId;
 
@@ -57,16 +61,17 @@ namespace Game
 
                 if (lobbyPlayerInfo.Id == playerId)
                 {
-                    Debug.Log($"[SessionSystem] RegisterLobbyPlayerRpc of player {nickname}");
+                    Debug.Log($"<color=yellow>[SessionSystem] RegisterLobbyPlayerRpc of player {nickname}</color>");
                     _pendingPlayerDatas.Add(new PlayerData
                                             {
-                                                clientID = clientId,
-                                                Nickname = nickname
+                                                clientID = clientId
+                                                , Nickname = nickname
                                             });
                 }
             }
 
-            if (_playerDatas.Count <= 0 && _pendingPlayerDatas.Count == _lobbySystem.SessionInfo.Players.Count)
+            if (_playerDatas.Count <= 0
+                && _pendingPlayerDatas.Count == _lobbySystem.SessionInfo.Players.Count)
             {
                 foreach (var playerData in _pendingPlayerDatas)
                 {
@@ -81,9 +86,9 @@ namespace Game
 
             var playerData = new PlayerData
                              {
-                                 clientID = clientId,
-                                 NetworkObjID = player.NetworkObjectId,
-                                 Nickname = nickname // Пример работы с FixedString
+                                 clientID = clientId
+                                 , NetworkObjID = player.NetworkObjectId
+                                 , Nickname = nickname // Пример работы с FixedString
                              };
 
             // Теперь это автоматически синхронизируется с клиентами!
@@ -133,6 +138,7 @@ namespace Game
                 }
             }
 
+            Debug.LogError("Didnt find player data with id " + networkObjId);
             return default(PlayerData);
         }
     }

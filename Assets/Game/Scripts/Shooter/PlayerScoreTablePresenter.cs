@@ -39,7 +39,11 @@ namespace Game
             {
                 case NetworkListEvent<PlayerScoreData>.EventType.Add:
                 case NetworkListEvent<PlayerScoreData>.EventType.Insert:
-                    CreateItem(playerScoreData);
+                case NetworkListEvent<PlayerScoreData>.EventType.Value:
+                    if (_presenters.ContainsKey(playerScoreData.PlayerData) == false)
+                    {
+                        CreateItem(playerScoreData);
+                    }
                     break;
 
                 case NetworkListEvent<PlayerScoreData>.EventType.Remove:
@@ -54,47 +58,13 @@ namespace Game
         {
             PlayerScoreItem playerScoreItem = _table.CreateScoreItem(scoreData);
             PlayerData playerData = scoreData.PlayerData;
-            var presenter = _presenterFactory.Create(playerData);
+            PlayerScoreItemPresenter presenter = _presenterFactory.Create(playerData);
             playerScoreItem.Init(presenter);
             _presenters.Add(playerData, presenter);
         }
 
         private void RefreshAll()
         {
-            // var viewData = new PlayerViewData[_scoreSystem.PlayerScores.Count];
-            //
-            // for (int i = 0; i < _scoreSystem.PlayerScores.Count; i++)
-            // {
-            //     PlayerScoreData scoreData = _scoreSystem.PlayerScores[i];
-            //
-            //     PlayerScoreItem item = _items[scoreData.ClientId];
-            //     item.SetScore(scoreData.Score.ToString());
-            //
-            //     viewData[i] = new PlayerViewData
-            //                   {
-            //                       PlayerId = (int)scoreData.ClientId,
-            //                       Order = i,
-            //                       Score = scoreData.Score
-            //                   };
-            // }
-            //
-            // Array.Sort(viewData,
-            //     (a, b) =>
-            //     {
-            //         int result = b.Score.CompareTo(a.Score);
-            //
-            //         if (result == 0)
-            //             result = a.PlayerId.CompareTo(b.PlayerId);
-            //
-            //         return result;
-            //     });
-            //
-            // for (int i = 0; i < viewData.Length; i++)
-            // {
-            //     viewData[i].Order = i;
-            // }
-            //
-            // _table.SortItems(viewData);
         }
 
         public void Dispose()
