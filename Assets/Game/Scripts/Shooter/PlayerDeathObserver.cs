@@ -25,7 +25,8 @@ namespace Game
         private void DealDamageSystemOnOnKill(KillEvent obj)
         {
             _sessionSystem.LaunchNextRound();
-            _scoreSystem.ScoreKillPoints(obj.KillerNetworkObjectId);
+            PlayerData killerData = _sessionSystem.GetPlayerDataByNetworkObjId(obj.KillerNetworkObjectId);
+            _scoreSystem.ScoreKillPoints(killerData);
         }
 
         public void Dispose()

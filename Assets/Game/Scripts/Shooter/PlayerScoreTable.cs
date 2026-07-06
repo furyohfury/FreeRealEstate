@@ -8,8 +8,6 @@ namespace Game
 {
     public sealed class PlayerScoreTable : MonoBehaviour
     {
-        public Transform Container => _container;
-
         [Header("Parameters")]
         [SerializeField]
         private float _sortAnimationDuration = 0.5f;
@@ -23,7 +21,7 @@ namespace Game
         [SerializeField]
         private VerticalLayoutGroup _verticalLayoutGroup;
 
-        private List<PlayerIdScoreItemPair> _scoreItemsMap = new List<PlayerIdScoreItemPair>();
+        private Dictionary<PlayerData, PlayerScoreItem> _scoreItemsMap = new Dictionary<PlayerData, PlayerScoreItem>();
         private Sequence _activeMoveTween;
 
         private void Awake()
@@ -36,63 +34,36 @@ namespace Game
             }
         }
 
-        public PlayerScoreItem AddScore(int id)
+        public PlayerScoreItem CreateScoreItem(PlayerScoreData scoreData)
         {
             _verticalLayoutGroup.enabled = true;
             PlayerScoreItem scoreItem = Instantiate(_playerScoreItemPrefab, _container);
-            _scoreItemsMap.Add(new PlayerIdScoreItemPair(id, scoreItem));
+            _scoreItemsMap.Add(scoreData.PlayerData, scoreItem);
             LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)_verticalLayoutGroup.transform);
             _verticalLayoutGroup.enabled = false;
 
             return scoreItem;
         }
 
-        public void RemoveScore(int id)
-        {
-            _verticalLayoutGroup.enabled = true;
-
-            for (int i = 0, count = _scoreItemsMap.Count; i < count; i++)
-            {
-                if (_scoreItemsMap[i].PlayerId == id)
-                {
-                    _scoreItemsMap.RemoveAt(i);
-                }
-            }
-
-            _verticalLayoutGroup.enabled = false;
-        }
-
         public void SortItems(PlayerViewData[] playerViewData)
         {
-            _activeMoveTween?.Complete();
-            Array.Sort(playerViewData, (data, other) => data.Order.CompareTo(other.Order));
-
-            var newPairs = new List<PlayerIdScoreItemPair>(_scoreItemsMap.Count);
-            _activeMoveTween = DOTween.Sequence();
-            
-            for (int i = 0, count = playerViewData.Length; i < count; i++)
-            {
-                int playerId = playerViewData[i].PlayerId;
-                int order = playerViewData[i].Order;
-                var playerScoreItem = _scoreItemsMap.Find(pair => pair.PlayerId == playerId).ScoreItem;
-                PlayerScoreItem otherScoreItem = _scoreItemsMap[order].ScoreItem;
-                _activeMoveTween.Join(playerScoreItem.Move(otherScoreItem.GetPosition(), _sortAnimationDuration, _sortAnimationEase));
-                // newPairs[i] = new PlayerIdScoreItemPair(playerId, playerScoreItem);
-            }
-
-            _scoreItemsMap = newPairs;
-        }
-
-        private struct PlayerIdScoreItemPair
-        {
-            public readonly int PlayerId;
-            public readonly PlayerScoreItem ScoreItem;
-
-            public PlayerIdScoreItemPair(int playerId, PlayerScoreItem scoreItem)
-            {
-                PlayerId = playerId;
-                ScoreItem = scoreItem;
-            }
+            // _activeMoveTween?.Complete();
+            // Array.Sort(playerViewData, (data, other) => data.Order.CompareTo(other.Order));
+            //
+            // var newPairs = new List<PlayerIdScoreItemPair>(_scoreItemsMap.Count);
+            // _activeMoveTween = DOTween.Sequence();
+            //
+            // for (int i = 0, count = playerViewData.Length; i < count; i++)
+            // {
+            //     int playerId = playerViewData[i].PlayerId;
+            //     int order = playerViewData[i].Order;
+            //     var playerScoreItem = _scoreItemsMap.Find(pair => pair.PlayerId == playerId).ScoreItem;
+            //     PlayerScoreItem otherScoreItem = _scoreItemsMap[order].ScoreItem;
+            //     _activeMoveTween.Join(playerScoreItem.Move(otherScoreItem.GetPosition(), _sortAnimationDuration, _sortAnimationEase));
+            //     // newPairs[i] = new PlayerIdScoreItemPair(playerId, playerScoreItem);
+            // }
+            //
+            // _scoreItemsMap = newPairs;
         }
     }
 }

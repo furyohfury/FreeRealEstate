@@ -384,8 +384,8 @@ RectTransform:
   - {fileID: 1841824481251257226}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 768, y: 98}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -401,9 +401,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2382a9cd2a2440719c5eb6bc523c2a7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.PlayerScoreItem
+  _place: {fileID: 7815713087672500156}
   _playerName: {fileID: 4965228518010002834}
   _score: {fileID: 8450995985353410571}
-  _avatar: {fileID: 0}
   _rectTransform: {fileID: 252605314573810334}
 --- !u!1 &8504750996887665875
 GameObject:

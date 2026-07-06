@@ -1,42 +1,59 @@
 ﻿using DG.Tweening;
+using R3;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Game
 {
     public class PlayerScoreItem : MonoBehaviour
     {
-        [Header("References")]
+        [SerializeField]
+        private TextMeshProUGUI _place;
         [SerializeField]
         private TextMeshProUGUI _playerName;
         [SerializeField]
         private TextMeshProUGUI _score;
         [SerializeField]
-        private Image _avatar;
-        [SerializeField]
         private RectTransform _rectTransform;
-        
-        public Vector2 GetPosition() => _rectTransform.anchoredPosition;
+        private PlayerScoreItemPresenter _presenter;
+        private readonly CompositeDisposable _disposables = new CompositeDisposable();
 
-        public void SetPlayerName(string playerName)
+        public void Init(PlayerScoreItemPresenter presenter)
+        {
+            _presenter = presenter;
+            _presenter.Place.Subscribe(SetPlace).AddTo(_disposables);
+            SetPlayerName(_presenter.Nickname);
+            _presenter.Score.Subscribe(SetScore).AddTo(_disposables);
+        }
+
+        public Vector2 GetPosition()
+        {
+            return _rectTransform.anchoredPosition;
+        }
+
+        private void SetPlayerName(string playerName)
         {
             _playerName.text = playerName;
         }
 
-        public void SetScore(string score)
+        private void SetScore(string score)
         {
             _score.text = score;
         }
 
-        public void SetAvatar(Sprite avatar)
+        private void SetPlace(string place)
         {
-            _avatar.sprite = avatar;
+            _place.text = place;
         }
 
         public Tween Move(Vector2 targetPos, float duration, Ease ease)
         {
             return _rectTransform.DOAnchorPos(targetPos, duration).SetEase(ease);
+        }
+
+        private void OnDestroy()
+        {
+            _disposables.Dispose();
         }
     }
 }

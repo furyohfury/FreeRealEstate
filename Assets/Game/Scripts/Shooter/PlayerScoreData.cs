@@ -5,18 +5,18 @@ namespace Game
 {
     public struct PlayerScoreData : IEquatable<PlayerScoreData>, INetworkSerializable
     {
-        public ulong ClientId;
+        public PlayerData PlayerData;
         public int Score;
 
-        public PlayerScoreData(ulong clientId, int score)
+        public PlayerScoreData(PlayerData playerData, int score)
         {
-            ClientId = clientId;
+            PlayerData = playerData;
             Score = score;
         }
 
         public bool Equals(PlayerScoreData other)
         {
-            return ClientId == other.ClientId && Score == other.Score;
+            return PlayerData.Equals(other.PlayerData) && Score == other.Score;
         }
 
         public override bool Equals(object obj)
@@ -26,12 +26,22 @@ namespace Game
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(ClientId, Score);
+            return HashCode.Combine(PlayerData, Score);
+        }
+
+        public static bool operator ==(PlayerScoreData left, PlayerScoreData right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(PlayerScoreData left, PlayerScoreData right)
+        {
+            return !(left == right);
         }
 
         public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
         {
-            serializer.SerializeValue(ref ClientId);
+            serializer.SerializeValue(ref PlayerData);
             serializer.SerializeValue(ref Score);
         }
     }

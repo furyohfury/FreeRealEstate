@@ -28,12 +28,6 @@ namespace Game
             _playerFactory = playerFactory;
         }
 
-        private void Awake()
-        {
-            // Обязательно подписываемся на изменения, если клиентам нужно реагировать локально
-            _playerDatas.OnListChanged += OnPlayerListChanged;
-        }
-
         public override void OnNetworkSpawn()
         {
             if (!IsOwner)
@@ -42,13 +36,17 @@ namespace Game
             RegisterLobbyPlayerRpc(_authorizationSystem.IsAuthorized
                 ? _authorizationSystem.PlayerId
                 : $"Player_{NetworkManager.Singleton.LocalClientId}");
-
-            Debug.Log("[sessionsystem] RegisterLobbyPlayerRpc");
         }
 
         [Rpc(SendTo.Server)]
         private void RegisterLobbyPlayerRpc(string playerId, RpcParams rpcParams = default)
         {
+            if (_lobbySystem.SessionInfo == null)
+            {
+                Debug.LogError("[sessionsystem] LobbyPlayerInfo = null. Игра была начата с геймплей сцены для дебага?");
+                return;
+            }
+
             var players = _lobbySystem.SessionInfo.Players;
             var clientId = rpcParams.Receive.SenderClientId;
 
@@ -59,6 +57,7 @@ namespace Game
 
                 if (lobbyPlayerInfo.Id == playerId)
                 {
+                    Debug.Log($"[SessionSystem] RegisterLobbyPlayerRpc of player {nickname}");
                     _pendingPlayerDatas.Add(new PlayerData
                                             {
                                                 clientID = clientId,
@@ -89,15 +88,7 @@ namespace Game
 
             // Теперь это автоматически синхронизируется с клиентами!
             _playerDatas.Add(playerData);
-        }
-
-        private void OnPlayerListChanged(NetworkListEvent<PlayerData> changeEvent)
-        {
-            // Триггерится и на сервере, и на клиентах при добавлении/удалении элементов
-            if (changeEvent.Type == NetworkListEvent<PlayerData>.EventType.Add)
-            {
-                OnPlayerJoined?.Invoke(changeEvent.Value);
-            }
+            OnPlayerJoined?.Invoke(playerData);
         }
 
         public void LaunchNextRound()
@@ -119,7 +110,7 @@ namespace Game
             }
         }
 
-        public PlayerData GetPlayerData(ulong clientId)
+        public PlayerData GetPlayerDataByClientId(ulong clientId)
         {
             for (int i = 0, count = _playerDatas.Count; i < count; i++)
             {
@@ -132,10 +123,17 @@ namespace Game
             return default(PlayerData);
         }
 
-        public override void OnDestroy()
+        public PlayerData GetPlayerDataByNetworkObjId(ulong networkObjId)
         {
-            base.OnDestroy();
-            _playerDatas.OnListChanged -= OnPlayerListChanged;
+            for (int i = 0, count = _playerDatas.Count; i < count; i++)
+            {
+                if (_playerDatas[i].NetworkObjID == networkObjId)
+                {
+                    return _playerDatas[i];
+                }
+            }
+
+            return default(PlayerData);
         }
     }
 }

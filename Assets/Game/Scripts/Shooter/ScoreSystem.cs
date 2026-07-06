@@ -1,5 +1,8 @@
-﻿using TriInspector;
+﻿using System.Collections.Generic;
+using R3;
+using TriInspector;
 using Unity.Netcode;
+using UnityEngine;
 using Zenject;
 
 namespace Game
@@ -7,11 +10,15 @@ namespace Game
     [GenerateSerializationForType(typeof(PlayerScoreData))]
     public sealed class ScoreSystem : NetworkBehaviour
     {
+#if UNITY_EDITOR
         [ShowInPlayMode]
         public int[] Scores;
-        public NetworkList<PlayerScoreData> PlayerScores = new NetworkList<PlayerScoreData>();
+#endif
+        public Observable<PlayerScoreData> OnScoreChanged => _onScoreChanged;
+        public readonly NetworkList<PlayerScoreData> PlayerScores = new NetworkList<PlayerScoreData>();
         private ScoreSettingsConfig _scoreSettings;
         private SessionSystem _sessionSystem;
+        private readonly Subject<PlayerScoreData> _onScoreChanged = new Subject<PlayerScoreData>();
 
         [Inject]
         public void Construct(ScoreSettingsConfig scoreSettings, SessionSystem sessionSystem)
@@ -24,6 +31,11 @@ namespace Game
         {
             if (IsServer)
             {
+                Debug.Log($"[ScoreSystem] OnNetworkSpawn() session has {_sessionSystem.PlayerDatas.Count} players.");
+                foreach (PlayerData playerData in _sessionSystem.PlayerDatas)
+                {
+                    HandlePlayerJoined(playerData);
+                }
                 _sessionSystem.OnPlayerJoined += HandlePlayerJoined;
             }
         }
@@ -32,46 +44,47 @@ namespace Game
         {
             if (!IsServer)
                 return;
-            SetScore(player.clientID, 0);
+
+            Debug.Log($"[ScoreSystem] handling player {player.Nickname} joined.");
+            var scoreData = new PlayerScoreData(player, 0);
+            PlayerScores.Add(scoreData);
+            _onScoreChanged.OnNext(scoreData);
         }
 
-        public void SetScore(ulong clientId, int score)
+        public void ScoreKillPoints(PlayerData killerPlayerData)
         {
             for (int i = 0, count = PlayerScores.Count; i < count; i++)
             {
                 PlayerScoreData playerScoreData = PlayerScores[i];
 
-                if (PlayerScores[i].ClientId == clientId)
-                {
-                    playerScoreData.Score = score;
-                    PlayerScores[i] = playerScoreData;
-
-                    return;
-                }
-            }
-
-            PlayerScores.Add(new PlayerScoreData(clientId, score));
-        }
-
-        public void ScoreKillPoints(ulong killerClientId)
-        {
-            for (int i = 0, count = PlayerScores.Count; i < count; i++)
-            {
-                PlayerScoreData playerScoreData = PlayerScores[i];
-
-                if (PlayerScores[i].ClientId == killerClientId)
+                if (PlayerScores[i].PlayerData == killerPlayerData)
                 {
                     playerScoreData.Score += _scoreSettings.KillPoints;
                     PlayerScores[i] = playerScoreData;
+                    _onScoreChanged.OnNext(playerScoreData);
 
                     return;
                 }
             }
 
-            PlayerScores.Add(new PlayerScoreData(killerClientId, _scoreSettings.KillPoints));
+            var scoreData = new PlayerScoreData(killerPlayerData, _scoreSettings.KillPoints);
+            PlayerScores.Add(scoreData);
+            _onScoreChanged.OnNext(scoreData);
         }
 
-        #if UNITY_EDITOR
+        public int GetPlace(PlayerData playerData)
+        {
+            SortedList<int, PlayerData> scores = new SortedList<int, PlayerData>();
+
+            foreach (PlayerScoreData playerScoreData in PlayerScores)
+            {
+                scores.Add(playerScoreData.Score, playerScoreData.PlayerData);
+            }
+
+            return scores.IndexOfValue(playerData) + 1;
+        }
+
+#if UNITY_EDITOR
         private void Update()
         {
             if (Scores.Length != PlayerScores.Count)
@@ -82,7 +95,7 @@ namespace Game
                 Scores[i] = PlayerScores[i].Score;
             }
         }
-        #endif
+#endif
 
         public override void OnNetworkDespawn()
         {

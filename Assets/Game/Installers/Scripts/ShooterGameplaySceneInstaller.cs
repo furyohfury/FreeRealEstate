@@ -26,6 +26,8 @@ namespace Game.Installers
 
             Container.BindInterfacesAndSelfTo<ScoreSystem>().FromComponentsInHierarchy().AsSingle();
 
+            Container.Bind<PlayerScoreItemPresenterFactory>().AsSingle();
+
             Container.Bind<PlayersProvider>()
                      .AsSingle();
 

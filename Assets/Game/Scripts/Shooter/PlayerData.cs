@@ -34,6 +34,16 @@ namespace Game
             return obj is PlayerData other && Equals(other);
         }
 
+        public static bool operator ==(PlayerData lhs, PlayerData rhs)
+        {
+            return lhs.Equals(rhs);
+        }
+
+        public static bool operator !=(PlayerData lhs, PlayerData rhs)
+        {
+            return !(lhs == rhs);
+        }
+
         public override int GetHashCode()
         {
             return HashCode.Combine(NetworkObjID, clientID, Nickname);
