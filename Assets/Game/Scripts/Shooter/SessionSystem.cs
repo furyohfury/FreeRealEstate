@@ -36,10 +36,6 @@ namespace Game
                 : $"Player_{NetworkManager.Singleton.LocalClientId}");
         }
 
-        private void Start()
-        {
-        }
-
         [Rpc(SendTo.Server)]
         private void RegisterLobbyPlayerRpc(string playerId, RpcParams rpcParams = default)
         {
@@ -64,14 +60,13 @@ namespace Game
                     Debug.Log($"<color=yellow>[SessionSystem] RegisterLobbyPlayerRpc of player {nickname}</color>");
                     _pendingPlayerDatas.Add(new PlayerData
                                             {
-                                                clientID = clientId
-                                                , Nickname = nickname
+                                                clientID = clientId,
+                                                Nickname = nickname
                                             });
                 }
             }
 
-            if (_playerDatas.Count <= 0
-                && _pendingPlayerDatas.Count == _lobbySystem.SessionInfo.Players.Count)
+            if (_playerDatas.Count <= 0 && _pendingPlayerDatas.Count == _lobbySystem.SessionInfo.Players.Count)
             {
                 foreach (var playerData in _pendingPlayerDatas)
                 {
@@ -83,12 +78,13 @@ namespace Game
         private void SpawnPlayerObject(ulong clientId, string nickname)
         {
             Player player = _playerFactory.SpawnPlayer(clientId);
+            Debug.Log($"<color=green>[SessionSystem] SpawnPlayerObject</color> player {nickname}");
 
             var playerData = new PlayerData
                              {
-                                 clientID = clientId
-                                 , NetworkObjID = player.NetworkObjectId
-                                 , Nickname = nickname // Пример работы с FixedString
+                                 clientID = clientId,
+                                 NetworkObjID = player.NetworkObjectId,
+                                 Nickname = nickname // Пример работы с FixedString
                              };
 
             // Теперь это автоматически синхронизируется с клиентами!

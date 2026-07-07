@@ -12,6 +12,8 @@ namespace Game.Scripts.Shooter
         [Inject]
         private SessionSystem _sessionSystem;
         [Inject]
+        LobbySystem _lobby;
+        [Inject]
         private PlayerFactory _playerFactory;
 
         private void OnEnable()
@@ -21,11 +23,12 @@ namespace Game.Scripts.Shooter
 
         private void SingletonOnOnClientConnectedCallback(ulong obj)
         {
-            if (NetworkManager.Singleton.IsHost == false)
+            if (NetworkManager.Singleton.IsHost == false || _lobby.SessionInfo != null)
             {
                 return;
             }
 
+            Debug.Log($"<color=yellow>EditorHostStarter spawning player prefab for client {obj}</color>", this);
             _playerFactory.SpawnPlayer(obj);
         }
 
