@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using Game.Auth;
+﻿using Game.Auth;
 using UnityEngine.SceneManagement;
 using Zenject;
 

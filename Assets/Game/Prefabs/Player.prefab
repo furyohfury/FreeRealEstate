@@ -601,7 +601,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Shooter.ShootComponent
   ShowTopMostFoldoutHeaderGroup: 1
   _firePoint: {fileID: 4729275586957657767}
-  _projectilePrefab: {fileID: 1665730242349833395, guid: 89612b2bf2a58d54cae9a8feb2a5107a, type: 3}
+  _projectilePrefab: {fileID: 6304080916375983283, guid: 89612b2bf2a58d54cae9a8feb2a5107a, type: 3}
   _aimPointComponent: {fileID: 7308858719972387681}
   _cooldown: 1
 --- !u!114 &1449883553656788775

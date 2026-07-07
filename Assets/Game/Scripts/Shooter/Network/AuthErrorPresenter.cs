@@ -25,7 +25,10 @@ namespace Game.UI
 
         public async void Init()
         {
-            await TryAuthorize();
+            if (_authorizationSystem.IsAuthorized == false)
+            {
+                await TryAuthorize();
+            }
         }
 
         public async UniTask AuthErrorUIOnOnRetryPressed()
@@ -38,8 +41,7 @@ namespace Game.UI
             IsRetryInteractable.Value = false;
             IsQuitInteractable.Value = false;
 
-            await UniTask.WhenAny(UniTask.Delay(5000),
-                _authorizationSystem.Authorize());
+            await UniTask.WhenAny(UniTask.Delay(5000), _authorizationSystem.Authorize());
 
             IsRetryInteractable.Value = true;
             IsQuitInteractable.Value = true;
@@ -48,11 +50,10 @@ namespace Game.UI
             {
                 IsErrorMessageActive.Value = false;
                 Debug.Log($"<color=green>opening next window after auth</color>");
-                
+
                 await _uiManager.CloseTop();
-                
-                _uiManager.OpenPage<EnterNicknamePresenter>()
-                          .Forget();
+
+                _uiManager.OpenPage<EnterNicknamePresenter>().Forget();
             }
             else
             {

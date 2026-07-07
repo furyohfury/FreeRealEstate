@@ -8,7 +8,7 @@ namespace Game.Scripts.Shooter
     {
         public NetworkVariable<float> MaxHealth => _healthComponent.MaxHealth;
         public NetworkVariable<float> Health => _healthComponent.Health;
-        public ulong NetworkObjId => NetworkObjId;
+        public ulong NetworkObjId => NetworkObjectId;
         public Vector3 Position => _moveComponent.Position;
 
         [SerializeField]

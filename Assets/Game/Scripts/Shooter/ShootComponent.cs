@@ -9,11 +9,12 @@ namespace Game.Scripts.Shooter
         [SerializeField]
         private Transform _firePoint;
         [SerializeField]
-        private NetworkObject _projectilePrefab;
+        private Projectile _projectilePrefab;
         [SerializeField]
         private AimPointComponent _aimPointComponent;
         [SerializeField]
         private float _cooldown;
+        
         private float _timer;
         private ZenjectNetworkObjectSpawner _zenjectNetworkObjectSpawner;
 
@@ -49,12 +50,13 @@ namespace Game.Scripts.Shooter
         }
 
         [ServerRpc]
-        public void ShootServerRpc(Vector3 aimDirection)
+        private void ShootServerRpc(Vector3 aimDirection)
         {
-            Debug.Log($"[SERVER] RPC получен! Текущий таймер: {_timer}");
+            // Debug.Log($"[SERVER] RPC получен! Текущий таймер: {_timer}");
             Vector3 position = _firePoint.position;
             Quaternion rotation = Quaternion.LookRotation(aimDirection);
-            _zenjectNetworkObjectSpawner.SpawnPrefab(_projectilePrefab,position, rotation);
+            Projectile projectile = _zenjectNetworkObjectSpawner.SpawnPrefab(_projectilePrefab, position, rotation);
+            projectile.Initialize(NetworkObjectId);
         }
     }
 }
