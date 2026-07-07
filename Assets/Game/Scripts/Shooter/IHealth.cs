@@ -2,7 +2,7 @@
 {
     public interface IHealth   
     {
-        ulong OwnerClientId { get; }
+        ulong NetworkObjId { get; }
         void TakeDamage(float damage);
         float GetCurrentHealth();
     }

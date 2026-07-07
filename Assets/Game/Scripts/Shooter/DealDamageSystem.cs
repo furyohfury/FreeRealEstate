@@ -14,7 +14,11 @@ namespace Game.Scripts.Shooter
 
             if (health.GetCurrentHealth() <= 0)
             {
-                OnKill?.Invoke(new KillEvent(dealDamageEvent.TargetNetworkObjectId, dealDamageEvent.SourceNetworkObjectId));
+                OnKill?.Invoke(new KillEvent
+                               {
+                                   KillerNetworkObjectId = dealDamageEvent.SourceNetworkObjectId,
+                                   TargetNetworkObjectId = dealDamageEvent.TargetNetworkObjectId
+                               });
             }
         }
     }

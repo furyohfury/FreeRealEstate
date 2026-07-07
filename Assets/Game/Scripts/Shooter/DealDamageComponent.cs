@@ -18,7 +18,13 @@ namespace Game.Scripts.Shooter
 
         public void DealDamage(IHealth health)
         {
-            _dealDamageSystem.DealDamage(new DealDamageEvent(health.OwnerClientId, _damage, OwnerClientId), health);
+            var dealDamageEvent = new DealDamageEvent
+                                  {
+                                      Damage = _damage,
+                                      SourceNetworkObjectId = NetworkObjectId,
+                                      TargetNetworkObjectId = health.NetworkObjId
+                                  };
+            _dealDamageSystem.DealDamage(dealDamageEvent, health);
         }
     }
 }

@@ -8,8 +8,9 @@ namespace Game.Scripts.Shooter
     {
         public NetworkVariable<float> MaxHealth => _healthComponent.MaxHealth;
         public NetworkVariable<float> Health => _healthComponent.Health;
+        public ulong NetworkObjId => NetworkObjId;
         public Vector3 Position => _moveComponent.Position;
-        
+
         [SerializeField]
         private MoveComponent _moveComponent;
         [SerializeField]
@@ -35,7 +36,7 @@ namespace Game.Scripts.Shooter
         [Inject]
         private void Construct(PlayersProvider playersProvider)
         {
-            Debug.Log($"<color=yellow>[Player] Construct. playersProvider == null = {playersProvider == null}</color>");
+            Debug.Log($"<color=yellow>[Player] Construct </color>", this);
             _playersProvider = playersProvider;
         }
 
