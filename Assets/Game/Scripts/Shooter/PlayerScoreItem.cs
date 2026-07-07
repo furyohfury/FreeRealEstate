@@ -8,8 +8,6 @@ namespace Game
     public class PlayerScoreItem : MonoBehaviour
     {
         [SerializeField]
-        private TextMeshProUGUI _place;
-        [SerializeField]
         private TextMeshProUGUI _playerName;
         [SerializeField]
         private TextMeshProUGUI _score;
@@ -21,7 +19,6 @@ namespace Game
         public void Init(PlayerScoreItemPresenter presenter)
         {
             _presenter = presenter;
-            _presenter.Place.Subscribe(SetPlace).AddTo(_disposables);
             SetPlayerName(_presenter.Nickname);
             _presenter.Score.Subscribe(SetScore).AddTo(_disposables);
         }
@@ -39,11 +36,6 @@ namespace Game
         private void SetScore(string score)
         {
             _score.text = score;
-        }
-
-        private void SetPlace(string place)
-        {
-            _place.text = place;
         }
 
         public Tween Move(Vector2 targetPos, float duration, Ease ease)

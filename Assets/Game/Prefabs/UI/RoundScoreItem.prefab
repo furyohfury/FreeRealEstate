@@ -401,7 +401,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2382a9cd2a2440719c5eb6bc523c2a7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.PlayerScoreItem
-  _place: {fileID: 7815713087672500156}
   _playerName: {fileID: 4965228518010002834}
   _score: {fileID: 8450995985353410571}
   _rectTransform: {fileID: 252605314573810334}
@@ -422,7 +421,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4800307881276619653
 RectTransform:
   m_ObjectHideFlags: 0

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Netcode;
+using UnityEngine;
 using Zenject;
 
 namespace Game
@@ -11,7 +13,7 @@ namespace Game
         private readonly ScoreSystem _scoreSystem;
         private readonly PlayerScoreItemPresenterFactory _presenterFactory;
 
-        private readonly Dictionary<PlayerData, PlayerScoreItemPresenter> _presenters = new Dictionary<PlayerData, PlayerScoreItemPresenter>();
+        private readonly Dictionary<PlayerData, (PlayerScoreItemPresenter presenter, PlayerScoreItem view)> _presenters = new();
 
         public PlayerScoreTablePresenter(PlayerScoreTable table, ScoreSystem scoreSystem, PlayerScoreItemPresenterFactory presenterFactory)
         {
@@ -27,12 +29,12 @@ namespace Game
                 CreateItem(scoreData);
             }
 
-            RefreshAll();
             _scoreSystem.PlayerScores.OnListChanged += HandleScoreChanged;
         }
 
         private void HandleScoreChanged(NetworkListEvent<PlayerScoreData> e)
         {
+            Debug.Log("[PlayerScoreTablePresenter] HandleScoreChanged");
             PlayerScoreData playerScoreData = e.Value;
 
             switch (e.Type)
@@ -50,8 +52,6 @@ namespace Game
                 case NetworkListEvent<PlayerScoreData>.EventType.Clear:
                     break;
             }
-
-            RefreshAll();
         }
 
         private void CreateItem(PlayerScoreData scoreData)
@@ -60,18 +60,14 @@ namespace Game
             PlayerData playerData = scoreData.PlayerData;
             PlayerScoreItemPresenter presenter = _presenterFactory.Create(playerData);
             playerScoreItem.Init(presenter);
-            _presenters.Add(playerData, presenter);
-        }
-
-        private void RefreshAll()
-        {
+            _presenters.Add(playerData, (presenter, playerScoreItem));
         }
 
         public void Dispose()
         {
-            foreach (PlayerScoreItemPresenter playerScoreItemPresenter in _presenters.Values)
+            foreach (var tuple in _presenters.Values)
             {
-                playerScoreItemPresenter.Dispose();
+                tuple.presenter.Dispose();
             }
 
             if (_scoreSystem != null)

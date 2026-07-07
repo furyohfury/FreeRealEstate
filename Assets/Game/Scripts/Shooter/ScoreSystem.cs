@@ -47,7 +47,7 @@ namespace Game
             Debug.Log($"[ScoreSystem] handling player {player.Nickname} joined.");
             var scoreData = new PlayerScoreData(player, 0);
             PlayerScores.Add(scoreData);
-            _onScoreChanged.OnNext(scoreData);
+            RaiseOnScoreChangedRpc(scoreData);
         }
 
         public void ScoreKillPoints(PlayerData killerPlayerData)
@@ -55,12 +55,12 @@ namespace Game
             for (int i = 0, count = PlayerScores.Count; i < count; i++)
             {
                 PlayerScoreData playerScoreData = PlayerScores[i];
-                
+
                 if (playerScoreData.PlayerData == killerPlayerData)
                 {
                     playerScoreData.Score += _scoreSettings.KillPoints;
                     PlayerScores[i] = playerScoreData;
-                    _onScoreChanged.OnNext(playerScoreData);
+                    RaiseOnScoreChangedRpc(playerScoreData);
 
                     return;
                 }
@@ -68,7 +68,7 @@ namespace Game
 
             var scoreData = new PlayerScoreData(killerPlayerData, _scoreSettings.KillPoints);
             PlayerScores.Add(scoreData);
-            _onScoreChanged.OnNext(scoreData);
+            RaiseOnScoreChangedRpc(scoreData);
         }
 
         public int GetPlace(PlayerData playerData)
@@ -100,6 +100,12 @@ namespace Game
             }
 
             return place;
+        }
+
+        [Rpc(SendTo.ClientsAndHost)]
+        private void RaiseOnScoreChangedRpc(PlayerScoreData scoreData)
+        {
+            _onScoreChanged.OnNext(scoreData);
         }
 
 #if UNITY_EDITOR
