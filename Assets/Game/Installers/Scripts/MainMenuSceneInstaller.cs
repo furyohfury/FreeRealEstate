@@ -8,7 +8,7 @@ namespace Game.Installers
     {
         public override void InstallBindings()
         {
-            Container.BindInterfacesTo<MainSceneEntryPoint>()
+            Container.BindInterfacesTo<MainMenuSceneEntryPoint>()
                      .AsSingle();
         }
     }
