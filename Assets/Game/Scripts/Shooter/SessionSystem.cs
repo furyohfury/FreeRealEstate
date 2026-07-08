@@ -104,9 +104,7 @@ namespace Game
                     continue;
 
                 Player player = networkObject.GetComponent<Player>();
-                Debug.Log($"Setting player {playerData.clientID} hp to max");
-                player.Health.Value = player.MaxHealth.Value;
-                Debug.Log($"player {playerData.clientID} hp = {player.Health.Value}, max = {player.MaxHealth.Value}");
+                player.ResetHp();
                 player.GetToSpawnPosition();
             }
         }

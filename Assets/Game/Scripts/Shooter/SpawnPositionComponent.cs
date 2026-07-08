@@ -35,28 +35,16 @@ namespace Game
             }
         }
 
-        // [Rpc(SendTo.ClientsAndHost)]
-        // public void GetToSpawnPositionRpc(Vector3 position, Quaternion rotation)
-        // {
-        //     if (!_initialized && IsOwner)
-        //     {
-        //         _position = position;
-        //         _rotation = rotation;
-        //         _initialized = true;
-        //         _networkTransform.Teleport(position, rotation, Vector3.one);
-        //     }
-        // }
-
         [Rpc(SendTo.ClientsAndHost)]
         public void GetToSpawnPositionRpc()
         {
             if (IsOwner)
             {
-                // _characterController.enabled = false;
+                _characterController.enabled = false;
                 transform.position = _position;
                 transform.rotation = _rotation;
                 _networkTransform.Teleport(_position, _rotation, Vector3.one);
-                // _characterController.enabled = true;
+                _characterController.enabled = true;
             }
         }
     }

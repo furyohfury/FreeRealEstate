@@ -7,6 +7,8 @@ namespace Game.Scripts.Shooter
     // Этот скрипт нужен ТОЛЬКО в редакторе для заполнения массива
     public class RagdollSetupHelper : MonoBehaviour
     {
+#if UNITY_EDITOR
+
         [SerializeField]
         private RagdollComponent _ragdollComponent;
 
@@ -40,5 +42,6 @@ namespace Game.Scripts.Shooter
 
             EditorUtility.SetDirty(_ragdollComponent);
         }
+#endif
     }
 }

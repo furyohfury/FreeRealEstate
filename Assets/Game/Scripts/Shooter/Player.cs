@@ -100,6 +100,12 @@ namespace Game.Scripts.Shooter
             _animatorComponent.SetIsMoving(_moveComponent.Direction.x != 0 || _moveComponent.Direction.z != 0);
         }
 
+        public void ResetHp()
+        {
+            Health.Value = MaxHealth.Value;
+            Debug.Log($"Setting player {NetworkObject.OwnerClientId} hp to max");
+        }
+
         public void GetToSpawnPosition()
         {
             _spawnPositionComponent.GetToSpawnPositionRpc();
