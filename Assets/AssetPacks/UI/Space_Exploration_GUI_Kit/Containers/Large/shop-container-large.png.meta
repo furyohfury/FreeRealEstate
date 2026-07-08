@@ -123,12 +123,12 @@ TextureImporter:
       name: shop-container-large_0
       rect:
         serializedVersion: 2
-        x: 10
-        y: 11
-        width: 1572
-        height: 930
+        x: 69
+        y: 69
+        width: 1455
+        height: 815
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
