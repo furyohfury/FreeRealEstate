@@ -75,7 +75,9 @@ namespace UIStackSystem
             return presenter;
         }
 
-        public async UniTask<T> OpenPage<T>() where T : IPresenter // layers?
+        public async UniTask<T> OpenPage<T>() where T : IPresenter // TODO delete and make default param.
+                                                                   // But need to remake options mb if animations will be 
+                                                                   // interfaces mb options will be classes
         {
             UIPageAnimationMode defaultOpenAnimationMode = _uiRegistry.GetDefaultOpenAnimationMode<T>();
             OpenPageOptions openPageOptions = OpenPageOptions.Create()
@@ -95,9 +97,16 @@ namespace UIStackSystem
             pageContext.Presenter.Dispose();
             IPage page = pageContext.Page;
 
-            await page.Close(closePageOptions);
+            await page.Close(closePageOptions); // TODO default options
 
             page.DestroyPage();
+        }
+
+        public async UniTask<T> ReplaceCurrentPage<T>(OpenPageOptions openPageOptions = default, ClosePageOptions closePageOptions = default) where T : IPresenter
+        {
+            await CloseTop(closePageOptions);
+
+            return await OpenPage<T>(openPageOptions);
         }
 
         public Vector2 GetCanvasSize()
