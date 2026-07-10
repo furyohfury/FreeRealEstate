@@ -2,7 +2,7 @@
 {
     public struct ClosePageOptions
     {
-        public UIPageAnimationMode AnimationMode;
+        public IPageCloseAnimation AnimationMode;
 
         public static ClosePageOptions Create()
         {

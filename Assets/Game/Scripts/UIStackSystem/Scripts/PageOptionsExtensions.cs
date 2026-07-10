@@ -4,7 +4,7 @@ namespace UIStackSystem
 {
     public static class PageOptionsExtensions
     {
-        public static OpenPageOptions WithAnimationMode(this OpenPageOptions options, UIPageAnimationMode mode)
+        public static OpenPageOptions WithAnimationMode(this OpenPageOptions options, IPageOpenAnimation mode)
         {
             options.AnimationMode = mode;
 
@@ -25,7 +25,7 @@ namespace UIStackSystem
             return options;
         }
 
-        public static ClosePageOptions WithAnimationMode(this ClosePageOptions options, UIPageAnimationMode mode)
+        public static ClosePageOptions WithAnimationMode(this ClosePageOptions options, IPageCloseAnimation mode)
         {
             options.AnimationMode = mode;
 

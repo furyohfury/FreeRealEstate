@@ -4,7 +4,7 @@ namespace UIStackSystem
 {
     public struct OpenPageOptions
     {
-        public UIPageAnimationMode AnimationMode;
+        public IPageOpenAnimation AnimationMode;
         public UILayer Layer;
         public Vector2 Position;
 

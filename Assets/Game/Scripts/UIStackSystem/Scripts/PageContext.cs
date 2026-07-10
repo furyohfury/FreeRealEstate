@@ -4,8 +4,8 @@
     {
         public IPage Page;
         public IPresenter Presenter;
-        public UIPageAnimationMode ShowAnimation;
-        public UIPageAnimationMode HideAnimation;
+        public IPageOpenAnimation ShowAnimation;
+        public IPageCloseAnimation HideAnimation;
         public bool IsModal;
         public bool IsPersistentThroughScenes;
         public UILayer Layer;

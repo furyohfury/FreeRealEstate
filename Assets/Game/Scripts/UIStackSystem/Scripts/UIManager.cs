@@ -79,7 +79,7 @@ namespace UIStackSystem
                                                                    // But need to remake options mb if animations will be 
                                                                    // interfaces mb options will be classes
         {
-            UIPageAnimationMode defaultOpenAnimationMode = _uiRegistry.GetDefaultOpenAnimationMode<T>();
+            OpenAnimationInfo defaultOpenAnimationMode = _uiRegistry.GetDefaultOpenAnimation<T>().Animation;
             OpenPageOptions openPageOptions = OpenPageOptions.Create()
                                                              .WithAnimationMode(defaultOpenAnimationMode);
 
