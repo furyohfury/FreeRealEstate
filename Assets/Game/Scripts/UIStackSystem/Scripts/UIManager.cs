@@ -51,16 +51,18 @@ namespace UIStackSystem
             }
         }
 
-        public async UniTask<T> OpenPage<T>(OpenPageOptions openPageOptions) where T : IPresenter // layers?
+        public async UniTask<T> OpenPage<T>(OpenPageOptions openPageOptions = null) where T : IPresenter // layers?
         {
             T presenter = _presenterFactory.Create<T>();
             presenter.Init();
             Page<T> pagePrefab = _uiRegistry.GetPagePrefab<T>();
             Page<T> spawnedPage = Instantiate(pagePrefab, _container);
 
-            if (openPageOptions.AnimationMode == UIPageAnimationMode.None)
+            if (openPageOptions.AnimationMode == null)
             {
-                openPageOptions.AnimationMode = _uiRegistry.GetDefaultOpenAnimationMode<T>();
+                UIPageOpenAnimation animationMode = _uiRegistry.GetDefaultOpenAnimation<T>().Animation;
+                IPageOpenAnimation pageOpenAnimation = UIPageAnimationFactory.Create(animationMode);
+                openPageOptions.AnimationMode = pageOpenAnimation;
             }
 
             _stack.Push(new PageContext
@@ -73,17 +75,6 @@ namespace UIStackSystem
             await spawnedPage.Open(presenter, openPageOptions);
 
             return presenter;
-        }
-
-        public async UniTask<T> OpenPage<T>() where T : IPresenter // TODO delete and make default param.
-                                                                   // But need to remake options mb if animations will be 
-                                                                   // interfaces mb options will be classes
-        {
-            OpenAnimationInfo defaultOpenAnimationMode = _uiRegistry.GetDefaultOpenAnimation<T>().Animation;
-            OpenPageOptions openPageOptions = OpenPageOptions.Create()
-                                                             .WithAnimationMode(defaultOpenAnimationMode);
-
-            return await OpenPage<T>(openPageOptions);
         }
 
         public async UniTask CloseTop(ClosePageOptions closePageOptions = default)
