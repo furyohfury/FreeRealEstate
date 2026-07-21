@@ -1,12 +1,8 @@
-﻿using UnityEngine;
-
-namespace UIStackSystem
+﻿namespace UIStackSystem
 {
-    public sealed class ClosePageOptions
+    public struct ClosePageOptions
     {
         public IPageCloseAnimation AnimationMode;
-        public Vector2 Position;
-        public float Duration;
 
         public static ClosePageOptions Create()
         {

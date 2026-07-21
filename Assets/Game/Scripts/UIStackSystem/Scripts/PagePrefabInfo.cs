@@ -6,7 +6,7 @@ namespace UIStackSystem
     public sealed class PagePrefabInfo
     {
         public Page PagePrefab;
-        public OpenAnimationInfo DefaultOpenAnimation;
-        public CloseAnimationInfo DefaultCloseAnimation;
+        public OpenAnimationInfo DefaultOpenAnimation = new OpenAnimationInfo();
+        public CloseAnimationInfo DefaultCloseAnimation = new CloseAnimationInfo();
     }
 }

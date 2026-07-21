@@ -6,6 +6,6 @@ namespace UIStackSystem
     public sealed class OpenAnimationInfo
     {
         public UIPageOpenAnimation Animation;
-        public float Duration;
+        public float Duration = 0.25f;
     }
 }
