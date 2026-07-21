@@ -12,12 +12,12 @@ namespace UIStackSystem
         [SerializeField]
         private RectTransform _container;
 
-        private PresenterFactory _presenterFactory;
+        private IPresenterFactory _presenterFactory;
         private UIRegistry _uiRegistry;
         private readonly Stack<PageContext> _stack = new Stack<PageContext>();
 
         [Inject]
-        public void Construct(PresenterFactory presenterFactory)
+        public void Construct(IPresenterFactory presenterFactory)
         {
             _presenterFactory = presenterFactory;
             _uiRegistry = Resources.Load<UIRegistry>(nameof(UIRegistry));
@@ -90,7 +90,8 @@ namespace UIStackSystem
             page.DestroyPage();
         }
 
-        public async UniTask<T> ReplaceCurrentPage<T>(OpenPageOptions openPageOptions = null, ClosePageOptions closePageOptions = null) where T : IPresenter
+        public async UniTask<T> ReplaceCurrentPage<T>(OpenPageOptions openPageOptions = null, ClosePageOptions closePageOptions = null)
+            where T : IPresenter
         {
             await CloseTop(closePageOptions);
 

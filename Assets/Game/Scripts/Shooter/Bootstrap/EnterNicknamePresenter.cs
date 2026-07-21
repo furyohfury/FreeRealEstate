@@ -32,12 +32,10 @@ namespace Game
             await _uiManager.CloseTop();
 
             Vector2 canvasSize = _uiManager.GetCanvasSize();
-            _uiManager.OpenPage<SessionInfoPresenter>(OpenPageOptions.Create()
-                                                                     .WithPosition(new Vector2(canvasSize.x * -0.25f, 0)))
-                      .Forget();
-            _uiManager.OpenPage<JoinSessionByCodePresenter>(OpenPageOptions.Create()
-                                                                           .WithPosition(new Vector2(canvasSize.x * 0.25f, 0)))
-                      .Forget();
+            var sessionInfoOpenOptions = _uiManager.CreateOpenPageOptions<SessionInfoPresenter>().WithPosition(new Vector2(canvasSize.x * -0.25f, 0));
+            _uiManager.OpenPage<SessionInfoPresenter>(sessionInfoOpenOptions).Forget();
+            var joinSessionByCodeOpenOptions = _uiManager.CreateOpenPageOptions<SessionInfoPresenter>().WithPosition(new Vector2(canvasSize.x * 0.25f, 0));
+            _uiManager.OpenPage<JoinSessionByCodePresenter>(joinSessionByCodeOpenOptions).Forget();
         }
 
         public void Init()

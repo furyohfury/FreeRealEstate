@@ -2,6 +2,8 @@
 {
     public enum UILayer
     {
-        Windows, Popups, Tooltips
+        Windows,
+        Popups,
+        Tooltips
     }
 }

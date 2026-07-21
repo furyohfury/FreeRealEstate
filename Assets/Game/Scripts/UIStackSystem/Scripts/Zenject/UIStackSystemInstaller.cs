@@ -10,7 +10,8 @@ namespace UIStackSystem
 
         public override void InstallBindings()
         {
-            Container.Bind<PresenterFactory>()
+            Container.Bind<IPresenterFactory>()
+                     .To<PresenterFactory>()
                      .AsSingle()
                      .NonLazy();
 

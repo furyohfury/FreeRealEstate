@@ -1,9 +1,8 @@
-﻿using System;
-using Zenject;
+﻿using Zenject;
 
 namespace UIStackSystem
 {
-    public sealed class PresenterFactory
+    public sealed class PresenterFactory : IPresenterFactory
     {
         private readonly DiContainer _container;
 
@@ -17,13 +16,6 @@ namespace UIStackSystem
             var presenter = _container.Instantiate<T>();
 
             return presenter;
-        }
-
-        public IPresenter Create(Type type)
-        {
-            var presenter = _container.Instantiate(type);
-
-            return presenter as IPresenter;
         }
     }
 }

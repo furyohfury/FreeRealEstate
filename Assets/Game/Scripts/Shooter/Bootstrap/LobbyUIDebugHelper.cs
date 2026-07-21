@@ -14,11 +14,11 @@ namespace Game
         [Button]
         public async void OpenUI()
         {
-            Vector2 canvasSize = _uiManager.GetCanvasSize();
-            await _uiManager.OpenPage<JoinSessionByCodePresenter>(OpenPageOptions.Create()
-                                                                                 .WithPosition(new Vector2(canvasSize.x * -0.25f, 0)));
-            await _uiManager.OpenPage<SessionInfoPresenter>(OpenPageOptions.Create()
-                                                                           .WithPosition(new Vector2(canvasSize.x* 0.25f,0)));
+            // Vector2 canvasSize = _uiManager.GetCanvasSize();
+            // await _uiManager.OpenPage<JoinSessionByCodePresenter>(OpenPageOptions.Create()
+            //                                                                      .WithPosition(new Vector2(canvasSize.x * -0.25f, 0)));
+            // await _uiManager.OpenPage<SessionInfoPresenter>(OpenPageOptions.Create()
+            //                                                                .WithPosition(new Vector2(canvasSize.x* 0.25f,0)));
         }
     }
 }
