@@ -52,27 +52,21 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 6736719221171945580
       type: {class: PageCloseNoAnimation, ns: UIStackSystem, asm: Assembly-CSharp}
-      data: 
     - rid: 6736719221171945581
       type: {class: PageOpenNoAnimation, ns: UIStackSystem, asm: Assembly-CSharp}
-      data: 
     - rid: 6736719221171945582
       type: {class: PageCloseNoAnimation, ns: UIStackSystem, asm: Assembly-CSharp}
-      data: 
     - rid: 6736719221171945583
       type: {class: PageOpenNoAnimation, ns: UIStackSystem, asm: Assembly-CSharp}
-      data: 
     - rid: 6736719221171945584
       type: {class: PageCloseNoAnimation, ns: UIStackSystem, asm: Assembly-CSharp}
-      data: 
     - rid: 6736719221171945585
       type: {class: PageOpenNoAnimation, ns: UIStackSystem, asm: Assembly-CSharp}
-      data: 
     - rid: 6736719221171945589
       type: {class: PageOpenNoAnimation, ns: UIStackSystem, asm: Assembly-CSharp}
-      data: 
     - rid: 6736719221171945590
       type: {class: FadePageCloseAnimation, ns: UIStackSystem, asm: Assembly-CSharp}
-      data: 
