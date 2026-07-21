@@ -34,46 +34,36 @@ namespace UIStackSystem
             return (Page<TPresenter>)GetPageInfo<TPresenter>().PagePrefab;
         }
 
-        public OpenAnimationInfo GetDefaultOpenAnimation<TPresenter>()
+        public OpenAnimationInfo GetDefaultOpenAnimationInfo<TPresenter>()
             where TPresenter : IPresenter
         {
             return GetPageInfo<TPresenter>().DefaultOpenAnimation;
         }
 
-        public CloseAnimationInfo GetDefaultCloseAnimation<TPresenter>()
+        public CloseAnimationInfo GetDefaultCloseAnimationInfo<TPresenter>()
             where TPresenter : IPresenter
         {
-            return GetPageInfo<TPresenter>().DefaultCloseAnimation;
+            return GetDefaultCloseAnimationInfo(typeof(TPresenter));
+        }
+        
+        public CloseAnimationInfo GetDefaultCloseAnimationInfo(Type presenterType)
+        {
+            return GetPageInfo(presenterType).DefaultCloseAnimation;
         }
 
-        public IPageOpenAnimation CreateOpenAnimation<TPresenter>()
-            where TPresenter : IPresenter
+        private PagePrefabInfo GetPageInfo(Type presenterType)
         {
-            OpenAnimationInfo info =
-                GetPageInfo<TPresenter>().DefaultOpenAnimation;
+            if (_dictionary.TryGetValue(presenterType, out PagePrefabInfo info))
+                return info;
 
-            // Фабрика отделяет сериализуемый enum от конкретной реализации.
-            // UIRegistry не знает какие существуют классы анимаций.
-            return UIPageAnimationFactory.Create(info.Animation);
-        }
-
-        public IPageCloseAnimation CreateCloseAnimation<TPresenter>()
-            where TPresenter : IPresenter
-        {
-            CloseAnimationInfo info =
-                GetPageInfo<TPresenter>().DefaultCloseAnimation;
-
-            return UIPageAnimationFactory.Create(info.Animation);
+            throw new Exception(
+                $"The type {presenterType.FullName} was not found.");
         }
 
         private PagePrefabInfo GetPageInfo<TPresenter>()
             where TPresenter : IPresenter
         {
-            if (_dictionary.TryGetValue(typeof(TPresenter), out PagePrefabInfo info))
-                return info;
-
-            throw new Exception(
-                $"The type {typeof(TPresenter).FullName} was not found.");
+            return GetPageInfo(typeof(TPresenter));
         }
 
         private static Type GetPresenterType(Page page)

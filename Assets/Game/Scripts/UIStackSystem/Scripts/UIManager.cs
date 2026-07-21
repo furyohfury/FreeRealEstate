@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -30,8 +31,8 @@ namespace UIStackSystem
 
         private void SceneManagerOnActiveSceneChanged(Scene arg0, Scene arg1)
         {
-            var tempStack = new  Stack<PageContext>();
-            
+            var tempStack = new Stack<PageContext>();
+
             while (_stack.Count > 0)
             {
                 PageContext topPageContext = _stack.Peek();
@@ -41,7 +42,7 @@ namespace UIStackSystem
                     tempStack.Push(topPageContext);
                     continue;
                 }
-                
+
                 CloseTop();
             }
 
@@ -51,23 +52,19 @@ namespace UIStackSystem
             }
         }
 
-        public async UniTask<T> OpenPage<T>(OpenPageOptions openPageOptions) where T : IPresenter // layers?
+        public async UniTask<TPresenter> OpenPage<TPresenter>(OpenPageOptions openPageOptions = null) where TPresenter : IPresenter // layers?
         {
-            T presenter = _presenterFactory.Create<T>();
+            TPresenter presenter = _presenterFactory.Create<TPresenter>();
             presenter.Init();
-            Page<T> pagePrefab = _uiRegistry.GetPagePrefab<T>();
-            Page<T> spawnedPage = Instantiate(pagePrefab, _container);
-
-            if (openPageOptions.AnimationMode == UIPageAnimationMode.None)
-            {
-                openPageOptions.AnimationMode = _uiRegistry.GetDefaultOpenAnimationMode<T>();
-            }
+            Page<TPresenter> pagePrefab = _uiRegistry.GetPagePrefab<TPresenter>();
+            Page<TPresenter> spawnedPage = Instantiate(pagePrefab, _container);
+            openPageOptions ??= CreateOpenPageOptions<TPresenter>();
 
             _stack.Push(new PageContext
                         {
-                            Page = spawnedPage
-                            , Presenter = presenter
-                            , ShowAnimation = openPageOptions.AnimationMode
+                            Page = spawnedPage,
+                            Presenter = presenter,
+                            ShowAnimation = openPageOptions.Animation
                         });
 
             await spawnedPage.Open(presenter, openPageOptions);
@@ -75,18 +72,7 @@ namespace UIStackSystem
             return presenter;
         }
 
-        public async UniTask<T> OpenPage<T>() where T : IPresenter // TODO delete and make default param.
-                                                                   // But need to remake options mb if animations will be 
-                                                                   // interfaces mb options will be classes
-        {
-            OpenAnimationInfo defaultOpenAnimationMode = _uiRegistry.GetDefaultOpenAnimation<T>().Animation;
-            OpenPageOptions openPageOptions = OpenPageOptions.Create()
-                                                             .WithAnimationMode(defaultOpenAnimationMode);
-
-            return await OpenPage<T>(openPageOptions);
-        }
-
-        public async UniTask CloseTop(ClosePageOptions closePageOptions = default)
+        public async UniTask CloseTop(ClosePageOptions closePageOptions = null)
         {
             if (_stack.Count <= 0)
             {
@@ -94,19 +80,43 @@ namespace UIStackSystem
             }
 
             PageContext pageContext = _stack.Pop();
-            pageContext.Presenter.Dispose();
+            IPresenter presenter = pageContext.Presenter;
+            presenter.Dispose();
             IPage page = pageContext.Page;
+            closePageOptions ??= CreateClosePageOptions(presenter.GetType());
 
-            await page.Close(closePageOptions); // TODO default options
+            await page.Close(closePageOptions);
 
             page.DestroyPage();
         }
 
-        public async UniTask<T> ReplaceCurrentPage<T>(OpenPageOptions openPageOptions = default, ClosePageOptions closePageOptions = default) where T : IPresenter
+        public async UniTask<T> ReplaceCurrentPage<T>(OpenPageOptions openPageOptions = default, ClosePageOptions closePageOptions = default)
+            where T : IPresenter
         {
             await CloseTop(closePageOptions);
 
             return await OpenPage<T>(openPageOptions);
+        }
+
+        public OpenPageOptions CreateOpenPageOptions<TPresenter>() where TPresenter : IPresenter
+        {
+            OpenAnimationInfo animationInfo = _uiRegistry.GetDefaultOpenAnimationInfo<TPresenter>();
+            OpenPageOptions defaultPageOptions = animationInfo.ToOptions();
+
+            return defaultPageOptions;
+        }
+
+        public ClosePageOptions CreateClosePageOptions(Type presenterType)
+        {
+            CloseAnimationInfo animationInfo = _uiRegistry.GetDefaultCloseAnimationInfo(presenterType);
+            ClosePageOptions defaultPageOptions = animationInfo.ToOptions();
+
+            return defaultPageOptions;
+        }
+
+        public ClosePageOptions CreateClosePageOptions<TPresenter>() where TPresenter : IPresenter
+        {
+            return CreateClosePageOptions(typeof(TPresenter));
         }
 
         public Vector2 GetCanvasSize()

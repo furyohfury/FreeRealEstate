@@ -1,11 +1,13 @@
 ﻿using System;
+using UnityEngine;
 
 namespace UIStackSystem
 {
     [Serializable]
     public sealed class CloseAnimationInfo
     {
-        public UIPageCloseAnimation Animation;
-        public float Duration = 0.25f;
+        [SerializeReference]
+        public IPageCloseAnimation Animation = new PageCloseNoAnimation();
+        public float Duration;
     }
 }

@@ -1,11 +1,13 @@
 ﻿using System;
+using UnityEngine;
 
 namespace UIStackSystem
 {
     [Serializable]
     public sealed class OpenAnimationInfo
     {
-        public UIPageOpenAnimation Animation;
-        public float Duration = 0.25f;
+        [SerializeReference]
+        public IPageOpenAnimation Animation = new PageOpenNoAnimation();
+        public float Duration;
     }
 }

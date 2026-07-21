@@ -26,12 +26,18 @@ namespace UIStackSystem
 
         protected async virtual UniTask PlayOpenAnimation(OpenPageOptions options)
         {
-            await options.AnimationMode.PlayAnimation();
+            await options.Animation.PlayAnimation(new PageAnimationContext()
+                                                      {
+                                                          Duration = options.Duration
+                                                      });
         }
 
         protected async virtual UniTask PlayCloseAnimation(ClosePageOptions options)
         {
-            await options.AnimationMode.PlayAnimation();
+            await options.Animation.PlayAnimation(new PageAnimationContext()
+                                                      {
+                                                          Duration = options.Duration
+                                                      });
         }
     }
 

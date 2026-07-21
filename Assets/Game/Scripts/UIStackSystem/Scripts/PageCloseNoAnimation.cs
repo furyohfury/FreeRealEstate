@@ -2,12 +2,10 @@
 
 namespace UIStackSystem
 {
-    public class NonePageOpenAnimation : IPageOpenAnimation
+    public class PageCloseNoAnimation : IPageCloseAnimation
     {
         public UniTask PlayAnimation(PageAnimationContext context)
         {
-            context.RectTransform.position = context.Position;
-
             return UniTask.CompletedTask;
         }
     }

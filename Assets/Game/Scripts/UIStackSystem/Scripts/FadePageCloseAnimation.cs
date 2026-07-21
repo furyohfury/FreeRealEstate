@@ -11,7 +11,8 @@ namespace UIStackSystem
             var canvasGroup = context.RectTransform.gameObject.AddComponent<CanvasGroup>();
             canvasGroup.alpha = 1;
 
-            return canvasGroup.DOFade(0, context.Duration).ToUniTask();
+            return canvasGroup.DOFade(0, context.Duration)
+                              .OnComplete(() => Object.Destroy(canvasGroup)).ToUniTask();
         }
     }
 }

@@ -40,9 +40,6 @@ namespace UIStackSystem.Editor
 
             EditorUtility.SetDirty(registry);
             AssetDatabase.SaveAssets();
-
-            // Следующим файлом реализуем кодогенерацию.
-            UIAnimationCodeGenerator.Generate();
         }
 
         private static UIRegistry LoadOrCreateRegistry()

@@ -2,15 +2,11 @@
 
 namespace UIStackSystem
 {
-    public struct OpenPageOptions
+    public sealed class OpenPageOptions
     {
-        public IPageOpenAnimation AnimationMode;
+        public IPageOpenAnimation Animation;
         public UILayer Layer;
         public Vector2 Position;
-
-        public static OpenPageOptions Create()
-        {
-            return new OpenPageOptions();
-        }
+        public float Duration;
     }
 }

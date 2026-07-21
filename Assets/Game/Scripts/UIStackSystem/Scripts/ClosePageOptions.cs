@@ -1,8 +1,12 @@
-﻿namespace UIStackSystem
+﻿using UnityEngine;
+
+namespace UIStackSystem
 {
-    public struct ClosePageOptions
+    public sealed class ClosePageOptions
     {
-        public IPageCloseAnimation AnimationMode;
+        public IPageCloseAnimation Animation;
+        public Vector2 Position;
+        public float Duration;
 
         public static ClosePageOptions Create()
         {

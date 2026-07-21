@@ -12,16 +12,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd088f41c36a417197bb173a09630639, type: 3}
   m_Name: UIRegistry
   m_EditorClassIdentifier: Assembly-CSharp::UIStackSystem.UIRegistry
-  _pagesPrefabs:
+  PagesPrefabs:
   - PagePrefab: {fileID: 3482698839386701202, guid: 1f89b7d2119744d45873b0be2ef749c7, type: 3}
-    DefaultOpenAnimationMode: 4
-    DefaultCloseAnimationMode: 3
+    DefaultOpenAnimation:
+      Animation:
+        rid: 6736719221171945579
+      Duration: 0.25
+    DefaultCloseAnimation:
+      Animation:
+        rid: 6736719221171945580
+      Duration: 0.25
   - PagePrefab: {fileID: 4400338438551431992, guid: a0adda5f3324a1f41a6b9d1bf45e5207, type: 3}
-    DefaultOpenAnimationMode: 4
-    DefaultCloseAnimationMode: 3
+    DefaultOpenAnimation:
+      Animation:
+        rid: 6736719221171945581
+      Duration: 0.25
+    DefaultCloseAnimation:
+      Animation:
+        rid: 6736719221171945582
+      Duration: 0.25
   - PagePrefab: {fileID: 3681853871731877903, guid: 70c4eb1985b1da84684e793c26ec59d5, type: 3}
-    DefaultOpenAnimationMode: 5
-    DefaultCloseAnimationMode: 6
+    DefaultOpenAnimation:
+      Animation:
+        rid: 6736719221171945583
+      Duration: 0.25
+    DefaultCloseAnimation:
+      Animation:
+        rid: 6736719221171945584
+      Duration: 0.25
   - PagePrefab: {fileID: 1594865592524624999, guid: 15f097d42fc942a4992fda8c15a0c5db, type: 3}
-    DefaultOpenAnimationMode: 5
-    DefaultCloseAnimationMode: 6
+    DefaultOpenAnimation:
+      Animation:
+        rid: 6736719221171945585
+      Duration: 0.25
+    DefaultCloseAnimation:
+      Animation:
+        rid: 6736719221171945586
+      Duration: 0.25
+  references:
+    version: 2
+    RefIds:
+    - rid: 6736719221171945579
+      type: {class: PageOpenNoAnimation, ns: UIStackSystem, asm: Assembly-CSharp}
+      data: 
+    - rid: 6736719221171945580
+      type: {class: PageCloseNoAnimation, ns: UIStackSystem, asm: Assembly-CSharp}
+      data: 
+    - rid: 6736719221171945581
+      type: {class: PageOpenNoAnimation, ns: UIStackSystem, asm: Assembly-CSharp}
+      data: 
+    - rid: 6736719221171945582
+      type: {class: PageCloseNoAnimation, ns: UIStackSystem, asm: Assembly-CSharp}
+      data: 
+    - rid: 6736719221171945583
+      type: {class: PageOpenNoAnimation, ns: UIStackSystem, asm: Assembly-CSharp}
+      data: 
+    - rid: 6736719221171945584
+      type: {class: PageCloseNoAnimation, ns: UIStackSystem, asm: Assembly-CSharp}
+      data: 
+    - rid: 6736719221171945585
+      type: {class: PageOpenNoAnimation, ns: UIStackSystem, asm: Assembly-CSharp}
+      data: 
+    - rid: 6736719221171945586
+      type: {class: PageCloseNoAnimation, ns: UIStackSystem, asm: Assembly-CSharp}
+      data: 

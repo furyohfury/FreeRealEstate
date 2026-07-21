@@ -2,11 +2,29 @@
 
 namespace UIStackSystem
 {
-    public static class PageOptionsExtensions
+    public static class Extensions
     {
+        public static OpenPageOptions ToOptions(this OpenAnimationInfo info)
+        {
+            return new OpenPageOptions
+                   {
+                       Animation = info.Animation,
+                       Duration = info.Duration
+                   };
+        }
+
+        public static ClosePageOptions ToOptions(this CloseAnimationInfo info)
+        {
+            return new ClosePageOptions
+                   {
+                       Animation = info.Animation,
+                       Duration = info.Duration
+                   };
+        }
+
         public static OpenPageOptions WithAnimationMode(this OpenPageOptions options, IPageOpenAnimation mode)
         {
-            options.AnimationMode = mode;
+            options.Animation = mode;
 
             return options;
         }
@@ -27,7 +45,7 @@ namespace UIStackSystem
 
         public static ClosePageOptions WithAnimationMode(this ClosePageOptions options, IPageCloseAnimation mode)
         {
-            options.AnimationMode = mode;
+            options.Animation = mode;
 
             return options;
         }
