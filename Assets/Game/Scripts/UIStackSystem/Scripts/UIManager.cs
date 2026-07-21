@@ -35,7 +35,7 @@ namespace UIStackSystem
 
             while (_stack.Count > 0)
             {
-                PageContext topPageContext = _stack.Peek();
+                PageContext topPageContext = _stack.Pop();
 
                 if (topPageContext.IsPersistentThroughScenes)
                 {
@@ -90,8 +90,7 @@ namespace UIStackSystem
             page.DestroyPage();
         }
 
-        public async UniTask<T> ReplaceCurrentPage<T>(OpenPageOptions openPageOptions = default, ClosePageOptions closePageOptions = default)
-            where T : IPresenter
+        public async UniTask<T> ReplaceCurrentPage<T>(OpenPageOptions openPageOptions = null, ClosePageOptions closePageOptions = null) where T : IPresenter
         {
             await CloseTop(closePageOptions);
 
